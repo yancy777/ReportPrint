@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>家长报告</title>
+		<link href="http://cdn.imreliable.net/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="http://cdn.imreliable.net/jquery/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="http://cdn.imreliable.net/bootstrap/js/bootstrap.min.js"></script>
+
+	</head>
+	<style type="text/css">
+		ul {
+			list-style: none;
+		}
+		
+		img {
+			width: 28%;
+			float: left;
+		}
+		
+		body {
+			font-family: "microsoft yahei";
+		}
+		
+		.report-box {
+			width: 794px;
+			height: 1123px;
+			margin: 0 auto;
+			position: relative;
+		}
+		/*新的css 样式*/
+		
+		.top-head {
+			width: 794px;
+		}
+		
+		.top-head .top-title {
+			width: 794px;
+			height: 51px;
+			font-size: 25px;
+			text-align: center;
+			padding-top: 40px;
+			margin-bottom: 29px;
+		}
+		
+		.baby-info-new {
+			width: 288px;
+			height: 136px;
+			background: url(img/baby-info-bg.png) no-repeat center left;
+			background-size: contain;
+			padding-top: 39px;
+			padding-left: 23px;
+			font-size: 15px;
+			color: #fff;
+			float: left;
+		}
+		
+		.result-text {
+			width: 335px;
+			height: 156px;
+			float: right;
+			padding-right: 50px;
+		}
+		
+		.hr-class {
+			margin-top: -2px;
+			margin-bottom: 15px!important;
+		}
+		
+		.result-text span {
+			color: #b92131;
+			font-size: 15px;
+			padding: 17px 0 10px 0;
+			display: block;
+		}
+		
+		.result-text p {
+			color: #444444;
+			font-size: 15px;
+			line-height: 18px;
+			letter-spacing: 1px;
+		}
+		/*内容*/
+		
+		#ul-list {
+			margin: 0;
+			padding: 0;
+		}
+		
+		.course-conter {
+			padding: 0 32px;
+			padding-top: 1px;
+			clear: both;
+		}
+		
+		.course-conter h4 img,
+		.result-conter h4 img {
+			width: 3%;
+			margin-right: 9px;
+		}
+		/*体育6项目*/
+		
+		.test-subjects {
+			margin: 0 -32px;
+		}
+		
+		.test-subjects li {
+			height: 239px;
+		}
+		
+		.test-subjects-title {
+			width: 231px;
+			height: 239px;
+			background: url('img/test-subjects-E.png') no-repeat center right;
+			background-size: 10%;
+			float: left;
+			margin-left: 38px;
+		}
+		
+		.test-subjects-title img {
+			margin-top: 55px;
+			width: 48%;
+		}
+		
+		.test-subjects-title h4 {
+			color: #444444;
+			font-size: 14px;
+			margin: 113px 0 46px 129px;
+			font-weight: 600;
+		}
+		
+		.test-subjects-title b {
+			color: #323333;
+			font-size: 15px;
+			line-height: 30px;
+		}
+		
+		.test-subjects-title span {
+			color: #666666;
+			font-size: 12px;
+		}
+		
+		.test-subjects-text {
+			padding-top: 3px;
+		}
+		
+		.test-subjects-text li {
+			width: 500px;
+			height: 60px;
+			float: left;
+			margin-top: 15px;
+		}
+		
+		.test-subjects-text-img span {
+			float: left;
+			clear: both;
+			width: 80px;
+			text-align: center;
+		}
+		
+		.test-subjects-text li img {
+			width: 8%;
+			margin: 0 22px;
+		}
+		
+		.test-subjects-text li em {
+			font-size: 15px;
+			color: #b92131;
+			font-style: normal;
+			margin-bottom: 10px;
+		}
+		
+		.test-subjects-text li span {
+			color: #666666;
+			font-size: 12px;
+			line-height: 22px;
+		}
+		
+		.course-conter h4 span {
+			font-size: 11px;
+			padding-left: 20px
+		}
+		
+		.training-methods {
+			margin-top: 7px;
+		}
+		
+		.training-methods p {
+			font-size: 13px;
+		}
+		
+		.bar-code {
+			margin: 0 32px;
+		}
+		
+		.bar-code-code {
+			width: 160px;
+			height: 137px;
+			float: left;
+		}
+		
+		.bar-code-code img {
+			width: 115px;
+			margin-left: 16px;
+		}
+		
+		.bar-code-bar img {
+			width: 135px;
+			margin-left: 24px;
+			margin-top: 17px;
+		}
+		
+		.bar-code-code span,
+		.bar-code-bar span {
+			float: left;
+			text-align: center;
+			font-size: 11px;
+			margin-top: 5px;
+		}
+		
+		.bar-code-bar {
+			width: 170px;
+			height: 137px;
+			float: right;
+		}
+		/*脚本*/
+		
+		.footer {
+			margin-top: 20px;
+			float: left;
+			width: 794px;
+			height: 30px;
+			text-align: center;
+			font-size: 10px;
+			line-height: 6px;
+			position: absolute;
+			bottom: 5px;
+		}
+		
+		.foot-zc {
+			color: #7f7f80;
+		}
+		
+		.foot-english {
+			color: #c6c2c1;
+		}
+	</style>
+
+	<body>
+		<div class="report-box">
+			<!--头-->
+			<div class="top-head ">
+				<div class="top-title">
+					<p>身体素质弱项分析报告</p>
+				</div>
+				<div>
+					<div class=" baby-info-new">
+						<ul>
+							<li>班级：中一班</li>
+							<li>学校：品格锦业幼儿园</li>
+							<li>人数：28人</li>
+						</ul>
+					</div>
+					<div class="result-text">
+						<div>
+							<span>分析与说明</span>
+						</div>
+						<p>根据体测结果显示，杨研一在走平衡木（平衡能力测试）、立定跳远（下肢力量测试）等项目中未达到合格标准。根据大数据分析显示，孩子的不合格项与以下常用动作紧密相关，建议重点关注孩子的以下动作</p>
+					</div>
+				</div>
+
+			</div>
+			<!--内容-->
+			<div class="course-conter">
+				<h4>
+                <img src="img/title-icon1.png" />
+            		    素质分析
+                <span>相关性显示两个元素之间线性关系的强度和方向</span>
+            </h4>
+				<hr class="hr-class" />
+				<div class="test-subjects">
+					<ul id="ul-list">
+						<li style=" background: #f6f6f6;">
+							<div class="test-subjects-title">
+								<img src="img/test-subjects-icon.png" />
+								<h4>相关联动作</h4>
+								<b>网球掷远（上肢力量）</b><br />
+								<span>未达标人数：15人</span>
+							</div>
+							<div class="test-subjects-text">
+								<ul>
+									<li>
+										<div class="test-subjects-text-img">
+											<img src="img/test-subjects-text-icon.png" />
+											<span>原地拍球</span>
+										</div>
+										<p>
+											<em> 相关性：20.65%</em><br />
+											<span>皮球是幼儿童年时的重要“玩伴”，原地、跑动中拍球是幼儿的必备“技能”</span>
+										</p>
+									</li>
+									<li>
+										<div class="test-subjects-text-img">
+											<img src="img/test-subjects-text-icon.png" />
+											<span>原地拍球</span>
+										</div>
+										<p>
+											<em> 相关性：20.65%</em><br />
+											<span>皮球是幼儿童年时的重要“玩伴”，原地、跑动中拍球是幼儿的必备“技能”</span>
+										</p>
+									</li>
+									<li>
+										<div class="test-subjects-text-img">
+											<img src="img/test-subjects-text-icon.png" />
+											<span>原地拍球</span>
+										</div>
+										<p>
+											<em> 相关性：20.65%</em><br />
+											<span>皮球是幼儿童年时的重要“玩伴”，原地、跑动中拍球是幼儿的必备“技能”</span>
+										</p>
+									</li>
+								</ul>
+							</div>
+						</li>
+
+						<li style="background: #fff;">
+							<div class="test-subjects-title">
+								<img src="img/test-subjects-icon.png" />
+								<h4>相关联动作</h4>
+								<b>网球掷远（上肢力量）</b><br />
+								<span>未达标人数：15人</span>
+							</div>
+							<div class="test-subjects-text">
+								<ul>
+									<li>
+										<div class="test-subjects-text-img">
+											<img src="img/test-subjects-text-icon.png" />
+											<span>原地拍球</span>
+										</div>
+										<p>
+											<em> 相关性：20.65%</em><br />
+											<span>皮球是幼儿童年时的重要“玩伴”，原地、跑动中拍球是幼儿的必备“技能”</span>
+										</p>
+									</li>
+									<li>
+										<div class="test-subjects-text-img">
+											<img src="img/test-subjects-text-icon.png" />
+											<span>原地拍球</span>
+										</div>
+										<p>
+											<em> 相关性：20.65%</em><br />
+											<span>皮球是幼儿童年时的重要“玩伴”，原地、跑动中拍球是幼儿的必备“技能”</span>
+										</p>
+									</li>
+									<li>
+										<div class="test-subjects-text-img">
+											<img src="img/test-subjects-text-icon.png" />
+											<span>原地拍球</span>
+										</div>
+										<p>
+											<em> 相关性：20.65%</em><br />
+											<span>皮球是幼儿童年时的重要“玩伴”，原地、跑动中拍球是幼儿的必备“技能”</span>
+										</p>
+									</li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--训练方法-->
+			<div class="course-conter training-methods">
+				<h4>
+                <img src="img/title-icon3.png" />
+            		  训练方法
+               </h4>
+				<hr class="hr-class" />
+				<p>
+					1. 平衡：在地上贴几条10厘米宽的线并在上面横放几块窄纸板，在线和纸板上贴上脚印让宝贝踩，告诉宝贝假装像过小溪一样沿着脚印缓慢行走。必要时可以提供帮助。
+					<br/>2. 下肢力量：在地上摆一条像蛇一样的波浪形绳子，告诉宝贝跳过蛇；从纸板上剪一些形状如圆形、正方形、三角形等图片放在地上，让宝贝跳上跳下这些图形，一边跳一边说出图的形状
+				</p>
+			</div>
+			<!--条码+二维码-->
+			<div class="bar-code">
+				<div class="bar-code-code">
+					<img src="img/code-icon1.png" />
+					<span>扫一扫关注睿莱健康公众号</span>
+				</div>
+				<div class="bar-code-bar"><img src="img/code-icon2 .png" />
+					<span>在我们微信公众号中扫描条形码深度查看孩子体质情况</span>
+				</div>
+			</div>
+			<!--脚码-->
+			<div class="footer">
+				<p class="foot-zc">睿莱（RELIABLE）幼儿体质检测中心</p>
+				<p class="foot-english">Reliable Kids’Physical Fitness Testing Center</p>
+			</div>
+		</div>
+
+	</body>
+
+</html>
