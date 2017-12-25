@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>家长报告</title>
+    <link href="http://cdn.imreliable.net/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="http://cdn.imreliable.net/asset/css/physical-exam-report.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://cdn.imreliable.net/jquery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="http://cdn.imreliable.net/bootstrap/js/bootstrap.min.js"></script>
+    <script src="http://cdn.bootcss.com/underscore.js/1.8.3/underscore.js"></script>
+    <script src="http://cdn.bootcss.com/handlebars.js/4.0.6/handlebars.min.js"></script>
+    <script src="http://cdn.bootcss.com/jsbarcode/3.5.7/JsBarcode.all.min.js"></script>
+    <style type="text/css">
+        ul {
+            list-style: none;
+        }
+
+        img {
+            width: 28%;
+            float: left;
+        }
+
+        body {
+            font-family: "microsoft yahei";
+        }
+        /*新的css 样式*/
+
+        .top-head {
+            width: 794px;
+        }
+
+            .top-head .top-title {
+                width: 794px;
+                height: 51px;
+                font-size: 25px;
+                text-align: center;
+                padding-top: 40px;
+                margin-bottom: 29px;
+            }
+
+        .baby-info-new {
+            width: 288px;
+            height: 136px;
+            background: url(img/baby-info-bg.png) no-repeat center left;
+            background-size: contain;
+            padding-top: 39px;
+            padding-left: 23px;
+            font-size: 15px;
+            color: #fff;
+            float: left;
+        }
+
+        .result-text {
+            width: 335px;
+            height: 156px;
+            float: right;
+            padding-right: 50px;
+        }
+
+        .hr-class {
+            margin-top: -2px;
+            margin-bottom: 15px !important;
+        }
+
+        .result-text span {
+            color: #b92131;
+            font-size: 15px;
+            padding: 17px 0 10px 0;
+            display: block;
+        }
+
+        .result-text p {
+            color: #444444;
+            font-size: 15px;
+            line-height: 18px;
+            letter-spacing: 1px;
+        }
+        /*内容*/
+
+        #ul-list {
+            margin: 0;
+            padding: 0;
+        }
+
+        .course-conter {
+            padding: 0 32px;
+            padding-top: 1px;
+            clear: both;
+        }
+
+            .course-conter h4 img,
+            .result-conter h4 img {
+                width: 3%;
+                margin-right: 9px;
+            }
+        /*体育6项目*/
+
+        .test-subjects {
+            margin: 0 -32px;
+        }
+
+            .test-subjects li {
+                height: 239px;
+            }
+
+        .test-subjects-title {
+            width: 231px;
+            height: 239px;
+            float: left;
+            margin-left: 38px;
+        }
+
+            .test-subjects-title img {
+                margin-top: 55px;
+                width: 48%;
+            }
+
+            .test-subjects-title h4 {
+                color: #444444;
+                font-size: 14px;
+                margin: 113px 0 46px 129px;
+                font-weight: 600;
+            }
+
+            .test-subjects-title b {
+                color: #323333;
+                font-size: 15px;
+                line-height: 30px;
+            }
+
+            .test-subjects-title span {
+                color: #666666;
+                font-size: 12px;
+            }
+
+        .test-subjects-text {
+            padding-top: 3px;
+        }
+
+            .test-subjects-text li {
+                width: 500px;
+                height: 60px;
+                float: left;
+                margin-top: 15px;
+            }
+
+        .test-subjects-text-img span {
+            float: left;
+            clear: both;
+            width: 80px;
+            text-align: center;
+        }
+
+        .test-subjects-text li img {
+            width: 8%;
+            margin: 0 22px;
+        }
+
+        .test-subjects-text li em {
+            font-size: 15px;
+            color: #b92131;
+            font-style: normal;
+            margin-bottom: 10px;
+        }
+
+        .test-subjects-text li span {
+            color: #666666;
+            font-size: 12px;
+            line-height: 22px;
+        }
+
+        .course-conter h4 span {
+            font-size: 11px;
+            padding-left: 20px;
+        }
+
+        .training-methods {
+            margin-top: 7px;
+        }
+
+            .training-methods p {
+                font-size: 13px;
+            }
+
+        .bar-code {
+            margin: 0 32px;
+        }
+
+        .bar-code-code {
+            width: 160px;
+            height: 137px;
+            float: left;
+        }
+
+            .bar-code-code img {
+                width: 115px;
+                margin-left: 16px;
+            }
+
+            /*.bar-code-bar svg {
+            width: 135px !important;
+            margin-left: 24px;
+            margin-top: 17px;
+        }*/
+
+            .bar-code-code span,
+            .bar-code-bar span {
+                float: left;
+                text-align: center;
+                font-size: 11px;
+                margin-top: 5px;
+            }
+
+        .bar-code-bar {
+            width: 170px;
+            height: 137px;
+            float: right;
+        }
+
+        .report-box {
+            width: 794px;
+            height: 1123px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .top {
+            height: 247px;
+        }
+
+        .top-left {
+            width: 328px;
+            height: 237px;
+            float: left;
+        }
+
+        .change-page {
+            width: 296px;
+            height: 31px;
+            margin-left: 32px;
+        }
+
+            .change-page p {
+                float: left;
+                width: 80px;
+                height: 4px;
+                background: #b8b8b8;
+                margin: 21px 0 0 0;
+            }
+
+            .change-page .active {
+                background: #b92131;
+            }
+
+        .top-title {
+            width: 296px;
+            height: 51px;
+            margin-left: 32px;
+            margin-top: 20px;
+            height: 60px;
+            display: block;
+            font-size: 25px;
+        }
+
+        .baby-info {
+            width: 100%;
+            height: 136px;
+            background: url(http://cdn.imreliable.net/asset/image/patriarchReport/baby-info-bg.png) no-repeat center;
+            background-size: contain;
+            padding-top: 28px;
+            padding-left: 32px;
+            font-size: 15px;
+        }
+
+            .baby-info img {
+                width: 28%;
+                float: left;
+            }
+
+            .baby-info ul {
+                color: #FFFFFF;
+                padding-top: 5px;
+                float: left;  
+                padding-left: 15px;
+            }
+
+        .top-right {
+            width: 408px;
+            height: 237px;
+            float: right;
+        }
+
+        .prompt {
+            width: 210px;
+            height: 125px;
+            background: #f2f1f1;
+            float: right;
+            padding: 19px 30px 0 30px;
+            font-size: 13px;
+        }
+
+            .prompt b {
+                font-size: 16px;
+            }
+
+            .prompt span {
+                margin-top: 3px;
+                display: block;
+                color: #777978;
+            }
+
+        .total-score {
+            width: 400px;
+            height: 121px;
+            float: right;
+        }
+
+            .total-score p {
+                margin-left: 32px;
+                margin-top: 33px;
+                float: left;
+                width: 220px;
+                height: 48px;
+            }
+        /*内容*/
+
+        .body-shape {
+            height: 337px;
+        }
+        .head-title1,
+        .head-title2,
+        .head-title3 {
+            height: 37px;
+            margin: 18px 0;
+        }
+
+            .head-title1 b,
+            .head-title2 b,
+            .head-title3 b {
+                font-weight: normal;
+                margin-left: 32px;
+                color: #FFF;
+                line-height: 35px;
+                font-size: 17px;
+                float: left;
+                padding-right: 50px;
+            }
+
+        .head-title1 {
+            background: url(http://cdn.imreliable.net/asset/image/patriarchReport/head-title1.png) no-repeat left;
+            background-size: contain;
+        }
+
+        .head-title2 {
+            background: url(http://cdn.imreliable.net/asset/image/patriarchReport/head-title2.png) no-repeat left;
+            background-size: contain;
+        }
+
+        .head-title3 {
+            background: url(http://cdn.imreliable.net/asset/image/patriarchReport/head-title3.png) no-repeat left;
+            background-size: contain;
+        }
+
+        .head-explain {
+            float: left;
+            color: #797675;
+            padding-top: 10px;
+            font-size: 11px;
+        }
+
+        .score {
+            height: 146px;
+            padding-left: 32px;
+            background: url(http://cdn.imreliable.net/asset/image/patriarchReport/score-bg.png) no-repeat left;
+            background-size: contain;
+        }
+
+        .score2 {
+            height: 260px;
+            background: url(http://cdn.imreliable.net/asset/image/patriarchReport/score2-bg.png) no-repeat left;
+            background-size: contain;
+            margin-bottom: 26px;
+        }
+
+        .score-number {
+            width: 182px;
+            height: 144px;
+            float: left;
+        }
+
+        .number {
+            text-align: center;
+            line-height: 66px;
+            width: 70px;
+            height: 70px;
+            font-size: 36px;
+            color: #b92131;
+            border-radius: 50%;
+            border: 3px solid #b92131;
+            margin: 17px 0 10px 16px;
+        }
+
+        .number-btn {
+            width: 96px;
+            height: 30px;
+            color: #fff;
+            background: #b92131;
+            border-radius: 2px;
+            text-align: center;
+            line-height: 30px;
+            margin-left: 3px;
+            letter-spacing: 4px;
+        }
+
+        .score-level {
+            width: 316px;
+            height: 144px;
+            float: left;
+        }
+
+        .vs-title {
+            height: 30px;
+            font-size: 15px;
+            margin: 18px 0 0px 32px;
+            color: #b92131;
+        }
+
+        .vs-center {
+            padding-top: 10px;
+        }
+
+        .vs-center-li {
+            width: 332px;
+            height: 62px;
+            margin: 0px 32px;
+        }
+
+        .vs-center-li-tu {
+            width: 32px;
+            float: left;
+            text-align: center;
+        }
+
+            .vs-center-li-tu span {
+                font-size: 13px;
+            }
+
+        .vs-center-li p {
+            float: left;
+            width: 199px;
+            font-size: 12px;
+            color: #797675;
+            margin: 0 35px 0 16px;
+        }
+
+        .vs-center-li .icon {
+            width: 32px;
+            float: left;
+        }
+
+        .vs-center-li .icon1 {
+            width: 44px;
+            float: left;
+        }
+
+        .footer {
+            margin-top: 20px;
+            float: left;
+            width: 794px;
+            height: 30px;
+            text-align: center;
+            font-size: 10px;
+            line-height: 6px;
+            position: absolute;
+            bottom: 5px;
+        }
+
+        .foot-zc {
+            color: #7f7f80;
+        }
+
+        .foot-english {
+            color: #c6c2c1;
+        }
+        /*page2*/
+
+        .score2-left {
+            width: 450px;
+            height: 234px;
+            padding-right: 5px;
+            float: left;
+        }
+
+        .score2-right {
+            width: 342px;
+            height: 234px;
+            float: left;
+        }
+
+        .relative-score {
+            width: 171px;
+            height: 144px;
+            margin-left: 32px;
+            float: left;
+        }
+
+        .relative-score-top {
+            width: 167px;
+            height: 62px;
+            float: left;
+        }
+
+        .relative-score-title {
+            height: 62px;
+            width: 84px;
+            float: left;
+            padding-top: 13px;
+            color: #a69f9d;
+            font-size: 16px;
+        }
+
+        .relative-score-number {
+            float: left;
+            height: 62px;
+            width: 83px;
+            background: url(http://cdn.imreliable.net/asset/image/patriarchReport/polygon-icon.png) no-repeat center;
+            background-size: contain;
+            line-height: 62px;
+            padding-left: 32px;
+            font-size: 32px;
+            color: #fff;
+        }
+
+        .relative-score-btn {
+            width: 170px;
+            height: 33px;
+            color: #fff;
+            background: #b92131;
+            border-radius: 2px;
+            text-align: center;
+            line-height: 33px;
+            letter-spacing: 3px;
+            float: left;
+            margin-top: 25px;
+        }
+        /*  成绩级别插件*/
+
+        .abstract-score-info {
+            margin-top: 70px;
+        }
+
+            .abstract-score-info label {
+                font-size: 13px;
+                color: #666666;
+                text-align: center;
+                margin: 0 2px;
+                line-height: 30px;
+                font-weight: normal;
+                color: #666666;
+            }
+
+        .abstract-grade-one,
+        .abstract-grade-two,
+        .abstract-grade-three,
+        .abstract-grade-four {
+            width: 50px;
+            border-radius: .1rem;
+            line-height: 1.5rem;
+            position: relative;
+            top: .6rem;
+        }
+
+        .abstract-grade-one {
+            border-top: 3px solid #b92131;
+        }
+
+        .abstract-grade-two {
+            border-top: 3px solid #b92131;
+            margin-left: -5%;
+        }
+
+        .abstract-grade-three {
+            border-top: 3px solid #b92131;
+            margin-left: -5%;
+        }
+
+        .abstract-grade-four {
+            border-top: 3px solid #b92131;
+            margin-left: -5%;
+        }
+
+        .abstract-score-info img {
+            width: 4%;
+        }
+
+        .grade-one-score {
+            border-left: 1px dashed #666666;
+            height: 20px;
+        }
+
+        .circle-icon1 {
+            position: relative;
+            left: 20px;
+            width: 10%;
+        }
+
+        .circle-icon2 {
+            position: relative;
+            left: 276px;
+            width: 10%;
+        }
+        /*进度条*/
+
+        .score-bar {
+            width: 232px;
+            height: 144px;
+            float: left;
+        }
+
+        .score-fist-li {
+            margin-top: 32px;
+        }
+
+        .progress {
+            height: 10px;
+            margin-top: 2px;
+            /*box-shadow: 1px 10px 5px #888888;*/
+            box-shadow: inset 0 1px 2px rgba(216, 216, 216, 1);
+        }
+
+        .score-bar li {
+            width: 170px;
+            height: 35px;
+            font-size: 13px;
+        }
+
+        .score-bar span {
+            float: left;
+            margin-right: 6px;
+            margin-top: -4px;
+        }
+
+        .progress-bar {
+            border-bottom-right-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .text-description {
+            color: #bbbaba;
+            font-size: 2rem;
+            position: relative;
+            bottom: 12rem;
+        }
+    </style>
+    <script>
+        "use strict";
+        Handlebars.registerHelper("totalImage", function(person) {
+            if (person < 50) {
+                return "unqualified.png";
+            } else if (person >= 50 && person < 70) {
+                return "qualified.png";
+            } else if (person >= 70 && person < 80) {
+                return "favourable.png";
+            } else if (person >= 80) {
+                return "fine.png";
+            }
+        });
+        //Handlebars.registerHelper('badContent', function (person) {
+        //    console.log(person);
+        //});
+        var totalImgGrade = function(person) {
+            var imgName;
+            var description;
+            if (person < 50) {
+                imgName = "unqualified.png";
+                description = "您孩子的体质水平不合格，可能会严重影响孩子参与体育活动！";
+            } else if (person >= 50 && person < 70) {
+                imgName = "qualified.png";
+                description = "您孩子体质水平合格，参加体育活动可能有障碍，需要警惕了！";
+            } else if (person >= 70 && person < 80) {
+                imgName = "favourable.png";
+                description = "您孩子体质水平良好，培养孩子对体育活动的爱好是提升关键！";
+            } else if (person >= 80) {
+                description = "您孩子体质水平优秀，从小就是“健力宝”，将来一定“可口可乐”！";
+                imgName = "fine.png";
+            }
+            return {ImgName:imgName,Description:description};
+        };
+        var trainWay = {
+            7:"上肢力量：<br/>1.扔小球、沙包和气球，开始从90厘米至150厘米远的距离投掷，给，宝贝演示抛球时手臂的动作，必要时引导宝贝的手臂向前运动。<br/>2.让宝贝从90厘米以外处将袜子、要洗的衣服或其他小的东西扔进洗衣篮里，将花生或其他食物扔去喂动物和鸟。",
+            5:"协调性：<br/>1.首先示范如何马步跳走，指导宝贝一脚在前一脚在后放置，让宝贝模仿你的动作，比如说:“咱们像小马一样跑”。<br/>2.用一个玩具木棍让宝贝假装当马骑，放一些音乐，告诉他音乐一开始他就跑，音乐结束他就停。",
+            6:"灵敏性：<br/>1.宝贝首先能协调地奔跑，跟宝贝玩相互追逐的游戏，让宝贝来追你，奔跑时，改变方向，如向右跑、再向左跑、然后转身跑、反向跑，让宝贝跟着你跑。<br/>2.让宝贝玩一种游戏，在与一条起始线相隔3米处的地上放3 ~ 5个沙包或空的饮料罐，示范宝贝怎样快速走过去，捡起饮料罐，再跑回来，宝贝尽可能快地捡回每一个罐，并给他以鼓励。重复以上的游",
+            4:"下肢力量：<br/>1.将各种类型的贴画如各种图形、小虫、字母等贴在墙上，高度在宝贝伸手够到处的上方5~8厘米，让宝贝跳起够贴画，宝贝每碰到一次给予奖励，并要求他说出每次碰到的是什么，如小虫、形状、字母等。<br/>2.在宝贝手能摸到处上方5~8厘米处悬一风铃，示范宝贝怎样跳起打击它，看宝贝连续能够跳多少次并打击风铃。把一个软玩具放在柜子上，让宝贝跳起来拿到它。",
+            8:"平衡力：<br/>1.在房间地上放一些图形，每块间隔90厘米，让宝贝单脚从一块跳到另一块，同时说出图形的名称。<br/>2.在地上贴两条间隔90厘米的线，宝贝站在一条线上，对面线上放一些小东西，示范宝贝怎样单足跳到另一条线上拿东西，再单脚跳回来",
+            3:"柔韧性：<br/>1.用一条毯子搭在两把椅子上或将一个大盒子两端去掉做成筒状通道，让宝贝在指引下玩钻筒的游戏。如钻筒追逐，或爬大的物体如枕头或卷起的毯子等。"
+        }
+        var itemProjectGradeImg = function(score) {
+            switch (score) {
+                case 1:
+                    return "item-unqualified.png";
+                    break;
+                case 2:
+                    return "item-qualified.png";
+                    break;
+                case 3:
+                    return "item-inferior.png";
+                    break;
+                case 4:
+                    return "item-favourable.png";
+                    break;
+                case 5:
+                    return "item-fine.png";
+                    break;
+            }
+        };
+        var objectTypeGrade = function(score) {
+            if (score < 25) {
+                return 47;
+            } else if (score >= 25 && score < 50) {
+                return 113;
+            } else if (score >= 50 && score < 75) {
+                return 184;
+            } else if (score >= 75) {
+                return 256;
+            }
+        };
+        var itemTestCorrespondence = {
+            3: {
+                TestName: "坐位体前屈",
+                TestLastName: "柔韧性",
+                ImgName:"title-sit-icon.png",
+                ReleventAct: {
+                    One: {
+                        Name: "侧滑步",
+                        Persent: "34.12%",
+                        ImageName: "side-step-icon.png",
+                        Description: "在躲避、反应类游戏中经常用到侧滑步动作，也是篮球运动最基本的动作之一"
+                    }
+                }
+            },
+            4: {
+                TestName: "立定跳远",
+                TestLastName: "下肢力量",
+                ImgName:"title-stand-jump-icon.png",
+                ReleventAct: {
+                    One: {
+                        Name: "单脚跳",
+                        Persent: "70.63%",
+                        ImageName: "hop-icon.png",
+                        Description: "在躲避、反应类游戏中经常用到侧滑步动作，也是篮球运动最基本的动作之一"
+                    },
+                    Two: {
+                        Name: "前跨跳",
+                        Persent: "35.51%",
+                        ImageName: "fron-jump.png",
+                        Description: "日常活动中经常会跨过一些障碍物，当有什么挡路时，跳过去使幼儿避免绊倒"
+                    },
+                    Three: {
+                        Name: "踢球",
+                        Persent: "33.18%",
+                        ImageName: "kick-ball-icon.png",
+                        Description: "足球是孩子最喜欢的游戏“伙伴”，幼儿常用踢足球玩乐，还可用于移开物体"
+                    }
+                }
+            },
+            5: {
+                TestName: "双脚连续跳",
+                TestLastName: "协调性",
+                ImgName:"title-double-icon.png",
+                ReleventAct: {
+                    One: {
+                        Name: "单脚跳",
+                        Persent: "50.6%",
+                        ImageName: "hop-icon.png",
+                        Description: "生活中常用到单脚跳的动作，例如像跳房子、斗鸡等"
+                    },
+                    Two: {
+                        Name: "前滑步",
+                        Persent: "22.51%",
+                        ImageName: "before-sliding-icon.png",
+                        Description: "孩子常常模仿马儿奔跑，用到前滑步动作，同时，跆拳道、武术中也经常用到"
+                    }
+                }
+            },
+            6: {
+                TestName: "10米折返跑",
+                TestLastName: "灵敏性",
+                ImgName:"title-shuttle-icon.png",
+                ReleventAct: {
+                    One: {
+                        Name: "侧滑步",
+                        Persent: "20.38%",
+                        ImageName: "side-step-icon.png",
+                        Description: "在躲避、反应类游戏中经常用到侧滑步动作，也是篮球运动最基本的动作之一"
+                    },
+                    Two: {
+                        Name: "前滑步",
+                        Persent: "28.96%",
+                        ImageName: "before-sliding-icon.png",
+                        Description: "孩子常常模仿马儿奔跑，用到前滑步动作，同时，跆拳道、武术中也经常用到"
+                    },
+                    Three: {
+                        Name: "原地排球",
+                        Persent: "44.96%",
+                        ImageName: "standing-pat-icon.png",
+                        Description: "皮球是幼儿童年时的重要“玩伴”，原地、跑动中拍球是幼儿的必备“技能”"
+                    }
+                }
+            },
+            7: {
+                TestName: "网球掷远",
+                TestLastName: "上肢力量",
+                ImgName:"title-throw-icon.png",
+                ReleventAct: {
+                    One: {
+                        Name: "双手接球",
+                        Persent: "34.61%",
+                        ImageName: "hand-catching-icon.png",
+                        Description: "生活中常用到接的动作，比如玩群体性运动，以及把球扔来扔去的游戏等"
+                    },
+                    Two: {
+                        Name: "地滚球",
+                        Persent: "20.63%",
+                        ImageName: "grounder-icon.png",
+                        Description: "在生活中经常滚动物体，使其紧贴地面滚动，给动物喂食等游戏常用到此动作"
+                    },
+                    Three: {
+                        Name: "原地排球",
+                        Persent: "20.65%",
+                        ImageName: "standing-pat-icon.png",
+                        Description: "皮球是幼儿童年时的重要“玩伴”，原地、跑动中拍球是幼儿的必备“技能”"
+                    }
+                }
+            },
+            8: {
+                TestName: "走平衡木",
+                TestLastName: "平衡力",
+                ImgName:"title-balance-icon.png",
+                ReleventAct: {
+                    One: {
+                        Name: "单脚跳",
+                        Persent: "42.66%",
+                        ImageName: "hop-icon.png",
+                        Description: "幼儿在游戏中常用到单脚跳的动作，例如像跳房子、斗鸡等"
+                    },
+                    Two: {
+                        Name: "前滑步",
+                        Persent: "21.65%",
+                        ImageName: "before-sliding-icon.png",
+                        Description: "孩子常常模仿马儿奔跑，用到前滑步动作，同时，跆拳道、武术中也经常用到"
+                    },
+                    Three: {
+                        Name: "侧滑步",
+                        Persent: "21.38%",
+                        ImageName: "side-step-icon.png",
+                        Description: "皮球是幼儿童年时的重要“玩伴”，原地、跑动中拍球是幼儿的必备“技能”"
+                    }
+                }
+            }
+        };
+        var itemDataBase = {
+            3: "SitReachScore",
+            4: "BroadJumpScore",
+            5: "DoubleJumpScore",
+            6: "ShuttleRunScore",
+            7: "ThrowScore",
+            8: "BalanceScore"
+        };
+        var imgUrl= 'http://cdn.imreliable.net/asset/image/familyReportImg/'
+        Handlebars.registerHelper('badContent', function (person) {
+            var oneInfo = itemTestCorrespondence[person[0].TestName];
+            var twoInfo = itemTestCorrespondence[person[1].TestName]
+            var itemContent = {
+                OneFirstMarginTop:person[0].TestName == 3?"92px":(person[0].TestName == 5?"55px":"15px"),
+                FirstObjectImgName:imgUrl+oneInfo.ImgName,
+                FirstObjectName: oneInfo.TestLastName + '（' + oneInfo.TestName + '）',
+                OneTitleBackImg:person[0].TestName == 3?(imgUrl+"one-branch-icon.png"):(person[0].TestName == 5?imgUrl+"two-branch-icon.png":imgUrl+"three-branch-icon.png"),
+                OneFirstActName:oneInfo.ReleventAct.One.Name,
+                OneFirstActPercent:"相关性："+oneInfo.ReleventAct.One.Persent,
+                OneFirstActImg:imgUrl+oneInfo.ReleventAct.One.ImageName,
+                OneFirstActDec:oneInfo.ReleventAct.One.Description,
+                OneSecondDisPlay:person[0].TestName == 3?"none":"block",
+                OneSecondActName:oneInfo.ReleventAct.Two == null?"":oneInfo.ReleventAct.Two.Name,
+                OneSecondActPercent:oneInfo.ReleventAct.Two == null?"":( "相关性："+oneInfo.ReleventAct.Two.Persent),
+                OneSecondActImg:oneInfo.ReleventAct.Two == null ?"":(imgUrl+oneInfo.ReleventAct.Two.ImageName),
+                OneSecondActDec:oneInfo.ReleventAct.Two == null ? "":oneInfo.ReleventAct.Two.Description,
+                OneThirdDisPlay:(person[0].TestName == 3 || person[0].TestName == 5)?"none":"block",
+                OneThirdActName:oneInfo.ReleventAct.Three == null ?"":oneInfo.ReleventAct.Three.Name,
+                OnethirdActPercent:oneInfo.ReleventAct.Three == null ? "":("相关性："+oneInfo.ReleventAct.Three.Persent),
+                OnethirdActImg:oneInfo.ReleventAct.Three == null ? "":(imgUrl+oneInfo.ReleventAct.Three.ImageName),
+                OnethirdActDec:oneInfo.ReleventAct.Three == null ? "":oneInfo.ReleventAct.Three.Description,
+                SecondObjectImgName:imgUrl+twoInfo.ImgName,
+                SecondObjectName: twoInfo.TestLastName + '（' + twoInfo.TestName + '）',
+                TwoTitleBackImg:person[1].TestName == 3?(imgUrl+"one-branch-icon.png"):(person[1].TestName == 5?imgUrl+"two-branch-icon.png":imgUrl+"three-branch-icon.png"),
+                TwoFirstMarginTop:person[1].TestName == 3?"92px":(person[1].TestName == 5?"55px":"15px"),
+                TwoFirstActName:twoInfo.ReleventAct.One.Name,
+                TwoFirstActPercent:"相关性："+twoInfo.ReleventAct.One.Persent,
+                TwoFirstActImg:imgUrl+twoInfo.ReleventAct.One.ImageName,
+                TwoFirstActDec:twoInfo.ReleventAct.One.Description,
+                TwoSecondDisPlay:person[1].TestName == 3?"none":"block",
+                TwoSecondActName:twoInfo.ReleventAct.Two == null?"":twoInfo.ReleventAct.Two.Name,
+                TwoSecondActPercent:twoInfo.ReleventAct.Two == null?"":( "相关性："+twoInfo.ReleventAct.Two.Persent),
+                TwoSecondActImg:twoInfo.ReleventAct.Two == null ?"":(imgUrl+twoInfo.ReleventAct.Two.ImageName),
+                TwoSecondActDec:twoInfo.ReleventAct.Two == null ? "":twoInfo.ReleventAct.Two.Description,
+                TwoThirdDisPlay:(person[1].TestName == 3 || person[1].TestName == 5)?"none":"block",
+                TwoThirdActName:twoInfo.ReleventAct.Three == null ?"":twoInfo.ReleventAct.Three.Name,
+                TwothirdActPercent:twoInfo.ReleventAct.Three == null ? "":("相关性："+twoInfo.ReleventAct.Three.Persent),
+                TwothirdActImg:twoInfo.ReleventAct.Three == null ? "":(imgUrl+twoInfo.ReleventAct.Three.ImageName),
+                TwothirdActDec:twoInfo.ReleventAct.Three == null ? "":twoInfo.ReleventAct.Three.Description,
+            }
+            var template = Handlebars.compile($("#item-bad-html").html());
+            var htmlText = template(itemContent);
+            return htmlText;
+        });
+        $(function() {
+            var responseData = $information$;
+            if (responseData.Result.Total <= 0) {
+                alert("没有报告相关信息，请联系客服");
+                return;
+            }
+            debugger;
+            var classId;
+            var provinceJson = responseData.PropinceAbstract;
+            var provinceShapeScore = provinceJson.WeightAVGScore + provinceJson.HeightAVGScore;
+            var provinceDiathesisScore = provinceJson.DoubleJumpAVGScore + provinceJson.BroadJumpAVGScore + provinceJson.ShuttleRunAVGScore + provinceJson.SitReachAVGScore + provinceJson.ThrowAVGScore + provinceJson.BalanceAVGScore;
+            var provinceLocomotorScore = provinceJson.LocomotorAVGScore;
+            var provinceObjectControlScore = provinceJson.ObjectControlAVGScore;
+            var contentArr = [];
+            var childBarCodeArr = [];
+            for (var jsonResult in responseData.Result.Results) {
+                var classShapeScore;
+                var classDiathesisScore;
+                var classLocomotorScore;
+                var classObjectControlScore;
+                var jsonInfo = responseData.Result.Results[jsonResult];
+                var actionDevScore = jsonInfo.LocomotorScore + jsonInfo.ObjectControlScore;
+                for (var jsonClassAbstract in responseData.ClassAbstract) {
+                    var jsonClassAbstractInfo = responseData.ClassAbstract[jsonClassAbstract];
+                    if (jsonInfo.ClassId == classId) {
+                        continue;
+                    }
+                    if (jsonInfo.ClassId == jsonClassAbstractInfo.ClassId) {
+                        classShapeScore = jsonClassAbstractInfo.HeightAVGScore + jsonClassAbstractInfo.WeightAVGScore;
+                        classDiathesisScore = jsonClassAbstractInfo.DoubleJumpAVGScore + jsonClassAbstractInfo.BroadJumpAVGScore + jsonClassAbstractInfo.ShuttleRunAVGScore + jsonClassAbstractInfo.SitReachAVGScore +
+
+jsonClassAbstractInfo.BalanceAVGScore + jsonClassAbstractInfo.ThrowAVGScore + jsonClassAbstractInfo.ShuttleRunAVGScore;
+                        classLocomotorScore = jsonClassAbstractInfo.LocomotorAVGScore;
+                        classObjectControlScore = jsonClassAbstractInfo.ObjectControlAVGScore;
+                        classId = jsonInfo.ClassId;
+                    }
+                }
+                var itemObjectScoreArr = [];
+                for (var i = 3; i < 9; i++) {
+                    var item = {};
+                    var s = jsonInfo[itemDataBase[i]];
+                    item['TestName'] = i;
+                    item['Score'] = s;
+                    itemObjectScoreArr.push(item);
+                }
+
+                var scoreArr = _.sortBy(itemObjectScoreArr, 'Score');
+                var itemPhyInfo = {
+                    ChildName: jsonInfo.ChildName,
+                    AgeGroup: jsonInfo.AgeGroup,
+                    KindergartenName: jsonInfo.KindergartenName,
+                    ShapeTotalScore: jsonInfo.BodyShapTotalScore * 10,
+                    TotalScoreImage: totalImgGrade(jsonInfo.TotalScore * 2.5).ImgName,
+                    TotalDescription: totalImgGrade(jsonInfo.TotalScore * 2.5).Description,
+                    BodyShapScore: jsonInfo.BodyShapTotalScore * 100 / 10,
+                    ShapeGrade: objectTypeGrade(jsonInfo.BodyShapTotalScore * 10),
+                    ClassShapeScore: classShapeScore * 10,
+                    ProvinceShapeScore: provinceShapeScore * 10,
+                    HeightScoreImg: itemProjectGradeImg(jsonInfo.HeightScore),
+                    WeightScoreImg: itemProjectGradeImg(Math.abs(jsonInfo.WeightScore)),
+                    DiathesisTotalScore: Math.round(jsonInfo.BodyDiathesisTotalScore / 30 * 100),
+                    BodyDiathesisScore: jsonInfo.BodyDiathesisTotalScore / 30 * 100,
+                    ClassDiathesisScore: classDiathesisScore / 30 * 100,
+                    ProvinceDiathesisScore: provinceDiathesisScore / 30 * 100,
+                    DiathesisGrade: objectTypeGrade(jsonInfo.BodyDiathesisTotalScore * 10 / 3),
+                    PowerTotalImg: itemProjectGradeImg(Math.round((jsonInfo.ThrowScore + jsonInfo.BroadJumpScore) / 2)),
+                    BalanceTotalImg: itemProjectGradeImg(jsonInfo.BalanceScore),
+                    ShuttleRunTotalImg: itemProjectGradeImg(jsonInfo.ShuttleRunScore),
+                    DoubleJumpTotalImg: itemProjectGradeImg(jsonInfo.DoubleJumpScore),
+                    SitReachTotalImg: itemProjectGradeImg(jsonInfo.SitReachScore),
+                    ObjectControlTotalScore: jsonInfo.ObjectControlScore / 20 * 100,
+                    LocomotorTotalScore: jsonInfo.LocomotorScore / 20 * 100,
+                    ClassLocomotorGrade: classLocomotorScore / 20 * 100,
+                    ProvinceLocomotorGrade: provinceLocomotorScore / 20 * 100,
+                    LocomotorGrade: jsonInfo.LocomotorScore * 13 + 20,
+                    ClassObjectControlScore: classObjectControlScore / 20 * 100,
+                    ProvinceObjectControlScore: provinceObjectControlScore * 5,
+                    ObjectControlGrade: jsonInfo.ObjectControlScore * 13 + 20,
+                    BadObjectContent: scoreArr,
+                    OneTrainWay:trainWay[scoreArr[0].TestName],
+                    TwoTrainWay:trainWay[scoreArr[1].TestName],
+                    OneBadName: itemTestCorrespondence[scoreArr[0].TestName].TestName+'（'+itemTestCorrespondence[scoreArr[0].TestName].TestLastName+'）',
+                    TwoBadName: itemTestCorrespondence[scoreArr[1].TestName].TestName+'（'+itemTestCorrespondence[scoreArr[1].TestName].TestLastName+'）',
+                    ChildId:jsonInfo.ChildId
+                }
+                contentArr.push(itemPhyInfo);
+                var itemChildCode = {};
+                itemChildCode["ChildId"] = jsonInfo.ChildId;
+                itemChildCode["ChildCode"] = jsonInfo.ChildCode;
+                childBarCodeArr.push(itemChildCode);
+            }
+            var template = Handlebars.compile($("#content-html").html());
+            var htmlText = template(contentArr);
+            $("#content").html(htmlText);
+            for(var codejson in childBarCodeArr ){
+                JsBarcode("#barcode"+childBarCodeArr[codejson].ChildId,childBarCodeArr[codejson].ChildCode,{width: "1px",height:"70px",fontSize:18,marginLeft:300,textAlign:"right",textAlign:"center"});
+            }
+        });
+    </script>
+    <script type="text/x-handlebars-template" id="item-bad-html">
+        <li style="background:#f6f6f6;">
+            <div class="test-subjects-title" style="background: url('{{OneTitleBackImg}}') no-repeat center right;background-size: 10%;">
+                <img src="{{FirstObjectImgName}}" />
+                <h4>相关联动作</h4>
+                <b>{{FirstObjectName}}</b><br />
+            </div>
+            <div class="test-subjects-text">
+                <ul>
+                    <li style="margin-top:{{OneFirstMarginTop}}">
+                        <div class="test-subjects-text-img">
+                            <img src="{{OneFirstActImg}}" />
+                            <span>{{OneFirstActName}}</span>
+                        </div>
+                        <p>
+                            <em> {{OneFirstActPercent}}</em><br />
+                            <span>{{OneFirstActDec}}</span>
+                        </p>
+                    </li>
+                    <li style="display: {{OneSecondDisPlay}};">
+                        <div class="test-subjects-text-img">
+                            <img src="{{OneSecondActImg}}" />
+                            <span>{{OneSecondActName}}</span>
+                        </div>
+                        <p>
+                            <em> {{OneSecondActPercent}}</em><br />
+                            <span>{{OneSecondActDec}}</span>
+                        </p>
+                    </li>
+                    <li style="display: {{OneThirdDisPlay}};">
+                        <div class="test-subjects-text-img">
+                            <img src="{{OnethirdActImg}}" />
+                            <span>{{OneThirdActName}}</span>
+                        </div>
+                        <p>
+                            <em> {{OnethirdActPercent}}</em><br />
+                            <span>{{OnethirdActDec}}</span>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li style="background: #fff;">
+            <div class="test-subjects-title" style="background: url('{{TwoTitleBackImg}}') no-repeat center right;background-size: 10%;">
+                <img src="{{SecondObjectImgName}}" />
+                <h4>相关联动作</h4>
+                <b>{{SecondObjectName}}</b><br />
+
+            </div>
+            <div class="test-subjects-text">
+                <ul>
+                    <li style="margin-top:{{TwoFirstMarginTop}}">
+                        <div class="test-subjects-text-img">
+                            <img src="{{TwoFirstActImg}}" />
+                            <span>{{TwoFirstActName}}</span>
+                        </div>
+                        <p>
+                            <em> {{TwoFirstActPercent}}</em><br />
+                            <span>{{TwoFirstActDec}}</span>
+                        </p>
+                    </li>
+                    <li style="display: {{TwoSecondDisPlay}};">
+                        <div class="test-subjects-text-img">
+                            <img src="{{TwoSecondActImg}}" />
+                            <span>{{TwoSecondActName}}</span>
+                        </div>
+                        <p>
+                            <em> {{TwoSecondActPercent}}</em><br />
+                            <span>{{TwoSecondActDec}}</span>
+                        </p>
+                    </li>
+                    <li style="display: {{TwoThirdDisPlay}};">
+                        <div class="test-subjects-text-img">
+                            <img src="{{TwothirdActImg}}" />
+                            <span>{{TwoThirdActName}}</span>
+                        </div>
+                        <p>
+                            <em> {{TwothirdActPercent}}</em><br />
+                            <span>{{TwothirdActDec}}</span>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </script>
+    <script type="text/x-handlebars-template" id="content-html">
+        {{#each this}}
+        <div class="report-box page-break-before">
+            <!--头-->
+            <div class="top">
+                <div class="top-left">
+                    <div class="change-page">
+                        <p class="active" href="#"></p>
+                        <p href=""></p>
+                    </div>
+                    <div class="top-title">
+                        <p>睿莱体育健康检查报告</p>
+                    </div>
+                    <div class="baby-info">
+                        <img src="http://cdn.imreliable.net/asset/image/patriarchReport/bady.png" />
+                        <ul>
+                            <li>姓名：{{ChildName}}</li>
+                            <li>年龄：{{AgeGroup}}岁</li>
+                            <li>学校：{{KindergartenName}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="top-right">
+                    <div class="prompt">
+                        <b>注:</b><br>
+                        <span>
+                            我们从身体形态、身体素质、动作发展三个方面进行评价
+                        </span>
+                    </div>
+                    <div class="total-score">
+                        <img src="http://cdn.imreliable.net/asset/image/patriarchReport/{{TotalScoreImage}}">
+                        <p>{{TotalDescription}}</p>
+                    </div>
+                </div>
+            </div>
+            <!--内容-->
+            <!--身体形态-->
+            <div class="body-shape">
+                <div class="head-title1">
+                    <b>
+                        身体形态
+                    </b>
+                    <p class="head-explain">是幼儿身体的外部形状和特征，主要包括体形、身体姿势等方面，反映了宝宝的生长发育水平</p>
+                </div>
+                <div class="score">
+                    <div class="score-number">
+                        <div class="number">
+                            {{ShapeTotalScore}}
+                        </div>
+                        <div class="number-btn">
+                            综合分数
+                        </div>
+                    </div>
+                    <div class="score-level">
+                        <div class="abstract-score-info">
+                            <label class="abstract-grade-one">不合格</label>
+                            <img class="circle-icon1" src="http://cdn.imreliable.net/asset/image/patriarchReport/circle-icon1.png" />
+                            <label class="grade-score">
+                                <label class="grade-one-score"></label>
+                            </label>
+                            <label class="abstract-grade-two">合格</label>
+                            <label class="grade-score">
+                                <label class="grade-one-score"></label>
+                            </label>
+                            <label class="abstract-grade-three">良好</label>
+                            <label class="grade-score">
+                                <label class="grade-one-score"></label>
+                            </label>
+                            <label class="abstract-grade-four">优秀</label>
+                            <img class="circle-icon2" src="http://cdn.imreliable.net/asset/image/patriarchReport/circle-icon2.png" /><br />
+                            <img src="http://cdn.imreliable.net/asset/image/patriarchReport/jiantou.png" style="position: relative; bottom:50px; left:{{ShapeGrade}}px ;width: 6%;" class="float-left" />
+                        </div>
+                    </div>
+                    <div class="score-bar">
+                        <ul>
+                            <li class="score-fist-li">
+                                <span>
+                                    幼儿
+                                </span>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{BodyShapScore}}%;">
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <span>
+                                    班级
+                                </span>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{ClassShapeScore}}%;">
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <span>
+                                    全省
+                                </span>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{ProvinceShapeScore}}%;">
+                                    </div>
+                                </div>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="various-situation">
+                    <div class="vs-title">
+                        <b>
+                            各项情况
+                        </b>
+                    </div>
+                    <div class="vs-center">
+                        <div class="vs-center-li pull-left">
+                            <div class="vs-center-li-tu">
+                                <img class="icon" src="http://cdn.imreliable.net/asset/image/patriarchReport/icon-1.png" />
+                                <span>
+                                    身高
+                                </span>
+                            </div>
+                            <p>是幼儿直立时支撑面至头顶点的垂直距离，是宝宝发育过程中反映骨骼发育的重要指标</p>
+                            <img class="icon1" src="http://cdn.imreliable.net/asset/image/patriarchReport/{{HeightScoreImg}}" />
+                        </div>
+
+                        <div class="vs-center-li pull-left">
+                            <div class="vs-center-li-tu">
+                                <img class="icon" src="http://cdn.imreliable.net/asset/image/patriarchReport/icon-2.png" />
+                                <span>
+                                    体重
+                                </span>
+                            </div>
+                            <p>是描述幼儿横向发育的指标，能够反映宝宝骨骼、肌肉、皮下脂肪以及内脏器官的综合发育状况</p>
+                            <img class="icon1" src="http://cdn.imreliable.net/asset/image/patriarchReport/{{WeightScoreImg}}" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--身体素质-->
+            <div class="body-shape">
+                <div class="head-title2">
+                    <b>
+                        身体素质
+                    </b>
+                    <p class="head-explain">是幼儿身体肌肉活动的基本能力，是幼儿的各个器官系统的机能在肌肉工作中的综合反映</p>
+                </div>
+                <div class="score">
+                    <div class="score-number">
+                        <div class="number">
+                            {{DiathesisTotalScore}}
+                        </div>
+                        <div class="number-btn">
+                            综合分数
+                        </div>
+                    </div>
+                    <div class="score-level">
+                        <div class="abstract-score-info">
+                            <label class="abstract-grade-one">不合格</label>
+                            <img class="circle-icon1" src="http://cdn.imreliable.net/asset/image/patriarchReport/circle-icon1.png" />
+                            <label class="grade-score">
+                                <label class="grade-one-score"></label>
+                            </label>
+                            <label class="abstract-grade-two">合格</label>
+                            <label class="grade-score">
+                                <label class="grade-one-score"></label>
+                            </label>
+                            <label class="abstract-grade-three">良好</label>
+                            <label class="grade-score">
+                                <label class="grade-one-score"></label>
+                            </label>
+                            <label class="abstract-grade-four">优秀</label>
+                            <img class="circle-icon2" src="http://cdn.imreliable.net/asset/image/patriarchReport/circle-icon2.png" /><br />
+                            <img src="http://cdn.imreliable.net/asset/image/patriarchReport/jiantou.png" style="position: relative; bottom:50px; left:{{DiathesisGrade}}px ;width: 6%;" class="float-left" />
+                        </div>
+                    </div>
+                    <div class="score-bar">
+                        <ul>
+                            <li class="score-fist-li">
+                                <span>
+                                    幼儿
+                                </span>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{BodyDiathesisScore}}%;">
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <span>
+                                    班级
+                                </span>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{ClassDiathesisScore}}%;">
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <span>
+                                    全省
+                                </span>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{ProvinceDiathesisScore}}%;">
+                                    </div>
+                                </div>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="various-situation">
+                    <div class="vs-title">
+                        <b>
+                            各项情况
+                        </b>
+                    </div>
+                    <div class="vs-center">
+                        <div class="vs-center-li pull-left">
+                            <div class="vs-center-li-tu">
+                                <img class="icon" src="http://cdn.imreliable.net/asset/image/patriarchReport/icon1.png" />
+                                <span>
+                                    力量
+                                </span>
+                            </div>
+                            <p>是幼儿全身肌肉在活动时克服阻力的能力，使宝宝在完成各种动作的首要保证</p>
+                            <img class="icon1" src="http://cdn.imreliable.net/asset/image/patriarchReport/{{PowerTotalImg}}" />
+                        </div>
+                        <div class="vs-center-li pull-left">
+                            <div class="vs-center-li-tu">
+                                <img class="icon" src="http://cdn.imreliable.net/asset/image/patriarchReport/icon2.png" />
+                                <span>
+                                    平衡
+                                </span>
+                            </div>
+                            <p>是幼儿维持身体姿势的能力，是宝宝中枢神经、前庭分析器、本体感受器等机能的综合反映</p>
+                            <img class="icon1" src="http://cdn.imreliable.net/asset/image/patriarchReport/{{BalanceTotalImg}}" />
+                        </div>
+                        <div class="vs-center-li pull-left">
+                            <div class="vs-center-li-tu">
+                                <img class="icon" src="http://cdn.imreliable.net/asset/image/patriarchReport/icon3.png" />
+                                <span>
+                                    灵敏
+                                </span>
+                            </div>
+                            <p>是幼儿在复杂的条件下，快速、准确地改变身体姿势、运动方向和随机应变的能力</p>
+                            <img class="icon1" src="http://cdn.imreliable.net/asset/image/patriarchReport/{{ShuttleRunTotalImg}}" />
+                        </div>
+
+                        <div class="vs-center-li pull-left">
+                            <div class="vs-center-li-tu">
+                                <img class="icon" src="http://cdn.imreliable.net/asset/image/patriarchReport/icon4.png" />
+                                <span>
+                                    协调
+                                </span>
+                            </div>
+                            <p>是幼儿身体的不同系统、不同部位和不同器官协同配合完成某一动作的能力</p>
+                            <img class="icon1" src="http://cdn.imreliable.net/asset/image/patriarchReport/{{DoubleJumpTotalImg}}" />
+                        </div>
+                        <div class="vs-center-li pull-left">
+                            <div class="vs-center-li-tu">
+                                <img class="icon" src="http://cdn.imreliable.net/asset/image/patriarchReport/icon5.png" />
+                                <span>
+                                    柔韧
+                                </span>
+                            </div>
+                            <p>指幼儿关节在不同方向上的运动能力以及肌肉、韧带的伸展能力</p>
+                            <img class="icon1" src="http://cdn.imreliable.net/asset/image/patriarchReport/{{SitReachTotalImg}}" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--脚码-->
+            <div class="footer">
+                <p class="foot-zc">睿莱（RELIABLE）儿童体质检测中心</p>
+                <p class="foot-english">Reliable Children Physical Fitness Testing Center</p>
+            </div>
+        </div>
+
+        <!--2page------------------------>
+        <div class="report-box page-break-before">
+            <div class="change-page">
+                <p class="active" href="#"></p>
+                <p href=""></p>
+            </div>
+            <!--动作发展-->
+            <div class="body-shape">
+                <div class="head-title3">
+                    <b>
+                        动作发展
+                    </b>
+                    <p class="head-explain">指幼儿动作行为发生连续、持续的与年龄相关的变化，是宝宝最早发展的运动技能</p>
+                </div>
+                <!--	物体控制-->
+                <!--位移能力-->
+                <div class="score2">
+                    <div class="center-block">
+                        <img style=" margin-left:287px" src="http://cdn.imreliable.net/asset/image/familyReportImg/perfect.png" />
+
+                    </div>
+                </div>
+                <div class="row text-center text-description" style="bottom: 9rem">
+                    <label>
+                        抱歉，幼儿园体测内容未包括该项目<br>
+                        请联系我们：400-833-8163
+                    </label>
+                </div>
+            </div>
+            <!--脚码-->
+            <div class="footer">
+                <p class="foot-zc">睿莱（RELIABLE）儿童体质检测中心</p>
+                <p class="foot-english">Reliable Children Physical Fitness Testing Center</p>
+            </div>
+        </div>
+        <div class="report-box">
+            <!--头-->
+            <div class="top-head ">
+
+                <div class="top-title">
+                    <p>身体素质弱项分析报告</p>
+                </div>
+                <div class="course-conter">
+                    <h4>
+                        <img src="http://cdn.imreliable.net/asset/image/familyReportImg/report-title-icon3.png" />
+                        分析与说明
+
+                    </h4>
+                    <hr class="hr-class" />
+                    <p style="color: #666666;font-size: 12px;">
+                        {{ChildName}}的{{OneBadName}}、{{TwoBadName}}两项身体素质落后于其他身体素质。睿莱结合幼儿身体素质与动作发展规律，筛选出与弱项身体素质相关动作，为家长和老师观察儿童的素质表现提供多个动作参照
+
+                        。
+                    </p>
+                </div>
+
+            </div>
+            <!--内容-->
+            <div class="course-conter">
+                <h4>
+                    <img src="http://cdn.imreliable.net/asset/image/familyReportImg/report-title-icon1.png" />
+                    素质分析
+                    <span>相关性显示两个元素之间线性关系的强度和方向</span>
+                </h4>
+                <hr class="hr-class" />
+                <div class="test-subjects">
+                    <ul id="ul-list">
+                        {{{badContent  BadObjectContent}}}
+                    </ul>
+                </div>
+            </div>
+            <!--训练方法-->
+            <div class="course-conter training-methods">
+                <h4>
+                    <img src="http://cdn.imreliable.net/asset/image/familyReportImg/report-title-icon2.png" />
+                    训练方法
+                </h4>
+                <hr class="hr-class" />
+                <p>
+                    {{{OneTrainWay}}}
+                    <br />{{{TwoTrainWay}}}
+                </p>
+            </div>
+            <!--条码+二维码-->
+            <div class="bar-code">
+                <div class="bar-code-code">
+                    <img src="http://cdn.imreliable.net/asset/image/familyReportImg/QR-code.png" />
+                    <span>扫一扫关注睿莱健康公众号</span>
+                </div>
+                <div class="3.5rem">
+                    <svg id="barcode{{ChildId}}"></svg>
+                    <br />
+                    <!--<img src="http://cdn.imreliable.net/asset/image/familyReportImg/bar-code.png" />-->
+                    <span style="margin-left: 30%;">在我们微信公众号中扫描条形码深度查看孩子体质情况</span>
+                </div>
+            </div>
+            <!--脚码-->
+            <div class="footer">
+                <p class="foot-zc">睿莱（RELIABLE）儿童体质检测中心</p>
+                <p class="foot-english">Reliable Children Physical Fitness Testing Center</p>
+            </div>
+        </div>
+
+        {{/each}}
+    </script>
+</head>
+<body id="content">
+
+</body>
+
+</html>

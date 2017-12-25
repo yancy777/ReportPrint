@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>家长报告</title>
+		<link href="http://cdn.imreliable.net/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="http://cdn.imreliable.net/jquery/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="http://cdn.imreliable.net/bootstrap/js/bootstrap.min.js"></script>
+
+	</head>
+	<style type="text/css">
+		ul {
+			list-style: none;
+		}
+		
+		img {
+			width: 28%;
+			float: left;
+		}
+		
+		body {
+			font-family: "microsoft yahei";
+		}
+		
+		.report-box {
+			width: 794px;
+			height: 1123px;
+			margin: 0 auto;
+			position: relative;
+		}
+		
+		.top {
+			height: 247px;
+		}
+		
+		.top-left {
+			width: 328px;
+			height: 237px;
+			float: left;
+		}
+		
+		.change-page {
+			width: 296px;
+			height: 31px;
+			margin-left: 32px;
+		}
+		
+		.change-page p {
+			float: left;
+			width: 80px;
+			height: 4px;
+			background: #b8b8b8;
+			margin: 21px 0 0 0;
+		}
+		
+		.change-page .active {
+			background: #b92131;
+		}
+		
+		.top-title {
+			width: 296px;
+			height: 51px;
+			margin-left: 32px;
+			margin-top: 20px;
+			height: 60px;
+			display: block;
+			font-size: 25px;
+		}
+		
+		.baby-info {
+			width: 100%;
+			height: 136px;
+			background: url(images/baby-info-bg.png) no-repeat center;
+			background-size: contain;
+			padding-top: 28px;
+			padding-left: 32px;
+			font-size: 15px;
+		}
+		
+		.baby-info img {
+			width: 28%;
+			float: left;
+		}
+		
+		.baby-info ul {
+			color: #FFFFFF;
+			float: left;
+			padding-top: 5px;
+		}
+		
+		.top-right {
+			width: 408px;
+			height: 237px;
+			float: right;
+		}
+		
+		.prompt {
+			width: 210px;
+			height: 125px;
+			background: #f2f1f1;
+			float: right;
+			padding: 19px 30px 0 30px;
+			font-size: 13px;
+		}
+		.prompt b{
+			font-size:16px;
+		 
+		}
+		.prompt span {
+			margin-top: 3px;
+  			display: block;
+			color: #777978
+		}
+		
+		.total-score {
+			width: 400px;
+			height: 121px;
+			float: right;
+		}
+		
+		.total-score p {
+			margin-left: 32px;
+			margin-top: 33px;
+			float: left;
+			width: 220px;
+			height: 48px
+		}
+		/*内容*/
+		
+		.body-shape {
+			height: 337px;
+		}
+		
+		.head-title1,
+		.head-title2,
+		.head-title3 {
+			height: 37px;
+			margin: 18px 0;
+		}
+		
+		.head-title1 b,
+		.head-title2 b,
+		.head-title3 b {
+			font-weight: normal;
+			margin-left: 32px;
+			color: #FFF;
+			line-height: 35px;
+			font-size: 17px;
+			float: left;
+			padding-right: 50px;
+		}
+		
+		.head-title1 {
+			background: url(images/head-title1.png) no-repeat left;
+			background-size: contain;
+		}
+		
+		.head-title2 {
+			background: url(images/head-title2.png) no-repeat left;
+			background-size: contain;
+		}
+		
+		.head-title3 {
+			background: url(images/head-title3.png) no-repeat left;
+			background-size: contain;
+		}
+		
+		.head-explain {
+			float: left;
+			color: #797675;
+			padding-top: 10px;
+			font-size: 11px;
+		}
+		
+		.score {
+			height: 146px;
+			padding-left: 32px;
+			background: url(images/score-bg.png) no-repeat left;
+			background-size: contain;
+		}
+		
+		.score2 {
+			height: 260px;
+			background: url(images/score2-bg.png) no-repeat left;
+			background-size: contain;
+			margin-bottom: 26px;
+		}
+		
+		.score-number {
+			width: 182px;
+			height: 144px;
+			float: left;
+		}
+		
+		.number {
+			text-align: center;
+			line-height: 66px;
+			width: 70px;
+			height: 70px;
+			font-size: 36px;
+			color: #b92131;
+			border-radius: 50%;
+			border: 3px solid #b92131;
+			margin: 17px 0 10px 16px;
+		}
+		
+		.number-btn {
+			width: 96px;
+			height: 30px;
+			color: #fff;
+			background: #b92131;
+			border-radius: 2px;
+			text-align: center;
+			line-height: 30px;
+			margin-left: 3px;
+			letter-spacing: 4px;
+		}
+		
+		.score-level {
+			width: 316px;
+			height: 144px;
+			float: left;
+		}
+		
+		.vs-title {
+			height: 30px;
+			font-size: 15px;
+			margin: 18px 0 0px 32px;
+			color: #b92131;
+			background: url(images/em-line.png) no-repeat 40px;
+		}
+		
+		.vs-center {
+			padding-top: 10px;
+		}
+		
+		.vs-center-li {
+			width: 332px;
+			height: 62px;
+			margin: 0px 32px;
+		}
+		
+		.vs-center-li-tu {
+			width: 32px;
+			float: left;
+			text-align: center;
+		}
+		
+		.vs-center-li-tu span {
+			font-size: 13px;
+		}
+		
+		.vs-center-li p {
+			float: left;
+			width: 199px;
+			font-size: 12px;
+			color: #797675;
+			margin: 0 35px 0 16px;
+		}
+		
+		.vs-center-li .icon {
+			width: 32px;
+			float: left;
+		}
+		
+		.vs-center-li .icon1 {
+			width: 44px;
+			float: left;
+		}
+		
+		.footer {
+			margin-top: 20px;
+			float: left;
+			width: 794px;
+			height: 30px;
+			text-align: center;
+			font-size: 10px;
+			line-height: 6px;
+			position: absolute;
+			bottom: 5px;
+		}
+		
+		.foot-zc {
+			color: #7f7f80;
+		}
+		
+		.foot-english {
+			color: #c6c2c1;
+		}
+		/*page2*/
+		
+		.score2-left {
+			width: 450px;
+			height: 234px;
+			padding-right: 5px;
+			float: left;
+		}
+		
+		.score2-right {
+			width: 342px;
+			height: 234px;
+			float: left;
+		}
+		
+		.relative-score {
+			width: 171px;
+			height: 144px;
+			margin-left: 32px;
+			float: left;
+		}
+		
+		.relative-score-top {
+			width: 167px;
+			height: 62px;
+			float: left;
+		}
+		
+		.relative-score-title {
+			height: 62px;
+			width: 84px;
+			float: left;
+			padding-top: 13px;
+			color: #a69f9d;
+			font-size: 16px;
+		}
+		
+		.relative-score-number {
+			float: left;
+			height: 62px;
+			width: 83px;
+			background: url(images/polygon-icon.png) no-repeat center;
+			background-size: contain;
+			line-height: 62px;
+			padding-left: 32px;
+			font-size: 32px;
+			color: #fff;
+		}
+		
+		.relative-score-btn {
+			width: 170px;
+			height: 33px;
+			color: #fff;
+			background: #b92131;
+			border-radius: 2px;
+			text-align: center;
+			line-height: 33px;
+			letter-spacing: 3px;
+			float: left;
+			margin-top: 25px;
+		}
+		/*  成绩级别插件*/
+		
+		.abstract-score-info {
+			margin-top: 70px;
+		}
+		
+		.abstract-score-info label {
+			font-size: 13px;
+			color: #666666;
+			text-align: center;
+			margin: 0 2px;
+			line-height: 30px;
+			font-weight: normal;
+			color: #666666;
+		}
+		
+		.abstract-grade-one,
+		.abstract-grade-two,
+		.abstract-grade-three,
+		.abstract-grade-four {
+			width: 50px;
+			border-radius: .1rem;
+			line-height: 1.5rem;
+			position: relative;
+			top: .6rem;
+		}
+		
+		.abstract-grade-one {
+			border-top: 3px solid #b92131;
+		}
+		
+		.abstract-grade-two {
+			border-top: 3px solid #b92131;
+			margin-left: -5%;
+		}
+		
+		.abstract-grade-three {
+			border-top: 3px solid #b92131;
+			margin-left: -5%;
+		}
+		
+		.abstract-grade-four {
+			border-top: 3px solid #b92131;
+			margin-left: -5%;
+		}
+		
+		.abstract-score-info img {
+			width: 4%;
+		}
+		
+		.grade-one-score {
+			border-left: 1px dashed #666666;
+			height: 20px;
+		}
+		
+		.circle-icon1 {
+			position: relative;
+			left: 20px;
+			width: 10%;
+		}
+		
+		.circle-icon2 {
+			position: relative;
+			left: 276px;
+			width: 10%;
+		}
+		/*进度条*/
+		
+		.score-bar {
+			width: 232px;
+			height: 144px;
+			float: left;
+		}
+		
+		.score-fist-li {
+			margin-top: 32px;
+		}
+		
+		.progress {
+			height: 10px;
+			margin-top: 2px;
+			/*box-shadow: 1px 10px 5px #888888;*/
+			box-shadow: inset 0 1px 2px rgba(216, 216, 216, 1)
+		}
+		
+		.score-bar li {
+			width: 170px;
+			height: 35px;
+			font-size: 13px;
+		}
+		
+		.score-bar span {
+			float: left;
+			margin-right: 6px;
+			margin-top: -4px;
+		}
+		
+		.progress-bar {
+			border-bottom-right-radius: 5px;
+			border-top-right-radius: 5px;
+		}
+	</style>
+
+	<body>
+		<div class="report-box">
+			<!--头-->
+			<div class="top">
+				<div class="top-left">
+					<div class="change-page">
+						<p class="active" href="#"></p>
+						<p href=""></p>
+					</div>
+					<div class="top-title">
+						<p>睿莱体育健康检查报告</p>
+					</div>
+					<div class="baby-info">
+						<img src="images/bady.png" />
+						<ul>
+							<li>姓名：宝宝sss</li>
+							<li>生日：sss</li>
+							<li>学校：sss</li>
+						</ul>
+					</div>
+				</div>
+				<div class="top-right">
+					<div class="prompt">
+						<b>注:</b><br>
+						<span>
+							我们从身体形态、身体素质、动作发展三个方面进行评价 
+						</span>
+					</div>
+					<div class="total-score">
+						<img src="images/total-score.png">
+						<p>该幼儿身体形态发展良好，身体素质</p>
+					</div>
+				</div>
+			</div>
+			<!--内容-->
+			<!--身体形态-->
+			<div class="body-shape">
+				<div class="head-title1">
+					<b>
+	               		身体形态
+	               	</b>
+					<p class="head-explain">是幼儿身体的外部形状和特征，主要包括体形、身体姿势等方面，反映了宝宝的生长发育水平</p>
+				</div>
+				<div class="score">
+					<div class="score-number">
+						<div class="number">
+							35
+						</div>
+						<div class="number-btn">
+							综合分数
+						</div>
+					</div>
+					<div class="score-level">
+						<div class="abstract-score-info">
+							<label class="abstract-grade-one">不合格</label>
+							<img class="circle-icon1" src="images/circle-icon1.png" />
+							<label class="grade-score">
+				                    	<label class="grade-one-score"></label>
+							</label>
+							<label class="abstract-grade-two">合格</label>
+							<label class="grade-score">
+										 <label class="grade-one-score"></label>
+							</label>
+							<label class="abstract-grade-three">良好</label>
+							<label class="grade-score">
+				                    	<label class="grade-one-score"></label>
+							</label>
+							<label class="abstract-grade-four">优秀</label>
+							<img class="circle-icon2" src="images/circle-icon2.png" /><br />
+							<img src="images/jiantou.png" style="position: relative; bottom:50px; left:198px ;width: 6%;" class="float-left" />
+						</div>
+					</div>
+					<div class="score-bar">
+						<ul>
+							<li class="score-fist-li">
+								<span>
+									幼儿
+								</span>
+								<div class="progress">
+									<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+									</div>
+								</div>
+							</li>
+							<li>
+								<span>
+									班级
+								</span>
+								<div class="progress">
+									<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+									</div>
+								</div>
+							</li>
+							<li><span>
+									全省
+								</span>
+								<div class="progress">
+									<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
+									</div>
+								</div>
+
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="various-situation">
+					<div class="vs-title">
+						<b>
+	               			各项情况  
+	               		</b>
+					</div>
+					<div class="vs-center">
+						<div class="vs-center-li pull-left">
+							<div class="vs-center-li-tu">
+								<img class="icon" src="images/icon-1.png" />
+								<span>
+                      				身高
+                      			</span>
+							</div>
+							<p>是幼儿直立时支撑面至头顶点的垂直距离，是宝宝发育过程中反映骨骼发育的重要指标</p>
+							<img class="icon1" src="images/score2.png" />
+						</div>
+
+						<div class="vs-center-li pull-left">
+							<div class="vs-center-li-tu">
+								<img class="icon" src="images/icon-2.png" />
+								<span>
+                      				体重
+                      			</span>
+							</div>
+							<p>是描述幼儿横向发育的指标，能够反映宝宝骨骼、肌肉、皮下脂肪以及内脏器官的综合发育状况</p>
+							<img class="icon1" src="images/score2.png" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--身体素质-->
+			<div class="body-shape">
+				<div class="head-title2">
+					<b>
+	               		身体素质 
+	               	</b>
+					<p class="head-explain">是幼儿身体肌肉活动的基本能力，是幼儿的各个器官系统的机能在肌肉工作中的综合反映</p>
+				</div>
+				<div class="score">
+					<div class="score-number">
+						<div class="number">
+							35
+						</div>
+						<div class="number-btn">
+							综合分数
+						</div>
+					</div>
+					<div class="score-level">
+						<div class="abstract-score-info">
+							<label class="abstract-grade-one">不合格</label>
+							<img class="circle-icon1" src="images/circle-icon1.png" />
+							<label class="grade-score">
+				                    	<label class="grade-one-score"></label>
+							</label>
+							<label class="abstract-grade-two">合格</label>
+							<label class="grade-score">
+										 <label class="grade-one-score"></label>
+							</label>
+							<label class="abstract-grade-three">良好</label>
+							<label class="grade-score">
+				                    	<label class="grade-one-score"></label>
+							</label>
+							<label class="abstract-grade-four">优秀</label>
+							<img class="circle-icon2" src="images/circle-icon2.png" /><br />
+							<img src="images/jiantou.png" style="position: relative; bottom:50px; left:198px ;width: 6%;" class="float-left" />
+						</div>
+					</div>
+					<div class="score-bar">
+						<ul>
+							<li class="score-fist-li">
+								<span>
+									幼儿
+								</span>
+								<div class="progress">
+									<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+									</div>
+								</div>
+							</li>
+							<li>
+								<span>
+									班级
+								</span>
+								<div class="progress">
+									<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+									</div>
+								</div>
+							</li>
+							<li><span>
+									全省
+								</span>
+								<div class="progress">
+									<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
+									</div>
+								</div>
+
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="various-situation">
+					<div class="vs-title">
+						<b>
+	               			各项情况  
+	               		</b>
+					</div>
+					<div class="vs-center">
+						<div class="vs-center-li pull-left">
+							<div class="vs-center-li-tu">
+								<img class="icon" src="images/icon1.png" />
+								<span>
+                      				力量
+                      			</span>
+							</div>
+							<p>是幼儿全身肌肉在活动时克服阻力的能力，使宝宝在完成各种动作的首要保证</p>
+							<img class="icon1" src="images/score1.png" />
+						</div>
+						<div class="vs-center-li pull-left">
+							<div class="vs-center-li-tu">
+								<img class="icon" src="images/icon2.png" />
+								<span>
+                      				平衡
+                      			</span>
+							</div>
+							<p>是幼儿维持身体姿势的能力，是宝宝中枢神经、前庭分析器、本体感受器等机能的综合反映</p>
+							<img class="icon1" src="images/score2.png" />
+						</div>
+						<div class="vs-center-li pull-left">
+							<div class="vs-center-li-tu">
+								<img class="icon" src="images/icon3.png" />
+								<span>
+                      				灵敏
+                      			</span>
+							</div>
+							<p>是幼儿在复杂的条件下，快速、准确地改变身体姿势、运动方向和随机应变的能力</p>
+							<img class="icon1" src="images/score3.png" />
+						</div>
+
+						<div class="vs-center-li pull-left">
+							<div class="vs-center-li-tu">
+								<img class="icon" src="images/icon4.png" />
+								<span>
+                      				协调
+                      			</span>
+							</div>
+							<p>是幼儿身体的不同系统、不同部位和不同器官协同配合完成某一动作的能力</p>
+							<img class="icon1" src="images/score4.png" />
+						</div>
+						<div class="vs-center-li pull-left">
+							<div class="vs-center-li-tu">
+								<img class="icon" src="images/icon5.png" />
+								<span>
+                      				柔韧
+                      			</span>
+							</div>
+							<p>指幼儿关节在不同方向上的运动能力以及肌肉、韧带的伸展能力</p>
+							<img class="icon1" src="images/score5.png" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--脚码-->
+			<div class="footer">
+				<p class="foot-zc">睿莱（RELIABLE）幼儿体质检测中心</p>
+				<p class="foot-english">Reliable Kids’Physical Fitness Testing Center</p>
+			</div>
+		</div>
+
+		<!--2page------------------------>
+		<div class="report-box">
+			<div class="change-page">
+				<p class="active" href="#"></p>
+				<p href=""></p>
+			</div>
+			<!--动作发展-->
+			<div class="body-shape">
+				<div class="head-title3">
+					<b>
+	               		动作发展
+	               	</b>
+					<p class="head-explain">指幼儿动作行为发生连续、持续的与年龄相关的变化，是宝宝最早发展的运动技能</p>
+				</div>
+				<!--	位移能力-->
+				<div class="score2">
+					<div class="score2-left">
+						<div class="vs-title">
+							<b>
+		               		 位移能力
+		                    </b>
+							<p class="head-explain">是幼儿身体的外部形状和特征，主要包括体形、身体姿势等方面，反映了宝宝的生长发育水平</p>
+						</div>
+						<div class="relative-score">
+							<div class="relative-score-top">
+								<span class="relative-score-title">
+									位移能力<br />相对年龄
+								</span>
+								<div class="relative-score-number">35</div>
+							</div>
+							<div class="relative-score-btn">
+								落后实际年龄2个月
+							</div>
+						</div>
+						<div class="score-bar">
+							<ul>
+								<li class="score-fist-li">
+									<span>
+									幼儿
+								</span>
+									<div class="progress">
+										<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+										</div>
+									</div>
+								</li>
+								<li>
+									<span>
+									班级
+								</span>
+									<div class="progress">
+										<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+										</div>
+									</div>
+								</li>
+								<li><span>
+									全省
+								</span>
+									<div class="progress">
+										<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
+										</div>
+									</div>
+
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="score2-right">
+						<div class="score-number" style="margin-left: 144px;">
+							<div class="number">
+								35
+							</div>
+							<div class="number-btn">
+								综合分数
+							</div>
+						</div>
+						<div class="abstract-score-info" style="margin-top: 170px;">
+							<label class="abstract-grade-one">不合格</label>
+							<img class="circle-icon1" src="images/circle-icon1.png" />
+							<label class="grade-score">
+				                    	<label class="grade-one-score"></label>
+							</label>
+							<label class="abstract-grade-two">合格</label>
+							<label class="grade-score">
+										 <label class="grade-one-score"></label>
+							</label>
+							<label class="abstract-grade-three">良好</label>
+							<label class="grade-score">
+				                    	<label class="grade-one-score"></label>
+							</label>
+							<label class="abstract-grade-four">优秀</label>
+							<img class="circle-icon2" src="images/circle-icon2.png" /><br />
+							<img src="images/jiantou.png" style="position: relative; bottom:50px; left:198px ;width: 6%;" class="float-left" />
+						</div>
+
+					</div>
+				</div>
+				<!--位移能力-->
+				<div class="score2">
+					<div class="score2-left">
+						<div class="vs-title">
+							<b>
+		               		位移能力
+		                    </b>
+							<p class="head-explain">是幼儿身体的外部形状和特征，主要包括体形、身体姿势等方面，反映了宝宝的生长发育水平</p>
+						</div>
+						<div class="relative-score">
+							<div class="relative-score-top">
+								<span class="relative-score-title">
+									位移能力<br />相对年龄
+								</span>
+								<div class="relative-score-number">35</div>
+							</div>
+							<div class="relative-score-btn">
+								落后实际年龄2个月
+							</div>
+						</div>
+						<div class="score-bar">
+							<ul>
+								<li class="score-fist-li">
+									<span>
+									幼儿
+								</span>
+									<div class="progress">
+										<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+										</div>
+									</div>
+								</li>
+								<li>
+									<span>
+									班级
+								</span>
+									<div class="progress">
+										<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+										</div>
+									</div>
+								</li>
+								<li><span>
+									全省
+								</span>
+									<div class="progress">
+										<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
+										</div>
+									</div>
+
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="score2-right">
+						<div class="score-number" style="margin-left: 144px;">
+							<div class="number">
+								35
+							</div>
+							<div class="number-btn">
+								综合分数
+							</div>
+						</div>
+						<div class="abstract-score-info" style="margin-top: 170px;">
+							<label class="abstract-grade-one">不合格</label>
+							<img class="circle-icon1" src="images/circle-icon1.png" />
+							<label class="grade-score">
+				                    	<label class="grade-one-score"></label>
+							</label>
+							<label class="abstract-grade-two">合格</label>
+							<label class="grade-score">
+										 <label class="grade-one-score"></label>
+							</label>
+							<label class="abstract-grade-three">良好</label>
+							<label class="grade-score">
+				                    	<label class="grade-one-score"></label>
+							</label>
+							<label class="abstract-grade-four">优秀</label>
+							<img class="circle-icon2" src="images/circle-icon2.png" /><br />
+							<img src="images/jiantou.png" style="position: relative; bottom:50px; left:198px ;width: 6%;" class="float-left" />
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!--脚码-->
+			<div class="footer">
+				<p class="foot-zc">睿莱（RELIABLE）幼儿体质检测中心</p>
+				<p class="foot-english">Reliable Kids’Physical Fitness Testing Center</p>
+			</div>
+		</div>
+	</body>
+
+</html>
