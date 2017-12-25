@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>家长一封信</title>
+    <script type="text/javascript" src="http://cdn.imreliable.net/jquery/jquery-1.10.2.min.js"></script>
+    <script src="http://cdn.bootcss.com/handlebars.js/4.0.6/handlebars.min.js"></script>
+    <script src="http://cdn.bootcss.com/jsbarcode/3.5.7/JsBarcode.all.min.js"></script>
+    <script src="http://cdn.bootcss.com/jsbarcode/3.5.7/JsBarcode.all.min.js"></script>
+    <script src="http://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+
+    <style type="text/css">
+        ul,
+        ol {
+            list-style-type: none;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .pull-left {
+            float: left;
+        }
+
+        body {
+            font-family: "microsoft yahei";
+            color: #222222;
+            margin: 0;
+            padding: 0;
+        }
+
+        .report-box {
+            width: 794px;
+            height: 1123px;
+            margin: 0 auto;
+            position: relative;
+            /*background: red;*/
+        }
+        /*头部*/
+
+        .head {
+            width: 794px;
+            height: 218px;
+            background: url(http://cdn.imreliable.net/asset/image/letter/head-bg.png);
+            background-size: contain;
+            color: #fff;
+        }
+
+        .head-title {
+            width: 352px;
+            padding-left: 200px;
+            margin-top: 80px;
+        }
+
+            .head-title strong {
+                font-size: 23px;
+                line-height: 35px;
+                letter-spacing: 1px;
+            }
+
+            .head-title span {
+                font-size: 15px;
+            }
+
+            .head-title .head-kdg-name {
+                background: url(http://cdn.imreliable.net/asset/image/letter/kdg-icon.png) no-repeat left center;
+                background-size: contain;
+                height: 28px;
+                padding-left: 40px;
+                margin-top: 25px;
+            }
+
+        .head-info {
+            width: 225px;
+        }
+
+            .head-info div {
+                height: 34px;
+                border-bottom: 1px solid #FFFFFF;
+                padding-top: 20px;
+                margin: 0 35px;
+                font-size: 20px;
+                text-align: center;
+            }
+
+            .head-info ul {
+                font-size: 16px;
+            }
+
+                .head-info ul li {
+                    margin: 15px 0;
+                }
+
+                    .head-info ul li strong {
+                        margin-right: 20px;
+                        padding-left: 50px;
+                    }
+        /*内容*/
+
+        .active-bg {
+            background: #f7f7f7;
+        }
+
+        .content-text {
+            font-size: 15px;
+            color: #222222;
+            line-height: 25px;
+            padding: 20px 38px;
+            letter-spacing: 1px;
+        }
+
+            .content-text span {
+                font-size: 18px;
+                color: #da2337;
+            }
+
+        .content-text1 {
+            height: 110px;
+        }
+
+        .content-text2 {
+            height: 310px;
+        }
+
+            .content-text2 img {
+                width: 580px;
+                margin: 0 auto;
+                display: block;
+            }
+
+        .content-text3 img {
+            width: 35px;
+        }
+
+        .content-text3 span {
+            margin-top: 5px;
+            margin-left: 10px;
+        }
+
+        .content-text3 p {
+            clear: both;
+            display: block;
+            margin-top: 40px;
+            margin-left: 10px;
+        }
+        /*.content-foot{
+                height: 200px;
+            }*/
+
+        .Wchar-box,
+        .Wbar-box {
+            width: 355px;
+            height: 120px;
+        }
+
+        .Wchar-box {
+            background: url(http://cdn.imreliable.net/asset/image/letter/arrow-icon.png) no-repeat right center;
+            background-size: 147PX;
+        }
+
+            .Wchar-box .step1,
+            .Wbar-box .step2 {
+                height: 120px;
+                margin-left: 20px;
+                margin-top: 10px;
+            }
+
+                .Wchar-box .step1 img,
+                .Wbar-box .step2 img {
+                    width: 65px;
+                    height: 65px;
+                }
+
+            .Wchar-box .Wchar,
+            .Wbar-box .Wbar {
+                height: 70px;
+                margin-top: 30px;
+                margin-left: 20px;
+            }
+
+            .Wchar-box .Wchar {
+                width: 70px;
+            }
+
+        .Wbar-box .Wbar {
+            width: 160px;
+        }
+
+        .Wchar-box span,
+        .Wbar-box span {
+            font-size: 15px;
+        }
+        /*角码*/
+
+        .footer {
+            float: left;
+            width: 794px;
+            height: 30px;
+            text-align: center;
+            font-size: 10px;
+            line-height: 6px;
+            position: absolute;
+            bottom: 20px;
+        }
+
+        .foot-zc {
+            color: #7f7f80;
+        }
+
+        .foot-english {
+            color: #c6c2c1;
+        }
+    </style>
+    <script type="text/x-handlebars-template" id="content-html">
+        {{#each this}}
+        <div class="report-box">
+            <!--头-->
+            <div class="head">
+                <div class="head-title pull-left">
+                    <div>
+                        <strong>睿莱儿童体质检测说明</strong><br>
+                        <span>Reliable Children fitness test</sapn>
+                    </div>
+                    <div class="head-kdg-name">
+
+                        <span>校园：{{ServiceName}}</span>
+                    </div>
+                </div>
+                <div class="head-info pull-left">
+                    <div>个人信息</div>
+                    <ul>
+                        <li>
+                            <strong>姓名</strong>{{ChildName}}
+                        </li>
+                        <li>
+                            <strong>性别</strong>{{genderfun Gender}}
+                        </li>
+                        <li>
+                            <strong>年龄</strong>{{agefun Birthday}} 岁
+                        </li>
+                        <li>
+                            <strong>班级</strong>{{Name}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content">
+                <div class="content-text content-text1 active-bg">
+                    <span>
+                        ■  我园已实施睿莱儿童体质改善计划
+                    </span>
+                    <p>
+                        根据国家的《 》，为了有效改善孩子的体质情况，培养孩子健壮体魄和健康的生活习惯，睿莱推出了睿莱体质改善计划。结合先进的家园共育理念和前卫的动作教育系统，让孩子不要输在起跑线上。结合先进的家园共育理念和前卫的动作教育系统，让孩子不要输在起跑线上。
+                    </p>
+                </div>
+                <div class="content-text content-text2">
+                    <span>
+                        ■  改善计划的组成
+                    </span>
+                    <p>
+                        改善计划以先进的动作发展理论为依托，根据各年龄段的孩子的体测的实际水平，打造针对性的的体育课程。家长在家庭中的小测试，来检测孩子对课程的接受情况。根据孩子的完成情况，学校动态地调整课程内容，从而实现因材施教的理念。
+                    </p>
+                    <img src="http://cdn.imreliable.net/asset/image/letter/step-tree.png" />
+                </div>
+                <div class="content-text content-text3 active-bg">
+                    <img class="pull-left" src="http://cdn.imreliable.net/asset/image/letter/love-icon.png">
+                    <span class="pull-left">
+                        我园已实施睿莱儿童体质改善计划
+                    </span>
+                    <p>
+                        ■ &nbsp;&nbsp;根据孩子体测结果，提供体质分析报告，实现对体质水平的监测<br> ■ &nbsp;&nbsp;将周内课程内容同步给家长，并提供相对应的锻炼方法<br> ■ &nbsp;&nbsp;对周内课程内容的测试检验孩子学习成果，并根据结果动态调整学校课程。
+                    </p>
+                </div>
+                <div class="content-text content-foot">
+                    <span class="pull-left">
+                        ■  查看详细体测报告+更多改善方案
+                    </span>
+                    <div class="Wchar-box pull-left" style="clear: both;">
+                        <div class="step1 pull-left">
+                            <img class=" pull-left" src="http://cdn.imreliable.net/asset/image/letter/step1-icon.png" />
+                        </div>
+                        <img class="Wchar" src="http://cdn.imreliable.net/asset/image/letter/wchat-icon.png" /><br>
+                        <span>关注“睿莱健康”</span>
+                    </div>
+                    <div class="Wbar-box pull-left">
+                        <div class="step2 pull-left">
+                            <img class="pull-left" src="http://cdn.imreliable.net/asset/image/letter/step2-icon.png" />
+                        </div>
+                        <!--<img class="Wbar" src="http://cdn.imreliable.net/asset/image/letter/wchat-bar.png" />-->
+                        <svg id="barcode{{Id}}" style="margin-top: 27px;margin-left: 15px;"></svg><br>
+
+                        <span>点击“查看报告”，扫描条形码</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <p class="foot-zc">睿莱（RELIABLE）儿童体质检测中心</p>
+                <p class="foot-english">Reliable Children Physical Fitness Testing Center</p>
+            </div>
+        </div>
+        {{/each }}
+    </script>
+    <script>
+			$(document).ready(function() {
+				var response = {"ChildList":[{"__type":"BabybusSSApi.DatabaseModel.UV_DB_Child_Class, BabybusSSApi.DatabaseModel","Id":3030,"CreateTime":"\/Date(1513860966360-0000)\/","ServiceUnitId":17,"ClassId":211,"ChildName":"浪里个浪","Gender":1,"Birthday":"\/Date(1402502400000-0000)\/","Cancel":false,"Code":"110100010000107","Phone":"","ResponsibleTeacher":"","GUID":"a560df25-3d52-4166-815a-3915d2ed61ab","Name":"测试班级"},{"Id":3031,"CreateTime":"\/Date(1513861892047-0000)\/","ServiceUnitId":17,"ClassId":210,"ChildName":"浪里个浪","Gender":1,"Birthday":"\/Date(1307980800000-0000)\/","Cancel":false,"Code":"110100010000222","Phone":"","ResponsibleTeacher":"","GUID":"dfebd9e9-041c-4171-89b3-1ae91a5a8f96","Name":"测试"}]};
+				console.log(response)
+				Handlebars.registerHelper('genderfun', function(value) {
+					return value == 1 ? '男' : value == 2 ? '女' : '未知';
+				});
+				Handlebars.registerHelper('agefun', function(value) {
+					if(value) {
+						var dt = new Date(parseInt(value.slice(6, 19)));
+						var year = dt.getFullYear();
+						var month = dt.getMonth() + 1;
+						var date = dt.getDate();
+						var nowDate = new Date();
+						var yearVal = nowDate.getFullYear() - year;
+						var monthVal = nowDate.getMonth() - month;
+						var age = 0;
+						if(monthVal >= 6) {
+							age = yearVal + 0.5;
+						}
+						if(monthVal < 6 && monthVal > -6) {
+							age = yearVal;
+						}
+						if(monthVal <= -6) {
+							age = yearVal - 0.5;
+						}
+						return age;
+					} else {
+						return '未知';
+					}
+				});
+				var template = Handlebars.compile($("#content-html").html());
+				var htmlText = template(response.ChildList);
+				$("#content").append(htmlText);
+
+				for(var codejson in response.ChildList) {
+					JsBarcode("#barcode" + response.ChildList[codejson].Id, response.ChildList[codejson].Code, { width: "1px", height: "30px", fontSize: 14, textAlign: "center", });
+				}
+
+			})
+    </script>
+</head>
+
+<body>
+    <div id="content">
+    </div>
+</body>
+
+</html>

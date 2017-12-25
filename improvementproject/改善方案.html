@@ -1,0 +1,3746 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)http://www.imreliable.com.cn/Pages/ImprovementProgram.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>改善方案</title>
+    <link rel="shortcut icon" href="http://www.imreliable.com.cn/Pages/images/logo.png">
+    <!--=== CSS ===-->
+    <!-- Bootstrap -->
+    <link href="./改善方案_files/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="./改善方案_files/physical-exam-report.min.css" rel="stylesheet" type="text/css">
+    <!--    <link href="https://cdn.bootcss.com/highcharts/5.0.11/css/highcharts.css" rel="stylesheet">-->
+    <!-- Theme -->
+    <link href="./改善方案_files/index.css" rel="stylesheet" type="text/css">
+    <link href="./改善方案_files/main.css" rel="stylesheet" type="text/css">
+    <link href="./改善方案_files/plugins.css" rel="stylesheet" type="text/css">
+    <link href="./改善方案_files/responsive.css" rel="stylesheet" type="text/css">
+    <link href="./改善方案_files/icons.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./改善方案_files/font-awesome.min.css">
+    <link href="./改善方案_files/fakeLoader.css" rel="stylesheet">
+    
+    <!--=== JavaScript ===-->
+    <script type="text/javascript" src="./改善方案_files/jquery-1.10.2.min.js.下载"></script>
+    <script type="text/javascript" src="./改善方案_files/jquery-ui-1.10.2.custom.min.js.下载"></script>
+    <script type="text/javascript" src="./改善方案_files/bootstrap.min.js.下载"></script>
+    <script type="text/javascript" src="./改善方案_files/lodash.compat.min.js.下载"></script>
+    <script type="text/javascript" src="./改善方案_files/jquery.fastLiveFilter.js.下载"></script>
+
+    <!--qrcode-->
+    <script src="./改善方案_files/jquery.qrcode.min.js.下载"></script>
+    <!-- Noty -->
+    <script type="text/javascript" src="./改善方案_files/jquery.noty.js.下载"></script>
+    <script type="text/javascript" src="./改善方案_files/top.js.下载"></script>
+    <script type="text/javascript" src="./改善方案_files/default.js.下载"></script>
+
+    <!-- General -->
+    <script type="text/javascript" src="./改善方案_files/breakpoints.js.下载"></script>
+    <script type="text/javascript" src="./改善方案_files/respond.min.js.下载"></script> <!-- Polyfill for min/max-width CSS3 Media Queries (only for IE8) -->
+    <script type="text/javascript" src="./改善方案_files/jquery.cookie.min.js.下载"></script>
+    <script type="text/javascript" src="./改善方案_files/jquery.slimscroll.min.js.下载"></script>
+    <script type="text/javascript" src="./改善方案_files/jquery.slimscroll.horizontal.min.js.下载"></script>
+    <!--iCheck-->
+    <script src="./改善方案_files/icheck.min.js.下载"></script>
+    <link href="./改善方案_files/blue.css" rel="stylesheet">
+
+    <!-- App -->
+    <script type="text/javascript" src="./改善方案_files/app.js.下载"></script>
+    <script type="text/javascript" src="./改善方案_files/plugins.js.下载"></script>
+    <script type="text/javascript" src="./改善方案_files/plugins.form-components.js.下载"></script>
+    <script type="text/javascript" src="./改善方案_files/handlebars-v2.0.0.js.下载"></script>
+    
+    <script type="text/javascript" src="./改善方案_files/require.min.js.下载"></script>
+    <!--highChart-->
+    <script src="./改善方案_files/highcharts.js.下载"></script>
+    <script src="./改善方案_files/highcharts-more.js.下载"></script>
+
+    <script src="./改善方案_files/underscore-min.js.下载"></script>
+
+    <!--loading-->
+    <script src="./改善方案_files/fakeLoader.min.js.下载"></script>
+
+    <script type="text/x-handlebars-template" id="bigClassHTML">
+        {{#each this}}
+        <div class="col-md-2 searchTypesButton">
+            <input type="radio" name="ClassId" value="{{ClassId}},{{ClassType}},{{ClassName}}" />
+            <label>{{ClassName}}</label>
+        </div>
+        {{/each}}
+    </script>
+    <script type="text/x-handlebars-template" id="middleClassHTML">
+        {{#each this}}
+        <div class="col-md-2 col-sm-2 col-xs-2 searchTypesButton">
+            <input type="radio" name="ClassId" value="{{ClassId}},{{ClassType}},{{ClassName}}" />
+            <label>{{ClassName}}</label>
+        </div>
+        {{/each}}
+    </script>
+    <script type="text/x-handlebars-template" id="smallClassHTML">
+        {{#each this}}
+        <div class="col-md-2 col-sm-2 col-xs-2 searchTypesButton">
+            <input type="radio" name="ClassId" value="{{ClassId}},{{ClassType}},{{ClassName}}" />
+            <label>{{ClassName}}</label>
+        </div>
+        {{/each}}
+    </script>
+    <script type="text/x-handlebars-template" id="bestSmallClassHTML">
+        {{#each this}}
+        <div class="col-md-2 col-sm-2 col-xs-2 searchTypesButton">
+            <input type="radio" name="ClassId" value="{{ClassId}},{{ClassType}},{{ClassName}}" />
+            <label>{{ClassName}}</label>
+        </div>
+        {{/each}}
+    </script>
+
+    <script id="PrincipalAttClsStuDetailInfo3Html" type="text/x-handlebars-template">
+        {{#each this}}
+        <td style="text-align:center;vertical-align:middle">
+            <nobr><span id="{{day}}cqInfo{{childId}}">{{cq}}</span></nobr>
+            <input type="hidden" value="{{cqStatus}}" id="{{day}}cqStatus{{childId}}" />
+        </td>
+        {{/each}}
+    </script>
+
+    <!-- 2page课程表 -->
+    <script id="item-content-template" type="text/x-handlebars-template">
+        <ul id="ul-list">
+            <li class="week-box ">
+                <div class="tile">
+                    <span>{{WeakDay}}</span>
+                    <p>{{Title}}</p>
+                </div>
+                <div class="center-box">
+                    <p>活动准备：{{ActivityGetRead}}</p>
+                    活动过程：{{ActivityProcess}}
+
+                    <p class="remarks">调整难度：{{ActivityDifficult}}</p>
+                </div>
+                <div class="qrcode">
+                    <div id="{{VideoName}}"></div>
+                    <div>扫一扫，观看课程</div>
+                </div>
+            </li>
+        </ul>
+    </script>
+    <script type="text/x-handlebars-template" id="table-template-html">
+        {{#each this}}
+        <div class="tbody-right-tr">
+            <img src="/Pages/images/phyExImages/{{ItemCourseIcon}}" alt="" />
+            <p>{{Title}}</p>
+        </div>
+        {{/each}}
+    </script>
+    <script type="text/x-handlebars-template" id="footer-html">
+        <div class="footer">
+            <p class="foot-zc">睿莱（RELIABLE）儿童体质检测中心</p>
+            <p class="foot-english">RELIABLE Children Physical Fitness Testing Center</p>
+        </div>
+    </script>
+    <script type="text/x-handlebars-template" id="week-course-title-html">
+        <!--脚码-->
+        <div class="head  page-break-before" id="head">
+            第{{NoNumber}}月课程
+        </div>
+    </script>
+    <script>
+        var UserInfo = null;
+        var Utilities = null;
+        var TestReport;
+        require.config({
+            baseUrl: "/./Pages/assets/js",
+            waitSeconds: 10,
+            paths: {
+                "text": "libs/text",
+                "reliable-test-report": "/assets/js/reliable-test-report"
+            }
+        });
+        //改善方案标题改变
+        var titleText = function () {
+            var par = $('input[type=radio][name=ClassId]:checked').val();
+            var parArry = par.split(",");
+            $("#className").text(parArry[2]);
+            $(".className").text($("#className").html());
+        };
+        $(document).ready(function () {
+            "use strict";
+            App.init(); // Init layout and core plugins
+            Plugins.init(); // Init all plugins
+            FormComponents.init(); // Init all form-specific plugins
+            fakeloader();//loading..
+            require(["utilities", "userinfo", "reliable-test-report",
+                    "text!../../template/navigation_kindergartens.htm"],
+                function (utilities, userinfo, testReport, text) {
+                    var loadKdgNameType = utilities.GetUrlParameterByName("KindergartenName");
+                    debugger;
+                    if (loadKdgNameType != null && loadKdgNameType != "") {
+                        $.cookie("KindergartenId", utilities.GetUrlParameterByName("KindergartenId"), { expires: 1, path: '/' });
+                    } else {
+                        $(document).find("head").append(text);
+                    }
+                    $("#showKinNameInfoTitle").text($.cookie("KindergartenName"));
+                    $(".showKinNameInfo").text($("#showKinNameInfoTitle").html());
+                    utilities.DrawHeader();
+                    utilities.ShowDiv();
+                    userinfo.GenerateSiderBarKindergartenInfo();
+                    if (utilities.GetPermissionType() == "0") {
+                        $(".toggle-sidebar").css("display", "block");
+                    }
+                    $('#showKinNameInfo').fastLiveFilter('#nav');
+                    var url = "/Classes/";
+                    var kinderIdVal = $.cookie("KindergartenId");
+                    var parameter = {
+                        KindergartenId: kinderIdVal,
+                        Cancel: false,
+                        ClassTypeGreaterThan: -1
+                    };
+                    utilities.CallGetApi(url, parameter).done(function (data) {
+                        if (data.Total <= 0) {
+                            $("#showClass").text("没有班级信息！");
+                        } else {
+
+                            var bigClassData = _.filter(data.Results, function (num) { return num.ClassType == 0; });
+                            var middleClassData = _.filter(data.Results, function (num) { return num.ClassType == 1; });
+                            var samallClassData = _.filter(data.Results, function (num) { return num.ClassType == 2; });
+                            var bestSmallClassData = _.filter(data.Results, function (num) { return num.ClassType == 3; });
+                            var othersClassData = _.filter(data.Results, function (num) { return num.ClassType == 4 });
+                            var preSchoolClassData = _.filter(data.Results, function (num) { return num.ClassType == 5 });
+                            var bigClassHTML = utilities.HandlebarsHelp("#bigClassHTML", bigClassData);
+                            var middleClassHTML = utilities.HandlebarsHelp("#middleClassHTML", middleClassData);
+                            var smallClassHTML = utilities.HandlebarsHelp("#smallClassHTML", samallClassData);
+                            var bestSmallClassHtml = utilities.HandlebarsHelp("#smallClassHTML", bestSmallClassData);
+                            var othersClassHTML = utilities.HandlebarsHelp("#bestSmallClassHTML", othersClassData);
+                            var preSchoolClassHtml = utilities.HandlebarsHelp("#bestSmallClassHTML", preSchoolClassData);
+
+                            $("#showBigClass").append(bigClassHTML);
+                            $("#showMiddleClass").append(middleClassHTML);
+                            $("#showSmallClass").append(smallClassHTML);
+                            $("#showBabyClass").append(bestSmallClassHtml);
+                            $("#showBestSmallClass").append(bestSmallClassHTML);
+                            $("#othersClass").append(othersClassHTML);
+                            $("#showPreSchoolClass").append(preSchoolClassHtml);
+                            //2017年度上班学期
+                            var monthInfo = semosterMonth();
+                            $("#semesterTime").text(monthInfo.FinishText);
+                            $("#semesterTime2").text(monthInfo.FinishText);
+                        }
+
+                        $('input[type="radio"]').each(function () {
+                            var self = $(this),
+                                label = self.next(),
+                                label_text = label.text();
+                            label.remove();
+                            self.iCheck({
+                                checkboxClass: 'icheckbox_line-blue',
+                                radioClass: 'iradio_line-blue',
+                                insert: '<div class="icheck_line-icon"></div>' + label_text
+                            });
+                        });
+                        $("input[type=radio][name=ClassId]").eq(0).iCheck('toggle');
+                        debugger;
+                        testReport.GenerateImproveInfo();
+                        if (data.Results.length == 0) {
+                            $("#className").append("");
+                        }
+                        titleText();
+                        utilities.NotySuccess();
+                    }).fail(function () {
+                        utilities.NotyFailure();
+                    });
+                });
+
+        });
+        //学年度相关月份计算
+        var semosterMonth = function () {
+            var nowDate = new Date();
+            var oneSemoster = [2, 3, 4, 5, 6, 7];
+            var twoSemoster = [8, 9, 10, 11, 12, 1];
+            var monthObj = {};
+            if (oneSemoster.some(function (s) {
+                return s == nowDate.getMonth() + 1;
+            })) {
+                monthObj.StartTime = nowDate.getFullYear() + '-02-01';
+                monthObj.FinishTime = nowDate.getFullYear() + '-07-31';
+                monthObj.FinishText = nowDate.getFullYear() + '年3月学期';
+                monthObj.MonthArr = oneSemoster;
+            } else {
+                var endYear = 0;
+                var startYear = 0;
+                if ((nowDate.getMonth() + 1) >= 8 && (nowDate.getMonth() + 1) <= 12) {
+                    startYear = nowDate.getFullYear();
+                    endYear = nowDate.getFullYear() + 1;
+                } else {
+                    startYear = nowDate.getFullYear() - 1;
+                    endYear = nowDate.getFullYear();
+                }
+                monthObj.StartTime = startYear + '-08-01';
+                monthObj.FinishTime = endYear + '-01-31';
+                monthObj.FinishText = nowDate.getFullYear() + '年9月学期';
+                monthObj.MonthArr = twoSemoster;
+            }
+            return monthObj;
+        };
+        //loading
+        function fakeloader() {
+            $(".fakeloader").fakeLoader({
+                timeToHide: 1,
+                bgColor: "#000",
+                spinner: "spinner2"
+            });
+        }
+        function Search() {
+            fakeloader();
+            require(['reliable-test-report'], function (reliableReport) {
+                titleText();
+                reliableReport.GenerateImproveInfo();
+                fakeloader();
+            });
+        }
+        function ChangKindergartenInSiderBar(kindergartenId, kinName) {
+            $("#" + $.cookie("KindergartenId")).removeClass("current");
+            $("#" + $.cookie("KindergartenId")).css({ "background": "" });
+            $.cookie("KindergartenId", kindergartenId, { expires: 1, path: '/' });
+            $.cookie("KindergartenName", kinName, { expires: 1, path: '/' });
+            $("#" + kindergartenId).addClass("current");
+            $("#" + kindergartenId).css({ "background": "#00bcab" });
+            $("#showKinNameInfoTitle").text($.cookie("KindergartenName"));
+            location.replace("ImprovementProgram.html");
+
+        }
+    </script>
+
+    <style>
+        a {
+            color: grey;
+        }
+
+            a:link {
+                text-decoration: none;
+            }
+
+            a:hover {
+                cursor: pointer;
+            }
+
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            width: 28%;
+            float: left;
+        }
+
+        body {
+            font-family: "microsoft yahei" !important;
+        }
+
+        h4 {
+            font-size: 18px;
+            font-family: 'Microsoft YaHei';
+        }
+
+        .report-box {
+            width: 794px;
+            height: 1123px;
+            margin: 0 auto;
+            position: relative;
+            clear: both;
+        }
+
+        .head-title {
+            text-align: center;
+            display: inline-block;
+            /*height: 88px;*/
+            width: 100%;
+            padding-top: 35px;
+        }
+
+        .hr-class {
+            margin-top: -2px;
+        }
+
+        .result-conter {
+            height: 400px;
+            padding: 0 32px;
+            padding-top: 24px;
+        }
+
+        .result-hightchart {
+            float: left;
+            width: 430px;
+            height: 318px;
+        }
+
+        .result-text {
+            width: 298px;
+            float: right;
+            height: 318px;
+        }
+
+            .result-text span {
+                color: #b92131;
+                font-size: 15px;
+                padding: 17px 0;
+                display: block;
+            }
+
+            .result-text p {
+                color: #444444;
+                font-size: 13px;
+                line-height: 16px;
+                letter-spacing: 1px;
+            }
+
+            .result-text .result-text-button img {
+                width: 8%;
+                height: 8%;
+                margin-left: 53px;
+                margin-top: -37px;
+            }
+
+        .week-table {
+            padding: 0 32px;
+        }
+
+        .table-box {
+            text-align: center !important;
+            color: #424142;
+        }
+
+        .table-bordered > thead > tr > td {
+            border-right: 1px solid #919191 !important;
+        }
+
+        .week-table h4 img,
+        .result-conter h4 img {
+            width: 3%;
+            margin-right: 9px;
+        }
+
+        thead th {
+            padding: 15px 0px 8px 0px !important;
+            width: 120px !important;
+            text-align: center !important;
+        }
+
+        thead tr {
+            height: 45px;
+        }
+
+        thead {
+            border-bottom: none;
+        }
+
+            thead tr:first-child th {
+                border-right: 2px solid #fff;
+            }
+
+                thead tr:first-child th:last-child {
+                    border-right: 1px solid #919191;
+                }
+
+            thead tr:first-child {
+                background: #b92131;
+                color: white;
+            }
+
+                thead tr:first-child th:nth-child(odd) {
+                    background: #e4564e;
+                }
+
+            thead tr:nth-child(2) {
+                font-size: 16px;
+            }
+        /*2page*/
+
+        .week-background {
+            background: #fcf6f3 url(/Pages/images/improvementProgram-bgl.png) no-repeat bottom right;
+            background-size: 32%;
+        }
+
+        .footer {
+            float: left;
+            width: 794px;
+            text-align: center;
+            font-size: 10px;
+            line-height: 6px;
+            padding-top: 19px;
+        }
+
+            .footer:first-of-type {
+                display: none;
+            }
+
+        .foot-zc {
+            color: #7f7f80;
+        }
+
+        .foot-english {
+            color: #c6c2c1;
+        }
+
+        .head {
+            clear: both;
+            width: 794px;
+            height: 64px;
+            background: #b92131;
+            color: white;
+            line-height: 64px;
+            font-size: 25px;
+            text-align: center;
+        }
+        /*内容*/
+
+        #ul-list {
+            margin: 0;
+            padding: 0;
+        }
+
+        .week-box {
+            height: 200px;
+            padding: 0 32px;
+        }
+
+        .center-box {
+            width: 586px;
+            float: left;
+            font-size: 13px;
+            color: #444444;
+            line-height: 19px;
+        }
+
+        .tile {
+            padding: 9px 0;
+            font-size: 19px;
+            color: black;
+        }
+
+        .week-box .tile {
+            background: url(/Pages/images/xie-line.png) no-repeat 18px 10px;
+            background-size: 5.5%;
+            height: 53px;
+            width: 400px;
+        }
+
+            .week-box .tile span {
+                float: left;
+                padding-right: 20px;
+                color: #b92131;
+                font-size: 13px;
+                font-weight: 600;
+            }
+
+            .week-box .tile p {
+                float: left;
+                padding-top: 7px;
+                font-size: 18px;
+            }
+
+        .week-box img {
+            float: right;
+            width: 17%;
+        }
+
+        .remarks {
+            clear: both;
+            margin-top: 15px;
+        }
+
+            .remarks input {
+                width: 507px;
+                margin-left: 10px;
+                border: 1px solid #a0a0a0;
+                background-color: transparent;
+            }
+
+            .remarks span {
+                line-height: 25px;
+                display: block;
+                float: left;
+            }
+
+        .tbody-left-tr {
+            padding-top: 10px;
+            width: 122px;
+            height: 94px;
+            border-right: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            font-size: 15px;
+            font-weight: 600;
+            background: #f8ece6;
+        }
+
+            .tbody-left-tr b {
+                font-size: 25px;
+            }
+
+        .tbody-right-tr {
+            width: 121.8px;
+            height: 94px;
+            border-right: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+            float: left;
+            background: #fcf6f4;
+        }
+
+            .tbody-right-tr img {
+                float: left;
+                margin: 18px 0 3px 43px;
+            }
+
+            .tbody-right-tr p {
+                float: left;
+                width: 120px;
+                clear: both;
+                font-size: 15px;
+            }
+
+        .week-table .table {
+            margin-bottom: 0 !important;
+        }
+
+
+        .showKinNameInfo, #showKinNameInfoTitle {
+            margin-left: -6px;
+        }
+
+        .className, #className {
+            margin-left: -6px;
+            margin-right: -6px;
+        }
+
+        /*体育6项目*/
+        .test-subjects {
+            margin: 0 -32px;
+        }
+
+            .test-subjects li {
+                height: 239px;
+            }
+
+        .test-subjects-title {
+            width: 231px;
+            height: 239px;
+            background: url('/Pages/images/test-subjects-E.png') no-repeat center right;
+            background-size: 10%;
+            float: left;
+            margin-left: 38px;
+        }
+
+            .test-subjects-title img {
+                margin-top: 55px;
+                width: 46%;
+            }
+
+            .test-subjects-title h4 {
+                color: #444444;
+                font-size: 14px;
+                margin: 113px 0 38px 129px;
+                font-weight: 600;
+            }
+
+            .test-subjects-title b {
+                color: #323333;
+                font-size: 15px;
+                line-height: 30px;
+            }
+
+            .test-subjects-title span {
+                color: #666666;
+                font-size: 12px;
+            }
+
+        .test-subjects-text {
+            padding-top: 3px;
+        }
+
+            .test-subjects-text li {
+                width: 500px;
+                height: 60px;
+                float: left;
+                margin-top: 15px;
+            }
+
+        .test-subjects-text-img span {
+            float: left;
+            clear: both;
+            width: 80px;
+            text-align: center;
+        }
+
+        .test-subjects-text li img {
+            width: 8%;
+            margin: 0 22px;
+        }
+
+        .test-subjects-text li em {
+            font-size: 15px;
+            color: #b92131;
+            font-style: normal;
+            margin-bottom: 10px;
+        }
+
+        .test-subjects-text li span {
+            color: #666666;
+            font-size: 12px;
+            line-height: 22px;
+        }
+
+        .week-table h4 span {
+            font-size: 11px;
+            padding-left: 20px;
+        }
+
+        .test-subjects .li-background {
+            background: #f6f6f6 url(/Pages/images/test-subjects-bg.png) no-repeat center right;
+            background-size: 100%;
+        }
+
+        /*课程+注意*/
+        .course-conter {
+            height: 135px !important;
+            font-size: 14px;
+        }
+
+        .dangerous-conter {
+            font-size: 14px;
+            height: 270px !important;
+        }
+
+            .dangerous-conter p, .course-conter p {
+                margin-left: 5px;
+            }
+
+        .qrcode {
+            text-align: center;
+            float: right;
+            width: 17%;
+            height: auto;
+            margin-top: -15px;
+        }
+
+        .btn-style {
+            width: 12rem;
+        }
+
+        .breakpoint-1200 {
+            height: 7861px !important;
+        }
+    </style>
+    <style media="print">
+        .noprint {
+            display: none;
+        }
+    </style>
+<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="utilities" src="./改善方案_files/utilities.js.下载"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="userinfo" src="./改善方案_files/userinfo.js.下载"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="reliable-test-report" src="./改善方案_files/reliable-test-report.js.下载"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="text" src="./改善方案_files/text.js.下载"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="config" src="./改善方案_files/config.js.下载"></script> <!--左侧幼儿园信息-->
+<script id="navKindergartens-template" type="text/x-handlebars-template">
+    <div class="input-group search-kdg">
+        <span class="input-group-addon glyphicon glyphicon-search " id="search-Icon"></span>
+        <input type="text" class="form-control" id="showKinNameInfo" placeholder="幼儿园">
+    </div>
+
+    <ul id="nav" class="nav">
+        {{#each this}}
+        <li  kindergartenId={{KindergartenId}} kindergartenName={{KindergartenName}} id="{{KindergartenId}}">
+            <a onclick="ChangKindergartenInSiderBar('{{KindergartenId}}', '{{KindergartenName}}')">
+                {{KindergartenName}}-{{Code}}
+            </a>
+        </li>
+        {{/each}}
+    </ul>
+</script></head>
+<body class="breakpoint-1200" style="height: 4988px;">
+    <!-- Header -->
+    <header id="drawHeader" class="header navbar navbar-fixed-top noprint" role="banner"><div class="container" id="one"><a class="navbar-brand" href="http://www.imreliable.com.cn/Pages/Home.html" id="helloWorldVal"><img class="icon-home" src="./改善方案_files/jion-logo.png" style="margin-top:0.6rem;float:left;"></a><a href="http://www.imreliable.com.cn/Pages/ImprovementProgram.html#" class="toggle-sidebar bs-tooltip" data-placement="bottom" data-original-title="左侧栏" style="display: block;"> <i class="icon-reorder"></i> </a><ul class="nav navbar-nav navbar-left hidden-xs hidden-sm" id="ulContent"><li class="dropdown user" id="homePagesTab"><a href="http://www.imreliable.com.cn/Pages/Home.html">首页 </a></li><li class="dropdown user" id="kindergartenTab"><a href="http://www.imreliable.com.cn/Pages/ImprovementProgram.html#" class="dropdown-toggle" data-toggle="dropdown">幼儿园 <i class="icon-caret-down small"></i></a><ul class="dropdown-menu" id="kindergartenTabDetail"><li><a href="http://www.imreliable.com.cn/Pages/User.html">宝贝资料</a></li><li><a href="http://www.imreliable.com.cn/Pages/KinderPresidentInfo.html">园长信息</a></li></ul></li><li class="dropdown user" id="attendanceTab"><a href="http://www.imreliable.com.cn/Pages/ImprovementProgram.html#" class="dropdown-toggle" data-toggle="dropdown">考 勤 <i class="icon-caret-down small"></i></a><ul class="dropdown-menu" id="attendanceTabDetail"><li><a id="attendanceDay" href="http://www.imreliable.com.cn/Pages/AttendanceDayInfo.html">考勤 / 天</a></li><li><a id="attendanceInformation" href="http://www.imreliable.com.cn/Pages/PrincipalAttClsInformationDetail.html">考勤详情/月</a></li></ul></li><li class="dropdown user" id="physicalExaTab"><a href="http://www.imreliable.com.cn/Pages/ImprovementProgram.html#" class="dropdown-toggle" data-toggle="dropdown">体质检测 <i class="icon-caret-down small"></i></a><ul class="dropdown-menu" id="physicalExaDetailTab"><li><a id="individualStId" href="http://www.imreliable.com.cn/Pages/ReliableTest/KindergartenAbstract.html">园体测总览</a></li><li><a id="individualStId" href="http://www.imreliable.com.cn/Pages/physical/PhyExFileExport.html">体测档案导出</a></li><li><a id="individualStId" href="http://www.imreliable.com.cn/Pages/physical/ParentReportExport.html">家长报告导出</a></li><li><a id="individualStId" href="http://www.imreliable.com.cn/Pages/ChildrenQuery.html">幼儿数据核查</a></li><li><a id="individualStId" href="http://www.imreliable.com.cn/Pages/physical/GroupPhyAbstract.html">集团体测总览</a></li><li><a id="individualStId" href="http://www.imreliable.com.cn/Pages/physical/PhyExPlan.html">体质测评</a></li><li><a id="individualStId" href="http://www.imreliable.com.cn/Pages/physical/PhyProMessage.html">体测建议</a></li><li><a id="individualStId" href="http://www.imreliable.com.cn/Pages/ImprovementProgram.html">改善方案</a></li></ul></li><li class="dropdown user" id="group-menu-view"><a href="http://www.imreliable.com.cn/Pages/ImprovementProgram.html#" class="dropdown-toggle" data-toggle="dropdown">加盟商 <i class="icon-caret-down small"></i></a><ul class="dropdown-menu" id="group-menu"><li><a href="http://www.imreliable.com.cn/Pages/AllianceList.html">加盟商管理</a></li></ul></li><li class="dropdown user" id="knowledge-base"><a href="http://www.imreliable.com.cn/Pages/ImprovementProgram.html#" class="dropdown-toggle" data-toggle="dropdown">知识库 <i class="icon-caret-down small"></i></a><ul class="dropdown-menu" id="knowledge-base-menu"><li><a href="http://www.imreliable.com.cn/Pages/KnowledgeInfoList.html" target="_self">知识库信息</a></li><li><a href="http://www.imreliable.com.cn/Pages/KnowContentAdd.html" target="_self">添加知识库内容</a></li></ul></li><li class="dropdown user" id="other-menu-view"><a href="http://www.imreliable.com.cn/Pages/ImprovementProgram.html#" class="dropdown-toggle" data-toggle="dropdown">其他 <i class="icon-caret-down small"></i></a><ul class="dropdown-menu" id="others-menu"><li><a href="http://www.imreliable.com.cn/Pages/FeedbackRecords.html" target="_self">反馈信息</a></li><li><a href="http://www.imreliable.com.cn/Pages/Migration.html" target="_self">数据导入</a></li><li><a id="deblockingUser" target="_self">解锁用户</a></li><li><a href="http://www.imreliable.com.cn/Pages/physical/ChildLabelPrint.html" target="_self">宝贝标签打印</a></li><li><a href="http://www.imreliable.com.cn/Pages/WebsiteLog.html" target="_self">后台网站日志</a></li><li><a href="http://www.imreliable.com.cn/Pages/WxLog.html" target="_self">微网站日志</a></li></ul></li></ul><ul class="nav navbar-nav navbar-right" id="ul2Content"><li class="dropdown user" id="hederLi"><a href="http://www.imreliable.com.cn/Pages/ImprovementProgram.html#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-male"></i><span class="username">管理员</span><i class="icon-caret-down small"></i></a><ul class="dropdown-menu" id="permissionMenu"><li><a id="modify_password" href="http://www.imreliable.com.cn/Pages/ModifyPassword.html"><i class="icon-user"></i> 修改密码</a></li><li><a id="logout"><i class="icon-user"></i> 退出</a></li></ul></li></ul></div></header>
+    <div class="fakeloader" style="position: fixed; width: 100%; height: 100%; top: 0px; left: 0px; background-color: rgb(0, 0, 0); z-index: 999; display: none;"><div class="fl spinner2" style="position: absolute; left: 654.5px; top: 298.5px;"><div class="spinner-container container1"><div class="circle1"></div><div class="circle2"></div><div class="circle3"></div><div class="circle4"></div></div><div class="spinner-container container2"><div class="circle1"></div><div class="circle2"></div><div class="circle3"></div><div class="circle4"></div></div><div class="spinner-container container3"><div class="circle1"></div><div class="circle2"></div><div class="circle3"></div><div class="circle4"></div></div></div></div>
+    <div id="container" class="fixed-header noprint sidebar-closed" style="height:auto">
+        <div id="sidebar" class="sidebar-fixed noprint ">
+            <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;"><div id="sidebar-content" style="overflow: hidden; width: auto; height: 100%;">
+                <div id="navKindergartens">
+    <div class="input-group search-kdg">
+        <span class="input-group-addon glyphicon glyphicon-search " id="search-Icon"></span>
+        <input type="text" class="form-control" id="showKinNameInfo" placeholder="幼儿园">
+    </div>
+
+    <ul id="nav" class="nav">
+        <li kindergartenid="116" kindergartenname="万国金色幼儿园" id="116">
+            <a onclick="ChangKindergartenInSiderBar(&#39;116&#39;, &#39;万国金色幼儿园&#39;)">
+                万国金色幼儿园-61005001
+            </a>
+        </li>
+        <li kindergartenid="117" kindergartenname="丽水花都幼儿园" id="117">
+            <a onclick="ChangKindergartenInSiderBar(&#39;117&#39;, &#39;丽水花都幼儿园&#39;)">
+                丽水花都幼儿园-61005002
+            </a>
+        </li>
+        <li kindergartenid="119" kindergartenname="鸵鸟王幼儿园" id="119">
+            <a onclick="ChangKindergartenInSiderBar(&#39;119&#39;, &#39;鸵鸟王幼儿园&#39;)">
+                鸵鸟王幼儿园-61800006
+            </a>
+        </li>
+        <li kindergartenid="120" kindergartenname="新城子语幼儿园" id="120">
+            <a onclick="ChangKindergartenInSiderBar(&#39;120&#39;, &#39;新城子语幼儿园&#39;)">
+                新城子语幼儿园-61800007
+            </a>
+        </li>
+        <li kindergartenid="121" kindergartenname="金太阳幼儿园" id="121">
+            <a onclick="ChangKindergartenInSiderBar(&#39;121&#39;, &#39;金太阳幼儿园&#39;)">
+                金太阳幼儿园-61800008
+            </a>
+        </li>
+        <li kindergartenid="122" kindergartenname="浐灞嘉禾幼儿园" id="122">
+            <a onclick="ChangKindergartenInSiderBar(&#39;122&#39;, &#39;浐灞嘉禾幼儿园&#39;)">
+                浐灞嘉禾幼儿园-61800009
+            </a>
+        </li>
+        <li kindergartenid="123" kindergartenname="伟才幼儿园" id="123">
+            <a onclick="ChangKindergartenInSiderBar(&#39;123&#39;, &#39;伟才幼儿园&#39;)">
+                伟才幼儿园-61008001
+            </a>
+        </li>
+        <li kindergartenid="124" kindergartenname="新城童乐幼儿园" id="124">
+            <a onclick="ChangKindergartenInSiderBar(&#39;124&#39;, &#39;新城童乐幼儿园&#39;)">
+                新城童乐幼儿园-61800010
+            </a>
+        </li>
+        <li kindergartenid="125" kindergartenname="小树苗幼儿园" id="125">
+            <a onclick="ChangKindergartenInSiderBar(&#39;125&#39;, &#39;小树苗幼儿园&#39;)">
+                小树苗幼儿园-61800011
+            </a>
+        </li>
+        <li kindergartenid="126" kindergartenname="爱心育幼儿园" id="126">
+            <a onclick="ChangKindergartenInSiderBar(&#39;126&#39;, &#39;爱心育幼儿园&#39;)">
+                爱心育幼儿园-61800012
+            </a>
+        </li>
+        <li kindergartenid="127" kindergartenname="英浩成长幼儿园" id="127">
+            <a onclick="ChangKindergartenInSiderBar(&#39;127&#39;, &#39;英浩成长幼儿园&#39;)">
+                英浩成长幼儿园-61800013
+            </a>
+        </li>
+        <li kindergartenid="128" kindergartenname="明德春雨幼儿园" id="128">
+            <a onclick="ChangKindergartenInSiderBar(&#39;128&#39;, &#39;明德春雨幼儿园&#39;)">
+                明德春雨幼儿园-61800014
+            </a>
+        </li>
+        <li kindergartenid="129" kindergartenname="古都西苑幼儿园" id="129">
+            <a onclick="ChangKindergartenInSiderBar(&#39;129&#39;, &#39;古都西苑幼儿园&#39;)">
+                古都西苑幼儿园-61800015
+            </a>
+        </li>
+        <li kindergartenid="130" kindergartenname="洪庆街办小蘑菇幼儿园" id="130">
+            <a onclick="ChangKindergartenInSiderBar(&#39;130&#39;, &#39;洪庆街办小蘑菇幼儿园&#39;)">
+                洪庆街办小蘑菇幼儿园-61800016
+            </a>
+        </li>
+        <li kindergartenid="131" kindergartenname="洪庆街办博艺幼儿园" id="131">
+            <a onclick="ChangKindergartenInSiderBar(&#39;131&#39;, &#39;洪庆街办博艺幼儿园&#39;)">
+                洪庆街办博艺幼儿园-61800017
+            </a>
+        </li>
+        <li kindergartenid="134" kindergartenname="启蒙高智幼儿园" id="134">
+            <a onclick="ChangKindergartenInSiderBar(&#39;134&#39;, &#39;启蒙高智幼儿园&#39;)">
+                启蒙高智幼儿园-61800018
+            </a>
+        </li>
+        <li kindergartenid="137" kindergartenname="乐淘淘幼儿园" id="137">
+            <a onclick="ChangKindergartenInSiderBar(&#39;137&#39;, &#39;乐淘淘幼儿园&#39;)">
+                乐淘淘幼儿园-61800020
+            </a>
+        </li>
+        <li kindergartenid="138" kindergartenname="长乐壹号幼儿园" id="138">
+            <a onclick="ChangKindergartenInSiderBar(&#39;138&#39;, &#39;长乐壹号幼儿园&#39;)">
+                长乐壹号幼儿园-61800021
+            </a>
+        </li>
+        <li kindergartenid="139" kindergartenname="王子幼儿园西园区" id="139">
+            <a onclick="ChangKindergartenInSiderBar(&#39;139&#39;, &#39;王子幼儿园西园区&#39;)">
+                王子幼儿园西园区-61007001
+            </a>
+        </li>
+        <li kindergartenid="140" kindergartenname="王子幼儿园" id="140">
+            <a onclick="ChangKindergartenInSiderBar(&#39;140&#39;, &#39;王子幼儿园&#39;)">
+                王子幼儿园-61007002
+            </a>
+        </li>
+        <li kindergartenid="141" kindergartenname="麦凯德幼儿园" id="141">
+            <a onclick="ChangKindergartenInSiderBar(&#39;141&#39;, &#39;麦凯德幼儿园&#39;)">
+                麦凯德幼儿园-61800022
+            </a>
+        </li>
+        <li kindergartenid="143" kindergartenname="秦都马泉中心幼儿园" id="143">
+            <a onclick="ChangKindergartenInSiderBar(&#39;143&#39;, &#39;秦都马泉中心幼儿园&#39;)">
+                秦都马泉中心幼儿园-61800024
+            </a>
+        </li>
+        <li kindergartenid="144" kindergartenname="秦都安查幼儿园" id="144">
+            <a onclick="ChangKindergartenInSiderBar(&#39;144&#39;, &#39;秦都安查幼儿园&#39;)">
+                秦都安查幼儿园-61800025
+            </a>
+        </li>
+        <li kindergartenid="150" kindergartenname="岐山枣林镇贾家幼儿园" id="150">
+            <a onclick="ChangKindergartenInSiderBar(&#39;150&#39;, &#39;岐山枣林镇贾家幼儿园&#39;)">
+                岐山枣林镇贾家幼儿园-61800031
+            </a>
+        </li>
+        <li kindergartenid="151" kindergartenname="神农镇中心幼儿园" id="151">
+            <a onclick="ChangKindergartenInSiderBar(&#39;151&#39;, &#39;神农镇中心幼儿园&#39;)">
+                神农镇中心幼儿园-61800032
+            </a>
+        </li>
+        <li kindergartenid="152" kindergartenname="岐山麦禾营中心幼儿园" id="152">
+            <a onclick="ChangKindergartenInSiderBar(&#39;152&#39;, &#39;岐山麦禾营中心幼儿园&#39;)">
+                岐山麦禾营中心幼儿园-61800033
+            </a>
+        </li>
+        <li kindergartenid="153" kindergartenname="温水镇火烧寨中心幼儿园" id="153">
+            <a onclick="ChangKindergartenInSiderBar(&#39;153&#39;, &#39;温水镇火烧寨中心幼儿园&#39;)">
+                温水镇火烧寨中心幼儿园-61800034
+            </a>
+        </li>
+        <li kindergartenid="154" kindergartenname="眉县仙龙幼儿园" id="154">
+            <a onclick="ChangKindergartenInSiderBar(&#39;154&#39;, &#39;眉县仙龙幼儿园&#39;)">
+                眉县仙龙幼儿园-61800035
+            </a>
+        </li>
+        <li kindergartenid="155" kindergartenname="麟游县丈八镇中心幼儿园" id="155">
+            <a onclick="ChangKindergartenInSiderBar(&#39;155&#39;, &#39;麟游县丈八镇中心幼儿园&#39;)">
+                麟游县丈八镇中心幼儿园-61800036
+            </a>
+        </li>
+        <li kindergartenid="156" kindergartenname="宝鸡高新红英幼儿园" id="156">
+            <a onclick="ChangKindergartenInSiderBar(&#39;156&#39;, &#39;宝鸡高新红英幼儿园&#39;)">
+                宝鸡高新红英幼儿园-61800037
+            </a>
+        </li>
+        <li kindergartenid="157" kindergartenname="钟楼寺幼儿园" id="157">
+            <a onclick="ChangKindergartenInSiderBar(&#39;157&#39;, &#39;钟楼寺幼儿园&#39;)">
+                钟楼寺幼儿园-61800038
+            </a>
+        </li>
+        <li kindergartenid="158" kindergartenname="常兴镇贝贝幼儿园" id="158">
+            <a onclick="ChangKindergartenInSiderBar(&#39;158&#39;, &#39;常兴镇贝贝幼儿园&#39;)">
+                常兴镇贝贝幼儿园-61800039
+            </a>
+        </li>
+        <li kindergartenid="159" kindergartenname="岐山县安乐中心幼儿园" id="159">
+            <a onclick="ChangKindergartenInSiderBar(&#39;159&#39;, &#39;岐山县安乐中心幼儿园&#39;)">
+                岐山县安乐中心幼儿园-61800040
+            </a>
+        </li>
+        <li kindergartenid="160" kindergartenname="眉县常兴育苗幼儿园" id="160">
+            <a onclick="ChangKindergartenInSiderBar(&#39;160&#39;, &#39;眉县常兴育苗幼儿园&#39;)">
+                眉县常兴育苗幼儿园-61800041
+            </a>
+        </li>
+        <li kindergartenid="161" kindergartenname="凤县河口镇中心幼儿园" id="161">
+            <a onclick="ChangKindergartenInSiderBar(&#39;161&#39;, &#39;凤县河口镇中心幼儿园&#39;)">
+                凤县河口镇中心幼儿园-61800042
+            </a>
+        </li>
+        <li kindergartenid="162" kindergartenname="秦川武道" id="162">
+            <a onclick="ChangKindergartenInSiderBar(&#39;162&#39;, &#39;秦川武道&#39;)">
+                秦川武道-61800043
+            </a>
+        </li>
+        <li kindergartenid="169" kindergartenname="未央国培幼儿园" id="169">
+            <a onclick="ChangKindergartenInSiderBar(&#39;169&#39;, &#39;未央国培幼儿园&#39;)">
+                未央国培幼儿园-61800044
+            </a>
+        </li>
+        <li kindergartenid="170" kindergartenname="宇浩幼儿园" id="170">
+            <a onclick="ChangKindergartenInSiderBar(&#39;170&#39;, &#39;宇浩幼儿园&#39;)">
+                宇浩幼儿园-61800045
+            </a>
+        </li>
+        <li kindergartenid="171" kindergartenname="西贝骄子幼儿园" id="171">
+            <a onclick="ChangKindergartenInSiderBar(&#39;171&#39;, &#39;西贝骄子幼儿园&#39;)">
+                西贝骄子幼儿园-61800046
+            </a>
+        </li>
+        <li kindergartenid="173" kindergartenname="腾飞幼儿园" id="173">
+            <a onclick="ChangKindergartenInSiderBar(&#39;173&#39;, &#39;腾飞幼儿园&#39;)">
+                腾飞幼儿园-61800048
+            </a>
+        </li>
+        <li kindergartenid="174" kindergartenname="鹿塬小区幼儿园" id="174">
+            <a onclick="ChangKindergartenInSiderBar(&#39;174&#39;, &#39;鹿塬小区幼儿园&#39;)">
+                鹿塬小区幼儿园-61800049
+            </a>
+        </li>
+        <li kindergartenid="175" kindergartenname="新合筑梦幼儿园" id="175">
+            <a onclick="ChangKindergartenInSiderBar(&#39;175&#39;, &#39;新合筑梦幼儿园&#39;)">
+                新合筑梦幼儿园-61800050
+            </a>
+        </li>
+        <li kindergartenid="176" kindergartenname="新时代幼儿园" id="176">
+            <a onclick="ChangKindergartenInSiderBar(&#39;176&#39;, &#39;新时代幼儿园&#39;)">
+                新时代幼儿园-61800051
+            </a>
+        </li>
+        <li kindergartenid="177" kindergartenname="品格锦业幼儿园" id="177">
+            <a onclick="ChangKindergartenInSiderBar(&#39;177&#39;, &#39;品格锦业幼儿园&#39;)">
+                品格锦业幼儿园-61800052
+            </a>
+        </li>
+        <li kindergartenid="178" kindergartenname="宇馨幼儿园" id="178">
+            <a onclick="ChangKindergartenInSiderBar(&#39;178&#39;, &#39;宇馨幼儿园&#39;)">
+                宇馨幼儿园-61800053
+            </a>
+        </li>
+        <li kindergartenid="179" kindergartenname="文语幼儿园" id="179">
+            <a onclick="ChangKindergartenInSiderBar(&#39;179&#39;, &#39;文语幼儿园&#39;)">
+                文语幼儿园-61800054
+            </a>
+        </li>
+        <li kindergartenid="181" kindergartenname="中华小区幼儿园" id="181">
+            <a onclick="ChangKindergartenInSiderBar(&#39;181&#39;, &#39;中华小区幼儿园&#39;)">
+                中华小区幼儿园-61800056
+            </a>
+        </li>
+        <li kindergartenid="182" kindergartenname="世纪华苑幼儿园" id="182">
+            <a onclick="ChangKindergartenInSiderBar(&#39;182&#39;, &#39;世纪华苑幼儿园&#39;)">
+                世纪华苑幼儿园-61800057
+            </a>
+        </li>
+        <li kindergartenid="183" kindergartenname="西安海伦幼儿园" id="183">
+            <a onclick="ChangKindergartenInSiderBar(&#39;183&#39;, &#39;西安海伦幼儿园&#39;)">
+                西安海伦幼儿园-61800058
+            </a>
+        </li>
+        <li kindergartenid="185" kindergartenname="西安未央区博汇幼儿园" id="185">
+            <a onclick="ChangKindergartenInSiderBar(&#39;185&#39;, &#39;西安未央区博汇幼儿园&#39;)">
+                西安未央区博汇幼儿园-61800060
+            </a>
+        </li>
+        <li kindergartenid="187" kindergartenname="新概念大学城幼儿园" id="187">
+            <a onclick="ChangKindergartenInSiderBar(&#39;187&#39;, &#39;新概念大学城幼儿园&#39;)">
+                新概念大学城幼儿园-61800062
+            </a>
+        </li>
+        <li kindergartenid="188" kindergartenname="新概念第六幼儿园" id="188">
+            <a onclick="ChangKindergartenInSiderBar(&#39;188&#39;, &#39;新概念第六幼儿园&#39;)">
+                新概念第六幼儿园-61800063
+            </a>
+        </li>
+        <li kindergartenid="189" kindergartenname="摇篮家庭幼儿园" id="189">
+            <a onclick="ChangKindergartenInSiderBar(&#39;189&#39;, &#39;摇篮家庭幼儿园&#39;)">
+                摇篮家庭幼儿园-61800064
+            </a>
+        </li>
+        <li kindergartenid="190" kindergartenname="新概念第五幼儿园" id="190">
+            <a onclick="ChangKindergartenInSiderBar(&#39;190&#39;, &#39;新概念第五幼儿园&#39;)">
+                新概念第五幼儿园-61800065
+            </a>
+        </li>
+        <li kindergartenid="192" kindergartenname="西安莲湖世杰幼儿园" id="192">
+            <a onclick="ChangKindergartenInSiderBar(&#39;192&#39;, &#39;西安莲湖世杰幼儿园&#39;)">
+                西安莲湖世杰幼儿园-61800067
+            </a>
+        </li>
+        <li kindergartenid="195" kindergartenname="西安雁塔区兰泰幼儿园" id="195">
+            <a onclick="ChangKindergartenInSiderBar(&#39;195&#39;, &#39;西安雁塔区兰泰幼儿园&#39;)">
+                西安雁塔区兰泰幼儿园-61800070
+            </a>
+        </li>
+        <li kindergartenid="196" kindergartenname="未央区志天幼儿园" id="196">
+            <a onclick="ChangKindergartenInSiderBar(&#39;196&#39;, &#39;未央区志天幼儿园&#39;)">
+                未央区志天幼儿园-61800071
+            </a>
+        </li>
+        <li kindergartenid="198" kindergartenname="小天使幼儿园长安西路" id="198">
+            <a onclick="ChangKindergartenInSiderBar(&#39;198&#39;, &#39;小天使幼儿园长安西路&#39;)">
+                小天使幼儿园长安西路-61800073
+            </a>
+        </li>
+        <li kindergartenid="199" kindergartenname="小天使幼儿园铁炉庙" id="199">
+            <a onclick="ChangKindergartenInSiderBar(&#39;199&#39;, &#39;小天使幼儿园铁炉庙&#39;)">
+                小天使幼儿园铁炉庙-61800074
+            </a>
+        </li>
+        <li kindergartenid="200" kindergartenname="小天使幼儿园阳光" id="200">
+            <a onclick="ChangKindergartenInSiderBar(&#39;200&#39;, &#39;小天使幼儿园阳光&#39;)">
+                小天使幼儿园阳光-61800075
+            </a>
+        </li>
+        <li kindergartenid="201" kindergartenname="福田万科幼儿园" id="201">
+            <a onclick="ChangKindergartenInSiderBar(&#39;201&#39;, &#39;福田万科幼儿园&#39;)">
+                福田万科幼儿园-61800076
+            </a>
+        </li>
+        <li kindergartenid="202" kindergartenname="西安市未央区行知幼儿园" id="202">
+            <a onclick="ChangKindergartenInSiderBar(&#39;202&#39;, &#39;西安市未央区行知幼儿园&#39;)">
+                西安市未央区行知幼儿园-61800077
+            </a>
+        </li>
+        <li kindergartenid="203" kindergartenname="新概念海荣骄子幼儿园" id="203">
+            <a onclick="ChangKindergartenInSiderBar(&#39;203&#39;, &#39;新概念海荣骄子幼儿园&#39;)">
+                新概念海荣骄子幼儿园-61800078
+            </a>
+        </li>
+        <li kindergartenid="204" kindergartenname="新概念兴乐幼儿园" id="204">
+            <a onclick="ChangKindergartenInSiderBar(&#39;204&#39;, &#39;新概念兴乐幼儿园&#39;)">
+                新概念兴乐幼儿园-61800079
+            </a>
+        </li>
+        <li kindergartenid="205" kindergartenname="新概念未央第一幼儿园" id="205">
+            <a onclick="ChangKindergartenInSiderBar(&#39;205&#39;, &#39;新概念未央第一幼儿园&#39;)">
+                新概念未央第一幼儿园-61800080
+            </a>
+        </li>
+        <li kindergartenid="206" kindergartenname="新城繁华幼儿园" id="206">
+            <a onclick="ChangKindergartenInSiderBar(&#39;206&#39;, &#39;新城繁华幼儿园&#39;)">
+                新城繁华幼儿园-61800081
+            </a>
+        </li>
+        <li kindergartenid="207" kindergartenname="西安雁塔区兰泰第二幼儿园" id="207">
+            <a onclick="ChangKindergartenInSiderBar(&#39;207&#39;, &#39;西安雁塔区兰泰第二幼儿园&#39;)">
+                西安雁塔区兰泰第二幼儿园-61800082
+            </a>
+        </li>
+        <li kindergartenid="208" kindergartenname="秦都卡伊奥幼儿园" id="208">
+            <a onclick="ChangKindergartenInSiderBar(&#39;208&#39;, &#39;秦都卡伊奥幼儿园&#39;)">
+                秦都卡伊奥幼儿园-61800083
+            </a>
+        </li>
+        <li kindergartenid="209" kindergartenname="咸阳秦都大泉幼儿园" id="209">
+            <a onclick="ChangKindergartenInSiderBar(&#39;209&#39;, &#39;咸阳秦都大泉幼儿园&#39;)">
+                咸阳秦都大泉幼儿园-61800084
+            </a>
+        </li>
+        <li kindergartenid="212" kindergartenname="翰林北苑幼儿园" id="212">
+            <a onclick="ChangKindergartenInSiderBar(&#39;212&#39;, &#39;翰林北苑幼儿园&#39;)">
+                翰林北苑幼儿园-61800087
+            </a>
+        </li>
+        <li kindergartenid="213" kindergartenname="如意幼儿园" id="213">
+            <a onclick="ChangKindergartenInSiderBar(&#39;213&#39;, &#39;如意幼儿园&#39;)">
+                如意幼儿园-61800088
+            </a>
+        </li>
+        <li kindergartenid="215" kindergartenname="双照第一中心幼儿园" id="215">
+            <a onclick="ChangKindergartenInSiderBar(&#39;215&#39;, &#39;双照第一中心幼儿园&#39;)">
+                双照第一中心幼儿园-61800090
+            </a>
+        </li>
+        <li kindergartenid="216" kindergartenname="秦都花之雨幼儿园" id="216">
+            <a onclick="ChangKindergartenInSiderBar(&#39;216&#39;, &#39;秦都花之雨幼儿园&#39;)">
+                秦都花之雨幼儿园-61800091
+            </a>
+        </li>
+        <li kindergartenid="217" kindergartenname="西安莲湖梦之城幼儿园" id="217">
+            <a onclick="ChangKindergartenInSiderBar(&#39;217&#39;, &#39;西安莲湖梦之城幼儿园&#39;)">
+                西安莲湖梦之城幼儿园-61800092
+            </a>
+        </li>
+        <li kindergartenid="222" kindergartenname="宇辰幼儿园" id="222">
+            <a onclick="ChangKindergartenInSiderBar(&#39;222&#39;, &#39;宇辰幼儿园&#39;)">
+                宇辰幼儿园-61800093
+            </a>
+        </li>
+        <li kindergartenid="225" kindergartenname="凯迪西橡幼儿园" id="225">
+            <a onclick="ChangKindergartenInSiderBar(&#39;225&#39;, &#39;凯迪西橡幼儿园&#39;)">
+                凯迪西橡幼儿园-61800096
+            </a>
+        </li>
+        <li kindergartenid="226" kindergartenname="四医大幼儿园" id="226">
+            <a onclick="ChangKindergartenInSiderBar(&#39;226&#39;, &#39;四医大幼儿园&#39;)">
+                四医大幼儿园-61800097
+            </a>
+        </li>
+        <li kindergartenid="227" kindergartenname="陕科大蒲公英幼儿园" id="227">
+            <a onclick="ChangKindergartenInSiderBar(&#39;227&#39;, &#39;陕科大蒲公英幼儿园&#39;)">
+                陕科大蒲公英幼儿园-61800098
+            </a>
+        </li>
+        <li kindergartenid="228" kindergartenname="西安莲湖亚美幼儿园" id="228">
+            <a onclick="ChangKindergartenInSiderBar(&#39;228&#39;, &#39;西安莲湖亚美幼儿园&#39;)">
+                西安莲湖亚美幼儿园-61800099
+            </a>
+        </li>
+        <li kindergartenid="229" kindergartenname="咸阳晨苗幼儿园" id="229">
+            <a onclick="ChangKindergartenInSiderBar(&#39;229&#39;, &#39;咸阳晨苗幼儿园&#39;)">
+                咸阳晨苗幼儿园-61800100
+            </a>
+        </li>
+        <li kindergartenid="248" kindergartenname="秦川幼儿园" id="248">
+            <a onclick="ChangKindergartenInSiderBar(&#39;248&#39;, &#39;秦川幼儿园&#39;)">
+                秦川幼儿园-61800119
+            </a>
+        </li>
+        <li kindergartenid="250" kindergartenname="陕汽幼儿园" id="250">
+            <a onclick="ChangKindergartenInSiderBar(&#39;250&#39;, &#39;陕汽幼儿园&#39;)">
+                陕汽幼儿园-61800120
+            </a>
+        </li>
+        <li kindergartenid="264" kindergartenname="春苗幼儿园" id="264">
+            <a onclick="ChangKindergartenInSiderBar(&#39;264&#39;, &#39;春苗幼儿园&#39;)">
+                春苗幼儿园-61800134
+            </a>
+        </li>
+        <li kindergartenid="265" kindergartenname="品格秦都幼教中心" id="265">
+            <a onclick="ChangKindergartenInSiderBar(&#39;265&#39;, &#39;品格秦都幼教中心&#39;)">
+                品格秦都幼教中心-61800135
+            </a>
+        </li>
+        <li kindergartenid="266" kindergartenname="秦都蓓蕾幼儿园" id="266">
+            <a onclick="ChangKindergartenInSiderBar(&#39;266&#39;, &#39;秦都蓓蕾幼儿园&#39;)">
+                秦都蓓蕾幼儿园-61800136
+            </a>
+        </li>
+        <li kindergartenid="267" kindergartenname="秦都新苗幼儿园" id="267">
+            <a onclick="ChangKindergartenInSiderBar(&#39;267&#39;, &#39;秦都新苗幼儿园&#39;)">
+                秦都新苗幼儿园-61800137
+            </a>
+        </li>
+        <li kindergartenid="268" kindergartenname="碧水茗居幼儿园" id="268">
+            <a onclick="ChangKindergartenInSiderBar(&#39;268&#39;, &#39;碧水茗居幼儿园&#39;)">
+                碧水茗居幼儿园-61800138
+            </a>
+        </li>
+        <li kindergartenid="269" kindergartenname="秦都京师阳光幼儿园" id="269">
+            <a onclick="ChangKindergartenInSiderBar(&#39;269&#39;, &#39;秦都京师阳光幼儿园&#39;)">
+                秦都京师阳光幼儿园-61800139
+            </a>
+        </li>
+        <li kindergartenid="270" kindergartenname="金色摇篮紫玉华园幼儿园" id="270">
+            <a onclick="ChangKindergartenInSiderBar(&#39;270&#39;, &#39;金色摇篮紫玉华园幼儿园&#39;)">
+                金色摇篮紫玉华园幼儿园-61800140
+            </a>
+        </li>
+        <li kindergartenid="271" kindergartenname="西安金色摇篮世纪城幼儿园" id="271">
+            <a onclick="ChangKindergartenInSiderBar(&#39;271&#39;, &#39;西安金色摇篮世纪城幼儿园&#39;)">
+                西安金色摇篮世纪城幼儿园-61800141
+            </a>
+        </li>
+        <li kindergartenid="272" kindergartenname="兰乔圣菲幼儿园" id="272">
+            <a onclick="ChangKindergartenInSiderBar(&#39;272&#39;, &#39;兰乔圣菲幼儿园&#39;)">
+                兰乔圣菲幼儿园-61800142
+            </a>
+        </li>
+        <li kindergartenid="274" kindergartenname="高山流水幼稚园" id="274">
+            <a onclick="ChangKindergartenInSiderBar(&#39;274&#39;, &#39;高山流水幼稚园&#39;)">
+                高山流水幼稚园-61800144
+            </a>
+        </li>
+        <li kindergartenid="275" kindergartenname="万国远鉴幼儿园" id="275">
+            <a onclick="ChangKindergartenInSiderBar(&#39;275&#39;, &#39;万国远鉴幼儿园&#39;)">
+                万国远鉴幼儿园-61800145
+            </a>
+        </li>
+        <li kindergartenid="280" kindergartenname="晨曦幼儿园" id="280">
+            <a onclick="ChangKindergartenInSiderBar(&#39;280&#39;, &#39;晨曦幼儿园&#39;)">
+                晨曦幼儿园-61800147
+            </a>
+        </li>
+        <li kindergartenid="281" kindergartenname="万国幼儿园" id="281">
+            <a onclick="ChangKindergartenInSiderBar(&#39;281&#39;, &#39;万国幼儿园&#39;)">
+                万国幼儿园-61800148
+            </a>
+        </li>
+        <li kindergartenid="283" kindergartenname="未央区世杰幼儿园" id="283">
+            <a onclick="ChangKindergartenInSiderBar(&#39;283&#39;, &#39;未央区世杰幼儿园&#39;)">
+                未央区世杰幼儿园-61800150
+            </a>
+        </li>
+        <li kindergartenid="284" kindergartenname="高新国际幼儿园" id="284">
+            <a onclick="ChangKindergartenInSiderBar(&#39;284&#39;, &#39;高新国际幼儿园&#39;)">
+                高新国际幼儿园-61800151
+            </a>
+        </li>
+        <li kindergartenid="285" kindergartenname="贝贝巴士体质测试幼儿园" id="285">
+            <a onclick="ChangKindergartenInSiderBar(&#39;285&#39;, &#39;贝贝巴士体质测试幼儿园&#39;)">
+                贝贝巴士体质测试幼儿园-61800152
+            </a>
+        </li>
+        <li kindergartenid="286" kindergartenname="佰启慧伊顿幼稚园" id="286">
+            <a onclick="ChangKindergartenInSiderBar(&#39;286&#39;, &#39;佰启慧伊顿幼稚园&#39;)">
+                佰启慧伊顿幼稚园-61800153
+            </a>
+        </li>
+        <li kindergartenid="290" kindergartenname="深圳市盐田区机关幼儿园2016" id="290">
+            <a onclick="ChangKindergartenInSiderBar(&#39;290&#39;, &#39;深圳市盐田区机关幼儿园2016&#39;)">
+                深圳市盐田区机关幼儿园2016-44800157
+            </a>
+        </li>
+        <li kindergartenid="291" kindergartenname="深圳市盐田区机关幼儿园2014" id="291">
+            <a onclick="ChangKindergartenInSiderBar(&#39;291&#39;, &#39;深圳市盐田区机关幼儿园2014&#39;)">
+                深圳市盐田区机关幼儿园2014-44800158
+            </a>
+        </li>
+        <li kindergartenid="292" kindergartenname="深圳市盐田区机关幼儿园2015" id="292">
+            <a onclick="ChangKindergartenInSiderBar(&#39;292&#39;, &#39;深圳市盐田区机关幼儿园2015&#39;)">
+                深圳市盐田区机关幼儿园2015-44800159
+            </a>
+        </li>
+        <li kindergartenid="298" kindergartenname="万国集团幼儿园" id="298">
+            <a onclick="ChangKindergartenInSiderBar(&#39;298&#39;, &#39;万国集团幼儿园&#39;)">
+                万国集团幼儿园-61800164
+            </a>
+        </li>
+        <li kindergartenid="299" kindergartenname="万国集团" id="299">
+            <a onclick="ChangKindergartenInSiderBar(&#39;299&#39;, &#39;万国集团&#39;)">
+                万国集团-61800165
+            </a>
+        </li>
+        <li kindergartenid="300" kindergartenname="大连中科院幼儿园" id="300">
+            <a onclick="ChangKindergartenInSiderBar(&#39;300&#39;, &#39;大连中科院幼儿园&#39;)">
+                大连中科院幼儿园-11800001
+            </a>
+        </li>
+        <li kindergartenid="301" kindergartenname="卡酷幼儿园" id="301">
+            <a onclick="ChangKindergartenInSiderBar(&#39;301&#39;, &#39;卡酷幼儿园&#39;)">
+                卡酷幼儿园-10800001
+            </a>
+        </li>
+        <li kindergartenid="302" kindergartenname="英伦幼儿园" id="302">
+            <a onclick="ChangKindergartenInSiderBar(&#39;302&#39;, &#39;英伦幼儿园&#39;)">
+                英伦幼儿园-61800166
+            </a>
+        </li>
+        <li kindergartenid="303" kindergartenname="五一实验幼儿园" id="303">
+            <a onclick="ChangKindergartenInSiderBar(&#39;303&#39;, &#39;五一实验幼儿园&#39;)">
+                五一实验幼儿园-61800167
+            </a>
+        </li>
+        <li kindergartenid="304" kindergartenname="博恩桑尼幼儿园" id="304">
+            <a onclick="ChangKindergartenInSiderBar(&#39;304&#39;, &#39;博恩桑尼幼儿园&#39;)">
+                博恩桑尼幼儿园-61800168
+            </a>
+        </li>
+        <li kindergartenid="305" kindergartenname="嘉乐堡幼儿园" id="305">
+            <a onclick="ChangKindergartenInSiderBar(&#39;305&#39;, &#39;嘉乐堡幼儿园&#39;)">
+                嘉乐堡幼儿园-61800169
+            </a>
+        </li>
+        <li kindergartenid="306" kindergartenname="哈考特成长学苑" id="306">
+            <a onclick="ChangKindergartenInSiderBar(&#39;306&#39;, &#39;哈考特成长学苑&#39;)">
+                哈考特成长学苑-61800170
+            </a>
+        </li>
+        <li kindergartenid="307" kindergartenname="七彩童年幼儿园" id="307">
+            <a onclick="ChangKindergartenInSiderBar(&#39;307&#39;, &#39;七彩童年幼儿园&#39;)">
+                七彩童年幼儿园-61800171
+            </a>
+        </li>
+        <li kindergartenid="308" kindergartenname="赛乐启智幼儿园" id="308">
+            <a onclick="ChangKindergartenInSiderBar(&#39;308&#39;, &#39;赛乐启智幼儿园&#39;)">
+                赛乐启智幼儿园-61800172
+            </a>
+        </li>
+        <li kindergartenid="309" kindergartenname="双水磨幼儿园" id="309">
+            <a onclick="ChangKindergartenInSiderBar(&#39;309&#39;, &#39;双水磨幼儿园&#39;)">
+                双水磨幼儿园-61800173
+            </a>
+        </li>
+        <li kindergartenid="310" kindergartenname="思博幼儿园" id="310">
+            <a onclick="ChangKindergartenInSiderBar(&#39;310&#39;, &#39;思博幼儿园&#39;)">
+                思博幼儿园-61800174
+            </a>
+        </li>
+        <li kindergartenid="311" kindergartenname="睿莱幼儿园" id="311">
+            <a onclick="ChangKindergartenInSiderBar(&#39;311&#39;, &#39;睿莱幼儿园&#39;)">
+                睿莱幼儿园-61005001
+            </a>
+        </li>
+        <li kindergartenid="326" kindergartenname="宝瑞兰特幼儿园" id="326">
+            <a onclick="ChangKindergartenInSiderBar(&#39;326&#39;, &#39;宝瑞兰特幼儿园&#39;)">
+                宝瑞兰特幼儿园-61800175
+            </a>
+        </li>
+        <li kindergartenid="332" kindergartenname="成都市第十一幼儿园" id="332">
+            <a onclick="ChangKindergartenInSiderBar(&#39;332&#39;, &#39;成都市第十一幼儿园&#39;)">
+                成都市第十一幼儿园-51010000
+            </a>
+        </li>
+        <li kindergartenid="334" kindergartenname="湘桥区玉兰幼儿园" id="334">
+            <a onclick="ChangKindergartenInSiderBar(&#39;334&#39;, &#39;湘桥区玉兰幼儿园&#39;)">
+                湘桥区玉兰幼儿园-44510000
+            </a>
+        </li>
+        <li kindergartenid="335" kindergartenname="一加幼儿园" id="335">
+            <a onclick="ChangKindergartenInSiderBar(&#39;335&#39;, &#39;一加幼儿园&#39;)">
+                一加幼儿园-51010001
+            </a>
+        </li>
+        <li kindergartenid="336" kindergartenname="高宽创智幼儿园" id="336">
+            <a onclick="ChangKindergartenInSiderBar(&#39;336&#39;, &#39;高宽创智幼儿园&#39;)">
+                高宽创智幼儿园-51010002
+            </a>
+        </li>
+        <li kindergartenid="337" kindergartenname="宝二发电公司幼儿园（新区）" id="337">
+            <a onclick="ChangKindergartenInSiderBar(&#39;337&#39;, &#39;宝二发电公司幼儿园（新区）&#39;)">
+                宝二发电公司幼儿园（新区）-61030000
+            </a>
+        </li>
+        <li kindergartenid="338" kindergartenname="科教新村幼儿园" id="338">
+            <a onclick="ChangKindergartenInSiderBar(&#39;338&#39;, &#39;科教新村幼儿园&#39;)">
+                科教新村幼儿园-62100000
+            </a>
+        </li>
+        <li kindergartenid="339" kindergartenname="刘岭幼儿园" id="339">
+            <a onclick="ChangKindergartenInSiderBar(&#39;339&#39;, &#39;刘岭幼儿园&#39;)">
+                刘岭幼儿园-62100001
+            </a>
+        </li>
+        <li kindergartenid="340" kindergartenname="金宝贝幼儿园（新区）" id="340">
+            <a onclick="ChangKindergartenInSiderBar(&#39;340&#39;, &#39;金宝贝幼儿园（新区）&#39;)">
+                金宝贝幼儿园（新区）-62100002
+            </a>
+        </li>
+        <li kindergartenid="341" kindergartenname="华宇幼儿园" id="341">
+            <a onclick="ChangKindergartenInSiderBar(&#39;341&#39;, &#39;华宇幼儿园&#39;)">
+                华宇幼儿园-62100003
+            </a>
+        </li>
+        <li kindergartenid="342" kindergartenname="星星幼儿园第三分园" id="342">
+            <a onclick="ChangKindergartenInSiderBar(&#39;342&#39;, &#39;星星幼儿园第三分园&#39;)">
+                星星幼儿园第三分园-62100004
+            </a>
+        </li>
+        <li kindergartenid="343" kindergartenname="团结村幼儿园" id="343">
+            <a onclick="ChangKindergartenInSiderBar(&#39;343&#39;, &#39;团结村幼儿园&#39;)">
+                团结村幼儿园-61010001
+            </a>
+        </li>
+        <li kindergartenid="344" kindergartenname="宝二发电公司幼儿园（老区）" id="344">
+            <a onclick="ChangKindergartenInSiderBar(&#39;344&#39;, &#39;宝二发电公司幼儿园（老区）&#39;)">
+                宝二发电公司幼儿园（老区）-61030001
+            </a>
+        </li>
+        <li kindergartenid="345" kindergartenname="天府新区万安幼儿园" id="345">
+            <a onclick="ChangKindergartenInSiderBar(&#39;345&#39;, &#39;天府新区万安幼儿园&#39;)">
+                天府新区万安幼儿园-51010003
+            </a>
+        </li>
+        <li kindergartenid="346" kindergartenname="金宝贝幼儿园" id="346">
+            <a onclick="ChangKindergartenInSiderBar(&#39;346&#39;, &#39;金宝贝幼儿园&#39;)">
+                金宝贝幼儿园-62100005
+            </a>
+        </li>
+        <li kindergartenid="394" kindergartenname="睿莱测试幼儿园" id="394">
+            <a onclick="ChangKindergartenInSiderBar(&#39;394&#39;, &#39;睿莱测试幼儿园&#39;)">
+                睿莱测试幼儿园-32010000
+            </a>
+        </li>
+        <li kindergartenid="403" kindergartenname="世纪英伦幼儿园" id="403">
+            <a onclick="ChangKindergartenInSiderBar(&#39;403&#39;, &#39;世纪英伦幼儿园&#39;)">
+                世纪英伦幼儿园-21020000
+            </a>
+        </li>
+        <li kindergartenid="405" kindergartenname="飞机设计研究所幼儿园" id="405">
+            <a onclick="ChangKindergartenInSiderBar(&#39;405&#39;, &#39;飞机设计研究所幼儿园&#39;)">
+                飞机设计研究所幼儿园-51010004
+            </a>
+        </li>
+        <li kindergartenid="408" kindergartenname="睿莱天童幼儿园" id="408">
+            <a onclick="ChangKindergartenInSiderBar(&#39;408&#39;, &#39;睿莱天童幼儿园&#39;)">
+                睿莱天童幼儿园-61010003
+            </a>
+        </li>
+        <li kindergartenid="515" kindergartenname="金蓓蕾幼儿园" id="515">
+            <a onclick="ChangKindergartenInSiderBar(&#39;515&#39;, &#39;金蓓蕾幼儿园&#39;)">
+                金蓓蕾幼儿园-61010006
+            </a>
+        </li>
+        <li kindergartenid="518" kindergartenname="蒋刘幼儿园" id="518">
+            <a onclick="ChangKindergartenInSiderBar(&#39;518&#39;, &#39;蒋刘幼儿园&#39;)">
+                蒋刘幼儿园-61040000
+            </a>
+        </li>
+        <li kindergartenid="519" kindergartenname="西安远东保育院" id="519">
+            <a onclick="ChangKindergartenInSiderBar(&#39;519&#39;, &#39;西安远东保育院&#39;)">
+                西安远东保育院-61010007
+            </a>
+        </li>
+        <li kindergartenid="520" kindergartenname="普兰店区爱娃幼儿园" id="520">
+            <a onclick="ChangKindergartenInSiderBar(&#39;520&#39;, &#39;普兰店区爱娃幼儿园&#39;)">
+                普兰店区爱娃幼儿园-21020001
+            </a>
+        </li>
+        <li kindergartenid="524" kindergartenname="江岸区卫计委幼儿园" id="524">
+            <a onclick="ChangKindergartenInSiderBar(&#39;524&#39;, &#39;江岸区卫计委幼儿园&#39;)">
+                江岸区卫计委幼儿园-42010000
+            </a>
+        </li>
+        <li kindergartenid="525" kindergartenname="蓝豚宝贝" id="525">
+            <a onclick="ChangKindergartenInSiderBar(&#39;525&#39;, &#39;蓝豚宝贝&#39;)">
+                蓝豚宝贝-61010011
+            </a>
+        </li>
+        <li kindergartenid="532" kindergartenname="蓓蕾艺术幼儿园" id="532">
+            <a onclick="ChangKindergartenInSiderBar(&#39;532&#39;, &#39;蓓蕾艺术幼儿园&#39;)">
+                蓓蕾艺术幼儿园-43020000
+            </a>
+        </li>
+        <li kindergartenid="533" kindergartenname="蓓蕾幼儿园" id="533">
+            <a onclick="ChangKindergartenInSiderBar(&#39;533&#39;, &#39;蓓蕾幼儿园&#39;)">
+                蓓蕾幼儿园-43020001
+            </a>
+        </li>
+        <li kindergartenid="534" kindergartenname="金娃娃幼儿园" id="534">
+            <a onclick="ChangKindergartenInSiderBar(&#39;534&#39;, &#39;金娃娃幼儿园&#39;)">
+                金娃娃幼儿园-51170000
+            </a>
+        </li>
+        <li kindergartenid="536" kindergartenname="清秀幼儿园" id="536">
+            <a onclick="ChangKindergartenInSiderBar(&#39;536&#39;, &#39;清秀幼儿园&#39;)">
+                清秀幼儿园-44030000
+            </a>
+        </li>
+        <li kindergartenid="537" kindergartenname="美酷奇高新国际体能馆" id="537">
+            <a onclick="ChangKindergartenInSiderBar(&#39;537&#39;, &#39;美酷奇高新国际体能馆&#39;)">
+                美酷奇高新国际体能馆-61010014
+            </a>
+        </li>
+        <li kindergartenid="539" kindergartenname="德源新城第一幼儿园" id="539">
+            <a onclick="ChangKindergartenInSiderBar(&#39;539&#39;, &#39;德源新城第一幼儿园&#39;)">
+                德源新城第一幼儿园-51010005
+            </a>
+        </li>
+        <li kindergartenid="540" kindergartenname="岽方金典幼儿园" id="540">
+            <a onclick="ChangKindergartenInSiderBar(&#39;540&#39;, &#39;岽方金典幼儿园&#39;)">
+                岽方金典幼儿园-51070000
+            </a>
+        </li>
+        <li kindergartenid="541" kindergartenname="西安高新国际幼儿园" id="541">
+            <a onclick="ChangKindergartenInSiderBar(&#39;541&#39;, &#39;西安高新国际幼儿园&#39;)">
+                西安高新国际幼儿园-61010015
+            </a>
+        </li>
+        <li kindergartenid="542" kindergartenname="童乐幼儿运动俱乐部" id="542">
+            <a onclick="ChangKindergartenInSiderBar(&#39;542&#39;, &#39;童乐幼儿运动俱乐部&#39;)">
+                童乐幼儿运动俱乐部-61090000
+            </a>
+        </li>
+        <li kindergartenid="544" kindergartenname="中科院幼儿园" id="544">
+            <a onclick="ChangKindergartenInSiderBar(&#39;544&#39;, &#39;中科院幼儿园&#39;)">
+                中科院幼儿园-11010013
+            </a>
+        </li>
+        <li kindergartenid="545" kindergartenname="美酷奇航天基地体能馆" id="545">
+            <a onclick="ChangKindergartenInSiderBar(&#39;545&#39;, &#39;美酷奇航天基地体能馆&#39;)">
+                美酷奇航天基地体能馆-61010016
+            </a>
+        </li>
+        <li kindergartenid="546" kindergartenname="小天才幼儿园" id="546">
+            <a onclick="ChangKindergartenInSiderBar(&#39;546&#39;, &#39;小天才幼儿园&#39;)">
+                小天才幼儿园-43100000
+            </a>
+        </li>
+        <li kindergartenid="547" kindergartenname="德源新城第一分幼儿园" id="547">
+            <a onclick="ChangKindergartenInSiderBar(&#39;547&#39;, &#39;德源新城第一分幼儿园&#39;)">
+                德源新城第一分幼儿园-51010006
+            </a>
+        </li>
+        <li kindergartenid="548" kindergartenname="小红帽幼儿园" id="548">
+            <a onclick="ChangKindergartenInSiderBar(&#39;548&#39;, &#39;小红帽幼儿园&#39;)">
+                小红帽幼儿园-62080000
+            </a>
+        </li>
+        <li kindergartenid="549" kindergartenname="绵阳市花园实验幼儿园" id="549">
+            <a onclick="ChangKindergartenInSiderBar(&#39;549&#39;, &#39;绵阳市花园实验幼儿园&#39;)">
+                绵阳市花园实验幼儿园-51070001
+            </a>
+        </li>
+        <li kindergartenid="550" kindergartenname="中房蓝天幼儿园" id="550">
+            <a onclick="ChangKindergartenInSiderBar(&#39;550&#39;, &#39;中房蓝天幼儿园&#39;)">
+                中房蓝天幼儿园-43020002
+            </a>
+        </li>
+        <li kindergartenid="551" kindergartenname="广电丰和北苑艺术幼儿园" id="551">
+            <a onclick="ChangKindergartenInSiderBar(&#39;551&#39;, &#39;广电丰和北苑艺术幼儿园&#39;)">
+                广电丰和北苑艺术幼儿园-36010000
+            </a>
+        </li>
+        <li kindergartenid="552" kindergartenname="巴学园幼儿园" id="552">
+            <a onclick="ChangKindergartenInSiderBar(&#39;552&#39;, &#39;巴学园幼儿园&#39;)">
+                巴学园幼儿园-51170001
+            </a>
+        </li>
+        <li kindergartenid="553" kindergartenname="航天幼儿园" id="553">
+            <a onclick="ChangKindergartenInSiderBar(&#39;553&#39;, &#39;航天幼儿园&#39;)">
+                航天幼儿园-51170002
+            </a>
+        </li>
+        <li kindergartenid="554" kindergartenname="阳光宝贝幼儿园" id="554">
+            <a onclick="ChangKindergartenInSiderBar(&#39;554&#39;, &#39;阳光宝贝幼儿园&#39;)">
+                阳光宝贝幼儿园-51170003
+            </a>
+        </li>
+        <li kindergartenid="555" kindergartenname="湖北省实验幼儿园白沙洲分园" id="555">
+            <a onclick="ChangKindergartenInSiderBar(&#39;555&#39;, &#39;湖北省实验幼儿园白沙洲分园&#39;)">
+                湖北省实验幼儿园白沙洲分园-42010001
+            </a>
+        </li>
+        <li kindergartenid="556" kindergartenname="星城幼儿园" id="556">
+            <a onclick="ChangKindergartenInSiderBar(&#39;556&#39;, &#39;星城幼儿园&#39;)">
+                星城幼儿园-43090000
+            </a>
+        </li>
+        <li kindergartenid="557" kindergartenname="政通幼儿园" id="557">
+            <a onclick="ChangKindergartenInSiderBar(&#39;557&#39;, &#39;政通幼儿园&#39;)">
+                政通幼儿园-43090001
+            </a>
+        </li>
+        <li kindergartenid="558" kindergartenname="红缨贝贝幼儿园" id="558">
+            <a onclick="ChangKindergartenInSiderBar(&#39;558&#39;, &#39;红缨贝贝幼儿园&#39;)">
+                红缨贝贝幼儿园-51170004
+            </a>
+        </li>
+        <li kindergartenid="559" kindergartenname="新余测试园" id="559">
+            <a onclick="ChangKindergartenInSiderBar(&#39;559&#39;, &#39;新余测试园&#39;)">
+                新余测试园-36050000
+            </a>
+        </li>
+        <li kindergartenid="560" kindergartenname="西安新城中天爱幼幼儿园" id="560">
+            <a onclick="ChangKindergartenInSiderBar(&#39;560&#39;, &#39;西安新城中天爱幼幼儿园&#39;)">
+                西安新城中天爱幼幼儿园-61010017
+            </a>
+        </li>
+        <li kindergartenid="561" kindergartenname="西安新城爱幼幼儿园" id="561">
+            <a onclick="ChangKindergartenInSiderBar(&#39;561&#39;, &#39;西安新城爱幼幼儿园&#39;)">
+                西安新城爱幼幼儿园-61010018
+            </a>
+        </li>
+        <li kindergartenid="562" kindergartenname="新城东尚爱幼幼儿园" id="562">
+            <a onclick="ChangKindergartenInSiderBar(&#39;562&#39;, &#39;新城东尚爱幼幼儿园&#39;)">
+                新城东尚爱幼幼儿园-61010019
+            </a>
+        </li>
+        <li kindergartenid="563" kindergartenname="沣东伊诺幼儿园" id="563">
+            <a onclick="ChangKindergartenInSiderBar(&#39;563&#39;, &#39;沣东伊诺幼儿园&#39;)">
+                沣东伊诺幼儿园-61010020
+            </a>
+        </li>
+        <li kindergartenid="564" kindergartenname="童星幼儿园" id="564">
+            <a onclick="ChangKindergartenInSiderBar(&#39;564&#39;, &#39;童星幼儿园&#39;)">
+                童星幼儿园-42100000
+            </a>
+        </li>
+        <li kindergartenid="565" kindergartenname="莲湖爱幼幼儿园" id="565">
+            <a onclick="ChangKindergartenInSiderBar(&#39;565&#39;, &#39;莲湖爱幼幼儿园 &#39;)">
+                莲湖爱幼幼儿园 -61010021
+            </a>
+        </li>
+        <li kindergartenid="566" kindergartenname="欧莱特路居中心幼儿园" id="566">
+            <a onclick="ChangKindergartenInSiderBar(&#39;566&#39;, &#39;欧莱特路居中心幼儿园&#39;)">
+                欧莱特路居中心幼儿园-53040000
+            </a>
+        </li>
+        <li kindergartenid="567" kindergartenname="青蓝幼儿园" id="567">
+            <a onclick="ChangKindergartenInSiderBar(&#39;567&#39;, &#39;青蓝幼儿园&#39;)">
+                青蓝幼儿园-42020000
+            </a>
+        </li>
+        <li kindergartenid="568" kindergartenname="恩施市童欣幼儿园" id="568">
+            <a onclick="ChangKindergartenInSiderBar(&#39;568&#39;, &#39;恩施市童欣幼儿园&#39;)">
+                恩施市童欣幼儿园-42280000
+            </a>
+        </li>
+        <li kindergartenid="569" kindergartenname="六一幼儿园" id="569">
+            <a onclick="ChangKindergartenInSiderBar(&#39;569&#39;, &#39;六一幼儿园&#39;)">
+                六一幼儿园-42280001
+            </a>
+        </li>
+        <li kindergartenid="570" kindergartenname="启博幼儿园" id="570">
+            <a onclick="ChangKindergartenInSiderBar(&#39;570&#39;, &#39;启博幼儿园&#39;)">
+                启博幼儿园-42280002
+            </a>
+        </li>
+        <li kindergartenid="571" kindergartenname="新星幼儿园" id="571">
+            <a onclick="ChangKindergartenInSiderBar(&#39;571&#39;, &#39; 新星幼儿园&#39;)">
+                 新星幼儿园-42280003
+            </a>
+        </li>
+        <li kindergartenid="572" kindergartenname="恩施市阳光幼儿园" id="572">
+            <a onclick="ChangKindergartenInSiderBar(&#39;572&#39;, &#39;恩施市阳光幼儿园&#39;)">
+                恩施市阳光幼儿园-42280004
+            </a>
+        </li>
+        <li kindergartenid="573" kindergartenname="有色幼儿园" id="573">
+            <a onclick="ChangKindergartenInSiderBar(&#39;573&#39;, &#39;有色幼儿园&#39;)">
+                有色幼儿园-42020001
+            </a>
+        </li>
+        <li kindergartenid="574" kindergartenname="绿园实验幼儿园" id="574">
+            <a onclick="ChangKindergartenInSiderBar(&#39;574&#39;, &#39;绿园实验幼儿园&#39;)">
+                绿园实验幼儿园-22010000
+            </a>
+        </li>
+        <li kindergartenid="575" kindergartenname="桔城幼儿园" id="575">
+            <a onclick="ChangKindergartenInSiderBar(&#39;575&#39;, &#39;桔城幼儿园&#39;)">
+                桔城幼儿园-43090002
+            </a>
+        </li>
+        <li kindergartenid="576" kindergartenname="沅江市中心幼儿园" id="576">
+            <a onclick="ChangKindergartenInSiderBar(&#39;576&#39;, &#39;沅江市中心幼儿园&#39;)">
+                沅江市中心幼儿园-43090003
+            </a>
+        </li>
+        <li kindergartenid="577" kindergartenname="益阳市东城幼儿园" id="577">
+            <a onclick="ChangKindergartenInSiderBar(&#39;577&#39;, &#39;益阳市东城幼儿园&#39;)">
+                益阳市东城幼儿园-43090004
+            </a>
+        </li>
+        <li kindergartenid="578" kindergartenname="新投幼儿园" id="578">
+            <a onclick="ChangKindergartenInSiderBar(&#39;578&#39;, &#39;新投幼儿园&#39;)">
+                新投幼儿园-61040001
+            </a>
+        </li>
+        <li kindergartenid="579" kindergartenname="成长幼儿园" id="579">
+            <a onclick="ChangKindergartenInSiderBar(&#39;579&#39;, &#39;成长幼儿园&#39;)">
+                成长幼儿园-61010022
+            </a>
+        </li>
+        <li kindergartenid="580" kindergartenname="新概念第一幼儿园" id="580">
+            <a onclick="ChangKindergartenInSiderBar(&#39;580&#39;, &#39;新概念第一幼儿园&#39;)">
+                新概念第一幼儿园-61010023
+            </a>
+        </li>
+        <li kindergartenid="581" kindergartenname="福孚生态幼儿园" id="581">
+            <a onclick="ChangKindergartenInSiderBar(&#39;581&#39;, &#39;福孚生态幼儿园&#39;)">
+                福孚生态幼儿园-44510001
+            </a>
+        </li>
+        <li kindergartenid="582" kindergartenname="哈考特儿童成长学苑" id="582">
+            <a onclick="ChangKindergartenInSiderBar(&#39;582&#39;, &#39;哈考特儿童成长学苑&#39;)">
+                哈考特儿童成长学苑-61010024
+            </a>
+        </li>
+        <li kindergartenid="583" kindergartenname="市直机关丰和分园幼儿园" id="583">
+            <a onclick="ChangKindergartenInSiderBar(&#39;583&#39;, &#39;市直机关丰和分园幼儿园&#39;)">
+                市直机关丰和分园幼儿园-22010001
+            </a>
+        </li>
+        <li kindergartenid="584" kindergartenname="宝宝乐园幼儿园" id="584">
+            <a onclick="ChangKindergartenInSiderBar(&#39;584&#39;, &#39;宝宝乐园幼儿园&#39;)">
+                宝宝乐园幼儿园-41050000
+            </a>
+        </li>
+        <li kindergartenid="585" kindergartenname="七色花幼儿园" id="585">
+            <a onclick="ChangKindergartenInSiderBar(&#39;585&#39;, &#39;七色花幼儿园&#39;)">
+                七色花幼儿园-41050001
+            </a>
+        </li>
+        <li kindergartenid="586" kindergartenname="阳光雨露幼儿园" id="586">
+            <a onclick="ChangKindergartenInSiderBar(&#39;586&#39;, &#39;阳光雨露幼儿园&#39;)">
+                阳光雨露幼儿园-41050002
+            </a>
+        </li>
+        <li kindergartenid="587" kindergartenname="米兰阳光幼儿园" id="587">
+            <a onclick="ChangKindergartenInSiderBar(&#39;587&#39;, &#39;米兰阳光幼儿园&#39;)">
+                米兰阳光幼儿园-41050003
+            </a>
+        </li>
+        <li kindergartenid="588" kindergartenname="风花幼儿园" id="588">
+            <a onclick="ChangKindergartenInSiderBar(&#39;588&#39;, &#39;风花幼儿园&#39;)">
+                风花幼儿园-41050004
+            </a>
+        </li>
+        <li kindergartenid="589" kindergartenname="长春市政府机关第三幼儿园" id="589">
+            <a onclick="ChangKindergartenInSiderBar(&#39;589&#39;, &#39;长春市政府机关第三幼儿园&#39;)">
+                长春市政府机关第三幼儿园-22010002
+            </a>
+        </li>
+        <li kindergartenid="590" kindergartenname="木色都活动" id="590">
+            <a onclick="ChangKindergartenInSiderBar(&#39;590&#39;, &#39;木色都活动&#39;)">
+                木色都活动-61020000
+            </a>
+        </li>
+        <li kindergartenid="591" kindergartenname="VIP会员" id="591">
+            <a onclick="ChangKindergartenInSiderBar(&#39;591&#39;, &#39;VIP会员&#39;)">
+                VIP会员-61020001
+            </a>
+        </li>
+        <li kindergartenid="592" kindergartenname="天空城VIP会员" id="592">
+            <a onclick="ChangKindergartenInSiderBar(&#39;592&#39;, &#39;天空城VIP会员&#39;)">
+                天空城VIP会员-61020002
+            </a>
+        </li>
+        <li kindergartenid="593" kindergartenname="木色都数字音乐教育" id="593">
+            <a onclick="ChangKindergartenInSiderBar(&#39;593&#39;, &#39;木色都数字音乐教育&#39;)">
+                木色都数字音乐教育-61020003
+            </a>
+        </li>
+        <li kindergartenid="595" kindergartenname="曙光吉的堡幼儿园" id="595">
+            <a onclick="ChangKindergartenInSiderBar(&#39;595&#39;, &#39;曙光吉的堡幼儿园&#39;)">
+                曙光吉的堡幼儿园-41050005
+            </a>
+        </li>
+        <li kindergartenid="596" kindergartenname="文明大道幼儿园" id="596">
+            <a onclick="ChangKindergartenInSiderBar(&#39;596&#39;, &#39;文明大道幼儿园&#39;)">
+                文明大道幼儿园-41050006
+            </a>
+        </li>
+        <li kindergartenid="597" kindergartenname="慧思通" id="597">
+            <a onclick="ChangKindergartenInSiderBar(&#39;597&#39;, &#39;慧思通&#39;)">
+                慧思通-51070002
+            </a>
+        </li>
+        <li kindergartenid="598" kindergartenname="慧思通" id="598">
+            <a onclick="ChangKindergartenInSiderBar(&#39;598&#39;, &#39;慧思通&#39;)">
+                慧思通-11010015
+            </a>
+        </li>
+        <li kindergartenid="599" kindergartenname="慧思通幼儿园" id="599">
+            <a onclick="ChangKindergartenInSiderBar(&#39;599&#39;, &#39;慧思通幼儿园&#39;)">
+                慧思通幼儿园-51070003
+            </a>
+        </li>
+        <li kindergartenid="600" kindergartenname="宇航幼儿园" id="600">
+            <a onclick="ChangKindergartenInSiderBar(&#39;600&#39;, &#39;宇航幼儿园&#39;)">
+                宇航幼儿园-21010000
+            </a>
+        </li>
+        <li kindergartenid="601" kindergartenname="二十一世纪幼儿园" id="601">
+            <a onclick="ChangKindergartenInSiderBar(&#39;601&#39;, &#39;二十一世纪幼儿园&#39;)">
+                二十一世纪幼儿园-21010001
+            </a>
+        </li>
+        <li kindergartenid="602" kindergartenname="弗瑞实验幼儿园" id="602">
+            <a onclick="ChangKindergartenInSiderBar(&#39;602&#39;, &#39;弗瑞实验幼儿园&#39;)">
+                弗瑞实验幼儿园-21010002
+            </a>
+        </li>
+        <li kindergartenid="603" kindergartenname="沈大附属幼儿园" id="603">
+            <a onclick="ChangKindergartenInSiderBar(&#39;603&#39;, &#39;沈大附属幼儿园&#39;)">
+                沈大附属幼儿园-21010003
+            </a>
+        </li>
+        <li kindergartenid="618" kindergartenname="广元市福康幼儿园" id="618">
+            <a onclick="ChangKindergartenInSiderBar(&#39;618&#39;, &#39;广元市福康幼儿园&#39;)">
+                广元市福康幼儿园-51080000
+            </a>
+        </li>
+        <li kindergartenid="619" kindergartenname="慧思通幼儿体质健康" id="619">
+            <a onclick="ChangKindergartenInSiderBar(&#39;619&#39;, &#39;慧思通幼儿体质健康&#39;)">
+                慧思通幼儿体质健康-51070004
+            </a>
+        </li>
+        <li kindergartenid="620" kindergartenname="广元市优山郡幼儿园" id="620">
+            <a onclick="ChangKindergartenInSiderBar(&#39;620&#39;, &#39;广元市优山郡幼儿园&#39;)">
+                广元市优山郡幼儿园-51080001
+            </a>
+        </li>
+        <li kindergartenid="622" kindergartenname="东升双语艺术幼儿园" id="622">
+            <a onclick="ChangKindergartenInSiderBar(&#39;622&#39;, &#39;东升双语艺术幼儿园&#39;)">
+                东升双语艺术幼儿园-62080001
+            </a>
+        </li>
+        <li kindergartenid="623" kindergartenname="东升双语艺术幼儿园分园" id="623">
+            <a onclick="ChangKindergartenInSiderBar(&#39;623&#39;, &#39;东升双语艺术幼儿园分园&#39;)">
+                东升双语艺术幼儿园分园-62080002
+            </a>
+        </li>
+        <li kindergartenid="624" kindergartenname="广元市羊木春蕾幼儿园" id="624">
+            <a onclick="ChangKindergartenInSiderBar(&#39;624&#39;, &#39;广元市羊木春蕾幼儿园&#39;)">
+                广元市羊木春蕾幼儿园-51080002
+            </a>
+        </li>
+        <li kindergartenid="625" kindergartenname="广元市贝佳幼儿园" id="625">
+            <a onclick="ChangKindergartenInSiderBar(&#39;625&#39;, &#39;广元市贝佳幼儿园&#39;)">
+                广元市贝佳幼儿园-51080003
+            </a>
+        </li>
+        <li kindergartenid="626" kindergartenname="广元市康乐幼儿园" id="626">
+            <a onclick="ChangKindergartenInSiderBar(&#39;626&#39;, &#39;广元市康乐幼儿园&#39;)">
+                广元市康乐幼儿园-51080004
+            </a>
+        </li>
+        <li kindergartenid="627" kindergartenname="天禾新苗童馨幼儿园" id="627">
+            <a onclick="ChangKindergartenInSiderBar(&#39;627&#39;, &#39;天禾新苗童馨幼儿园&#39;)">
+                天禾新苗童馨幼儿园-62100006
+            </a>
+        </li>
+        <li kindergartenid="628" kindergartenname="博阳幼儿园" id="628">
+            <a onclick="ChangKindergartenInSiderBar(&#39;628&#39;, &#39;博阳幼儿园&#39;)">
+                博阳幼儿园-62100007
+            </a>
+        </li>
+        <li kindergartenid="629" kindergartenname="朝阳幼儿园" id="629">
+            <a onclick="ChangKindergartenInSiderBar(&#39;629&#39;, &#39;朝阳幼儿园&#39;)">
+                朝阳幼儿园-62080003
+            </a>
+        </li>
+        <li kindergartenid="630" kindergartenname="睿智幼儿园" id="630">
+            <a onclick="ChangKindergartenInSiderBar(&#39;630&#39;, &#39;睿智幼儿园&#39;)">
+                睿智幼儿园-62100008
+            </a>
+        </li>
+        <li kindergartenid="632" kindergartenname="旺仔国际幼儿园" id="632">
+            <a onclick="ChangKindergartenInSiderBar(&#39;632&#39;, &#39;旺仔国际幼儿园&#39;)">
+                旺仔国际幼儿园-14110000
+            </a>
+        </li>
+        <li kindergartenid="633" kindergartenname="海琳儿幼儿园（三部）" id="633">
+            <a onclick="ChangKindergartenInSiderBar(&#39;633&#39;, &#39;海琳儿幼儿园（三部）&#39;)">
+                海琳儿幼儿园（三部）-36010001
+            </a>
+        </li>
+        <li kindergartenid="634" kindergartenname="育苗幼儿园" id="634">
+            <a onclick="ChangKindergartenInSiderBar(&#39;634&#39;, &#39;育苗幼儿园&#39;)">
+                育苗幼儿园-62100009
+            </a>
+        </li>
+        <li kindergartenid="635" kindergartenname="凤凰岛幼儿园" id="635">
+            <a onclick="ChangKindergartenInSiderBar(&#39;635&#39;, &#39;凤凰岛幼儿园&#39;)">
+                凤凰岛幼儿园-37020000
+            </a>
+        </li>
+        <li kindergartenid="638" kindergartenname="川口乡幼儿园" id="638">
+            <a onclick="ChangKindergartenInSiderBar(&#39;638&#39;, &#39;川口乡幼儿园&#39;)">
+                川口乡幼儿园-61060002
+            </a>
+        </li>
+        <li kindergartenid="639" kindergartenname="大树幼儿园" id="639">
+            <a onclick="ChangKindergartenInSiderBar(&#39;639&#39;, &#39;大树幼儿园&#39;)">
+                大树幼儿园-61060003
+            </a>
+        </li>
+        <li kindergartenid="640" kindergartenname="川口幼儿园" id="640">
+            <a onclick="ChangKindergartenInSiderBar(&#39;640&#39;, &#39;川口幼儿园&#39;)">
+                川口幼儿园-61060004
+            </a>
+        </li>
+        <li kindergartenid="641" kindergartenname="延安大树幼儿园" id="641">
+            <a onclick="ChangKindergartenInSiderBar(&#39;641&#39;, &#39;延安大树幼儿园&#39;)">
+                延安大树幼儿园-61060005
+            </a>
+        </li>
+        <li kindergartenid="642" kindergartenname="川口乡中心幼儿园" id="642">
+            <a onclick="ChangKindergartenInSiderBar(&#39;642&#39;, &#39;川口乡中心幼儿园&#39;)">
+                川口乡中心幼儿园-61060006
+            </a>
+        </li>
+        <li kindergartenid="648" kindergartenname="清水镇春光幼儿园" id="648">
+            <a onclick="ChangKindergartenInSiderBar(&#39;648&#39;, &#39;清水镇春光幼儿园&#39;)">
+                清水镇春光幼儿园-51170005
+            </a>
+        </li>
+        <li kindergartenid="649" kindergartenname="绵阳市新加坡伊顿幼儿园" id="649">
+            <a onclick="ChangKindergartenInSiderBar(&#39;649&#39;, &#39;绵阳市新加坡伊顿幼儿园&#39;)">
+                绵阳市新加坡伊顿幼儿园-51070005
+            </a>
+        </li>
+        <li kindergartenid="650" kindergartenname="小精灵幼儿园" id="650">
+            <a onclick="ChangKindergartenInSiderBar(&#39;650&#39;, &#39;小精灵幼儿园&#39;)">
+                小精灵幼儿园-36010002
+            </a>
+        </li>
+        <li kindergartenid="651" kindergartenname="梁元区第二幼儿园" id="651">
+            <a onclick="ChangKindergartenInSiderBar(&#39;651&#39;, &#39;梁元区第二幼儿园&#39;)">
+                梁元区第二幼儿园-41140000
+            </a>
+        </li>
+        <li kindergartenid="652" kindergartenname="实幼喜羊羊幼儿园" id="652">
+            <a onclick="ChangKindergartenInSiderBar(&#39;652&#39;, &#39;实幼喜羊羊幼儿园&#39;)">
+                实幼喜羊羊幼儿园-41140001
+            </a>
+        </li>
+        <li kindergartenid="653" kindergartenname="立博幼儿园" id="653">
+            <a onclick="ChangKindergartenInSiderBar(&#39;653&#39;, &#39;立博幼儿园&#39;)">
+                立博幼儿园-41140002
+            </a>
+        </li>
+        <li kindergartenid="654" kindergartenname="康城实验幼儿园" id="654">
+            <a onclick="ChangKindergartenInSiderBar(&#39;654&#39;, &#39;康城实验幼儿园&#39;)">
+                康城实验幼儿园-41140003
+            </a>
+        </li>
+        <li kindergartenid="655" kindergartenname="金太阳幼儿园" id="655">
+            <a onclick="ChangKindergartenInSiderBar(&#39;655&#39;, &#39;金太阳幼儿园&#39;)">
+                金太阳幼儿园-41140004
+            </a>
+        </li>
+        <li kindergartenid="656" kindergartenname="米奇国际幼儿园" id="656">
+            <a onclick="ChangKindergartenInSiderBar(&#39;656&#39;, &#39;米奇国际幼儿园&#39;)">
+                米奇国际幼儿园-41030000
+            </a>
+        </li>
+        <li kindergartenid="657" kindergartenname="县级机关幼儿园" id="657">
+            <a onclick="ChangKindergartenInSiderBar(&#39;657&#39;, &#39;县级机关幼儿园&#39;)">
+                县级机关幼儿园-51170006
+            </a>
+        </li>
+        <li kindergartenid="658" kindergartenname="蒲公英双语艺术幼儿园" id="658">
+            <a onclick="ChangKindergartenInSiderBar(&#39;658&#39;, &#39;蒲公英双语艺术幼儿园&#39;)">
+                蒲公英双语艺术幼儿园-22010003
+            </a>
+        </li>
+        <li kindergartenid="659" kindergartenname="华夏名城幼儿园" id="659">
+            <a onclick="ChangKindergartenInSiderBar(&#39;659&#39;, &#39;华夏名城幼儿园&#39;)">
+                华夏名城幼儿园-51170007
+            </a>
+        </li>
+        <li kindergartenid="660" kindergartenname="北师大新标准体系幼儿园" id="660">
+            <a onclick="ChangKindergartenInSiderBar(&#39;660&#39;, &#39;北师大新标准体系幼儿园&#39;)">
+                北师大新标准体系幼儿园-22010004
+            </a>
+        </li>
+        <li kindergartenid="661" kindergartenname="中共长春市委机关幼儿园" id="661">
+            <a onclick="ChangKindergartenInSiderBar(&#39;661&#39;, &#39;中共长春市委机关幼儿园&#39;)">
+                中共长春市委机关幼儿园-22010005
+            </a>
+        </li>
+        <li kindergartenid="662" kindergartenname="中海ABC幼儿园" id="662">
+            <a onclick="ChangKindergartenInSiderBar(&#39;662&#39;, &#39;中海ABC幼儿园&#39;)">
+                中海ABC幼儿园-22010006
+            </a>
+        </li>
+        <li kindergartenid="663" kindergartenname="军星幼儿园" id="663">
+            <a onclick="ChangKindergartenInSiderBar(&#39;663&#39;, &#39;军星幼儿园&#39;)">
+                军星幼儿园-22010007
+            </a>
+        </li>
+        <li kindergartenid="664" kindergartenname="北京师范大学实验幼儿园" id="664">
+            <a onclick="ChangKindergartenInSiderBar(&#39;664&#39;, &#39;北京师范大学实验幼儿园&#39;)">
+                北京师范大学实验幼儿园-22010008
+            </a>
+        </li>
+        <li kindergartenid="665" kindergartenname="洪恩美语村幼儿园" id="665">
+            <a onclick="ChangKindergartenInSiderBar(&#39;665&#39;, &#39;洪恩美语村幼儿园&#39;)">
+                洪恩美语村幼儿园-22010009
+            </a>
+        </li>
+        <li kindergartenid="666" kindergartenname="松滋市实验小学附属幼儿园" id="666">
+            <a onclick="ChangKindergartenInSiderBar(&#39;666&#39;, &#39;松滋市实验小学附属幼儿园&#39;)">
+                松滋市实验小学附属幼儿园-42100001
+            </a>
+        </li>
+        <li kindergartenid="667" kindergartenname="爱宝国际幼儿园" id="667">
+            <a onclick="ChangKindergartenInSiderBar(&#39;667&#39;, &#39;爱宝国际幼儿园&#39;)">
+                爱宝国际幼儿园-22010010
+            </a>
+        </li>
+        <li kindergartenid="669" kindergartenname="金色童年幼儿园" id="669">
+            <a onclick="ChangKindergartenInSiderBar(&#39;669&#39;, &#39;金色童年幼儿园&#39;)">
+                金色童年幼儿园-22010011
+            </a>
+        </li>
+        <li kindergartenid="671" kindergartenname="兰妮嘉童幼儿园" id="671">
+            <a onclick="ChangKindergartenInSiderBar(&#39;671&#39;, &#39;兰妮嘉童幼儿园&#39;)">
+                兰妮嘉童幼儿园-22010013
+            </a>
+        </li>
+        <li kindergartenid="672" kindergartenname="博乐幼儿园" id="672">
+            <a onclick="ChangKindergartenInSiderBar(&#39;672&#39;, &#39;博乐幼儿园&#39;)">
+                博乐幼儿园-36070001
+            </a>
+        </li>
+        <li kindergartenid="673" kindergartenname="华美幼儿园" id="673">
+            <a onclick="ChangKindergartenInSiderBar(&#39;673&#39;, &#39;华美幼儿园&#39;)">
+                华美幼儿园-22010014
+            </a>
+        </li>
+        <li kindergartenid="674" kindergartenname="启迪双语幼儿园" id="674">
+            <a onclick="ChangKindergartenInSiderBar(&#39;674&#39;, &#39;启迪双语幼儿园&#39;)">
+                启迪双语幼儿园-22010015
+            </a>
+        </li>
+        <li kindergartenid="675" kindergartenname="长春香港伟才国际幼儿园" id="675">
+            <a onclick="ChangKindergartenInSiderBar(&#39;675&#39;, &#39;长春香港伟才国际幼儿园&#39;)">
+                长春香港伟才国际幼儿园-22010016
+            </a>
+        </li>
+        <li kindergartenid="676" kindergartenname="军星国学幼儿园" id="676">
+            <a onclick="ChangKindergartenInSiderBar(&#39;676&#39;, &#39;军星国学幼儿园&#39;)">
+                军星国学幼儿园-22010017
+            </a>
+        </li>
+        <li kindergartenid="677" kindergartenname="华大幼儿园" id="677">
+            <a onclick="ChangKindergartenInSiderBar(&#39;677&#39;, &#39;华大幼儿园&#39;)">
+                华大幼儿园-37130000
+            </a>
+        </li>
+        <li kindergartenid="678" kindergartenname="迪贝瑞国际幼儿园" id="678">
+            <a onclick="ChangKindergartenInSiderBar(&#39;678&#39;, &#39;迪贝瑞国际幼儿园&#39;)">
+                迪贝瑞国际幼儿园-22010018
+            </a>
+        </li>
+        <li kindergartenid="679" kindergartenname="艾尔默顿幼教学院幼儿园" id="679">
+            <a onclick="ChangKindergartenInSiderBar(&#39;679&#39;, &#39;艾尔默顿幼教学院幼儿园&#39;)">
+                艾尔默顿幼教学院幼儿园-22010019
+            </a>
+        </li>
+        <li kindergartenid="680" kindergartenname="煤机厂幼儿园" id="680">
+            <a onclick="ChangKindergartenInSiderBar(&#39;680&#39;, &#39;煤机厂幼儿园&#39;)">
+                煤机厂幼儿园-61020004
+            </a>
+        </li>
+        <li kindergartenid="681" kindergartenname="哈尼国际幼儿园" id="681">
+            <a onclick="ChangKindergartenInSiderBar(&#39;681&#39;, &#39;哈尼国际幼儿园&#39;)">
+                哈尼国际幼儿园-22010020
+            </a>
+        </li>
+        <li kindergartenid="682" kindergartenname="长春市实验幼儿园" id="682">
+            <a onclick="ChangKindergartenInSiderBar(&#39;682&#39;, &#39;长春市实验幼儿园&#39;)">
+                长春市实验幼儿园-22010021
+            </a>
+        </li>
+        <li kindergartenid="683" kindergartenname="安吉美国际幼儿园" id="683">
+            <a onclick="ChangKindergartenInSiderBar(&#39;683&#39;, &#39;安吉美国际幼儿园&#39;)">
+                安吉美国际幼儿园-22010022
+            </a>
+        </li>
+        <li kindergartenid="684" kindergartenname="金苹果幼儿园" id="684">
+            <a onclick="ChangKindergartenInSiderBar(&#39;684&#39;, &#39;金苹果幼儿园&#39;)">
+                金苹果幼儿园-51080005
+            </a>
+        </li>
+        <li kindergartenid="685" kindergartenname="三之三国际幼儿园" id="685">
+            <a onclick="ChangKindergartenInSiderBar(&#39;685&#39;, &#39;三之三国际幼儿园&#39;)">
+                三之三国际幼儿园-22010023
+            </a>
+        </li>
+        <li kindergartenid="686" kindergartenname="爱丁堡国际幼儿园" id="686">
+            <a onclick="ChangKindergartenInSiderBar(&#39;686&#39;, &#39;爱丁堡国际幼儿园&#39;)">
+                爱丁堡国际幼儿园-22010024
+            </a>
+        </li>
+        <li kindergartenid="687" kindergartenname="爱丁堡全脑幼儿园" id="687">
+            <a onclick="ChangKindergartenInSiderBar(&#39;687&#39;, &#39;爱丁堡全脑幼儿园&#39;)">
+                爱丁堡全脑幼儿园-22010025
+            </a>
+        </li>
+        <li kindergartenid="688" kindergartenname="蓓蕾幼儿园" id="688">
+            <a onclick="ChangKindergartenInSiderBar(&#39;688&#39;, &#39;蓓蕾幼儿园&#39;)">
+                蓓蕾幼儿园-51080006
+            </a>
+        </li>
+        <li kindergartenid="689" kindergartenname="滨江园嘉裕英语幼儿园" id="689">
+            <a onclick="ChangKindergartenInSiderBar(&#39;689&#39;, &#39;滨江园嘉裕英语幼儿园&#39;)">
+                滨江园嘉裕英语幼儿园-36010003
+            </a>
+        </li>
+        <li kindergartenid="690" kindergartenname="城南幼儿园" id="690">
+            <a onclick="ChangKindergartenInSiderBar(&#39;690&#39;, &#39;城南幼儿园&#39;)">
+                城南幼儿园-43090005
+            </a>
+        </li>
+        <li kindergartenid="691" kindergartenname="三之三绿锦国际幼儿园" id="691">
+            <a onclick="ChangKindergartenInSiderBar(&#39;691&#39;, &#39;三之三绿锦国际幼儿园&#39;)">
+                三之三绿锦国际幼儿园-22010026
+            </a>
+        </li>
+        <li kindergartenid="692" kindergartenname="神奇双语幼儿园" id="692">
+            <a onclick="ChangKindergartenInSiderBar(&#39;692&#39;, &#39;神奇双语幼儿园&#39;)">
+                神奇双语幼儿园-61060007
+            </a>
+        </li>
+        <li kindergartenid="693" kindergartenname="甘泉下寺湾苗苗幼儿园" id="693">
+            <a onclick="ChangKindergartenInSiderBar(&#39;693&#39;, &#39;甘泉下寺湾苗苗幼儿园&#39;)">
+                甘泉下寺湾苗苗幼儿园-61060008
+            </a>
+        </li>
+        <li kindergartenid="694" kindergartenname="茗淇国际幼儿园" id="694">
+            <a onclick="ChangKindergartenInSiderBar(&#39;694&#39;, &#39;茗淇国际幼儿园&#39;)">
+                茗淇国际幼儿园-22010027
+            </a>
+        </li>
+        <li kindergartenid="696" kindergartenname="新加坡国际幼儿园" id="696">
+            <a onclick="ChangKindergartenInSiderBar(&#39;696&#39;, &#39;新加坡国际幼儿园&#39;)">
+                新加坡国际幼儿园-22010029
+            </a>
+        </li>
+        <li kindergartenid="697" kindergartenname="射洪县新星幼儿园" id="697">
+            <a onclick="ChangKindergartenInSiderBar(&#39;697&#39;, &#39;射洪县新星幼儿园&#39;)">
+                射洪县新星幼儿园-51090000
+            </a>
+        </li>
+        <li kindergartenid="698" kindergartenname="北京红黄蓝幼儿园" id="698">
+            <a onclick="ChangKindergartenInSiderBar(&#39;698&#39;, &#39;北京红黄蓝幼儿园&#39;)">
+                北京红黄蓝幼儿园-22010030
+            </a>
+        </li>
+        <li kindergartenid="699" kindergartenname="深圳市盐田区机关幼儿园" id="699">
+            <a onclick="ChangKindergartenInSiderBar(&#39;699&#39;, &#39;深圳市盐田区机关幼儿园&#39;)">
+                深圳市盐田区机关幼儿园-44030001
+            </a>
+        </li>
+        <li kindergartenid="700" kindergartenname="贝美国际幼儿园" id="700">
+            <a onclick="ChangKindergartenInSiderBar(&#39;700&#39;, &#39;贝美国际幼儿园&#39;)">
+                贝美国际幼儿园-14110001
+            </a>
+        </li>
+        <li kindergartenid="701" kindergartenname="市政府第三幼儿园南部分园" id="701">
+            <a onclick="ChangKindergartenInSiderBar(&#39;701&#39;, &#39;市政府第三幼儿园南部分园&#39;)">
+                市政府第三幼儿园南部分园-22010031
+            </a>
+        </li>
+        <li kindergartenid="702" kindergartenname="北大附属实验学校幼儿园" id="702">
+            <a onclick="ChangKindergartenInSiderBar(&#39;702&#39;, &#39;北大附属实验学校幼儿园&#39;)">
+                北大附属实验学校幼儿园-22010032
+            </a>
+        </li>
+        <li kindergartenid="703" kindergartenname="蒙特梭利儿童成长中心" id="703">
+            <a onclick="ChangKindergartenInSiderBar(&#39;703&#39;, &#39;蒙特梭利儿童成长中心&#39;)">
+                蒙特梭利儿童成长中心-22010033
+            </a>
+        </li>
+        <li kindergartenid="704" kindergartenname="市政府机关第二幼儿园" id="704">
+            <a onclick="ChangKindergartenInSiderBar(&#39;704&#39;, &#39;市政府机关第二幼儿园&#39;)">
+                市政府机关第二幼儿园-22010034
+            </a>
+        </li>
+        <li kindergartenid="705" kindergartenname="一零八国际幼儿园" id="705">
+            <a onclick="ChangKindergartenInSiderBar(&#39;705&#39;, &#39;一零八国际幼儿园&#39;)">
+                一零八国际幼儿园-22010035
+            </a>
+        </li>
+        <li kindergartenid="706" kindergartenname="太阳幼儿园" id="706">
+            <a onclick="ChangKindergartenInSiderBar(&#39;706&#39;, &#39;太阳幼儿园&#39;)">
+                太阳幼儿园-11010023
+            </a>
+        </li>
+        <li kindergartenid="707" kindergartenname="枧头洲中心幼儿园" id="707">
+            <a onclick="ChangKindergartenInSiderBar(&#39;707&#39;, &#39;枧头洲中心幼儿园&#39;)">
+                枧头洲中心幼儿园-43020003
+            </a>
+        </li>
+        <li kindergartenid="708" kindergartenname="城南幼儿园" id="708">
+            <a onclick="ChangKindergartenInSiderBar(&#39;708&#39;, &#39;城南幼儿园&#39;)">
+                城南幼儿园-43020004
+            </a>
+        </li>
+        <li kindergartenid="709" kindergartenname="未来星幼儿园" id="709">
+            <a onclick="ChangKindergartenInSiderBar(&#39;709&#39;, &#39;未来星幼儿园&#39;)">
+                未来星幼儿园-43020005
+            </a>
+        </li>
+        <li kindergartenid="710" kindergartenname="保利和乐国际幼儿园" id="710">
+            <a onclick="ChangKindergartenInSiderBar(&#39;710&#39;, &#39;保利和乐国际幼儿园&#39;)">
+                保利和乐国际幼儿园-61010026
+            </a>
+        </li>
+        <li kindergartenid="711" kindergartenname="保利金香槟幼儿园" id="711">
+            <a onclick="ChangKindergartenInSiderBar(&#39;711&#39;, &#39;保利金香槟幼儿园&#39;)">
+                保利金香槟幼儿园-61010027
+            </a>
+        </li>
+        <li kindergartenid="712" kindergartenname="童心幼儿园" id="712">
+            <a onclick="ChangKindergartenInSiderBar(&#39;712&#39;, &#39;童心幼儿园&#39;)">
+                童心幼儿园-37130001
+            </a>
+        </li>
+        <li kindergartenid="713" kindergartenname="蓝天幼儿园" id="713">
+            <a onclick="ChangKindergartenInSiderBar(&#39;713&#39;, &#39;蓝天幼儿园&#39;)">
+                蓝天幼儿园-13090000
+            </a>
+        </li>
+        <li kindergartenid="714" kindergartenname="顽皮鼠幼儿园" id="714">
+            <a onclick="ChangKindergartenInSiderBar(&#39;714&#39;, &#39;顽皮鼠幼儿园&#39;)">
+                顽皮鼠幼儿园-43020006
+            </a>
+        </li>
+        <li kindergartenid="715" kindergartenname="温泉幼儿园" id="715">
+            <a onclick="ChangKindergartenInSiderBar(&#39;715&#39;, &#39;温泉幼儿园&#39;)">
+                温泉幼儿园-43020007
+            </a>
+        </li>
+        <li kindergartenid="716" kindergartenname="江源幼儿园" id="716">
+            <a onclick="ChangKindergartenInSiderBar(&#39;716&#39;, &#39;江源幼儿园&#39;)">
+                江源幼儿园-43020008
+            </a>
+        </li>
+        <li kindergartenid="717" kindergartenname="红太阳幼儿园" id="717">
+            <a onclick="ChangKindergartenInSiderBar(&#39;717&#39;, &#39;红太阳幼儿园&#39;)">
+                红太阳幼儿园-22010036
+            </a>
+        </li>
+        <li kindergartenid="718" kindergartenname="红太阳幼儿园二园" id="718">
+            <a onclick="ChangKindergartenInSiderBar(&#39;718&#39;, &#39;红太阳幼儿园二园&#39;)">
+                红太阳幼儿园二园-22010037
+            </a>
+        </li>
+        <li kindergartenid="719" kindergartenname="五彩桔幼儿园" id="719">
+            <a onclick="ChangKindergartenInSiderBar(&#39;719&#39;, &#39;五彩桔幼儿园&#39;)">
+                五彩桔幼儿园-43020009
+            </a>
+        </li>
+        <li kindergartenid="720" kindergartenname="望旺幼儿园" id="720">
+            <a onclick="ChangKindergartenInSiderBar(&#39;720&#39;, &#39;望旺幼儿园&#39;)">
+                望旺幼儿园-43020010
+            </a>
+        </li>
+        <li kindergartenid="721" kindergartenname="英士博幼儿园" id="721">
+            <a onclick="ChangKindergartenInSiderBar(&#39;721&#39;, &#39;英士博幼儿园&#39;)">
+                英士博幼儿园-31010000
+            </a>
+        </li>
+        <li kindergartenid="722" kindergartenname="广元市朝天中子艺术幼儿园" id="722">
+            <a onclick="ChangKindergartenInSiderBar(&#39;722&#39;, &#39;广元市朝天中子艺术幼儿园&#39;)">
+                广元市朝天中子艺术幼儿园-51080007
+            </a>
+        </li>
+        <li kindergartenid="723" kindergartenname="睿莱测试第五幼儿园" id="723">
+            <a onclick="ChangKindergartenInSiderBar(&#39;723&#39;, &#39;睿莱测试第五幼儿园&#39;)">
+                睿莱测试第五幼儿园-32010001
+            </a>
+        </li>
+        <li kindergartenid="724" kindergartenname="中子艺术幼儿园宣河分园" id="724">
+            <a onclick="ChangKindergartenInSiderBar(&#39;724&#39;, &#39;中子艺术幼儿园宣河分园&#39;)">
+                中子艺术幼儿园宣河分园-51080008
+            </a>
+        </li>
+        <li kindergartenid="725" kindergartenname="睿莱测试第六幼儿园" id="725">
+            <a onclick="ChangKindergartenInSiderBar(&#39;725&#39;, &#39;睿莱测试第六幼儿园&#39;)">
+                睿莱测试第六幼儿园-42100002
+            </a>
+        </li>
+        <li kindergartenid="726" kindergartenname="欢乐谷幼儿园" id="726">
+            <a onclick="ChangKindergartenInSiderBar(&#39;726&#39;, &#39;欢乐谷幼儿园&#39;)">
+                欢乐谷幼儿园-43020011
+            </a>
+        </li>
+        <li kindergartenid="727" kindergartenname="堰东幼儿园" id="727">
+            <a onclick="ChangKindergartenInSiderBar(&#39;727&#39;, &#39;堰东幼儿园&#39;)">
+                堰东幼儿园-37130002
+            </a>
+        </li>
+        <li kindergartenid="728" kindergartenname="智星幼儿园" id="728">
+            <a onclick="ChangKindergartenInSiderBar(&#39;728&#39;, &#39;智星幼儿园&#39;)">
+                智星幼儿园-37130003
+            </a>
+        </li>
+        <li kindergartenid="729" kindergartenname="大地理想国幼儿园" id="729">
+            <a onclick="ChangKindergartenInSiderBar(&#39;729&#39;, &#39;大地理想国幼儿园&#39;)">
+                大地理想国幼儿园-22010038
+            </a>
+        </li>
+        <li kindergartenid="730" kindergartenname="东师附小中信幼儿园" id="730">
+            <a onclick="ChangKindergartenInSiderBar(&#39;730&#39;, &#39;东师附小中信幼儿园&#39;)">
+                东师附小中信幼儿园-22010039
+            </a>
+        </li>
+        <li kindergartenid="732" kindergartenname="睿莱A发布幼儿园" id="732">
+            <a onclick="ChangKindergartenInSiderBar(&#39;732&#39;, &#39;睿莱A发布幼儿园&#39;)">
+                睿莱A发布幼儿园-61010028
+            </a>
+        </li>
+        <li kindergartenid="733" kindergartenname="我的家在东北" id="733">
+            <a onclick="ChangKindergartenInSiderBar(&#39;733&#39;, &#39;我的家在东北&#39;)">
+                我的家在东北-11010024
+            </a>
+        </li>
+        <li kindergartenid="734" kindergartenname="测试园所01" id="734">
+            <a onclick="ChangKindergartenInSiderBar(&#39;734&#39;, &#39;测试园所01&#39;)">
+                测试园所01-61010029
+            </a>
+        </li>
+        <li kindergartenid="736" kindergartenname="测试园所03" id="736">
+            <a onclick="ChangKindergartenInSiderBar(&#39;736&#39;, &#39;测试园所03&#39;)">
+                测试园所03-11010025
+            </a>
+        </li>
+        <li kindergartenid="737" kindergartenname="测试园所04" id="737">
+            <a onclick="ChangKindergartenInSiderBar(&#39;737&#39;, &#39;测试园所04&#39;)">
+                测试园所04-11010026
+            </a>
+        </li>
+        <li kindergartenid="738" kindergartenname="睿莱测试A幼儿园" id="738">
+            <a onclick="ChangKindergartenInSiderBar(&#39;738&#39;, &#39;睿莱测试A幼儿园&#39;)">
+                睿莱测试A幼儿园-61010031
+            </a>
+        </li>
+        <li kindergartenid="739" kindergartenname="测试园所05" id="739">
+            <a onclick="ChangKindergartenInSiderBar(&#39;739&#39;, &#39;测试园所05&#39;)">
+                测试园所05-14010001
+            </a>
+        </li>
+        <li kindergartenid="740" kindergartenname="世博幼儿园" id="740">
+            <a onclick="ChangKindergartenInSiderBar(&#39;740&#39;, &#39;世博幼儿园&#39;)">
+                世博幼儿园-43020012
+            </a>
+        </li>
+        <li kindergartenid="741" kindergartenname="智慧树幼儿园" id="741">
+            <a onclick="ChangKindergartenInSiderBar(&#39;741&#39;, &#39;智慧树幼儿园&#39;)">
+                智慧树幼儿园-43020013
+            </a>
+        </li>
+        <li kindergartenid="742" kindergartenname="阳三中心幼儿园" id="742">
+            <a onclick="ChangKindergartenInSiderBar(&#39;742&#39;, &#39;阳三中心幼儿园&#39;)">
+                阳三中心幼儿园-43020014
+            </a>
+        </li>
+        <li kindergartenid="743" kindergartenname="小天使幼儿园" id="743">
+            <a onclick="ChangKindergartenInSiderBar(&#39;743&#39;, &#39;小天使幼儿园&#39;)">
+                小天使幼儿园-43020015
+            </a>
+        </li>
+        <li kindergartenid="744" kindergartenname="古井中心幼儿园" id="744">
+            <a onclick="ChangKindergartenInSiderBar(&#39;744&#39;, &#39;古井中心幼儿园&#39;)">
+                古井中心幼儿园-51070006
+            </a>
+        </li>
+        <li kindergartenid="745" kindergartenname="测试园所01" id="745">
+            <a onclick="ChangKindergartenInSiderBar(&#39;745&#39;, &#39;测试园所01&#39;)">
+                测试园所01-43010000
+            </a>
+        </li>
+        <li kindergartenid="746" kindergartenname="测试园所2" id="746">
+            <a onclick="ChangKindergartenInSiderBar(&#39;746&#39;, &#39;测试园所2&#39;)">
+                测试园所2-43010001
+            </a>
+        </li>
+        <li kindergartenid="747" kindergartenname="台湾爱丁堡幼儿园" id="747">
+            <a onclick="ChangKindergartenInSiderBar(&#39;747&#39;, &#39;台湾爱丁堡幼儿园&#39;)">
+                台湾爱丁堡幼儿园-37130004
+            </a>
+        </li>
+        <li kindergartenid="748" kindergartenname="家天下幼儿园" id="748">
+            <a onclick="ChangKindergartenInSiderBar(&#39;748&#39;, &#39;家天下幼儿园&#39;)">
+                家天下幼儿园-37130005
+            </a>
+        </li>
+        <li kindergartenid="749" kindergartenname="福瑞贝贝国学幼儿园" id="749">
+            <a onclick="ChangKindergartenInSiderBar(&#39;749&#39;, &#39;福瑞贝贝国学幼儿园&#39;)">
+                福瑞贝贝国学幼儿园-37130006
+            </a>
+        </li>
+        <li kindergartenid="751" kindergartenname="三台县八洞幼儿园" id="751">
+            <a onclick="ChangKindergartenInSiderBar(&#39;751&#39;, &#39;三台县八洞幼儿园&#39;)">
+                三台县八洞幼儿园-51070007
+            </a>
+        </li>
+        <li kindergartenid="752" kindergartenname="金色童年幼儿园" id="752">
+            <a onclick="ChangKindergartenInSiderBar(&#39;752&#39;, &#39;金色童年幼儿园&#39;)">
+                金色童年幼儿园-37020001
+            </a>
+        </li>
+        <li kindergartenid="753" kindergartenname="贝佳幼儿园" id="753">
+            <a onclick="ChangKindergartenInSiderBar(&#39;753&#39;, &#39;贝佳幼儿园&#39;)">
+                贝佳幼儿园-37020002
+            </a>
+        </li>
+        <li kindergartenid="755" kindergartenname="星光贝贝幼儿园" id="755">
+            <a onclick="ChangKindergartenInSiderBar(&#39;755&#39;, &#39;星光贝贝幼儿园&#39;)">
+                星光贝贝幼儿园-21010005
+            </a>
+        </li>
+        <li kindergartenid="757" kindergartenname="蒲河金色阳光幼儿园" id="757">
+            <a onclick="ChangKindergartenInSiderBar(&#39;757&#39;, &#39;蒲河金色阳光幼儿园&#39;)">
+                蒲河金色阳光幼儿园-21010007
+            </a>
+        </li>
+        <li kindergartenid="758" kindergartenname="阳光美逸幼儿园" id="758">
+            <a onclick="ChangKindergartenInSiderBar(&#39;758&#39;, &#39;阳光美逸幼儿园&#39;)">
+                阳光美逸幼儿园-21010008
+            </a>
+        </li>
+        <li kindergartenid="759" kindergartenname="小托福幼儿园" id="759">
+            <a onclick="ChangKindergartenInSiderBar(&#39;759&#39;, &#39;小托福幼儿园&#39;)">
+                小托福幼儿园-21010009
+            </a>
+        </li>
+        <li kindergartenid="760" kindergartenname="怡恬蒙氏双语幼儿园" id="760">
+            <a onclick="ChangKindergartenInSiderBar(&#39;760&#39;, &#39;怡恬蒙氏双语幼儿园&#39;)">
+                怡恬蒙氏双语幼儿园-21010010
+            </a>
+        </li>
+        <li kindergartenid="761" kindergartenname="石子岭幼儿园" id="761">
+            <a onclick="ChangKindergartenInSiderBar(&#39;761&#39;, &#39;石子岭幼儿园&#39;)">
+                石子岭幼儿园-43020016
+            </a>
+        </li>
+        <li kindergartenid="763" kindergartenname="荥经县幼儿园" id="763">
+            <a onclick="ChangKindergartenInSiderBar(&#39;763&#39;, &#39;荥经县幼儿园&#39;)">
+                荥经县幼儿园-51180001
+            </a>
+        </li>
+        <li kindergartenid="764" kindergartenname="广成花园幼儿园" id="764">
+            <a onclick="ChangKindergartenInSiderBar(&#39;764&#39;, &#39;广成花园幼儿园&#39;)">
+                广成花园幼儿园-62080004
+            </a>
+        </li>
+        <li kindergartenid="765" kindergartenname="延安市新起点幼儿园" id="765">
+            <a onclick="ChangKindergartenInSiderBar(&#39;765&#39;, &#39;延安市新起点幼儿园&#39;)">
+                延安市新起点幼儿园-61060010
+            </a>
+        </li>
+        <li kindergartenid="766" kindergartenname="小天才幼儿园" id="766">
+            <a onclick="ChangKindergartenInSiderBar(&#39;766&#39;, &#39;小天才幼儿园&#39;)">
+                小天才幼儿园-32030000
+            </a>
+        </li>
+        <li kindergartenid="768" kindergartenname="前有无谓" id="768">
+            <a onclick="ChangKindergartenInSiderBar(&#39;768&#39;, &#39;前有无谓&#39;)">
+                前有无谓-11010028
+            </a>
+        </li>
+        <li kindergartenid="772" kindergartenname="深圳市盐田区机关幼儿园" id="772">
+            <a onclick="ChangKindergartenInSiderBar(&#39;772&#39;, &#39;深圳市盐田区机关幼儿园&#39;)">
+                深圳市盐田区机关幼儿园-44030002
+            </a>
+        </li>
+        <li kindergartenid="773" kindergartenname="深圳市盐田区机关幼儿园2017" id="773">
+            <a onclick="ChangKindergartenInSiderBar(&#39;773&#39;, &#39;深圳市盐田区机关幼儿园2017&#39;)">
+                深圳市盐田区机关幼儿园2017-44030003
+            </a>
+        </li>
+        <li kindergartenid="774" kindergartenname="中泰华庭中英文幼儿园" id="774">
+            <a onclick="ChangKindergartenInSiderBar(&#39;774&#39;, &#39;中泰华庭中英文幼儿园&#39;)">
+                中泰华庭中英文幼儿园-41030001
+            </a>
+        </li>
+        <li kindergartenid="775" kindergartenname="邙山镇中心幼儿园" id="775">
+            <a onclick="ChangKindergartenInSiderBar(&#39;775&#39;, &#39;邙山镇中心幼儿园&#39;)">
+                邙山镇中心幼儿园-41030002
+            </a>
+        </li>
+        <li kindergartenid="776" kindergartenname="智元幼儿园" id="776">
+            <a onclick="ChangKindergartenInSiderBar(&#39;776&#39;, &#39;智元幼儿园&#39;)">
+                智元幼儿园-37150000
+            </a>
+        </li>
+        <li kindergartenid="777" kindergartenname="地球村幼儿园" id="777">
+            <a onclick="ChangKindergartenInSiderBar(&#39;777&#39;, &#39;地球村幼儿园&#39;)">
+                地球村幼儿园-53010000
+            </a>
+        </li>
+        <li kindergartenid="778" kindergartenname="罗丈礼仪幼儿园" id="778">
+            <a onclick="ChangKindergartenInSiderBar(&#39;778&#39;, &#39;罗丈礼仪幼儿园&#39;)">
+                罗丈礼仪幼儿园-53010001
+            </a>
+        </li>
+        <li kindergartenid="779" kindergartenname="欧莱特航天城幼儿园" id="779">
+            <a onclick="ChangKindergartenInSiderBar(&#39;779&#39;, &#39;欧莱特航天城幼儿园&#39;)">
+                欧莱特航天城幼儿园-53010002
+            </a>
+        </li>
+        <li kindergartenid="780" kindergartenname="金向幼儿园" id="780">
+            <a onclick="ChangKindergartenInSiderBar(&#39;780&#39;, &#39;金向幼儿园&#39;)">
+                金向幼儿园-53010003
+            </a>
+        </li>
+        <li kindergartenid="782" kindergartenname="平罗中心幼儿园" id="782">
+            <a onclick="ChangKindergartenInSiderBar(&#39;782&#39;, &#39;平罗中心幼儿园&#39;)">
+                平罗中心幼儿园-21010011
+            </a>
+        </li>
+        <li kindergartenid="783" kindergartenname="欧莱特彼岸幼儿园" id="783">
+            <a onclick="ChangKindergartenInSiderBar(&#39;783&#39;, &#39;欧莱特彼岸幼儿园&#39;)">
+                欧莱特彼岸幼儿园-53010005
+            </a>
+        </li>
+        <li kindergartenid="784" kindergartenname="麦地塘幼儿园" id="784">
+            <a onclick="ChangKindergartenInSiderBar(&#39;784&#39;, &#39;麦地塘幼儿园&#39;)">
+                麦地塘幼儿园-53010006
+            </a>
+        </li>
+        <li kindergartenid="785" kindergartenname="新迎第一幼儿园昆明湖一幼" id="785">
+            <a onclick="ChangKindergartenInSiderBar(&#39;785&#39;, &#39;新迎第一幼儿园昆明湖一幼&#39;)">
+                新迎第一幼儿园昆明湖一幼-53010007
+            </a>
+        </li>
+        <li kindergartenid="786" kindergartenname="金川幼儿园" id="786">
+            <a onclick="ChangKindergartenInSiderBar(&#39;786&#39;, &#39;金川幼儿园&#39;)">
+                金川幼儿园-53010008
+            </a>
+        </li>
+        <li kindergartenid="788" kindergartenname="冷水滩区上城国际小太阳幼儿园" id="788">
+            <a onclick="ChangKindergartenInSiderBar(&#39;788&#39;, &#39;冷水滩区上城国际小太阳幼儿园&#39;)">
+                冷水滩区上城国际小太阳幼儿园-43110000
+            </a>
+        </li>
+        <li kindergartenid="793" kindergartenname="长颈鹿幼儿园" id="793">
+            <a onclick="ChangKindergartenInSiderBar(&#39;793&#39;, &#39;长颈鹿幼儿园&#39;)">
+                长颈鹿幼儿园-53010009
+            </a>
+        </li>
+        <li kindergartenid="795" kindergartenname="望江县第二幼儿园" id="795">
+            <a onclick="ChangKindergartenInSiderBar(&#39;795&#39;, &#39;望江县第二幼儿园&#39;)">
+                望江县第二幼儿园-34080001
+            </a>
+        </li>
+        <li kindergartenid="796" kindergartenname="博文幼儿园" id="796">
+            <a onclick="ChangKindergartenInSiderBar(&#39;796&#39;, &#39;博文幼儿园&#39;)">
+                博文幼儿园-32070000
+            </a>
+        </li>
+        <li kindergartenid="797" kindergartenname="城西小埠子幼儿园" id="797">
+            <a onclick="ChangKindergartenInSiderBar(&#39;797&#39;, &#39;城西小埠子幼儿园&#39;)">
+                城西小埠子幼儿园-32070001
+            </a>
+        </li>
+        <li kindergartenid="798" kindergartenname="海蓝早教中心幼儿园" id="798">
+            <a onclick="ChangKindergartenInSiderBar(&#39;798&#39;, &#39;海蓝早教中心幼儿园&#39;)">
+                海蓝早教中心幼儿园-32070002
+            </a>
+        </li>
+        <li kindergartenid="799" kindergartenname="红苹果幼儿园" id="799">
+            <a onclick="ChangKindergartenInSiderBar(&#39;799&#39;, &#39;红苹果幼儿园&#39;)">
+                红苹果幼儿园-32070003
+            </a>
+        </li>
+        <li kindergartenid="800" kindergartenname="欢西幼儿园" id="800">
+            <a onclick="ChangKindergartenInSiderBar(&#39;800&#39;, &#39;欢西幼儿园&#39;)">
+                欢西幼儿园-32070004
+            </a>
+        </li>
+        <li kindergartenid="801" kindergartenname="金贝儿幼儿园" id="801">
+            <a onclick="ChangKindergartenInSiderBar(&#39;801&#39;, &#39;金贝儿幼儿园&#39;)">
+                金贝儿幼儿园-32070005
+            </a>
+        </li>
+        <li kindergartenid="802" kindergartenname="前程幼儿园" id="802">
+            <a onclick="ChangKindergartenInSiderBar(&#39;802&#39;, &#39;前程幼儿园&#39;)">
+                前程幼儿园-32070006
+            </a>
+        </li>
+        <li kindergartenid="803" kindergartenname="向日葵幼儿园" id="803">
+            <a onclick="ChangKindergartenInSiderBar(&#39;803&#39;, &#39;向日葵幼儿园&#39;)">
+                向日葵幼儿园-32070007
+            </a>
+        </li>
+        <li kindergartenid="804" kindergartenname="兴前幼儿园" id="804">
+            <a onclick="ChangKindergartenInSiderBar(&#39;804&#39;, &#39;兴前幼儿园&#39;)">
+                兴前幼儿园-32070008
+            </a>
+        </li>
+        <li kindergartenid="805" kindergartenname="庄留幼儿园" id="805">
+            <a onclick="ChangKindergartenInSiderBar(&#39;805&#39;, &#39;庄留幼儿园&#39;)">
+                庄留幼儿园-32070009
+            </a>
+        </li>
+        <li kindergartenid="806" kindergartenname="松滋市南海镇中心幼儿园" id="806">
+            <a onclick="ChangKindergartenInSiderBar(&#39;806&#39;, &#39;松滋市南海镇中心幼儿园&#39;)">
+                松滋市南海镇中心幼儿园-42100003
+            </a>
+        </li>
+        <li kindergartenid="807" kindergartenname="真的吗" id="807">
+            <a onclick="ChangKindergartenInSiderBar(&#39;807&#39;, &#39;真的吗&#39;)">
+                真的吗-13040000
+            </a>
+        </li>
+        <li kindergartenid="808" kindergartenname="新都大丰崇义幼儿园" id="808">
+            <a onclick="ChangKindergartenInSiderBar(&#39;808&#39;, &#39;新都大丰崇义幼儿园&#39;)">
+                新都大丰崇义幼儿园-51010007
+            </a>
+        </li>
+        <li kindergartenid="809" kindergartenname="克拉玛依市测试_BI_" id="809">
+            <a onclick="ChangKindergartenInSiderBar(&#39;809&#39;, &#39;克拉玛依市测试_BI_&#39;)">
+                克拉玛依市测试_BI_-65020000
+            </a>
+        </li>
+        <li kindergartenid="810" kindergartenname="丹江口市幼儿园" id="810">
+            <a onclick="ChangKindergartenInSiderBar(&#39;810&#39;, &#39;丹江口市幼儿园&#39;)">
+                丹江口市幼儿园-42030000
+            </a>
+        </li>
+        <li kindergartenid="811" kindergartenname="春苗幼儿园" id="811">
+            <a onclick="ChangKindergartenInSiderBar(&#39;811&#39;, &#39;春苗幼儿园&#39;)">
+                春苗幼儿园-53010010
+            </a>
+        </li>
+        <li kindergartenid="812" kindergartenname="佳园幼儿园" id="812">
+            <a onclick="ChangKindergartenInSiderBar(&#39;812&#39;, &#39;佳园幼儿园&#39;)">
+                佳园幼儿园-53010011
+            </a>
+        </li>
+        <li kindergartenid="813" kindergartenname="海贝中英文幼儿园" id="813">
+            <a onclick="ChangKindergartenInSiderBar(&#39;813&#39;, &#39;海贝中英文幼儿园&#39;)">
+                海贝中英文幼儿园-53010012
+            </a>
+        </li>
+        <li kindergartenid="814" kindergartenname="大嘴猴启智幼儿园" id="814">
+            <a onclick="ChangKindergartenInSiderBar(&#39;814&#39;, &#39;大嘴猴启智幼儿园&#39;)">
+                大嘴猴启智幼儿园-13090001
+            </a>
+        </li>
+        <li kindergartenid="815" kindergartenname="大嘴猴幼儿园" id="815">
+            <a onclick="ChangKindergartenInSiderBar(&#39;815&#39;, &#39;大嘴猴幼儿园&#39;)">
+                大嘴猴幼儿园-13090002
+            </a>
+        </li>
+        <li kindergartenid="816" kindergartenname="跨世纪育苗幼儿园" id="816">
+            <a onclick="ChangKindergartenInSiderBar(&#39;816&#39;, &#39;跨世纪育苗幼儿园&#39;)">
+                跨世纪育苗幼儿园-13090003
+            </a>
+        </li>
+        <li kindergartenid="817" kindergartenname="梅园小区幼儿园" id="817">
+            <a onclick="ChangKindergartenInSiderBar(&#39;817&#39;, &#39;梅园小区幼儿园&#39;)">
+                梅园小区幼儿园-13090004
+            </a>
+        </li>
+        <li kindergartenid="818" kindergartenname="世纪双语幼儿园" id="818">
+            <a onclick="ChangKindergartenInSiderBar(&#39;818&#39;, &#39;世纪双语幼儿园&#39;)">
+                世纪双语幼儿园-13090005
+            </a>
+        </li>
+        <li kindergartenid="819" kindergartenname="新蒙国际幼儿园" id="819">
+            <a onclick="ChangKindergartenInSiderBar(&#39;819&#39;, &#39;新蒙国际幼儿园&#39;)">
+                新蒙国际幼儿园-13090006
+            </a>
+        </li>
+        <li kindergartenid="820" kindergartenname="阳光幼儿园" id="820">
+            <a onclick="ChangKindergartenInSiderBar(&#39;820&#39;, &#39;阳光幼儿园&#39;)">
+                阳光幼儿园-13090007
+            </a>
+        </li>
+        <li kindergartenid="821" kindergartenname="育苗幼儿园" id="821">
+            <a onclick="ChangKindergartenInSiderBar(&#39;821&#39;, &#39;育苗幼儿园&#39;)">
+                育苗幼儿园-13090008
+            </a>
+        </li>
+        <li kindergartenid="822" kindergartenname="理工大学新迎幼儿园" id="822">
+            <a onclick="ChangKindergartenInSiderBar(&#39;822&#39;, &#39;理工大学新迎幼儿园&#39;)">
+                理工大学新迎幼儿园-53010013
+            </a>
+        </li>
+        <li kindergartenid="823" kindergartenname="上东迪佳幼儿园" id="823">
+            <a onclick="ChangKindergartenInSiderBar(&#39;823&#39;, &#39;上东迪佳幼儿园&#39;)">
+                上东迪佳幼儿园-53010014
+            </a>
+        </li>
+        <li kindergartenid="824" kindergartenname="新迎第一幼儿园" id="824">
+            <a onclick="ChangKindergartenInSiderBar(&#39;824&#39;, &#39;新迎第一幼儿园&#39;)">
+                新迎第一幼儿园-53010015
+            </a>
+        </li>
+        <li kindergartenid="825" kindergartenname="新迎第二幼儿园" id="825">
+            <a onclick="ChangKindergartenInSiderBar(&#39;825&#39;, &#39;新迎第二幼儿园&#39;)">
+                新迎第二幼儿园-53010016
+            </a>
+        </li>
+        <li kindergartenid="826" kindergartenname="新迎第三幼儿园" id="826">
+            <a onclick="ChangKindergartenInSiderBar(&#39;826&#39;, &#39;新迎第三幼儿园&#39;)">
+                新迎第三幼儿园-53010017
+            </a>
+        </li>
+        <li kindergartenid="827" kindergartenname="昆明市第十二幼儿园" id="827">
+            <a onclick="ChangKindergartenInSiderBar(&#39;827&#39;, &#39;昆明市第十二幼儿园&#39;)">
+                昆明市第十二幼儿园-53010018
+            </a>
+        </li>
+        <li kindergartenid="828" kindergartenname="精博常青幼儿园" id="828">
+            <a onclick="ChangKindergartenInSiderBar(&#39;828&#39;, &#39;精博常青幼儿园&#39;)">
+                精博常青幼儿园-42010002
+            </a>
+        </li>
+        <li kindergartenid="829" kindergartenname="光谷新世界精博幼儿园" id="829">
+            <a onclick="ChangKindergartenInSiderBar(&#39;829&#39;, &#39;光谷新世界精博幼儿园&#39;)">
+                光谷新世界精博幼儿园-42010003
+            </a>
+        </li>
+        <li kindergartenid="832" kindergartenname="睿莱" id="832">
+            <a onclick="ChangKindergartenInSiderBar(&#39;832&#39;, &#39;睿莱&#39;)">
+                睿莱-11010031
+            </a>
+        </li>
+    </ul>
+</div>
+            <div class="fill-nav-space"></div></div><div class="slimScrollBar" style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+            <div id="divider" class="resizeable"></div>
+        </div>
+        <div id="content  noprint">
+            <div class="container">
+                <div class="row noprint">
+                    <div class="col-md-12 col-xs-12 col-sm-12 ">
+                        <div class="widget box">
+                            <div class="widget-header">
+                                <h4><i class="icon-reorder"></i> 班级列表</h4>
+                                <div class="toolbar no-padding">
+                                    <div class="btn-group">
+                                        <span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget-content">
+                                <form id="searchForm" class="form-horizontal row-border" action="http://www.imreliable.com.cn/Pages/ImprovementProgram.html#">
+
+                                    <div class="form-group">
+                                        <label class="col-md-1 col-xs-1 col-sm-1 control-label">大班</label>
+                                        <div class="col-md-10" id="showBigClass">
+        <div class="col-md-2 searchTypesButton">
+            <div class="iradio_line-blue checked"><input type="radio" name="ClassId" value="197453,0,大一班" style="position: absolute; opacity: 0;"><div class="icheck_line-icon"></div>大一班<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+            
+        </div>
+        <div class="col-md-2 searchTypesButton">
+            <div class="iradio_line-blue"><input type="radio" name="ClassId" value="197454,0,大二班" style="position: absolute; opacity: 0;"><div class="icheck_line-icon"></div>大二班<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+            
+        </div>
+    </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-1 col-xs-1 col-sm-1 control-label">中班</label>
+                                        <div class="col-md-10" id="showMiddleClass">
+        <div class="col-md-2 col-sm-2 col-xs-2 searchTypesButton">
+            <div class="iradio_line-blue"><input type="radio" name="ClassId" value="197452,1,中一班" style="position: absolute; opacity: 0;"><div class="icheck_line-icon"></div>中一班<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+            
+        </div>
+    </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-1 col-xs-1 col-sm-1 control-label">小班</label>
+                                        <div class="col-md-10" id="showSmallClass">
+        <div class="col-md-2 col-sm-2 col-xs-2 searchTypesButton">
+            <div class="iradio_line-blue"><input type="radio" name="ClassId" value="197450,2,小一班" style="position: absolute; opacity: 0;"><div class="icheck_line-icon"></div>小一班<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+            
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-2 searchTypesButton">
+            <div class="iradio_line-blue"><input type="radio" name="ClassId" value="197451,2,小二班" style="position: absolute; opacity: 0;"><div class="icheck_line-icon"></div>小二班<ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+            
+        </div>
+    </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-1 col-xs-1 col-sm-1 control-label">托班</label>
+                                        <div class="col-md-10" id="showBabyClass">
+    </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-1 col-xs-1 col-sm-1 control-label">混龄班</label>
+                                        <div class="col-md-10" id="othersClass">
+    </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-1 col-xs-1 col-sm-1 control-label">学前班</label>
+                                        <div class="col-md-10" id="showPreSchoolClass">
+    </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <input type="button" value="搜索" onclick="Search() " class="btn btn-primary center-block  btn-style">
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="report-box  page-break-before ">
+        <div class="head-title" id="head-title">
+            <h2>
+                <span id="semesterTime">2017年9月学期</span>
+                <span id="showKinNameInfoTitle">麦地塘幼儿园</span>
+                <span id="className">大一班</span>
+                体测结果分析
+            </h2> <!-- 教师：杨心诚-->
+        </div>
+        <div class="result-conter">
+            <h4>
+                <img src="./改善方案_files/title-icon1.png">
+                结果和说明
+            </h4>
+            <hr class="hr-class">
+            <div class="result-hightchart">
+                <div id="container-hightchars" style="width: 410px; height: 320px; margin: 0 auto; margin-left: -10px; " data-highcharts-chart="0"><div id="highcharts-4b46b9d-0" class="highcharts-container " style="position: relative; overflow: hidden; width: 410px; height: 320px; text-align: left; line-height: normal; z-index: 0; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><svg version="1.1" class="highcharts-root " style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif;font-size:12px;" xmlns="http://www.w3.org/2000/svg" width="410" height="320" viewBox="0 0 410 320"><desc>Created with Highcharts 5.0.11</desc><defs><clippath id="highcharts-4b46b9d-1"><rect x="0" y="0" width="390" height="254" fill="none"></rect></clippath></defs><rect fill="#ffffff" class="highcharts-background" x="0" y="0" width="410" height="320" rx="0" ry="0"></rect><rect fill="none" class="highcharts-plot-background" x="10" y="10" width="390" height="254"></rect><g class="highcharts-pane-group"></g><g class="highcharts-grid highcharts-xaxis-grid "><path fill="none" stroke="#e6e6e6" stroke-width="1" class="highcharts-grid-line" d="M 205 137 L 205 29.049999999999997" opacity="1"></path><path fill="none" stroke="#e6e6e6" stroke-width="1" class="highcharts-grid-line" d="M 205 137 L 281.3321770290878 60.6678229709122" opacity="1"></path><path fill="none" stroke="#e6e6e6" stroke-width="1" class="highcharts-grid-line" d="M 205 137 L 312.95 137" opacity="1"></path><path fill="none" stroke="#e6e6e6" stroke-width="1" class="highcharts-grid-line" d="M 205 137 L 281.3321770290878 213.3321770290878" opacity="1"></path><path fill="none" stroke="#e6e6e6" stroke-width="1" class="highcharts-grid-line" d="M 205 137 L 205 244.95" opacity="1"></path><path fill="none" stroke="#e6e6e6" stroke-width="1" class="highcharts-grid-line" d="M 205 137 L 128.6678229709122 213.3321770290878" opacity="1"></path><path fill="none" stroke="#e6e6e6" stroke-width="1" class="highcharts-grid-line" d="M 205 137 L 97.05 137" opacity="1"></path><path fill="none" stroke="#e6e6e6" stroke-width="1" class="highcharts-grid-line" d="M 205 137 L 128.66782297091217 60.6678229709122" opacity="1"></path><path fill="none" stroke="#e6e6e6" stroke-width="1" class="highcharts-grid-line" d="M 205 137 L 204.99999999999997 29.049999999999997" opacity="1"></path></g><g class="highcharts-grid highcharts-yaxis-grid "><path fill="none" stroke="#e6e6e6" stroke-width="1" class="highcharts-grid-line" d="M 205 137 L 205 137 L 205 137 L 205 137 L 205 137 L 205 137 L 205 137 L 205 137 L 205 137 L 205 137" opacity="1"></path><path fill="none" stroke="#e6e6e6" stroke-width="1" class="highcharts-grid-line" d="M 205 83.025 L 205 83.025 L 166.8339114854561 98.8339114854561 L 151.025 137 L 166.8339114854561 175.1660885145439 L 205 190.975 L 243.1660885145439 175.1660885145439 L 258.975 137 L 243.1660885145439 98.8339114854561 L 205 83.025" opacity="1"></path><path fill="none" stroke="#e6e6e6" stroke-width="1" class="highcharts-grid-line" d="M 205 29.049999999999997 L 204.99999999999997 29.049999999999997 L 128.66782297091217 60.6678229709122 L 97.05 137 L 128.6678229709122 213.3321770290878 L 205 244.95 L 281.3321770290878 213.3321770290878 L 312.95 137 L 281.3321770290878 60.6678229709122 L 205 29.049999999999997" opacity="1"></path></g><rect fill="none" class="highcharts-plot-border" x="10" y="10" width="390" height="254"></rect><g class="highcharts-axis highcharts-xaxis "><path fill="none" class="highcharts-axis-line" d="M 205 29.049999999999997 A 107.95 107.95 0 1 1 204.8920500179916 29.050053974995492 M 205 137 A 0 0 0 1 0 205 137 "></path></g><g class="highcharts-axis highcharts-yaxis "><path fill="none" class="highcharts-axis-line" d="M 205 137 L 205 29.049999999999997"></path></g><g class="highcharts-series-group"><g class="highcharts-series highcharts-series-0 highcharts-line-series highcharts-color-0 " transform="translate(10,10) scale(1 1)" clip-path="url(#highcharts-4b46b9d-1)"><path fill="none" d="M 195 54.025800000000004 L 260.4930078909575 61.506992109042784 L 270.565 127.00000000000026 L 259.7296861206694 191.72968612066356 L 194.99999999999957 187.2361 L 142.02546914181525 179.97453085818913 L 142.3204 126.99999999999943 L 143.85744139050922 75.85744139051315 L 195 54.025800000000004" class="highcharts-graph" stroke="#7cb5ec" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path><path fill="none" d="M 185 54.025800000000004 L 195 54.025800000000004 L 260.4930078909575 61.506992109042784 L 270.565 127.00000000000026 L 259.7296861206694 191.72968612066356 L 194.99999999999957 187.2361 L 142.02546914181525 179.97453085818913 L 142.3204 126.99999999999943 L 143.85744139050922 75.85744139051315 L 195 54.025800000000004 L 205 54.025800000000004" stroke-linejoin="round" visibility="visible" stroke="rgba(192,192,192,0.0001)" stroke-width="22" class="highcharts-tracker"></path></g><g class="highcharts-markers highcharts-series-0 highcharts-line-series highcharts-color-0 highcharts-tracker" transform="translate(10,10) scale(1 1)" clip-path="none"><path fill="#7cb5ec" d="M 259 191.72968612066356 A 0 0 0 1 1 259 191.72968612066356 Z" class="highcharts-halo highcharts-color-0" fill-opacity="0.25"></path><path fill="#7cb5ec" d="M 199 54 A 4 4 0 1 1 198.99999800000018 53.99600000066666 Z" class="highcharts-point highcharts-color-0"></path><path fill="#7cb5ec" d="M 264 61.506992109042784 A 4 4 0 1 1 263.9999980000002 61.502992109709446 Z" class="highcharts-point highcharts-color-0 " stroke-width="1"></path><path fill="#7cb5ec" d="M 274 127.00000000000026 A 4 4 0 1 1 273.9999980000002 126.99600000066692 Z" class="highcharts-point highcharts-color-0 " stroke-width="1"></path><path fill="#7cb5ec" d="M 263 191.72968612066356 A 4 4 0 1 1 262.9999980000002 191.72568612133023 Z" class="highcharts-point highcharts-color-0 " stroke-width="1"></path><path fill="#7cb5ec" d="M 198 187 A 4 4 0 1 1 197.99999800000018 186.99600000066667 Z" class="highcharts-point highcharts-color-0"></path><path fill="#7cb5ec" d="M 146 180 A 4 4 0 1 1 145.99999800000018 179.99600000066667 Z" class="highcharts-point highcharts-color-0"></path><path fill="#7cb5ec" d="M 146 127 A 4 4 0 1 1 145.99999800000018 126.99600000066667 Z" class="highcharts-point highcharts-color-0"></path><path fill="#7cb5ec" d="M 147 76 A 4 4 0 1 1 146.99999800000018 75.99600000066667 Z" class="highcharts-point highcharts-color-0"></path></g><g class="highcharts-series highcharts-series-1 highcharts-line-series highcharts-color-1 " transform="translate(10,10) scale(1 1)" clip-path="url(#highcharts-4b46b9d-1)"><path fill="none" d="M 195 59.4233 L 263.3936306180628 58.60636938193744 L 259.77 127.00000000000023 L 258.05037822602935 190.0503782260237 L 194.9999999999996 182.0545 L 150.57467296907274 171.42532703093093 L 141.025 126.99999999999943 L 149.96401555283646 81.96401555283992 L 195 59.4233" class="highcharts-graph" stroke="#434348" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path><path fill="none" d="M 185 59.4233 L 195 59.4233 L 263.3936306180628 58.60636938193744 L 259.77 127.00000000000023 L 258.05037822602935 190.0503782260237 L 194.9999999999996 182.0545 L 150.57467296907274 171.42532703093093 L 141.025 126.99999999999943 L 149.96401555283646 81.96401555283992 L 195 59.4233 L 205 59.4233" stroke-linejoin="round" visibility="visible" stroke="rgba(192,192,192,0.0001)" stroke-width="22" class="highcharts-tracker"></path></g><g class="highcharts-markers highcharts-series-1 highcharts-line-series highcharts-color-1 highcharts-tracker " transform="translate(10,10) scale(1 1)" clip-path="none"><path fill="#434348" d="M 258 190.0503782260237 A 0 0 0 1 1 258 190.0503782260237 Z" class="highcharts-halo highcharts-color-1" fill-opacity="0.25"></path><path fill="#434348" d="M 195 55 L 199 59 195 63 191 59 Z" class="highcharts-point highcharts-color-1"></path><path fill="#434348" d="M 263 54.60636938193744 L 267 58.60636938193744 263 62.60636938193744 259 58.60636938193744 Z" class="highcharts-point highcharts-color-1 " stroke-width="1"></path><path fill="#434348" d="M 259 123.00000000000023 L 263 127.00000000000023 259 131.00000000000023 255 127.00000000000023 Z" class="highcharts-point highcharts-color-1 " stroke-width="1"></path><path fill="#434348" d="M 258 186.0503782260237 L 262 190.0503782260237 258 194.0503782260237 254 190.0503782260237 Z" class="highcharts-point highcharts-color-1 " stroke-width="1"></path><path fill="#434348" d="M 194 178 L 198 182 194 186 190 182 Z" class="highcharts-point highcharts-color-1"></path><path fill="#434348" d="M 150 167 L 154 171 150 175 146 171 Z" class="highcharts-point highcharts-color-1"></path><path fill="#434348" d="M 141 123 L 145 127 141 131 137 127 Z" class="highcharts-point highcharts-color-1"></path><path fill="#434348" d="M 149 78 L 153 82 149 86 145 82 Z" class="highcharts-point highcharts-color-1"></path></g></g><text x="205" text-anchor="middle" class="highcharts-title" style="color:#333333;font-size:18px;fill:#333333;" y="24"></text><text x="205" text-anchor="middle" class="highcharts-subtitle" style="color:#666666;fill:#666666;" y="24"></text><g class="highcharts-legend" transform="translate(105,276)"><rect fill="none" class="highcharts-legend-box" rx="0" ry="0" x="0" y="0" width="201" height="29" visibility="visible"></rect><g><g><g class="highcharts-legend-item highcharts-line-series highcharts-color-0 highcharts-series-0" transform="translate(8,3)"><path fill="none" d="M 0 11 L 16 11" class="highcharts-graph" stroke="#7cb5ec" stroke-width="2"></path><path fill="#7cb5ec" d="M 12 11 A 4 4 0 1 1 11.999998000000167 10.996000000666664 Z" class="highcharts-point"></path><text x="21" style="color:#333333;font-size:12px;font-weight:bold;cursor:pointer;fill:#333333;" text-anchor="start" y="15">班级平均分</text></g><g class="highcharts-legend-item highcharts-line-series highcharts-color-1 highcharts-series-1" transform="translate(111,3)"><path fill="none" d="M 0 11 L 16 11" class="highcharts-graph" stroke="#434348" stroke-width="2"></path><path fill="#434348" d="M 8 7 L 12 11 8 15 4 11 Z" class="highcharts-point"></path><text x="21" y="15" style="color:#333333;font-size:12px;font-weight:bold;cursor:pointer;fill:#333333;" text-anchor="start">园所平均分</text></g></g></g></g><g class="highcharts-axis-labels highcharts-xaxis-labels "><text x="205" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" transform="translate(0,0)" text-anchor="middle" y="18.049999999999997" opacity="1"><tspan>身高</tspan></text><text x="291.93877874688604" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" transform="translate(0,0)" text-anchor="start" y="54.061221253113985" opacity="1"><tspan>体重</tspan></text><text x="327.95" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" transform="translate(0,0)" text-anchor="start" y="141" opacity="1"><tspan>下肢力量</tspan></text><text x="291.93877874688604" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" transform="translate(0,0)" text-anchor="start" y="227.93877874688602" opacity="1"><tspan>协调性</tspan></text><text x="205" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" transform="translate(0,0)" text-anchor="middle" y="263.95" opacity="1"><tspan>上肢力量</tspan></text><text x="118.06122125311398" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" transform="translate(0,0)" text-anchor="end" y="227.93877874688604" opacity="1"><tspan>平衡力</tspan></text><text x="82.05" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" transform="translate(0,0)" text-anchor="end" y="141.00000000000003" opacity="1"><tspan>柔韧性</tspan></text><text x="118.06122125311396" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" transform="translate(0,0)" text-anchor="end" y="54.061221253113985" opacity="1"><tspan>灵敏性</tspan></text><text x="0" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" transform="translate(0,0)" text-anchor="middle" y="-9999"><tspan>8</tspan></text></g><g class="highcharts-axis-labels highcharts-yaxis-labels "><text x="202" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="end" transform="translate(0,0)" y="135" opacity="1"><tspan>0</tspan></text><text x="202" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="end" transform="translate(0,0)" y="81.025" opacity="1"><tspan>2.5</tspan></text><text x="0" style="color:#666666;cursor:default;font-size:11px;fill:#666666;" text-anchor="end" transform="translate(0,0)" y="-9999"><tspan>5</tspan></text></g><g class="highcharts-label highcharts-tooltip highcharts-color-0" style="cursor:default;pointer-events:none;white-space:nowrap;" transform="translate(152,-9999)" opacity="0" visibility="visible"><path fill="none" class="highcharts-label-box highcharts-tooltip-box" d="M 3.5 0.5 L 98.5 0.5 C 101.5 0.5 101.5 0.5 101.5 3.5 L 101.5 59.5 C 101.5 62.5 101.5 62.5 98.5 62.5 L 3.5 62.5 C 0.5 62.5 0.5 62.5 0.5 59.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5" isShadow="true" stroke="#000000" stroke-opacity="0.049999999999999996" stroke-width="5" transform="translate(1, 1)"></path><path fill="none" class="highcharts-label-box highcharts-tooltip-box" d="M 3.5 0.5 L 98.5 0.5 C 101.5 0.5 101.5 0.5 101.5 3.5 L 101.5 59.5 C 101.5 62.5 101.5 62.5 98.5 62.5 L 3.5 62.5 C 0.5 62.5 0.5 62.5 0.5 59.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5" isShadow="true" stroke="#000000" stroke-opacity="0.09999999999999999" stroke-width="3" transform="translate(1, 1)"></path><path fill="none" class="highcharts-label-box highcharts-tooltip-box" d="M 3.5 0.5 L 98.5 0.5 C 101.5 0.5 101.5 0.5 101.5 3.5 L 101.5 59.5 C 101.5 62.5 101.5 62.5 98.5 62.5 L 3.5 62.5 C 0.5 62.5 0.5 62.5 0.5 59.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5" isShadow="true" stroke="#000000" stroke-opacity="0.15" stroke-width="1" transform="translate(1, 1)"></path><path fill="rgba(247,247,247,0.85)" class="highcharts-label-box highcharts-tooltip-box" d="M 3.5 0.5 L 98.5 0.5 C 101.5 0.5 101.5 0.5 101.5 3.5 L 101.5 59.5 C 101.5 62.5 101.5 62.5 98.5 62.5 L 3.5 62.5 C 0.5 62.5 0.5 62.5 0.5 59.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5" stroke="#7cb5ec" stroke-width="1"></path><text x="8" style="font-size:12px;color:#333333;fill:#333333;" y="20"><tspan style="font-size: 10px">协调性</tspan><tspan style="fill:#7cb5ec" x="8" dy="15">班级平均分: </tspan><tspan style="font-weight:bold" dx="0">$4</tspan><tspan style="fill:#434348" x="8" dy="15">园所平均分: </tspan><tspan style="font-weight:bold" dx="0">$4</tspan></text></g></svg></div></div>
+            </div>
+            <div class="result-text">
+                <div>
+                    <span>结果分析</span>
+                </div>
+                <p id="generalCommentContent">体测结果显示,大一班孩子体质总体发展合格,其中上肢力量、柔韧性相对较弱，需要重点关注</p>
+                <div>
+                    <span>数据对比</span>
+                </div>
+                <p id="generalAnalysisContent">大一班与全园体测数据对比显示，本班孩子体质总体水平优秀于全园水平,其中体重、柔韧性低于全园对应测试项的平均水平。</p>
+            </div>
+        </div>
+        <div class="week-table">
+            <h4>
+                <img src="./改善方案_files/title-icon2.png">
+                相关动作<span>根据大数据分析，睿莱体测筛选出与六项身体素质相关联动作，为生活中孩子的素质改善提供强化指导。</span>
+            </h4>
+            <hr class="hr-class">
+            <div class="test-subjects">
+                <ul id="ul-list">
+                    <!-- 网球掷远（上肢力量） -->
+                    <li class="li-background">
+                        <div class="test-subjects-title">
+                            <img src="./改善方案_files/test-subjects-icon1.png"><h4>相关联动作</h4>
+                            <b>网球掷远（上肢力量）</b><br>
+                        </div>
+                        <div class="test-subjects-text">
+                            <ul>
+                                <li>
+                                    <div class="test-subjects-text-img">
+                                        <img src="./改善方案_files/test-subjects-text-icon1.png">
+                                        <span>原地拍球</span>
+                                    </div>
+                                    <p>
+                                        <em> 相关性：20.65%</em><br>
+                                        <span>皮球是幼儿童年时的重要“玩伴”，原地、跑动中拍球是幼儿的必备“技能”</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <div class="test-subjects-text-img">
+                                        <img src="./改善方案_files/test-subjects-text-icon2.png">
+                                        <span>双手接球</span>
+                                    </div>
+                                    <p>
+                                        <em> 相关性：34.61%</em><br>
+                                        <span>生活中常用到接的动作，比如玩群体性运动，以及把球扔来扔去的游戏等</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <div class="test-subjects-text-img">
+                                        <img src="./改善方案_files/test-subjects-text-icon3.png">
+                                        <span>地滚球</span>
+                                    </div>
+                                    <p>
+                                        <em> 相关性：20.63%</em><br>
+                                        <span>在生活中经常滚动物体，使其紧贴地面滚动，给动物喂食等游戏常用到此动作</span>
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!--立定跳远（下肢力量） -->
+                    <li>
+                        <div class="test-subjects-title">
+                            <img src="./改善方案_files/test-subjects-icon2.png"><h4>相关联动作</h4>
+                            <b>立定跳远（下肢力量）</b><br>
+                        </div>
+                        <div class="test-subjects-text">
+                            <ul>
+                                <li>
+                                    <div class="test-subjects-text-img">
+                                        <img src="./改善方案_files/test-subjects-text-icon4.png">
+                                        <span>单脚跳</span>
+                                    </div>
+                                    <p>
+                                        <em> 相关性：70.63%</em><br>
+                                        <span>幼儿在游戏中常用到单脚跳的动作，例如像跳房子、斗鸡等</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <div class="test-subjects-text-img">
+                                        <img src="./改善方案_files/test-subjects-text-icon5.png">
+                                        <span>前跨跳</span>
+                                    </div>
+                                    <p>
+                                        <em> 相关性：36.51%</em><br>
+                                        <span>日常活动中经常会跨过一些障碍物，当有什么挡路时，跳过去使幼儿避免绊倒</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <div class="test-subjects-text-img">
+                                        <img src="./改善方案_files/test-subjects-text-icon6.png">
+                                        <span>踢球</span>
+                                    </div>
+                                    <p>
+                                        <em> 相关性：33.18%</em><br>
+                                        <span>足球是孩子最喜欢的游戏“伙伴”，幼儿常用踢足球玩乐，还可用于移开物体</span>
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--脚码-->
+        <div class="footer" style="margin-top: 32px;">
+            <p class="foot-zc">睿莱（RELIABLE）儿童体质检测中心</p>
+            <p class="foot-english">RELIABLE Children Physical Fitness Testing Center</p>
+        </div>
+    </div>
+    <!-- 2page -->
+    <div class="report-box  page-break-before ">
+        <div class="week-table" style="padding-top:80px">
+            <div class="test-subjects ">
+                <ul id="ul-list">
+                    <!-- 走平衡木（平衡力） -->
+                    <li class="li-background">
+                        <div class="test-subjects-title">
+                            <img src="./改善方案_files/test-subjects-icon3.png"><h4>相关联动作</h4>
+                            <b>走平衡木（平衡力)</b><br>
+                            <!--<span>未达标人数：15人</span>-->
+                        </div>
+                        <div class="test-subjects-text">
+                            <ul>
+                                <li>
+                                    <div class="test-subjects-text-img">
+                                        <img src="./改善方案_files/test-subjects-text-icon4.png">
+                                        <span>单脚跳</span>
+                                    </div>
+                                    <p>
+                                        <em> 相关性：42.66%</em><br>
+                                        <span>幼儿在游戏中常用到单脚跳的动作，例如像跳房子、斗鸡等</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <div class="test-subjects-text-img">
+                                        <img src="./改善方案_files/test-subjects-text-icon7.png">
+                                        <span>前滑步</span>
+                                    </div>
+                                    <p>
+                                        <em> 相关性：21.65%</em><br>
+                                        <span>孩子常常模仿马儿奔跑，用到前滑步动作，同时，跆拳道、武术中也经常用到</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <div class="test-subjects-text-img">
+                                        <img src="./改善方案_files/test-subjects-text-icon8.png">
+                                        <span>侧滑步</span>
+                                    </div>
+                                    <p>
+                                        <em> 相关性：21.38%</em><br>
+                                        <span>在躲避、反应类游戏中经常用到侧滑步动作，也是篮球运动最基本的动作之一</span>
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!--十米折返跑（灵敏） -->
+                    <li>
+                        <div class="test-subjects-title">
+                            <img src="./改善方案_files/test-subjects-icon4.png"><h4>相关联动作</h4>
+                            <b>十米折返跑（灵敏）</b><br>
+                            <!--<span>未达标人数：15人</span>-->
+                        </div>
+                        <div class="test-subjects-text">
+                            <ul>
+                                <li>
+                                    <div class="test-subjects-text-img">
+                                        <img src="./改善方案_files/test-subjects-text-icon7.png">
+                                        <span>前滑步</span>
+                                    </div>
+                                    <p>
+                                        <em> 相关性：28.96%</em><br>
+                                        <span>孩子常常模仿马儿奔跑，用到前滑步动作，同时，跆拳道、武术中也经常用到</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <div class="test-subjects-text-img">
+                                        <img src="./改善方案_files/test-subjects-text-icon8.png">
+                                        <span>侧滑步</span>
+                                    </div>
+                                    <p>
+                                        <em> 相关性：20.38%</em><br>
+                                        <span>在躲避、反应类游戏中经常用到侧滑步动作，也是篮球运动最基本的动作之一</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <div class="test-subjects-text-img">
+                                        <img src="./改善方案_files/test-subjects-text-icon1.png">
+                                        <span>原地拍球</span>
+                                    </div>
+                                    <p>
+                                        <em> 相关性：44.96%</em><br>
+                                        <span>皮球是幼儿童年时的重要“玩伴”，原地、跑动中拍球是幼儿的必备“技能”</span>
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!--坐位体前屈（柔韧） -->
+                    <li class="li-background">
+                        <div class="test-subjects-title" style="background: url(/Pages/images/test-subjects1.png) no-repeat center right; background-size: 10%;">
+                            <img src="./改善方案_files/title-sit-icon.png"><h4>相关联动作</h4>
+                            <b>坐位体前屈（柔韧）</b><br>
+                            <!--                            <span>未达标人数：15人</span>-->
+                        </div>
+                        <div class="test-subjects-text">
+                            <ul>
+                                <li style="margin-top: 92px;">
+                                    <div class="test-subjects-text-img">
+                                        <img src="./改善方案_files/test-subjects-text-icon8.png">
+                                        <span>侧滑步</span>
+                                    </div>
+                                    <p>
+                                        <em> 相关性：34.12%</em><br>
+                                        <span>在躲避、反应类游戏中经常用到侧滑步动作，也是篮球运动最基本的动作之一</span>
+                                    </p>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </li>
+                    <!-- 双脚连续跳（协调） -->
+                    <li>
+                        <div class="test-subjects-title" style="background: url(/Pages/images/test-subjects2.png) no-repeat center right; background-size: 10%;">
+                            <img src="./改善方案_files/title-double-icon.png">
+                            <h4>相关联动作</h4>
+                            <b> 双脚连续跳（协调）</b><br>
+                            <!--                            <span>未达标人数：15人</span>-->
+                        </div>
+                        <div class="test-subjects-text">
+                            <ul>
+                                <li style="margin-top: 55px;">
+                                    <div class="test-subjects-text-img">
+                                        <img src="./改善方案_files/test-subjects-text-icon4.png">
+                                        <span>单脚跳</span>
+                                    </div>
+                                    <p>
+                                        <em> 相关性：50.6%</em><br>
+                                        <span>幼儿在游戏中常用到单脚跳的动作，例如像跳房子、斗鸡等</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <div class="test-subjects-text-img">
+                                        <img src="./改善方案_files/test-subjects-text-icon7.png">
+                                        <span>前滑步</span>
+                                    </div>
+                                    <p>
+                                        <em> 相关性：22.51%</em><br>
+                                        <span>孩子常常模仿马儿奔跑，用到前滑步动作，同时，跆拳道、武术中也经常用到</span>
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--脚码-->
+        <div class="footer" style="margin-top: 32px;">
+            <p class="foot-zc">睿莱（RELIABLE）儿童体质检测中心</p>
+            <p class="foot-english">RELIABLE Children Physical Fitness Testing Center</p>
+        </div>
+    </div>
+    <!-- 3page -->
+    <div class="report-box  page-break-before ">
+        <div class="head-title" id="head-title">
+            <h2>
+                <span id="semesterTime2">2017年9月学期</span>
+                <span class="showKinNameInfo">麦地塘幼儿园</span>
+                <span class="className">大一班</span>
+                健康课程表
+            </h2>
+        </div>
+        <div class="course-conter result-conter">
+            <h4>
+                <img src="./改善方案_files/title-icon1.png">
+                课程说明
+            </h4>
+            <hr class="hr-class">
+
+            <div class="course-explain ">
+
+                <p>根据幼儿的体质检测结果、身体素质与动作发展规律、生理与认知情感发展规律等多维度相结合，制定明确的课程目标，再根据课程目标在课程库中选择最适合的课程内容编写成实际应用的改善方案。</p>
+            </div>
+        </div>
+        <div class="dangerous-conter result-conter">
+            <h4>
+                <img src="./改善方案_files/title-icon4.png">
+                注意事项
+            </h4>
+            <hr class="hr-class">
+
+            <div class="course-explain ">
+                <p>
+                    （一）根据孩子自身的基本情况进行练习，在安排孩子的体育活动时应遵循运动量与难度由小到大的原则，并及时做出适宜的调整，以达到发展幼儿体质、提高身体素质的目的。 <br>（二）运动中根据孩子的个人情况进行适当地休息，如有不适，立即停止活动。 <br>（三）孩子做出违规和危险的动作需及时制止，以避免受伤。 <br>（四）必要时给予帮助和保护。<br>（五）做好充分的准备活动和结束后的放松活动。<br>（六）在运动前检查场地和器材，确保安全。 <br>（七）均衡膳食，避免过度的糖和油脂的摄入
+                </p>
+            </div>
+        </div>
+
+        <div class="week-table">
+            <h4>
+                <img src="./改善方案_files/title-icon5.png">
+                本学期课表
+            </h4>
+            <hr class="hr-class">
+            <div class="table-box">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th colspan="5"> 课程项目</th>
+                        </tr>
+                    </thead>
+                </table>
+                <div class="tbody-left" style="width: 121px;height: 376px;float: left;">
+                    <div class="tbody-left-tr">
+                        MONTH<br><b>1</b><br>第一月
+                    </div>
+                    <div class="tbody-left-tr">
+                        MONTH<br><b>2</b><br>第二月
+                    </div>
+                    <div class="tbody-left-tr">
+                        MONTH<br><b>3</b><br>第三月
+                    </div>
+                    <div class="tbody-left-tr">
+                        MONTH<br><b>4</b><br>第四月
+                    </div>
+                </div>
+                <div class="tbody-right" style="width: 609px;height: 376px;float: left;" id="table-content">
+        <div class="tbody-right-tr">
+            <img src="./改善方案_files/course-list-broad-icon.png" alt="">
+            <p> 跨跳</p>
+        </div>
+        <div class="tbody-right-tr">
+            <img src="./改善方案_files/course-lis-double-icon.png" alt="">
+            <p> 带宝宝</p>
+        </div>
+        <div class="tbody-right-tr">
+            <img src="./改善方案_files/course-list-broad-icon.png" alt="">
+            <p>跳跃峡谷</p>
+        </div>
+        <div class="tbody-right-tr">
+            <img src="./改善方案_files/course-list-broad-icon.png" alt="">
+            <p>前进后退</p>
+        </div>
+        <div class="tbody-right-tr">
+            <img src="./改善方案_files/course-list-broad-icon.png" alt="">
+            <p>开合跳</p>
+        </div>
+        <div class="tbody-right-tr">
+            <img src="./改善方案_files/course-list-broad-icon.png" alt="">
+            <p>交叉跳</p>
+        </div>
+        <div class="tbody-right-tr">
+            <img src="./改善方案_files/course-list-broad-icon.png" alt="">
+            <p>单脚交换跳</p>
+        </div>
+        <div class="tbody-right-tr">
+            <img src="./改善方案_files/course-list-throw-icon.png" alt="">
+            <p>划船</p>
+        </div>
+        <div class="tbody-right-tr">
+            <img src="./改善方案_files/course-list-broad-icon.png" alt="">
+            <p>碎步跑</p>
+        </div>
+        <div class="tbody-right-tr">
+            <img src="./改善方案_files/course-lise-run-icon.png" alt="">
+            <p>整体交换</p>
+        </div>
+        <div class="tbody-right-tr">
+            <img src="./改善方案_files/course-list-broad-icon.png" alt="">
+            <p> 跳进跳出</p>
+        </div>
+        <div class="tbody-right-tr">
+            <img src="./改善方案_files/course-list-broad-icon.png" alt="">
+            <p>在高处翻转</p>
+        </div>
+        <div class="tbody-right-tr">
+            <img src="./改善方案_files/course-list-broad-icon.png" alt="">
+            <p>看谁跳的远</p>
+        </div>
+        <div class="tbody-right-tr">
+            <img src="./改善方案_files/course-list-broad-icon.png" alt="">
+            <p>脚跟跳</p>
+        </div>
+        <div class="tbody-right-tr">
+            <img src="./改善方案_files/course-list-broad-icon.png" alt="">
+            <p> 芭蕾舞者</p>
+        </div>
+        <div class="tbody-right-tr">
+            <img src="./改善方案_files/course-list-balance-icon.png" alt="">
+            <p> 闭眼坐</p>
+        </div>
+        <div class="tbody-right-tr">
+            <img src="./改善方案_files/course-list-broad-icon.png" alt="">
+            <p>180°跳</p>
+        </div>
+        <div class="tbody-right-tr">
+            <img src="./改善方案_files/course-list-broad-icon.png" alt="">
+            <p> 左右跳</p>
+        </div>
+        <div class="tbody-right-tr">
+            <img src="./改善方案_files/course-list-broad-icon.png" alt="">
+            <p> 开合跳</p>
+        </div>
+        <div class="tbody-right-tr">
+            <img src="./改善方案_files/course-list-broad-icon.png" alt="">
+            <p> 翻转杯垫</p>
+        </div>
+    </div>
+            </div>
+        </div>
+        <!--脚码-->
+        <div class="footer" style="margin-top:85px;">
+            <p class="foot-zc">睿莱（RELIABLE）儿童体质检测中心</p>
+            <p class="foot-english">RELIABLE Children Physical Fitness Testing Center</p>
+        </div>
+    </div>
+    <!--3page------------------------>
+    <div class="report-box  page-break-before " id="tableList">
+        <!--脚码-->
+        <div class="head  page-break-before" id="head">
+            第一月课程
+        </div>
+    
+        <ul id="ul-list">
+            <li class="week-box " style="background-color: rgb(252, 246, 243);">
+                <div class="tile">
+                    <span>一</span>
+                    <p> 跨跳</p>
+                </div>
+                <div class="center-box">
+                    <p>活动准备： 踏板</p>
+                    活动过程：1.将踏板摆放在场地上，中间有一定的间隔，间隔相等。
+2.幼儿站在第一个踏板上，单腿跨跳到第二踏板上，依次前进，直到跳完所有的踏板。
+3.在跳跃过程，必须是单腿跨跳。
+
+
+                    <p class="remarks">调整难度：1.增加：增加踏板之间的间隔可以增加挑战。
+2.降低：缩短踏板之间的间隔可以降低挑战。
+</p>
+                </div>
+                <div class="qrcode">
+                    <div id="12902"><canvas width="125" height="125"></canvas></div>
+                    <div>扫一扫，观看课程</div>
+                </div>
+            </li>
+        </ul>
+    
+        <ul id="ul-list">
+            <li class="week-box ">
+                <div class="tile">
+                    <span>二</span>
+                    <p> 带宝宝</p>
+                </div>
+                <div class="center-box">
+                    <p>活动准备：锥形桶、报纸</p>
+                    活动过程：1.将报纸作为一名宝宝，放在自己的腹部位置，用锥形桶摆放出一个正方形，让孩子围绕锥形桶向前跑动，不能让宝宝掉落，带着宝宝一起跑。
+
+                    <p class="remarks">调整难度：1.增加：加快跑步速度可增加挑战。
+2.降低：降低跑步速度可降低速度。</p>
+                </div>
+                <div class="qrcode">
+                    <div id="12903"><canvas width="125" height="125"></canvas></div>
+                    <div>扫一扫，观看课程</div>
+                </div>
+            </li>
+        </ul>
+    
+        <ul id="ul-list">
+            <li class="week-box " style="background-color: rgb(252, 246, 243);">
+                <div class="tile">
+                    <span>三</span>
+                    <p>跳跃峡谷</p>
+                </div>
+                <div class="center-box">
+                    <p>活动准备： 踏板</p>
+                    活动过程：1.将踏板摆放在场地上，中间有一定的间隔，间隔相等。
+2.让幼儿站在起点，开始跳跃，在跳跃过程中必须是双脚连续跳跃。
+
+
+                    <p class="remarks">调整难度：1.增加：增加踏板之间的间隔可以增加挑战。
+2.降低：缩短踏板之间的间隔可以降低挑战。
+</p>
+                </div>
+                <div class="qrcode">
+                    <div id="12904"><canvas width="125" height="125"></canvas></div>
+                    <div>扫一扫，观看课程</div>
+                </div>
+            </li>
+        </ul>
+    
+        <ul id="ul-list">
+            <li class="week-box ">
+                <div class="tile">
+                    <span>四</span>
+                    <p>前进后退</p>
+                </div>
+                <div class="center-box">
+                    <p>活动准备：绳梯</p>
+                    活动过程：1.将绳梯平铺在场地上，让幼儿站在起点。
+2.让幼儿先一脚跨进一格，另一脚跟上然后以相同的的方式前进一格，然后在后退一格，后退的形式也是一脚先后退，另一脚在跟上。
+3.中途不允许出现失误。
+
+                    <p class="remarks">调整难度：1.增加：限定完成时间可增加难度。
+2.降低：不限定时间可降低难度。</p>
+                </div>
+                <div class="qrcode">
+                    <div id="12905"><canvas width="125" height="125"></canvas></div>
+                    <div>扫一扫，观看课程</div>
+                </div>
+            </li>
+        </ul>
+    
+        <ul id="ul-list">
+            <li class="week-box " style="background-color: rgb(252, 246, 243);">
+                <div class="tile">
+                    <span>五</span>
+                    <p>开合跳</p>
+                </div>
+                <div class="center-box">
+                    <p>活动准备：绳梯</p>
+                    活动过程：1.将绳梯平铺在场地上，让幼儿站在起点。
+2.幼儿双脚起跳跳进绳格里，然后两脚分开向前跳进一格，重复动作，直到跳完所有的绳格。
+
+                    <p class="remarks">调整难度：1.增加：限定完成时间可增加难度。
+2.降低：不限定时间可降低难度。</p>
+                </div>
+                <div class="qrcode">
+                    <div id="12906"><canvas width="125" height="125"></canvas></div>
+                    <div>扫一扫，观看课程</div>
+                </div>
+            </li>
+        </ul>
+    
+        <div class="footer">
+            <p class="foot-zc">睿莱（RELIABLE）儿童体质检测中心</p>
+            <p class="foot-english">RELIABLE Children Physical Fitness Testing Center</p>
+        </div>
+    
+        <!--脚码-->
+        <div class="head  page-break-before" id="head">
+            第二月课程
+        </div>
+    
+        <ul id="ul-list">
+            <li class="week-box ">
+                <div class="tile">
+                    <span>一</span>
+                    <p>交叉跳</p>
+                </div>
+                <div class="center-box">
+                    <p>活动准备：踏板</p>
+                    活动过程：1.将所有的踏板摆成两列放在一起，两列踏板相互错开。
+2.幼儿站在踏板上，斜着跳上另一个踏板，一直斜向跳跃，直到跳完所有的踏板。
+
+
+                    <p class="remarks">调整难度：1.增加：增加踏板之间的间隔可增加挑战。
+2.降低：降低踏板之间的间隔可增加挑战。
+</p>
+                </div>
+                <div class="qrcode">
+                    <div id="12907"><canvas width="125" height="125"></canvas></div>
+                    <div>扫一扫，观看课程</div>
+                </div>
+            </li>
+        </ul>
+    
+        <ul id="ul-list">
+            <li class="week-box " style="background-color: rgb(252, 246, 243);">
+                <div class="tile">
+                    <span>二</span>
+                    <p>单脚交换跳</p>
+                </div>
+                <div class="center-box">
+                    <p>活动准备：  踏板</p>
+                    活动过程：1.将踏板放在场地上，让幼儿站在踏板的侧面。
+2.在跳跃中，先将靠近踏板的脚跳上踏板，另一只脚在场地上，然后再将踏板上的脚放到踏板的另一侧，将场地上的脚放到踏板上，然后再反向进行。
+3.动作连续无停顿。
+
+
+                    <p class="remarks">调整难度：1.增加：加快跳跃的节奏可增加挑战。
+2.降低：减慢跳跃的节奏可降低挑战。
+</p>
+                </div>
+                <div class="qrcode">
+                    <div id="12908"><canvas width="125" height="125"></canvas></div>
+                    <div>扫一扫，观看课程</div>
+                </div>
+            </li>
+        </ul>
+    
+        <ul id="ul-list">
+            <li class="week-box ">
+                <div class="tile">
+                    <span>三</span>
+                    <p>划船</p>
+                </div>
+                <div class="center-box">
+                    <p>活动准备：纸箱</p>
+                    活动过程：1.准备一大纸箱子，让小孩坐在纸箱里，让另一个小孩推动纸箱，像是在河里划船一样。
+
+
+                    <p class="remarks">调整难度：1.增加：增加推动距离或使地面较为粗糙可增加挑战。
+2.降低：缩短推动距离或使地面较为光滑可降低挑战。</p>
+                </div>
+                <div class="qrcode">
+                    <div id="12909"><canvas width="125" height="125"></canvas></div>
+                    <div>扫一扫，观看课程</div>
+                </div>
+            </li>
+        </ul>
+    
+        <ul id="ul-list">
+            <li class="week-box " style="background-color: rgb(252, 246, 243);">
+                <div class="tile">
+                    <span>四</span>
+                    <p>碎步跑</p>
+                </div>
+                <div class="center-box">
+                    <p>活动准备：绳梯</p>
+                    活动过程：1.将绳梯平铺在场地上，让幼儿站在起点，迅速碎步跑通过绳梯，看谁用时最短。
+
+                    <p class="remarks">调整难度：1.增加：增加绳梯的长度可增加挑战。
+2.降低：缩短绳梯的长度可降低挑战。</p>
+                </div>
+                <div class="qrcode">
+                    <div id="12910"><canvas width="125" height="125"></canvas></div>
+                    <div>扫一扫，观看课程</div>
+                </div>
+            </li>
+        </ul>
+    
+        <ul id="ul-list">
+            <li class="week-box ">
+                <div class="tile">
+                    <span>五</span>
+                    <p>整体交换</p>
+                </div>
+                <div class="center-box">
+                    <p>活动准备：球拍</p>
+                    活动过程：1.三个人或更多的人参加，用食指使球拍例子地面上。听到口令后，所有人迅速交换位置，保持球拍不落地。
+
+                    <p class="remarks">调整难度：1.增加：增加两个球拍之间的距离可增加挑战。
+2.降低：缩短两个球拍之间的距离可降低挑战。</p>
+                </div>
+                <div class="qrcode">
+                    <div id="12911"><canvas width="125" height="125"></canvas></div>
+                    <div>扫一扫，观看课程</div>
+                </div>
+            </li>
+        </ul>
+    
+        <div class="footer">
+            <p class="foot-zc">睿莱（RELIABLE）儿童体质检测中心</p>
+            <p class="foot-english">RELIABLE Children Physical Fitness Testing Center</p>
+        </div>
+    
+        <!--脚码-->
+        <div class="head  page-break-before" id="head">
+            第三月课程
+        </div>
+    
+        <ul id="ul-list">
+            <li class="week-box " style="background-color: rgb(252, 246, 243);">
+                <div class="tile">
+                    <span>一</span>
+                    <p> 跳进跳出</p>
+                </div>
+                <div class="center-box">
+                    <p>活动准备：绳梯</p>
+                    活动过程：1.将绳梯平铺在场地上，让幼儿站在起点。
+2.让幼儿双脚跳进绳格里面，然后在从侧面跳出绳格，重复动作，直到跳完所有的绳梯。
+
+                    <p class="remarks">调整难度：1.增加：限定完成时间可增加难度。
+2.降低：不限定时间可降低难度。</p>
+                </div>
+                <div class="qrcode">
+                    <div id="12912"><canvas width="125" height="125"></canvas></div>
+                    <div>扫一扫，观看课程</div>
+                </div>
+            </li>
+        </ul>
+    
+        <ul id="ul-list">
+            <li class="week-box ">
+                <div class="tile">
+                    <span>二</span>
+                    <p>在高处翻转</p>
+                </div>
+                <div class="center-box">
+                    <p>活动准备：木条、卡片</p>
+                    活动过程：1.让幼儿站在一有高度的木条上，在木条的一侧摆放若干的卡片。
+2.让幼儿单腿站立在木条上将卡片翻转，在翻转过程中，只能单脚触地。
+
+
+                    <p class="remarks">调整难度：1.增加：增加木条的高度可增加挑战。
+2.降低：减低木条的高度可降低挑战。
+</p>
+                </div>
+                <div class="qrcode">
+                    <div id="12913"><canvas width="125" height="125"></canvas></div>
+                    <div>扫一扫，观看课程</div>
+                </div>
+            </li>
+        </ul>
+    
+        <ul id="ul-list">
+            <li class="week-box " style="background-color: rgb(252, 246, 243);">
+                <div class="tile">
+                    <span>三</span>
+                    <p>看谁跳的远</p>
+                </div>
+                <div class="center-box">
+                    <p>活动准备：  踏板</p>
+                    活动过程：1.将踏板摆放在场地上，中间有一定的间隔，间隔相等。
+2.让幼儿站在起点，开始跳跃，在跳跃过程中必须是是单脚连续跳跃。
+
+
+                    <p class="remarks">调整难度：1.增加：增加踏板之间的间隔可以增加挑战。
+2.降低：缩短踏板之间的间隔可以降低挑战。
+</p>
+                </div>
+                <div class="qrcode">
+                    <div id="12914"><canvas width="125" height="125"></canvas></div>
+                    <div>扫一扫，观看课程</div>
+                </div>
+            </li>
+        </ul>
+    
+        <ul id="ul-list">
+            <li class="week-box ">
+                <div class="tile">
+                    <span>四</span>
+                    <p>脚跟跳</p>
+                </div>
+                <div class="center-box">
+                    <p>活动准备： 胶带</p>
+                    活动过程：1.在场地上设置一条直线，让幼儿两脚并拢站在线上。
+2.当听到开始口令后，在跳跃过程中，将右腿踢向右侧同时脚尖抬起，然后收回右腿，再换左腿重复动作。
+3.注意跳跃节奏。
+
+
+                    <p class="remarks">调整难度：1.增加：加快跳跃节奏或脚跟不触地可增加挑战。
+2.降低：减慢跳跃节奏或脚跟触地可降低挑战。
+</p>
+                </div>
+                <div class="qrcode">
+                    <div id="12915"><canvas width="125" height="125"></canvas></div>
+                    <div>扫一扫，观看课程</div>
+                </div>
+            </li>
+        </ul>
+    
+        <ul id="ul-list">
+            <li class="week-box " style="background-color: rgb(252, 246, 243);">
+                <div class="tile">
+                    <span>五</span>
+                    <p> 芭蕾舞者</p>
+                </div>
+                <div class="center-box">
+                    <p>活动准备：踏板</p>
+                    活动过程：1.在场地上放置较多的踏板，每个踏板之间有一定的间隔。
+2.幼儿站在踏板上，单脚站立，用另外一条腿和胳膊带动身体，使身体旋转360°，并保持身体平衡。
+3.在旋转过程中要注意安全。
+
+
+                    <p class="remarks">调整难度：1.增加：加快旋转速度可增加挑战。
+2.降低：降低旋转速度可降低挑战。
+</p>
+                </div>
+                <div class="qrcode">
+                    <div id="12916"><canvas width="125" height="125"></canvas></div>
+                    <div>扫一扫，观看课程</div>
+                </div>
+            </li>
+        </ul>
+    
+        <div class="footer">
+            <p class="foot-zc">睿莱（RELIABLE）儿童体质检测中心</p>
+            <p class="foot-english">RELIABLE Children Physical Fitness Testing Center</p>
+        </div>
+    
+        <!--脚码-->
+        <div class="head  page-break-before" id="head">
+            第四月课程
+        </div>
+    
+        <ul id="ul-list">
+            <li class="week-box ">
+                <div class="tile">
+                    <span>一</span>
+                    <p> 闭眼坐</p>
+                </div>
+                <div class="center-box">
+                    <p>活动准备：篮球</p>
+                    活动过程：1.准备若干篮球，将球放在场地上，并间隔一定的距离。
+2.让幼儿坐在篮球上，双腿伸直，双脚叠在一起，脚尖对脚跟的形式，双手不能有任何辅助。
+3，在游戏过程上，要闭上眼睛。
+
+
+                    <p class="remarks">调整难度：1.增加:坐在球上互相传球可增加挑战。
+2.降低：闭眼坐在球上可降低难度。
+
+</p>
+                </div>
+                <div class="qrcode">
+                    <div id="12917"><canvas width="125" height="125"></canvas></div>
+                    <div>扫一扫，观看课程</div>
+                </div>
+            </li>
+        </ul>
+    
+        <ul id="ul-list">
+            <li class="week-box " style="background-color: rgb(252, 246, 243);">
+                <div class="tile">
+                    <span>二</span>
+                    <p>180°跳</p>
+                </div>
+                <div class="center-box">
+                    <p>活动准备：踏板</p>
+                    活动过程：1.在场地上放置一踏板，中间间隔一定的间隔，让幼儿站在踏板上。
+2.幼儿站在踏板上，双臂摆动同时下肢用力，使身体旋转180度站在踏板上。
+3.逆时针旋转或顺时针旋转交替。
+
+
+                    <p class="remarks">调整难度：1.增加：让幼儿顺时针和逆时针交叉跳跃可增加难度。
+2.降低：让幼儿随意方向旋转跳可降低难度。</p>
+                </div>
+                <div class="qrcode">
+                    <div id="12918"><canvas width="125" height="125"></canvas></div>
+                    <div>扫一扫，观看课程</div>
+                </div>
+            </li>
+        </ul>
+    
+        <ul id="ul-list">
+            <li class="week-box ">
+                <div class="tile">
+                    <span>三</span>
+                    <p> 左右跳</p>
+                </div>
+                <div class="center-box">
+                    <p>活动准备：绳梯</p>
+                    活动过程：1.将绳梯平铺在场地上，让幼儿站在起点。
+2.让幼儿双脚向前跳跃，向左跳时左脚在绳梯的外侧，右脚在绳梯的右侧，重复动作，跳完所有的绳格。
+
+                    <p class="remarks">调整难度：1.增加：限定完成时间可增加难度。
+2.降低：不限定时间可降低难度。</p>
+                </div>
+                <div class="qrcode">
+                    <div id="12919"><canvas width="125" height="125"></canvas></div>
+                    <div>扫一扫，观看课程</div>
+                </div>
+            </li>
+        </ul>
+    
+        <ul id="ul-list">
+            <li class="week-box " style="background-color: rgb(252, 246, 243);">
+                <div class="tile">
+                    <span>四</span>
+                    <p> 开合跳</p>
+                </div>
+                <div class="center-box">
+                    <p>活动准备： 踏板</p>
+                    活动过程：1.将踏板放在场地上，让幼儿两站开立，使踏板在幼儿的两腿之间。
+2.当听到开始的口令时，两脚同时跳上踏板，然后再跳成两脚开立，于踏板两侧。
+3.在跳跃过程中，两脚要同步。
+
+
+                    <p class="remarks">调整难度：1.增加：加快跳跃的节奏可增加挑战。
+2.降低：减慢跳跃的节奏可降低挑战。
+</p>
+                </div>
+                <div class="qrcode">
+                    <div id="12920"><canvas width="125" height="125"></canvas></div>
+                    <div>扫一扫，观看课程</div>
+                </div>
+            </li>
+        </ul>
+    
+        <ul id="ul-list">
+            <li class="week-box ">
+                <div class="tile">
+                    <span>五</span>
+                    <p> 翻转杯垫</p>
+                </div>
+                <div class="center-box">
+                    <p>活动准备： 杯垫/卡片</p>
+                    活动过程：1.在场地上设置一条直线，将所有的杯垫/卡片，正面向上沿着直线摆成一排，中间间隔一定的距离。
+2.让幼儿单脚站在起点，将杯垫翻转，使之反面向上，在尽力将所有的杯垫翻转。
+3.在翻转过程中，只能一只脚着地，尽量坚持。
+
+
+                    <p class="remarks">调整难度：1.增加：增加杯垫之间的距离间隔可增加挑战。
+2.降低：缩短杯垫之间的距离间隔可降低挑战。
+</p>
+                </div>
+                <div class="qrcode">
+                    <div id="12921"><canvas width="125" height="125"></canvas></div>
+                    <div>扫一扫，观看课程</div>
+                </div>
+            </li>
+        </ul>
+    
+        <div class="footer">
+            <p class="foot-zc">睿莱（RELIABLE）儿童体质检测中心</p>
+            <p class="foot-english">RELIABLE Children Physical Fitness Testing Center</p>
+        </div>
+    </div>
+
+</body></html>

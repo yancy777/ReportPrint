@@ -1,0 +1,990 @@
+﻿/// <reference path="../../AllianceList.html" />
+/// <reference path="../../AllianceList.html" />
+/// <reference path="../../AllianceList.html" />
+/// <reference path="../../AllianceList.html" />
+/// <reference path="../../AllianceList.html" />
+/// <reference path="../../Alliance/AllianceHome.html" />
+/// <reference path="../../Alliance/AllianceHome.html" />
+/// <reference path="../../physical/PhyExFileExport.html" />
+/*
+ * Core script to handle all login specific things
+ */
+define(function () {
+    if ($.datepicker != null) {
+        $.datepicker.regional['zh-CN'] = {
+            clearText: '清除',
+            clearStatus: '清除已选日期',
+             closeStatus: '不改变当前选择',
+            prevText: '<上月',
+            prevStatus: '显示上月',
+            prevBigText: '<<',
+            prevBigStatus: '显示上一年',
+            nextText: '下月>',
+            nextStatus: '显示下月',
+            nextBigText: '>>',
+            nextBigStatus: '显示下一年',
+            currentText: '今天',
+            currentStatus: '显示本月',
+            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+            monthNamesShort: ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二'],
+            monthStatus: '选择月份',
+            yearStatus: '选择年份',
+            weekHeader: '周',
+            weekStatus: '年内周次',
+            dayNames: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+            dayNamesShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+            dayNamesMin: ['日', '一', '二', '三', '四', '五', '六'],
+            dayStatus: '设置 DD 为一周起始',
+            dateStatus: '选择 m月 d日, DD',
+            dateFormat: 'yy-mm-dd',
+            firstDay: 1,
+            initStatus: '请选择日期',
+            isRTL: false
+        };
+        $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+    }
+    String.prototype.myFormat = function (args) {
+        if (arguments.length > 0) {
+            var result = this;
+            if (arguments.length == 1 && typeof (args) == "object") {
+                for (var key in args) {
+                    var reg = new RegExp("({" + key + "})", "g");
+                    result = result.replace(reg, args[key]);
+                }
+            }
+            else {
+                for (var i = 0; i < arguments.length; i++) {
+                    if (arguments[i] == undefined) {
+                        console.log("the args has undefined or null value");
+                        return "the args has undefined or null value";
+                    }
+                    else {
+                        var reg = new RegExp("({[" + i + "]})", "g");
+                        result = result.replace(reg, arguments[i]);
+                    }
+                }
+            }
+            return result;
+        }
+        else {
+            return this;
+        }
+    }
+    $.fn.serializeTableRow = function (rowId) {
+        var columns = $(this).find('thead th').map(function () {
+            // This assumes that your headings are suitable to be used as
+            //  JavaScript object keys. If the headings contain characters
+            //  that would be invalid, such as spaces or dashes, you should
+            //  use a regex here to strip those characters out.
+
+            return $(this).attr("name");
+        });
+        columns.splice($.inArray('ignore', columns), 1);
+
+        var tableObject = $(this).find(rowId).map(function (i) {
+            var row = {};
+
+            // Find all of the table cells on this row.
+            $(this).find("td").each(function (i) {
+                // Determine the cell's column name by comparing its index
+                //  within the row with the columns list we built previously.
+
+                var rowName = $.trim(columns[i]);
+                // Add a new property to the row object, using this cell's
+                //  column name as the key and the cell's text as the value.
+                var input = $(this).find("input")[0];
+                if (input) {
+                    row[rowName] = $.trim(input.value);
+                } else {
+                    row[rowName] = $.trim($(this).text());
+                }
+            });
+
+            // Finally, return the row's object representation, to be included
+            //  in the array that $.map() ultimately returns.
+            return row;
+
+            // Don't forget .get() to convert the jQuery set to a regular array.
+        }).get();
+        return tableObject[0];
+    };
+    $.fn.serializeTable = function (id) {
+        var columns = $(this).find('thead th').map(function () {
+            // This assumes that your headings are suitable to be used as
+            //  JavaScript object keys. If the headings contain characters
+            //  that would be invalid, such as spaces or dashes, you should
+            //  use a regex here to strip those characters out.
+            return $(this).attr("name");
+        });
+
+        var tableObject = $(this).find("tbody tr").map(function (i) {
+            var row = {};
+
+            // Find all of the table cells on this row.
+            $(this).find("td").each(function (i) {
+                // Determine the cell's column name by comparing its index
+                //  within the row with the columns list we built previously.
+
+                var rowName = $.trim(columns[i]);
+                // Add a new property to the row object, using this cell's
+                //  column name as the key and the cell's text as the value.
+                var input = $(this).find("input")[0];
+                if (input) {
+                    row[rowName] = $.trim(input.value);
+                } else {
+                    row[rowName] = $.trim($(this).text());
+                }
+            });
+
+            // Finally, return the row's object representation, to be included
+            //  in the array that $.map() ultimately returns.
+            return row;
+
+            // Don't forget .get() to convert the jQuery set to a regular array.
+        }).get();
+        return tableObject;
+    };
+    $.fn.serializeObject = function () {
+        var arrayData = this.serializeArray();
+        var objectData = {};
+
+        $.each(arrayData, function () {
+            var value;
+
+            if (this.value != null) {
+                value = this.value;
+            } else {
+                value = '';
+            }
+
+            if (objectData[this.name] != null) {
+                if (!objectData[this.name].push) {
+                    objectData[this.name] = [objectData[this.name]];
+                }
+
+                objectData[this.name].push(value);
+            } else {
+                objectData[this.name] = value;
+            }
+        });
+
+        return objectData;
+    };
+    // 对Date的扩展，将 Date 转化为指定格式的String
+    // 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
+    // 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)
+    // 例子：
+    // (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
+    // (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
+    Date.prototype.format = function (fmt) { //author: meizz
+        var o = {
+            "M+": this.getMonth() + 1,                 //月份
+            "d+": this.getDate(),                    //日
+            "h+": this.getHours(),                   //小时
+            "m+": this.getMinutes(),                 //分
+            "s+": this.getSeconds(),                 //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds()             //毫秒
+        };
+        if (/(y+)/.test(fmt))
+            fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt))
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    }
+
+    String.prototype.CharpStr2Date = function () {
+        //[\+\-]:+ is for datetime offset, - is for datetime
+        var dateReg = /\/Date\((-?\d+)([\+\-]?\d+)\)\//;
+        var date = new Date(parseInt(this.replace(/\/Date\((-?\d+)([\+\-]?\d+)?\)\//, '$1')));
+        var createTime = date.format("yyyy-MM-dd");
+        return createTime;
+    }
+
+    Date.prototype.JSDate2CharpDateTimeOffsetString = function () {
+        var date = new Date(this.format("yyyy-MM-dd"));
+        return date.getUTCFullYear() + '-' +
+                  ('00' + (date.getUTCMonth() + 1)).slice(-2) + '-' +
+                  ('00' + date.getUTCDate()).slice(-2) + ' ' +
+                  ('00' + date.getUTCHours()).slice(-2) + ':' +
+                  ('00' + date.getUTCMinutes()).slice(-2) + ':' +
+                  ('00' + date.getUTCSeconds()).slice(-2) + ' +08:00';
+    }
+
+    var initHandlebars = function () {
+        if (Handlebars) {
+            Handlebars.registerHelper('DateTimeFormat', function (type) {
+                return type.CharpStr2Date();
+            });
+            Handlebars.registerHelper('ABS', function (type) {
+                return Math.abs(type);
+            });
+            Handlebars.registerHelper('GenderHelp', function (type) {
+                if (type == 1) {
+                    return "男";
+                } else {
+                    return "女";
+                }
+            });
+            Handlebars.registerHelper('IsCancel', function (type) {
+                if (type == 1) {
+                    return "已删除";
+                } else {
+                    return "";
+                }
+            });
+            Handlebars.registerHelper("AddOne", function (index) {
+                //返回+1之后的结果
+                return index + 1;
+            });
+        }
+    };
+
+    initHandlebars();
+    /* * * * * * * * * * * *
+    * callApi is a ajax proxy
+    * * * * * * * * * * * */
+    var callDeleteApi = function (urlParam, dataParam) {
+        return $.ajax({
+            headers: {
+                Accept: "application/json; charset=utf-8"
+            },
+            url: urlParam + "?" + jQuery.param(dataParam),
+            type: "DELETE",
+            cache: false,
+            Accept: "text/json;"
+        });
+    };
+
+    var callPostApi = function (urlParam, dataParam) {
+        return $.ajax({
+            headers: {
+                Accept: "application/json; charset=utf-8"
+            },
+            beforeSend: function (x) {
+                x.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            },
+            url: urlParam,
+            type: "POST",
+            data: dataParam,
+            cache: false
+        });
+    };
+    var callGetApi = function (urlParam, dataParam) {
+        return $.ajax({
+            headers: {
+                Accept: "application/json; charset=utf-8"
+            },
+            url: urlParam,
+            type: "GET",
+            data: dataParam,
+            cache: false,
+            Accept: "text/json;",
+            async:false,
+            success:function() {
+                //alert("成功了，哈哈哈哈哈！");
+            },
+            error: function(xhr, errorInfo, ex) {
+                if (xhr.status == 401) {
+                    (function () {
+                        getXXXX(type, url, data, success, error);
+                    });
+                } else {
+                    // 调用外部的error
+                    error && error(xhr, textStatus, errorThrown);
+                }
+            }
+
+        });
+    };
+
+    var callPutApi = function (urlParam, dataParam) {
+        return $.ajax({
+            headers: {
+                Accept: "application/json; charset=utf-8"
+            },
+            url: urlParam,
+            type: "PUT",
+            data: dataParam,
+            cache: false
+        });
+    };
+    var redirect = function (paras, open) {
+        var url = window.location.href;
+        var returnValue = "";
+        var urlSlash = url.split("/");
+        urlSlash[urlSlash.length - 1] = paras;
+        returnValue = urlSlash.join();
+        returnValue = returnValue.replace(/\,/g, "/");
+        if (returnValue !== "") {
+            if (open) {
+                window.open(returnValue);
+            } else {
+                window.location = returnValue;
+            }
+        }
+    };
+    var isAdmin = function () {
+        var roleVal = $.cookie("Role");
+        return roleVal === "[Admin]";
+    };
+
+    var checkIsLogin = function () {
+        var loginUserName = $.cookie("LoginUserName");
+        var roleVal = $.cookie("Role");
+        if (!loginUserName || !roleVal) {
+            return false;
+        }
+        return true;
+    };
+
+    var handlebarsHelp = function (templateIdSelector, context) {
+        var source = $(templateIdSelector).html();
+        var template = Handlebars.compile(source);
+        var html = template(context);
+        return html;
+    };
+
+    var getPermissionType = function () {
+        var permissionType = -1;
+        var roleVal = $.cookie("Role");
+        permissionType = roleVal;
+        if (roleVal == "[Admin]") {
+            permissionType = 0;
+        } else if (roleVal == "[Parent]") {
+            permissionType = 1;
+        } else if (roleVal == "[Teacher]") {
+            permissionType = 2;
+        } else if (roleVal == "[Master]") {
+            permissionType = 3;
+        } else if (roleVal == "[SuperHeadMaster]") {
+            permissionType = 4;
+        }else if (roleVal == '[Agency]') {
+            permissionType = 5;
+        }
+        return permissionType;
+    };
+    var showDiv = function () {
+        document.documentElement.scrollTop = 0;
+        $("#box").css({ "display": "block" });
+        $("#Mybox").css({ "display": "block" });
+        $("#bodyonline").css({ "overflow-y": "hidden" });
+    };
+    var notyFailure = function (message) {
+        $("#box").css({ "display": "none" });
+        $("#Mybox").css({ "display": "none" });
+        $("#bodyonline").css({ "overflow-y": "scroll" });
+        if (message == null) {
+            message = '失败！';
+        }
+        var n = noty({
+            text: message,
+           animation: {
+                open: { height: 'toggle' }, // jQuery animate function property object
+                close: { height: 'toggle' }, // jQuery animate function property object
+               easing: 'swing', // easing
+                speed: 500 // opening & closing animation speed
+            },
+            timeout: 3000,
+            maxVisible: 3,
+            dismissQueue: true,
+            closeWith: ['click', 'button', 'hover', 'backdrop'],  // backdrop click will close all notifications
+            type: 'error'
+        });
+    };
+    if ($.noty != null) {
+        $.noty.consumeAlert({
+            animation: {
+                open: { height: 'toggle' }, // jQuery animate function property object
+                close: { height: 'toggle' }, // jQuery animate function property object
+                easing: 'swing', // easing
+                speed: 500 // opening & closing animation speed
+            },
+            maxVisible: 3,
+            timeout: 1000,
+            dismissQueue: true,
+            closeWith: ['click', 'button', 'hover', 'backdrop'], // ['click', 'button', 'hover', 'backdrop'] // backdrop click will close all notifications
+            type: 'Warning'
+        });
+    }
+
+    var notySuccess = function (message) {
+        $("#box").css({ "display": "none" });
+        $("#Mybox").css({ "display": "none" });
+        $("#bodyonline").css({ "overflow-y": "scroll" });
+        if (message == null) {
+            message = '成功！';
+        }
+        //var n = noty({
+        //    text: message,
+        //    animation: {
+        //        open: { height: 'toggle' }, // jQuery animate function property object
+        //        close: { height: 'toggle' }, // jQuery animate function property object
+        //        easing: 'swing', // easing
+        //        speed: 500 // opening & closing animation speed
+        //    },
+        //    maxVisible: 3,
+        //    timeout: 1000,
+        //    dismissQueue: true,
+        //    closeWith: ['click', 'button', 'hover', 'backdrop'], // ['click', 'button', 'hover', 'backdrop'] // backdrop click will close all notifications
+        //    type: 'success'
+        //});
+    };
+
+    var notify = function(text, type) {
+        noty({
+            text: text,
+            animation: {
+                open: { height: 'toggle' }, // jQuery animate function property object
+                close: { height: 'toggle' }, // jQuery animate function property object
+                easing: 'swing', // easing
+                speed: 500 // opening & closing animation speed
+            },
+            timeout: 3000,
+            dismissQueue: true,
+            closeWith: ['click', 'button', 'hover', 'backdrop'], // ['click', 'button', 'hover', 'backdrop'] // backdrop click will close all notifications
+            type: type
+        });
+    };
+    var logOut = function() {
+
+        var allCookies = document.cookie.split(';');
+        //alert(allCookies.length);
+        for (var allCookiesIndex = 0; allCookiesIndex < allCookies.length; allCookiesIndex++) {
+            var cookie1 = allCookies[allCookiesIndex].split('=');
+            if (cookie1 != null && cookie1.length == 2) {
+                var cookieName = cookie1[0].trim();
+                $.cookie(cookieName, null, { expires: 1, path: '/' });
+            }
+        }
+        location.replace("/Pages/login.html");
+    };
+    
+    var url = "/api/Management/";
+    var get = "GET";
+    var post = "POST";
+    var put = "PUT";
+    //修改密码；
+    var modifyPassword = function (parameter) {
+        url = "/password";
+        callPutApi(url, parameter).done(function(data) {
+            if (data) {
+                alert("修改成功，即将退出，请重新登录！");
+
+                var allCookies = document.cookie.split(';');
+                //alert(allCookies.length);
+                logOut();
+//                for (var allCookiesIndex = 0; allCookiesIndex < allCookies.length; allCookiesIndex++) {
+//                    var cookie1 = allCookies[allCookiesIndex].split('=');
+//                    if (cookie1 != null && cookie1.length == 2) {
+//                        var cookieName = cookie1[0].trim();
+//                        $.cookie(cookieName, null, { expires: 1, path: '/' });
+//                    }
+//                }
+                location.replace("/Pages/login.html");
+            }
+        });
+    };
+    return {
+        LogOut: function() {
+            logOut();
+        },
+        ModifyPassword: function(parameter) {
+            modifyPassword(parameter);
+        },
+        ImageServerPath: "http://babybus.emolbase.com/",
+        ThumbServerPath: "http://image.emolbase.com/",
+        ThumbRule: "@1e_80w_80h_1c_0i_1o_1x.png",
+        AdvertiseIconRule: "@1e_300w_150h_1c_0i_1o_1x.png",
+        ThumbRule40: "@1e_40w_40h_1c_0i_1o_1x.png",
+        GetUrlParameterByName: function (name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(decodeURI(location.search));
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        },
+        ShowDiv: function () { return showDiv(); },
+        NotySuccess: function (message) { return notySuccess(message); },
+        NotyFailure: function (message) { return notyFailure(message); },
+        Notify: function (text, type) { return notify(text, type); },
+        //public method
+        CallApi: function (urlParam, method, dataParam) {
+            if (method === get) {
+                return callGetApi(urlParam, dataParam);
+            } else if (method === put) {
+                return callPutApi(urlParam, dataParam);
+            }
+            else if (method === post) {
+                return callPostApi(urlParam, dataParam);
+            }
+            else {
+                return callDeleteApi(urlParam, dataParam);
+            }
+        },
+        CallPostApi: function (urlParam, dataParam) {
+            return callPostApi(urlParam, dataParam);
+        },
+        CallDeleteApi: function (urlParam, dataParam) {
+            return callDeleteApi(urlParam, dataParam);
+        },
+        CallGetApi: function (urlParam, dataParam) {
+            return callGetApi(urlParam, dataParam);
+        },
+        CallPutApi: function (urlParam, dataParam) {
+            return callPutApi(urlParam, dataParam);
+        },
+        IsAdmin: function () {
+            return isAdmin();
+        },
+        CheckIsLogin: function () {
+            return checkIsLogin();
+        },
+        GetPermissionType: function () {
+            return getPermissionType();
+        },
+        HandlebarsHelp: function (templateIdSelector, context) {
+            return handlebarsHelp(templateIdSelector, context);
+        },
+        Login: function (data) {
+            //http://localhost:2391/authenticate/credentials?UserName=teacher1&Password=123456&RememberMe=true&&&&&&&&Meta=%7BRoleType%3A%22Teacher%22%7D
+            // /authenticate/credentials?UserName=teacher1&Password=123456&RememberMe=true&&&&&&&&Meta=%7BRoleType%3A%22Teacher%22%7D
+            url = "/authenticate/credentials";
+            return callGetApi(url, data);
+        },
+        SendNotice: function (data) {
+            url = "/notices/";
+            return callPostApi(url, data);
+        },
+
+        Redirect: function (paras, open) {
+            redirect(paras, open);
+        },
+        Refresh: function () {
+            window.location.reload();
+        },
+        DrawHeader: function () {
+            //检查是否登录
+            var isLogin = checkIsLogin();
+            if (!isLogin) {
+                location.replace("/Pages/login.html");
+                return;
+            }
+            var kindergartenServiceType = $.cookie("KindergarServiceType");
+            var loginUserName = $.cookie("LoginUserName");
+            var roleVal = $.cookie("Role");
+
+            var classIdVal = $.cookie("ClassId");
+            var kindergartenIdVal = $.cookie("KindergartenId");
+            var classNameVal = $.cookie("ClassName");
+            var kindergartenNameVal = $.cookie("KindergartenName");
+
+            if (loginUserName != null && loginUserName != "") {
+                loginUserName = " , " + loginUserName;
+            }
+            var roleName = "";
+
+            var permissionType = getPermissionType();
+            if (permissionType == 0) {//admin
+                roleName = "管理员";
+            } else if (permissionType == 5) {
+                roleName = "机构代理";
+            } else if (permissionType == 3) {
+                roleName = "园长";
+            }else if( permissionType == 4) {
+                roleName = "集团园长";
+            } else if (permissionType == 2) {
+                $.cookie("paraClassId", classIdVal);
+                roleName = kindergartenNameVal + "," + classNameVal + "教师";
+            } else if (permissionType == 1) {
+                roleName = "家长";
+            }
+
+            var welcomeWord = "您好 " + loginUserName;
+            $("#drawHeader").append("<div class='container' id='one'></div>");
+            if (permissionType == 5) {
+                $("#one").append("<a class='navbar-brand' href='/Pages/AgencyHome.html' id='helloWorldVal'>" +
+                "<img class='icon-home' src='/Pages/images/jion-logo.png' style='margin-top:0.6rem;float:left;'>"+ "</a>");
+            } else { 
+                $("#one").append("<a class='navbar-brand' href='/Pages/Home.html' id='helloWorldVal'>" +
+                  "<img class='icon-home' src='/Pages/images/jion-logo.png' style='margin-top:0.6rem;float:left;'>"+ "</a>");
+
+            }
+            $("#one").append("<a href='#' class='toggle-sidebar bs-tooltip' data-placement='bottom' data-original-title='左侧栏'> <i class='icon-reorder'></i> </a>");
+
+            $("#one").append("<ul class='nav navbar-nav navbar-left hidden-xs hidden-sm' id='ulContent'></ul>");
+
+            if (permissionType == 5) {
+                $("#ulContent").append("<li class='dropdown user' id='homePagesTab'><a href='/Pages/AgencyHome.html'>首页 </a></li>");
+                $("#ulContent").append("<li class='dropdown user'><a id='individualStId' href='/Pages/AgencyKindergartenList.html'>服务园所列表</a></li>");
+                $("#ulContent").append("<li class='dropdown user'><a id='importData' href='/Pages/Migration.html'>数据导入</a></li>");
+                $("#ulContent").append("<li class='dropdown user'><a id='Agency-WeChat-Accounts' href='/Pages/AgencyWeChatOfficialAccounts.html'>公众号</a></li>");
+            }
+       
+            $("#homePagesTab").append("");
+            //tab
+            //幼儿园【宝贝资料】<admian、园长、教师可以看>【园长信息】<admian可以看>【付费记录】<admian、园长可以看>
+            //机构代理可看
+            if (permissionType == 0 || permissionType == 5) {
+                //$("#ulContent").append("<li class='dropdown user' id='homePagesTab'><a href='/Pages/AgencyHome.html'>首页 </a></li>");
+                //$("#ulContent").append("<li class='dropdown user'><a id='individualStId' href='/Pages/AgencyKindergartenList.html'>幼儿园列表</a></li>");
+               
+               
+            }
+            if (permissionType == 0 || permissionType == 2 || permissionType == 3 || permissionType == 4) {//admin
+                //$("#ulContent").append("<li><a ></a></li>");
+                $("#ulContent").append("<li class='dropdown user' id='homePagesTab'><a href='/Pages/Home.html'>首页 </a></li>");
+                $("#ulContent").append("<li class='dropdown user' id='kindergartenTab'></li>");
+                $("#kindergartenTab").append("<a href='#' class='dropdown-toggle' data-toggle='dropdown'>" +
+                                        "幼儿园 " +
+                                        "<i class='icon-caret-down small'></i>" +
+                                      "</a>");
+                $("#kindergartenTab").append("<ul class='dropdown-menu' id='kindergartenTabDetail'></ul>");
+                $("#kindergartenTabDetail").append("<li><a href='/Pages/User.html'>宝贝资料</a></li>");
+              
+                if (permissionType == 0 || permissionType == 4) {
+                    $("#kindergartenTabDetail").append("<li><a href='/Pages/KinderPresidentInfo.html'>园长信息</a></li>");
+                }
+                /*暂时禁用管理员创建幼儿园功能*/
+//                if (permissionType == 0) {
+//                    $("#kindergartenTabDetail").append("<li><a href='/Pages/KindergartenManageNew.html'>幼儿园管理</a></li>");
+//                }
+            }
+
+            //考勤【考勤/月】【考勤/日】<admian、园长、教师可以看>
+            if (kindergartenServiceType == 0 || permissionType == 0) {
+                if (permissionType == 0 || permissionType == 2 || permissionType == 3 || permissionType == 4) {//admin
+                    $("#ulContent").append("<li class='dropdown user' id='attendanceTab'></li>");
+
+                    $("#attendanceTab").append("<a href='#' class='dropdown-toggle' data-toggle='dropdown'>" +
+                                            "考 勤 " +
+                                            "<i class='icon-caret-down small'></i>" +
+                                          "</a>");
+
+                    $("#attendanceTab").append("<ul class='dropdown-menu' id='attendanceTabDetail'></ul>");
+                    $("#attendanceTabDetail").append("<li><a id='attendanceDay' href='/Pages/AttendanceDayInfo.html'>考勤 / 天</a></li>");
+                    $("#attendanceTabDetail").append("<li><a id='attendanceInformation' href='/Pages/PrincipalAttClsInformationDetail.html'>考勤详情/月</a></li>");
+                }
+            }
+            //消息【消息统计】<admian、园长、教师可以看>【发送消息】<园长、教师可以看>【消息记录】<admian、园长、教师可以看>
+            //if (kindergartenServiceType == 0 || permissionType == 0) {
+            //    if (permissionType == 0 || permissionType == 1 || permissionType == 2 || permissionType == 3 || permissionType == 4) {//admin
+            //        $("#ulContent").append("<li class='dropdown user' id='noticeTab'></li>");
+
+            //        $("#noticeTab").append("<a href='#' class='dropdown-toggle' data-toggle='dropdown'>" +
+            //                                "消 息 " +
+            //                                "<i class='icon-caret-down small'></i>" +
+            //                              "</a>");
+            //        $("#noticeTab").append("<ul class='dropdown-menu' id='noticeTabDetail'></ul>");
+            //        $("#noticeTabDetail").append("<li><a id='SendMessageRecords' href='/Pages/SendMessageRecords.html'>消息记录</a></li>");
+            //        if (permissionType === 2 || permissionType === 3 || permissionType === 4) {
+            //            $("#noticeTabDetail").append("<li><a id='SendNotice' href='/Pages/SendNotice.html'>发送消息</a></li>");
+            //        }
+            //    }
+            //}
+            //多元智力【参数配置】【题目维护】【多元智力测评】<admian>
+                //if (permissionType == 0) {
+                //    $("#ulContent").append("<li class='dropdown user' id='duoyuanzhiliTab'></li>");
+
+                //    $("#duoyuanzhiliTab").append("<a href='#' class='dropdown-toggle' data-toggle='dropdown'>" +
+                //                            "多元智力  " +
+                //                            "<i class='icon-caret-down small'></i>" +
+                //                          "</a>");
+                //    $("#duoyuanzhiliTab").append("<ul class='dropdown-menu' id='duoyuanzhiliTabDetail'></ul>");
+                //    $("#duoyuanzhiliTabDetail").append("<li><a href='/Pages/ParameterConfiguration.html' target='_self'>参数配置</a></li>");
+                //    $("#duoyuanzhiliTabDetail").append("<li><a href='/Pages/InputTestQuestion.html' target='_self'>题目维护</a></li>");
+                //    $("#duoyuanzhiliTabDetail").append("<li><a href='/Pages/ParentsIntelligenceQuestion.html' target='_self'>多元智力测评</a></li>");
+                //    $("#duoyuanzhiliTabDetail").append("<li><a href='/Pages/MI_Guilde_Mobile.html' target='_self'>多元智力报告</a></li>");
+                //    $("#duoyuanzhiliTabDetail").append("<li><a href='/Pages/MiExportReport.html' target='_self'>导出报告</a></li>");
+                //    $("#duoyuanzhiliTabDetail").append("<li><a href='/Pages/TestMi.html' target='_self'>查看报告</a></li>");
+
+                //}
+            //体质检测<admian可查看>
+            if (permissionType == 0 || permissionType == 3 || permissionType == 4) {
+                $("#ulContent").append("<li class='dropdown user' id='physicalExaTab'></li>");
+                $("#physicalExaTab").append("<a href='#' class='dropdown-toggle' data-toggle='dropdown'>" +
+                                       "体质检测 " +
+                                       "<i class='icon-caret-down small'></i>" +
+                                     "</a>");
+
+                $("#physicalExaTab").append("<ul class='dropdown-menu' id='physicalExaDetailTab'></ul>");
+                if (permissionType == 3 || permissionType == 0 || permissionType == 4) {
+                    //$("#physicalExaDetailTab").append("<li><a id='individualStId' href='/Pages/physical/PhyExKinderAbstract.html'>园体测总览</a></li>");
+//                    $("#physicalExaDetailTab").append("<li><a id='individualStId' href='/Pages/ReliableTest/ReliableTestReport.html'>园体测总览</a></li>");
+                    $("#physicalExaDetailTab").append("<li><a id='individualStId' href='/Pages/ReliableTest/KindergartenAbstract.html'>园体测总览</a></li>");
+                    if (permissionType ==0) {
+                        $("#physicalExaDetailTab").append("<li><a id='individualStId' href='/Pages/physical/PhyExFileExport.html'>体测档案导出</a></li>");
+                    $("#physicalExaDetailTab").append("<li><a id='individualStId' href='/Pages/physical/ParentReportExport.html'>家长报告导出</a></li>");
+                    }
+                    if (permissionType == 0 || permissionType == 4) {
+                        $("#physicalExaDetailTab").append("<li><a id='individualStId' href='/Pages/ChildrenQuery.html'>幼儿数据核查</a></li>");
+                    }
+                }
+                if (permissionType == 4 || permissionType == 0) {
+                    $("#physicalExaDetailTab").append("<li><a id='individualStId' href='/Pages/physical/GroupPhyAbstract.html'>集团体测总览</a></li>");
+                }
+               
+                //$("#physicalExaDetailTab").append("<li><a id='individualStId' href='/Pages/physical/PhysicalPropose_Client.html'>体测建议（前端）</a></li>");
+                $("#physicalExaDetailTab").append("<li><a id='individualStId' href='/Pages/physical/PhyExPlan.html'>体质测评</a></li>");
+                if (permissionType == 0) {
+                    //$("#physicalExaDetailTab").append("<li><a id='physicalExaWeight' href='/Pages/PhyBodyMassIndex.html'>身高标准体重</a></li>");
+                    //$("#physicalExaDetailTab").append("<li><a id='individualStId' href='/Pages/physical/PhyIndividualStandard.html'>单项评分标准</a></li>");
+                    $("#physicalExaDetailTab").append("<li><a id='individualStId' href='/Pages/physical/PhyProMessage.html'>体测建议</a></li>");
+                    $("#physicalExaDetailTab").append("<li><a id='individualStId' href='/Pages/ImprovementProgram.html'>改善方案</a></li>");
+                }
+            }
+
+            //数据导入导出
+            if (permissionType == 3) {
+                $("#ulContent").append("<li class='dropdown user' id='dataTab'></li>");
+
+                $("#dataTab").append("<a href='#' class='dropdown-toggle' data-toggle='dropdown'>" +
+                                        "数据" +
+                                        "<i class='icon-caret-down small'></i>" +
+                                      "</a>");
+
+                $("#dataTab").append("<ul class='dropdown-menu' id='dataTabDetail'></ul>");
+                $("#dataTabDetail").append("<li><a href='/Pages/Migration.html'>数据导入</a></li>");
+//                $("#dataTabDetail").append("<li><a href='/Pages/PrincipalAttClsInformationDetail.html'>数据导出</a></li>");
+            }
+
+
+            //优贝小报<admin>
+            //if (permissionType == 0) {
+            //    $("#ulContent").append("<li class='dropdown user' id='adminNoticeTabloidId'></li>");
+            //    $("#adminNoticeTabloidId").append("<a href='#' class='dropdown-toggle' data-toggle='dropdown'>" +
+            //                           "优贝小报 " +
+            //                           "<i class='icon-caret-down small'></i>" +
+            //                         "</a>");
+            //    $("#adminNoticeTabloidId").append("<ul class='dropdown-menu' id='adminNoticeId'></ul>");
+            //    $("#adminNoticeId").append("<li><a id='sendAdminNoticeId' href='/Pages/SendAdminNoticeTab.html'>发送优贝小报</a></li>");
+            //    $("#adminNoticeId").append("<li><a id='sendAdminNoticeId' href='/Pages/SendSuperAdminNoticeTab.html'>超级优贝小报</a></li>");
+            //    $("#adminNoticeId").append("<li><a id='sendAdminNoticeId' href='/Pages/SendAdminNoticeDetail.html'>优贝小报记录</a></li>");
+            //}
+            ////广告配置<admin>
+            //if (permissionType == 0) {
+            //    $("#ulContent").append("<li class='dropdown user' id='businessTab'></li>");
+            //    $("#businessTab").append("<a href='#' class='dropdown-toggle' data-toggle='dropdown'>" +
+            //                           "商业" +
+            //                           "<i class='icon-caret-down small'></i>" +
+            //                         "</a>");
+
+            //    $("#businessTab").append("<ul class='dropdown-menu' id='businessDetailTab'></ul>");
+            //    $("#businessDetailTab").append("<li><a id='uploadAdvertisementPicture' href='/Pages/UploadAdvertisementPicture.html' target='_self'>广告配置</a></li>");
+            //    $("#businessDetailTab").append("<li><a id='BusinessCategory' href='/Pages/BusinessCategory.html' target='_self'>商业分类</a></li>");
+            //    $("#businessDetailTab").append("<li><a id='BusinessSummary' href='/Pages/BusinessSummary.html' target='_self'>商业信息</a></li>");
+            //    $("#businessDetailTab").append("<li><a id='BusinessSummary_Add' href='/Pages/BusinessSummary_Add.html' target='_self'>增加商业信息</a></li>");
+            //}
+            //反馈信息、反馈信息、数据导入、集团<admin>、知识库
+            if (permissionType == 0) {
+                $("#ulContent").append("<li class='dropdown user' id='group-menu-view'></li>");
+                $("#group-menu-view").append("<a href='#' class='dropdown-toggle' data-toggle='dropdown'>" +
+                                       "加盟商 " +
+                                       "<i class='icon-caret-down small'></i>" +
+                                     "</a>");
+                $("#group-menu-view").append("<ul class='dropdown-menu' id='group-menu'></ul>");      
+                $("#group-menu").append("<li><a  href='/Pages/AllianceList.html'>加盟商管理</a></li>");
+                //$("#group-menu").append("<li><a id='group-menu-kindergartenId' href='#'>集团幼儿园</a></li>");
+                //知识库
+                $("#ulContent").append("<li class='dropdown user' id='knowledge-base'></li>");
+              
+                $("#knowledge-base").append("<a href='#' class='dropdown-toggle' data-toggle='dropdown'>" +
+                                       "知识库 " +
+                                       "<i class='icon-caret-down small'></i>" +
+                                     "</a>");
+                $("#knowledge-base").append("<ul class='dropdown-menu' id='knowledge-base-menu'></ul>");
+                $("#knowledge-base-menu").append("<li><a href='/Pages/KnowledgeInfoList.html' target='_self'>知识库信息</a></li>");
+                $("#knowledge-base-menu").append("<li><a href='/Pages/KnowContentAdd.html' target='_self'>添加知识库内容</a></li>");
+                $("#ulContent").append("<li class='dropdown user' id='other-menu-view'></li>");
+                $("#other-menu-view").append("<a href='#' class='dropdown-toggle' data-toggle='dropdown'>" +
+                                       "其他 " +
+                                       "<i class='icon-caret-down small'></i>" +
+                                     "</a>");
+                $("#other-menu-view").append("<ul class='dropdown-menu' id='others-menu'></ul>");
+                $("#others-menu").append("<li><a href='/Pages/FeedbackRecords.html' target='_self'>反馈信息</a></li>");
+                $("#others-menu").append("<li><a href='/Pages/Migration.html' target='_self'>数据导入</a></li>");
+                $("#others-menu").append("<li><a id='deblockingUser' target='_self'>解锁用户</a></li>");
+                $("#others-menu").append("<li><a href='/Pages/physical/ChildLabelPrint.html' target='_self'>宝贝标签打印</a></li>");
+                $("#others-menu").append("<li><a href='/Pages/WebsiteLog.html' target='_self'>后台网站日志</a></li>");
+                $("#others-menu").append("<li><a href='/Pages/WxLog.html' target='_self'>微网站日志</a></li>");
+
+                
+            }
+            //退出
+            $("#one").append("<ul class='nav navbar-nav navbar-right' id='ul2Content'></ul>");
+            $("#ul2Content").append("<li class='dropdown user' id='hederLi'></li>");
+
+            $("#hederLi").append("<a href='#' class='dropdown-toggle' data-toggle='dropdown'>" +
+                                    "<i class='icon-male'></i>" +
+                                    "<span class='username'>" + roleName + "</span>" +
+                                    "<i class='icon-caret-down small'></i>" +
+                                  "</a>");
+
+            $("#hederLi").append("<ul class='dropdown-menu' id='permissionMenu'></ul>");
+            $("#permissionMenu").append("<li><a id='modify_password' href='/Pages/ModifyPassword.html'><i class='icon-user'></i> 修改密码</a></li>");
+            $("#permissionMenu").append("<li><a id='logout'><i class='icon-user'></i> 退出</a></li>");
+            $("#logout").click(
+                function () {
+                    logOut();
+                }
+            );
+            $("#deblockingUser").click(function() {
+                var isTrue = confirm("您确定要为用户解锁码？");
+                if (isTrue) {
+                    url = "/users/userAuth";
+                    callPutApi(url).done(function (data) {
+                        if (data) {
+                            alert("解锁成功");
+                        }
+                    });
+                }
+            });
+        },
+
+        GenertFeedback: function () {
+            //if (getPermissionType() == 0) {
+            //    return;
+            //}
+            $("#feedBackIdInfoId").css({ "z-index": "9" });
+            $("#feedBackIdInfoId").append("<div style='float:right;position:relative;top:10px;'><a id='openId' style='display:block'>" +
+                "<div style='overflow:hidden;position:relative; height:35px;padding:0 20px 0 15px; color:#FFF; line-height: 35px;vertical-align:middle;cursor:pointer;width: 170px; height: 30px;'><center><h3 style='position:relative;bottom:15px' id='opentitleId'></h3></center></div></a></div>");
+            $("#opentitleId").append("<img src='assets/img/leaving-message-icon.png' style='width:25px;float:left;position:relative;top:2px'/>");
+            $("#opentitleId").append("<label> 请给我们留言</label>");
+            $("#opentitleId").append("<i class='glyphicon glyphicon-triangle-bottom' aria-hidden='true' style='color:white;float:right'>∧</i>");
+            $("#feedBackIdInfoId").append("<div id='closeId' style='width:350px;height:255px;float:right;position: absolute; bottom: 25px; right: 23px;;display:none;background-color:#FFF'>" +
+                "<a id = 'closeIdFeedBackId'><center><h3 style='overflow:hidden;position:relative; height:35px;padding:0 20px 0 15px; color:#FFF; line-height: 35px; background: #4edb68;vertical-align:middle;cursor:pointer;position:relative;bottom:20px'id = 'closeInfoFeedBackId'></h3></center></a>");
+            $("#closeInfoFeedBackId").append("<img src='assets/img/leaving-message-icon2.png' style='width:25px;float:left;position:relative;top:7px'/>");
+            $("#closeInfoFeedBackId").append("<label> 请给我们留言</label>");
+            $("#closeInfoFeedBackId").append("<i class='glyphicon glyphicon-menu-down' aria-hidden='true' style='color:white;float:right;margin-top:2%'>∨</i>");
+            $("#closeId").append("<div style='position:relative;left:3%'id='feedBackInfoDataId'></div>");
+            $("#feedBackInfoDataId").append("<p style='font-size:15px;position:relative;bottom:19px'>请留言，我们会尽快联系您，谢谢！</p>");
+            $("#feedBackInfoDataId").append("<textarea id='feedbookId' style='position:relative;bottom:10px;width:95%;height:100px' placeholder='请输入您的问题'></textarea>");
+            $("#feedBackInfoDataId").append("<div><button class='btn' id='submitFeedBackBtn' style='  width: 150px;height: 43px; color: #fff;margin-left: 85px;margin-top:5px;background-color:#ff9400;font-size: 19px!important;' >留言</button></div>");
+            $("#openId").click(function() {
+                $("#openId").css({ "display": "none" });
+                $("#closeId").css({ "display": "block" });
+            });
+            $("#closeIdFeedBackId").click(function() {
+                $("#openId").css({ "display": "block" });
+                $("#closeId").css({ "display": "none" });
+            });
+            $("#submitFeedBackBtn").click(function () {
+                var feedInfoVal = $("#feedbookId").val();
+                if (feedInfoVal == null || feedInfoVal === "") {
+                    alert("请填写问题！");
+                    return;
+                }
+                var myDate = new Date();
+                var parameter = {
+                    UserId: $.cookie("UserId"),
+                    Content: feedInfoVal,
+                    CreatTime: myDate,
+                    Type: "Web",
+                    Name: "贝贝巴士后台网站",
+                    Status:0
+                };
+                url = "/feedbacks";
+                callPostApi(url, parameter).done(function(data) {
+                    alert("");
+                }).fail(function(data) {
+
+                });
+                //callPostApi(url, parameter).done(function (data) {
+                //        alert("留言成功！");
+                //        $("#feedbookId").val("");
+                //    notySuccess();
+                //}).fail(function (data) {
+                //    alert(data.message);
+                //});
+            });
+        },
+        CreateAdertisementPictures: function (normalPics) {
+            if (normalPics == null) {
+                alert("请选择一张图片！");
+                return;
+            }
+            var descriptionVal = $("#picDescriptionId").val();
+            if (descriptionVal == null) {
+                descriptionVal = "";
+            }
+            url = "/ec/advertisement/";
+            showDiv();
+            callPostApi(url, { NormalPics: normalPics, Description: descriptionVal }).done(function (data) {
+                alert("上传成功！");
+                redirect("UploadAdvertisementPicture.html");
+            }).fail(function (data) {
+                NotyFailure();
+            });
+        },
+
+        GenerAdvertisementDetailInfo: function () {
+            url = "/ec/advertisement/";
+            showDiv();
+            callGetApi(url).done(function (data) {
+                if (data.Results == null || data.Results.leght == 0) {
+                    alert("暂时无图片");
+                    return;
+                }
+                var advPic = [];
+                for (var i = 0; i < data.Results.length; i++) {
+                    var advPicVal = data.Results[i];
+                    var createTime = advPicVal.CreateTime.CharpStr2Date();
+                    var desprition = "-";
+                    if (advPicVal.Description != null
+                        && advPicVal.Description != "") {
+                        desprition = advPicVal.Description;
+                    }
+                    var item = {
+                        AdvertisementPicId: advPicVal.Id,
+                        imgUrl: "http://babybus.emolbase.com\/" + advPicVal.NormalPics,
+                        DetailTime: createTime,
+                        Desprition: desprition
+                    };
+                    // advPic.push(item);
+                    var html = handlebarsHelp("#advUploadPicId", item);
+                    $("#uploadPicId").append(html);
+
+                    if (advPicVal.IsUsed == 1) {
+                        $("#" + advPicVal.Id).attr("checked", true);
+                    } else {
+                        $("#img" + advPicVal.Id).css({ "opacity": "0.6" });
+                    }
+                }
+                notySuccess();
+            }).fail(function (data) {
+                alert(data.message);
+            });
+        },
+
+        UpdateAdvertisePictures: function () {
+            var checkedPicVal = $("input[name = 'name']:checkbox");
+            var checkedTrueVal = "";
+            var totalVal = $("#inputPicTotalId").val();
+            if (totalVal === "" || totalVal == null) {
+                totalVal = $("#inputPicTotalId").attr("placeholder");
+            }
+            var index = 0;
+            $(checkedPicVal).each(function () {
+                if ($(this).is("input:checked")) {
+                    checkedTrueVal += ($(this).attr("value")) + ",";
+                    index++;
+                }
+            });
+            checkedTrueVal = checkedTrueVal.substr(0, checkedTrueVal.length - 1);
+            if (index > totalVal) {
+                alert("您选择的图片超过规定数量，请重新选择使用的图片！");
+                return;
+            }
+            url = "/ec/advertisement";
+            showDiv();
+            callPutApi(url, { Ids: checkedTrueVal }).done(function (data) {
+                alert("提交成功");
+                redirect("UploadAdvertisementPicture.html");
+                notySuccess();
+            }).fail(function (data) {
+                alert("提交失败，请联系管理员！");
+                notyFailure();
+            });
+        }
+    };
+});

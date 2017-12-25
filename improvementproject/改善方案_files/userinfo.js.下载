@@ -1,0 +1,1005 @@
+﻿/*
+ * Core script to handle all userInfo specific things
+ */
+define(["utilities"], function (utilities) {
+    "use strict";
+    // 准备班级信息 User.html
+    var generateClasses = function () {
+        var kindergartenId = $.cookie("KindergartenId");
+        var kindergartenName = $.cookie("KindergartenName");
+
+        $("#test").text("kinId" + kindergartenId);
+        $("#kinName").text(kindergartenName);
+        $("#kinId").val(kindergartenId);
+        $("#allClassContent").empty();
+        var url = "/classes/";
+
+        //准备参数
+        var classTypeVal = $("#classTypeVal").val();
+        var requestPara = {
+            ClassType: classTypeVal,
+            KindergartenId: kindergartenId
+        };
+        utilities.ShowDiv();
+
+        var permissionType = utilities.GetPermissionType();
+        if (permissionType !== 2) {
+            $("#classTypeTab").css({ "display": "block" });
+            $("#parentClassTypeTab").attr({ "class": "tabbable tabbable-custom tabbable-full-width" });
+        }
+        utilities.CallGetApi(url, requestPara).done(function (data) {
+            $("#allClassContent").empty();
+            if (data.Total <= 0) {
+                utilities.NotySuccess();
+                alert("无数据");
+                return;
+            }
+            if (classTypeVal == -1) {
+                var html = utilities.HandlebarsHelp("#deleteClass-template", data.Results);
+                $("#allClassContent").append(html);
+            } else {
+                var html = utilities.HandlebarsHelp("#class-template", data.Results);
+                $("#allClassContent").append(html);
+            }
+            utilities.NotySuccess();
+        }).fail(function () {
+            utilities.NotyFailure();
+        });
+
+        //utilities.ShowDiv();
+    };
+
+    // 查询小孩教师信息userInfo.html
+    var generateChildTeacherInfo = function (data) {
+        if (data != null && data.Total >= 0) {
+            var htmlTeacher = utilities.HandlebarsHelp("#teachers-userinfo-template", data.Results);
+            $("#childTeacherInfo").append(htmlTeacher);
+        }
+    };
+
+    // 查询小孩家长信息userInfo.html
+    var generateChildParentInfo = function (data) {
+        if (data != null && data.Total >= 0) {
+            var htmlParent = utilities.HandlebarsHelp("#chidld_parents_template", data.Results);
+            $("#parentInfo2").append(htmlParent);
+        }
+    };
+
+    // 查询小孩基本信息userInfo.html
+    var generateChildInfomation = function (data) {
+        var childInfo = data.Results[0];
+
+        // 获取权限
+        var permissionType = utilities.GetPermissionType();
+        var htmlDeleteChild = utilities.HandlebarsHelp("#delectChildId", childInfo);
+        $("#delete_child_id").append(htmlDeleteChild);
+        // 管理员会显示一部分操作按钮
+        if (permissionType === 0) {
+            $("#editeChild").css({ "display": "block" });
+            $("#createUsers").css({ "display": "block" });
+            var childId = $.cookie("paraUserInfoChildId");
+            $("#delete" + childId).css({ "display": "block" });
+        }
+        var imageUrlVal = "images/defaultChildImage.png";
+        if (data == null || data.Total <= 0) {
+            alert("小孩信息有误.");
+            return;
+        }
+
+        // 显示小孩信息
+        $("#childNameHeader").text(childInfo.ChildName);
+        if (childInfo.ImageName != null && childInfo.ImageName.trim() != "") {
+            imageUrlVal = "http:\/\/babybus.emolbase.com\/" + childInfo.ImageName;
+        }
+        var image = {
+            imagUrl: imageUrlVal
+        }
+
+        // 小孩图片
+        var childimages = utilities.HandlebarsHelp("#imagesHtml", image);
+        $("#childInfo2").append(childimages);
+
+        // 小孩基本信息
+        var htmlChildren = utilities.HandlebarsHelp("#children-userinfo-template", childInfo);
+        $("#childInfo2").append(htmlChildren);
+        var childGender = $("#childGenderVal").val();
+
+        // 1是男， 2是女
+        if (childGender == 1) {
+           $("#childGender").html("<b>宝贝性别</b> ： 男");
+            $("input[name=Gender][value=1]").attr("checked", true);
+        } else {
+            $("#childGender").html("<b>宝贝性别</b> ： 女");
+            $("input[name=Gender][value=2]").attr("checked", true);
+        }
+        $("#kinName").val($.cookie("KindergartenName"));
+        $("#kinId").val($.cookie("KindergartenId"));
+        $("#childName").val(childInfo.ChildName);
+        $("#birthday").val(childInfo.Birthday.CharpStr2Date());
+        $("#selectClassName").val(childInfo.ClassId);
+        $("#childId").val(childInfo.ChildId);
+        $("input[type=radio][name=Gender]").iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue'
+        });
+        $("input[type=radio][name=Gender][value=" + childInfo.Gender + "]").iCheck('check');
+    };
+    var checkUserData = function (dataRoleType, userDataId, loginNameValidate) {
+        $("#" + loginNameValidate).text("已有用户id为{0},角色为{1}".myFormat(userDataId, dataRoleType));
+        $("#" + loginNameValidate).css({ "color": "#FF0000" });
+    };
+
+    var isShowCreateEditBtn = function (permissionType) {
+        var isShow = false;
+        if (permissionType === 0 || permissionType === 3 || permissionType === 4) {
+            isShow = true;
+        }
+        return isShow;
+    };
+
+    //集团用户及园长信息
+    var generateMastersInformation = function (parameter) {
+        //$("#kinName").text(kindergartenName);
+        $("#presidentInfoContent").empty();
+        if (parameter.KindergartenId == null) {
+            alert("信息缺失!");
+            return;
+        }
+        var url = "/users/";
+        utilities.ShowDiv();
+        //暂时不支持大园长
+
+        utilities.CallGetApi(url, parameter)
+            .done(function (data) {
+                if (data.Total <= 0) {
+                    alert("无园长信息");
+                    utilities.NotySuccess();
+                    return;
+                }
+                var presidentInfos = [];
+                for (var presidentIndex = 0; presidentIndex < data.Results.length; presidentIndex++) {
+                    var president = data.Results[presidentIndex];
+                    var item = {
+                        num: presidentIndex + 1,
+                        RealName: president.RealName,
+                        LoginName: president.LoginName,
+                        UserId: president.UserId,
+                        Phone: president.PhoneNumber
+                    };
+                    presidentInfos.push(item);
+                }
+                var htmlPresident = utilities.HandlebarsHelp("#presidentInfo-template", presidentInfos);
+                $("#presidentInfoContent").append(htmlPresident);
+                utilities.NotySuccess();
+            }).fail(function (data) {
+                utilities.NotyFailure();
+                console.log(data.message);
+            });
+    };
+
+    var generateSiderBarKindergartenInfo = function () {
+        var deferred = $.Deferred();
+        var permissionType = utilities.GetPermissionType();
+        var url = "/kindergartens";
+        var parameter;
+        if (permissionType === 4) {
+            //url = "/kindergartens/SuperHeadMaster/";
+            parameter = {
+                Cancel: false,
+                GroupId: $.cookie("GroupId")
+            }
+        } else {
+            parameter = {
+                Cancel: false
+            }
+        }
+        utilities.ShowDiv();
+        utilities.CallGetApi(url, parameter).done(function (data) {
+            var html = utilities.HandlebarsHelp("#navKindergartens-template", data.Results);
+            $("#navKindergartens").append(html);
+            var kindergartenId = $.cookie("KindergartenId");
+
+            if (kindergartenId == null || kindergartenId == 0) {
+                kindergartenId = $("#nav li:first").attr("kindergartenid");
+                var kindergartenName = $("#nav li:first").attr("kindergartenname");
+                var kindergartenRegionCode = data.Results[0].RegionCode;
+
+                $.cookie("KindergartenId", kindergartenId, { expires: 30, path: '/' });
+                $.cookie("KindergartenName", kindergartenName, { expires: 30, path: '/' });
+                $.cookie("KindergartenRegionCode", kindergartenRegionCode, { expires: 30, path: '/' });
+            }
+
+            deferred.resolve(data);
+            //utilities.NotySuccess();
+        }).fail(function (data) {
+            alert("加载左侧幼儿园信息失败,请退出后重新登录！");
+            deferred.reject();
+        });
+        return deferred.promise();
+    };
+    Handlebars.registerHelper('IsCancel', function (dataInfo) {
+        if (dataInfo) {
+            return "已删除";
+        } else {
+            return "";
+        }
+    });
+    var url = "";
+    var get = "GET";
+    var post = "POST";
+
+    return {
+        //User.html
+        GenerateMastersInformation: function (parameter) {
+            return generateMastersInformation(parameter);
+        },
+        //User.html 页面加载
+        GenerateSideBarAndClasses: function () {
+            var isLogin = utilities.CheckIsLogin();
+            if (!isLogin) {
+                location.replace("/Pages/login.html");
+                return;
+            }
+   
+            // 左侧幼儿园信息
+            generateSiderBarKindergartenInfo().done(function () {
+                $('#showKinNameInfo').fastLiveFilter('#nav');
+                // 准备班级信息
+                generateClasses();
+                utilities.NotySuccess();
+            });
+        },
+
+        // 切换班级类型 User.html
+        GetClassAndChildInfoByClassType: function () {
+            // 准备班级信息
+            generateClasses();
+        },
+
+        // 展开班级，查询班级对应的小孩信息 User.html
+        GenerateChildrenOfClass: function (classId, classType) {
+            // 收起所有的小孩信息div
+            var classDivs = $(".childInfoShowAndHideDiv");
+
+            if (classDivs.length > 0) {
+                for (var index = 0; index < classDivs.length; index++) {
+                    var obj = $("#" + classDivs[index].id);
+                    obj.css({ "display": "none" });
+                    $("#types" + classId).text("▼");
+                }
+            }
+
+            // Step1: 清除历史数据
+            $("#childContent" + classId).empty();
+
+            // Step2: 请求数据
+            var param = { ClassId: classId, ChildCancel: false };
+            if (classType == -1) {
+                param = { ClassId: classId }
+            }
+            url = "/children/";
+            utilities.ShowDiv();
+
+            $.when(utilities.CallGetApi(url, param)
+            ).done(function (data) {
+                if (data.Total <= 0) {
+                    alert("暂时没有数据");
+                    utilities.NotySuccess();
+                    return;
+                }
+                console.log(data)
+                // Step3: 改变符号[如果有数据才需要改变符号]
+                $("#childContent" + classId).css({ display: "block" });
+                $("#types" + classId).html("<a style='text-decoration: none;'>▲</a>");
+
+                // Step4: 对数据进行整理
+                var childInfos = data.Results;
+
+                var childInfoSum = [];
+                var childIndex = 1;
+
+
+
+               
+                for (var childInfosIndex = 0; childInfosIndex < childInfos.length; childInfosIndex++) {
+                    var childInfo = childInfos[childInfosIndex];
+                    var imgUrl = "images/defaultChildImage.png";
+
+
+                    var nowDate = new Date();
+                    var birthday = new Date(childInfo.Birthday.CharpStr2Date().replace(/-/g, '/'));
+                    var interval = nowDate - birthday;
+                    var age = Math.round(interval / 3600 / 365 / 1000 / 24 * 2) / 2;
+                    // 家长联系方式
+                    if (childInfo.PhoneNumber == null || childInfo.PhoneNumber.trim() == "") {
+                        childInfo.PhoneNumber = "-";
+                    }
+                    if (childInfo.RealName == null || childInfo.RealName.trim() == "") {
+                        childInfo.RealName = "-";
+                    }
+
+                    // 小孩图片
+                    if (childInfo.ImageName != null && childInfo.ImageName.trim() != "") {
+                        imgUrl = "http:\/\/babybus.emolbase.com\/" + childInfo.ImageName;
+                    }
+                    var childInfoSumItm = {
+                        childId: childInfo.ChildId,
+                        childName: childInfo.ChildName,
+                        classId: childInfo.ClassId,
+                        kindergartenId: childInfo.KindergartenId,
+                        childIndex: childIndex,
+                        //partenName: childInfo.RealName,
+                        //partenPhone: childInfo.PhoneNumber,
+                        gender: (childInfo.Gender == 1) ? childInfo.Gender="男" : childInfo.Gender="女",
+                        birthday: age,
+
+                        imgUrl: imgUrl
+                    };
+                    childInfoSum.push(childInfoSumItm);
+                } // loop childInfos end
+
+                var childInfoGrouped = _.groupBy(childInfoSum, function (childInfo) { return childInfo.childId; });
+                var childInfoUniq = _.uniq(childInfoSum, false, function (childInfo) { return childInfo.childId; });
+                var childsHtml = utilities.HandlebarsHelp("#childInfo-template", childInfoUniq);
+                $("#childContent" + classId).append(childsHtml);
+
+                utilities.NotySuccess();
+
+                _.each(childInfoGrouped, function (value, key, list) {
+                 
+                    var html = utilities.HandlebarsHelp("#parents-template", value);
+
+                    var d = new Drop({
+                        target: $("#btn" + key)[0],
+                        content: html,
+                        position: 'right middle',
+                        openOn: 'hover'
+                    });
+                });
+            }).fail(function (data) {
+                alert(data.message);
+                utilities.NotyFailure();
+            });
+        },
+        DeleteParent: function (id) {
+            var url = "/users/parents";
+            utilities.ShowDiv();
+            utilities.CallDeleteApi(url, { Id: id }).done(function () {
+                utilities.NotySuccess();
+                utilities.Redirect("UserInfo.html");
+            }).fail(function () {
+                utilities.NotyFailure();
+            });
+        },
+        // UserInfo.html，页面加载
+        GenerateChildInformation: function () {
+            var classId = utilities.GetUrlParameterByName("classId");
+            var childId = utilities.GetUrlParameterByName("childId");
+            //改成param
+            var classType = $.cookie("user_classType");
+            var kindergartenId = utilities.GetUrlParameterByName("kindergartenId");
+            if (classId == null || childId == null || kindergartenId == null) {
+                alert("信息缺失！");
+                return;
+            }
+            var permissionType = utilities.GetPermissionType();
+            url = "/kindergartens/";
+            if (permissionType === 4) {
+                url = "/kindergartens/SuperHeadMaster/";
+            }
+
+            // callApi
+            var childUrl = "/children/";
+            var teacherUrl = "/users/teachers/";
+            var masterUrl = "/users/masters/";
+            var parentUrl = "/children/";
+            var classUrl = "/classes";
+
+            //删除班
+            var callChild, callClass, callKindergartenInfo, callTeacher, callMaster, callParent;
+            if (classType == "-1") {
+                callClass = utilities.CallGetApi(classUrl, { KindergartenId: kindergartenId });
+                callChild = utilities.CallGetApi(childUrl, { ChildId: childId });
+                callTeacher = utilities.CallGetApi(teacherUrl, { ChildId: childId });
+                callMaster = utilities.CallGetApi(masterUrl, { ChildId: childId });
+                callParent = utilities.CallGetApi(parentUrl, { ChildId: childId });
+            } else {
+                callClass = utilities.CallGetApi(classUrl, { KindergartenId: kindergartenId, Cancel: false });
+                callChild = utilities.CallGetApi(childUrl, { ChildId: childId, ChildCancel: false });
+                callTeacher = utilities.CallGetApi(teacherUrl, { ChildId: childId, Cancel: false });
+                callMaster = utilities.CallGetApi(masterUrl, { ChildId: childId, Cancel: false });
+                callParent = utilities.CallGetApi(parentUrl, { ChildId: childId, Cancel: false });
+            }
+
+            utilities.ShowDiv();
+            $.when(callChild, callTeacher, callParent, callMaster, callClass)
+                .done(function (data2, data3, data4, masters, classes) {
+                    //孩子修改-班级信息
+                    var selectClsHtml = utilities.HandlebarsHelp("#selectClassesTemplate", classes[0].Results);
+                    $("#selectClsInfo").empty();
+                    $("#selectClsInfo").append(selectClsHtml);
+
+                    // 小孩基本信息
+                    generateChildInfomation(data2[0]);
+
+
+                    // 小孩教师信息
+                    //generateChildTeacherInfo(data3[0]);
+
+                    // 小孩家长信息
+                    //generateChildParentInfo(data4[0]);
+
+                    //园长信息
+                    //var htmlPresident = utilities.HandlebarsHelp("#president-userinfo-template", masters[0].Results);
+                    //$("#presidentInfo").append(htmlPresident);
+
+                    utilities.NotySuccess();
+                }).fail(function (data1, data2, data3, data4) {
+                    alert("查询发生错误");
+                    utilities.Redirect("User.html");
+                });
+        },
+        // 切换幼儿园
+        GetClassAndChildInfo: function (kinId, kinName) {
+            //检查是否登录
+            var isLogin = utilities.CheckIsLogin();
+            if (!isLogin) {
+                location.replace("/Pages/login.html");
+                return;
+            }
+
+            var allLi = $("#navKindergartens li");
+            for (var liIndex = 0; liIndex < allLi.length; liIndex++) {
+                $("#" + allLi[liIndex].id).removeClass("current");
+                $("#" + allLi[liIndex].id).css({ "background": "" });
+            }
+            $("#" + kinId).addClass("current");
+            $("#" + kinId).css({ "background": "#00bcab" });
+            generateClasses();
+        },
+        // 准备左侧幼儿园信息
+        GenerateSiderBarKindergartenInfo: function () {
+            return generateSiderBarKindergartenInfo();
+        },
+        GenerateCreateTeacherInfo: function () {
+            //检查是否登录
+            var isLogin = utilities.CheckIsLogin();
+            if (!isLogin) {
+                location.replace("/Pages/login.html");
+                return;
+            }
+
+            //准备幼儿园信息
+            var kindergartenId = $.cookie("KindergartenId");
+            var kindergartenName = $.cookie("KindergartenName");
+            $("#kinId").val(kindergartenId);
+            $("#kinName").val(kindergartenName);
+            //准备班级信息
+            var classId = $.cookie("paraAddTeacherClsId");
+            var className = $.cookie("paraAddTeacherClsName");
+            $("#clsName").val(className);
+            $("#clsId").val(classId);
+        },
+        ResetChildParentPassword: function (userId) {
+            url = "/password/initial/";
+            utilities.CallPutApi(url, { UserId: userId }).done(function (data) {
+                alert("重置密码成功！");
+            }).fail(function (data) {
+                alert("重置密码失败！");
+            });
+        },
+        GetCheckInfo: function (loginNameValidate, submitBtnId, loginNameId) {
+            //检查是否登录
+            var isLogin = utilities.CheckIsLogin();
+            if (!isLogin) {
+                location.replace("/Pages/login.html");
+                return;
+            }
+
+            var loginNameVal = $("#" + loginNameId).val();
+            $("#" + submitBtnId).attr("disabled", false);
+            if (loginNameVal == null || loginNameVal == "") {
+                $("#" + loginNameValidate).css({ "color": "#FF0000" });
+                $("#" + loginNameValidate).text("请填写用户名!");
+                $("#" + submitBtnId).attr("disabled", true);
+                return;
+            }
+            url = "/users/";
+
+            utilities.CallGetApi(url, { LoginName: loginNameVal }).done(function (data) {
+                if (data.Total !== 0) {
+                    $("#" + submitBtnId).attr("disabled", true);
+                    var oldUser = data.Results[0];
+                    var checkParentRoleType = oldUser.RoleType;
+                    var checkParentUserId = oldUser.UserId;
+                    if (checkParentRoleType == 1) {
+                        utilities.CallGetApi("/children", { UserId: checkParentUserId })
+                            .done(function (childres) {
+                                var child = childres.Results[0];
+                                $("#" + loginNameValidate).text("已有用户,角色:家长，孩子姓名:{0}，班级:{1},幼儿园:{2}"
+                                    .myFormat(child.ChildName, child.ClassName, child.KindergartenName));
+                                $("#" + loginNameValidate).css({ "color": "#FF0000" });
+                            });
+                    } else {
+                        checkUserData(checkParentRoleType, checkParentUserId, loginNameValidate);
+                    }
+                } else {
+                    $("#" + submitBtnId).removeAttr("disabled");
+                    $("#" + loginNameValidate).css({ "color": "blue" });
+                    $("#" + loginNameValidate).text("用户名可用！");
+                    $("#" + submitBtnId).attr("disabled", false);
+                }
+            }).fail(function (data) {
+            });
+        },
+        CreateParent: function (param) {
+            var url = "/users";
+            param.roleType = 1;
+            param.passWord = "123456";
+
+            utilities.ShowDiv();
+            utilities.CallPostApi(url, param).done(function (data) {
+                utilities.NotySuccess();
+            }).fail(function (data) {
+                utilities.NotyFailure();
+            });
+        },
+        DeleteTeacher: function (userId) {
+            var url = "/users/teachers";
+            utilities.ShowDiv();
+            utilities.CallDeleteApi(url, { Id: userId }).done(function (data) {
+                alert("删除成功！");
+                utilities.Redirect("showEditTeacherInfo.html");
+            }).fail(function (data) {
+                utilities.NotyFailure();
+            });
+        },
+        CreateTeacher: function () {
+            var passWord = "123456";
+            var roleType = 2;
+            var kindergartenId = $.cookie("KindergartenId");
+            var teacherUserLoginNameVal = $("#loginName").val();
+            var teacherUserRealNameVal = $("#realName").val();
+            var teacherUserClassIdChooseVal = $("#clsId").val();
+            var phoneTeacherVal = $("#phoneTeacher").val();
+            if (teacherUserLoginNameVal == null || teacherUserLoginNameVal == ""
+                || teacherUserRealNameVal == null || teacherUserRealNameVal == ""
+                || teacherUserClassIdChooseVal == "" || teacherUserClassIdChooseVal == "-1"
+                || phoneTeacherVal == null || phoneTeacherVal == "") {
+                alert("信息填写不完整!");
+                $("#create_teacher_user_info").attr("disabled", false);
+                return;
+            }
+            utilities.ShowDiv();
+            url = "/users/";
+            utilities.CallPostApi(url, {
+                KindergartenId: kindergartenId,
+                LoginName: teacherUserLoginNameVal,
+                RealName: teacherUserRealNameVal,
+                ClassId: teacherUserClassIdChooseVal,
+                Password: passWord,
+                RoleType: roleType,
+                PhoneNumber: phoneTeacherVal
+            }).done(function (data) {
+                if (data !== null) {
+                    alert("添加成功！");
+                    $("#create_teacher_user_info").attr("disabled", true);
+                    utilities.Redirect("User.html");
+                } else {
+                    alert("添加失败！");
+                    $("#create_teacher_user_info").attr("disabled", false);
+                }
+            }).fail(function (data) {
+                utilities.NotyFailure();
+            });
+        },
+        GenerateEditClassTeacherInfo: function () {
+            var classId = $.cookie("paraShowTeacherInfoClsId");
+            var className = $.cookie("paraShowTeacherInfoClsName");
+            var kindergartenId = $.cookie("KindergartenId");
+            var kindergartenName = $.cookie("KindergartenName");
+
+            if (classId == null) {
+                alert("权限不足！");
+                location.replace("/Pages/login.html");
+                return;
+            }
+            $("#editTeacherInfoKinName").text(kindergartenName);
+            $("#classNameHeader").text(className);
+            var permissionType = utilities.GetPermissionType();
+            var isShow = isShowCreateEditBtn(permissionType);
+            if (!isShow) {
+                alert("权限不足");
+                location.replace("/Pages/login.html");
+                return;
+            }
+            url = "/users";
+            utilities.ShowDiv();
+            utilities.CallGetApi(url, {
+                KindergartenId: kindergartenId
+                , ClassId: classId
+                , RoleType: 2
+            }).done(function (dataClass) {
+                if (dataClass.Results == null || dataClass.Results.length === 0) {
+                    utilities.NotySuccess();
+                    alert("未查询到教师信息!");
+                    return;
+                }
+                var htmlTeacher = utilities.HandlebarsHelp("#showEditTeacherInfoHtml", dataClass.Results);
+                $("#showEditTeacherInfo").append(htmlTeacher);
+                utilities.NotySuccess();
+            }).fail(function () {
+                utilities.NotyFailure();
+            });
+        },
+        GenerateCreateChildInfo: function () {
+            //检查是否登录
+            var isLogin = utilities.CheckIsLogin();
+            if (!isLogin) {
+                location.replace("/Pages/login.html");
+                return;
+            }
+
+            //准备幼儿园信息
+            var kindergartenId = $.cookie("KindergartenId");
+            var kindergartenName = $.cookie("KindergartenName");
+            $("#kinId").val(kindergartenId);
+            $("#kinName").val(kindergartenName);
+            //准备班级信息
+            var classId = $.cookie("paraAddChildClsId");
+            var className = $.cookie("paraAddChildClsName");
+            $("#clsName").val(className);
+            $("#clsId").val(classId);
+        },
+        CreateChild: function () {
+            //检查是否登录
+            var isLogin = utilities.CheckIsLogin();
+            if (!isLogin) {
+                location.replace("/Pages/login.html");
+                return;
+            }
+
+            url = "/children/";
+            var childName = $("#childName").val();
+            var kindergartenId = $.cookie("kindergartenIds");
+            var classIdChoos = $("#selectClassName").val();
+            var obj = $("#create_child").serializeObject();
+
+            utilities.CallPostApi(url, obj)
+                .done(function (data) {
+                    if (data) {
+                        alert("添加成功！");
+                    } else {
+                        alert("添加失败！");
+                    }
+                }).fail(function (data) {
+                    alert(data.message);
+                });
+        },
+        CreateClass: function () {
+            //检查是否登录
+            var isLogin = utilities.CheckIsLogin();
+            if (!isLogin) {
+                location.replace("/Pages/login.html");
+                return;
+            }
+            var kindergartenId = $.cookie("KindergartenId");
+            var className = $("#edit_className").val();
+            var classType = $("#classType").val();
+            if (className == null || className == "" || kindergartenId == null || classType == null) {
+                alert("请填写完整信息！");
+                return;
+            }
+            url = "/classes/";
+            utilities.ShowDiv();
+
+            utilities.CallPostApi(url, {
+                KindergartenId: kindergartenId,
+                ClassName: className,
+                ClassType: classType
+            }).done(function (data) {
+                if (data !== null) {
+                    alert("添加成功！");
+                    $.cookie("addClassInfo_classType", classType, { expires: 1, path: '/' });
+                    utilities.Redirect("User.html");
+                } else {
+                    alert("添加失败！");
+                }
+                utilities.NotySuccess();
+            }).fail(function (data) {
+                utilities.NotyFailure();
+            });
+        },
+        UpdateChild: function (data) {
+            var url = "/children";
+            utilities.ShowDiv();
+
+            utilities.CallPutApi(url, data).done(function (data) {
+                utilities.NotySuccess();
+                location.reload(true);
+            }).fail(function (data) {
+                utilities.NotyFailure();
+            });
+        },
+        UpdateUser: function (data) {
+            var url = "/users";
+            utilities.ShowDiv();
+
+            utilities.CallPutApi(url, data).done(function (data) {
+                utilities.NotySuccess();
+                location.replace(document.referrer);
+            }).fail(function (data) {
+                utilities.NotyFailure();
+            });
+        },
+        UpdateClass: function () {
+            //检查是否登录
+            var isLogin = utilities.CheckIsLogin();
+            if (!isLogin) {
+                location.replace("/Pages/login.html");
+                return;
+            }
+
+            var kindId = $.cookie("KindergartenId");
+            var clsId = $.cookie("paraShowInfoClsId");
+            var clsName = $("#edit_className").val();
+            var clsType = $("#classType").val();
+            if (clsName == null
+                || clsName === ""
+                || clsType == null) {
+                alert("请填写完整信息！");
+                return;
+            }
+            url = "/Classes/";
+            utilities.ShowDiv();
+            utilities.CallPutApi(url, {
+                ClassType: clsType,
+                KindergartenId: kindId,
+                ClassName: clsName,
+                Id: clsId
+            }).done(function (data) {
+                alert("修改成功！");
+                utilities.NotySuccess();
+                $("#edit_classes_info").attr("disabled", true);
+                $.cookie("addClassInfo_classType", clsType, { expires: 1, path: '/' });
+                utilities.Redirect("User.html");
+            }).fail(function (data) {
+                utilities.NotyFailure();
+                alert("修改失败！班级名称重复或者网络有问题！");
+            });
+        },
+        CheckClassName: function () {
+            //检查是否登录
+            var isLogin = utilities.CheckIsLogin();
+            if (!isLogin) {
+                location.replace("/Pages/login.html");
+                return;
+            }
+
+            var kindId = $.cookie("KindergartenId");
+            var clsId = $.cookie("paraShowInfoClsId");
+            var clsName = $("#edit_className").val();
+            if (clsName == null || clsName == "") {
+                $("#checkInformation").css({ "color": "#FF0000" });
+                $("#checkInformation").text("请填写完整信息!");
+                $("#edit_classes_info").attr("disabled", true);
+                return;
+            }
+            url = "/Classes/";
+
+            utilities.CallGetApi(url, { KindergartenId: kindId, ClassName: clsName }).done(function (data) {
+                if (data.Total !== 0) {
+                    $("#checkInformation").css({ "color": "#FF0000" });
+                    $("#checkInformation").text("班级名称重复，请重新填写!");
+                    $("#edit_classes_info").attr("disabled", true);
+                } else {
+                    $("#checkInformation").css({ "color": "blue" });
+                    $("#checkInformation").text("班级名称正确！");
+                    $("#edit_classes_info").attr("disabled", false);
+                }
+            }).fail(function (data) {
+                alert(data.message);
+            });
+        },
+
+        DeleteChild: function (classIdVal, kindIdVal, childIdVal) {
+            //检查是否登录
+            var isLogin = utilities.CheckIsLogin();
+            if (!isLogin) {
+                location.replace("/Pages/login.html");
+                return;
+            }
+
+            var url = "/children";
+            utilities.ShowDiv();
+            utilities.CallDeleteApi(url, { Id: childIdVal }).done(function (data) {
+                alert("删除成功！");
+                $("#delete" + childIdVal).attr("disabled", true);
+                utilities.Redirect("User.html");
+                utilities.NotySuccess();
+            }).fail(function (data) {
+                utilities.NotyFailure();
+            });
+        },
+        DeleteClass: function (classId, className) {
+            //检查是否登录
+            var isLogin = utilities.CheckIsLogin();
+            if (!isLogin) {
+                location.replace("/Pages/login.html");
+                return;
+            }
+
+            var url = "/Classes/";
+            utilities.ShowDiv();
+            var newClassName = className + "-删除";
+
+            utilities.CallPutApi(url, { Id: classId, ClassName: newClassName, Cancel: 1, ClassType: -1 }).done(function (data) {
+                alert("删除成功!");
+                var clsTypeVal = -1;//已毕业,删除
+                $.cookie("addClassInfo_classType", clsTypeVal, { expires: 1, path: '/' });
+                utilities.Redirect("User.html");
+            }).fail(function (data) {
+                utilities.NotySuccess();
+                alert("异常：" + data.message);
+            });
+        },
+        //班级毕业
+        ClassGraduate: function (classId, className) {
+            //检查是否登录
+            var isLogin = utilities.CheckIsLogin();
+            if (!isLogin) {
+                location.replace("/Pages/login.html");
+                return;
+            }
+            var d = new Date();
+            var newClsName = d.getFullYear() + "级" + className + "(已毕业)";
+            var url = "/classes/";
+            utilities.ShowDiv();
+            utilities.CallPutApi(url, { Id: classId, ClassName: newClsName, ClassType: -1 }).done(function (data) {
+                alert("修改成功!");
+                utilities.Redirect("User.html");
+            }).fail(function (data) {
+                utilities.NotyFailure();
+                alert("修改失败！");
+            });
+        },
+        //集团信息
+        GenerateGroupManage: function (parameter) {
+            url = "/groupManage";
+            utilities.ShowDiv();
+            return utilities.CallGetApi(url, parameter);
+        },
+        //添加集团信息
+        GenerateCreateGroupInfo: function (parameter) {
+            url = "/groupManage/createGroupInfo";
+            utilities.ShowDiv();
+            utilities.CallPutApi(url, parameter).done(function (data) {
+                if (data) {
+                    alert("添加成功");
+                } else {
+                    alert("添加失败");
+                }
+                utilities.Redirect("GroupManage.html");
+                utilities.NotySuccess();
+            }).fail(function () {
+                utilities.NotyFailure();
+            });
+        },
+        //修改集团信息
+        GenerateUpdateGroupInfo: function (parameter) {
+            url = "/groupManage/updateGroupInfo";
+            utilities.ShowDiv();
+            utilities.CallPostApi(url, parameter).done(function (data) {
+                if (data) {
+                    alert("修改成功");
+                    utilities.Redirect("GroupManage.html");
+                }
+                utilities.NotySuccess();
+            }).fail(function (data) {
+                utilities.NotyFailure();
+            });
+        },
+        //删除集团信息
+        GenerateDeleteGroupInfo: function (parameter) {
+            url = "/groupManage/deleteGroupInfo";
+            utilities.ShowDiv();
+            utilities.CallPostApi(url, parameter).done(function () {
+                alert("删除成功");
+                utilities.Redirect("GroupManage.html");
+                utilities.NotySuccess();
+            }).fail(function () {
+                utilities.NotyFailure();
+            });
+        },
+        //创建集团用户
+        GenerateCreateGroupUsers: function (parameter) {
+            parameter.KindergartenId = 0;
+            parameter.RoleType = 4;
+            parameter.Password = "123456";
+            parameter.GroupId = utilities.GetUrlParameterByName("id");
+            var url = "/users/";
+            utilities.ShowDiv();
+            utilities.CallPostApi(url, parameter).done(function (data) {
+                alert("添加成功");
+                utilities.Redirect("GroupUsers.html?id=" + utilities.GetUrlParameterByName("id") + "&groupName=" + utilities.GetUrlParameterByName("groupName"));
+            });
+        },
+        //集团幼儿园列表
+        GenerateGroupKindergarList: function () {
+            var url = "/kindergartens/";
+            //url = "/kindergartens/SuperHeadMaster/";
+            utilities.ShowDiv();
+            var parameter = {
+                Cancel: false,
+                GroupId: utilities.GetUrlParameterByName("id")
+            }
+            return utilities.CallGetApi(url, parameter);
+        },
+        //加载幼儿园
+        GenerateKindergartenInformation: function () {
+            url = "/kindergartens/";
+            var parameter = {
+                Cancel: false
+            }
+            utilities.ShowDiv();
+            utilities.CallGetApi(url, parameter).done(function (data) {
+                if (data.Total <= 0) {
+                    alert("没有幼儿园信息！");
+                    utilities.NotySuccess();
+                    return;
+                }
+                var html = utilities.HandlebarsHelp("#kindergarten-information-list", data.Results);
+                $("#kindergartenList").append(html);
+                $("#kindergartenList").select2({
+                    placeholder: "输入幼儿园……",
+                    allowClear: true
+                });
+                document.getElementById('add-old-kindergarten').click();
+                utilities.NotySuccess();
+            }).fail(function () {
+                utilities.NotyFailure();
+            });
+
+        },
+        GenerateUpdateGroupOldKgInfo: function () {
+            url = "/kindergartens/updateGroupOldKg";
+            var parameter = {
+                KindergartenId: ($("#kindergartenList").val()).toString(),
+                GroupId: utilities.GetUrlParameterByName("id")
+            }
+            utilities.ShowDiv();
+            utilities.CallPostApi(url, parameter).done(function (data) {
+                if (data) {
+                    alert("添加成功！");
+                }
+                utilities.NotySuccess();
+                location.reload(true);
+            }).fail(function () {
+                utilities.NotyFailure();
+            });
+        },
+        GenerateModifyPassword: function (parameter) {
+            url = "/password";
+            utilities.ShowDiv();
+            utilities.CallPutApi(url, parameter).done(function (data) {
+                if (data) {
+                    alert("修改成功，即将退出，请重新登录！");
+
+                    var allCookies = document.cookie.split(';');
+                    //alert(allCookies.length);
+                    for (var allCookiesIndex = 0; allCookiesIndex < allCookies.length; allCookiesIndex++) {
+                        var cookie1 = allCookies[allCookiesIndex].split('=');
+                        if (cookie1 != null && cookie1.length == 2) {
+                            var cookieName = cookie1[0].trim();
+                            $.cookie(cookieName, null, { expires: 1, path: '/' });
+                        }
+                    }
+                    utilities.Redirect("login.html");
+                }
+                utilities.NotySuccess();
+            }).fail(function () {
+                utilities.NotyFailure();
+            });
+        }
+    };
+});

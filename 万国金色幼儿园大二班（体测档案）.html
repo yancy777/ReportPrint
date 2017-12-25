@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>幼儿园体测档案</title>
+    <link href="http://cdn.imreliable.net/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="http://cdn.imreliable.net/asset/css/physical-exam-report.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://cdn.imreliable.net/jquery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="http://cdn.imreliable.net/bootstrap/js/bootstrap.min.js"></script>
+    <script src="http://cdn.bootcss.com/underscore.js/1.8.3/underscore.js"></script>
+    <script src="http://cdn.bootcss.com/handlebars.js/4.0.6/handlebars.min.js"></script>
+    <!--High Chart-->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <!--<script src="https://code.highcharts.com/modules/exporting.js"></script>-->
+    <style>
+        .col-md-3,
+        .col-sm-3,
+        .col-xs-3 {
+            padding-left: 5px !important;
+            padding-right: 5px !important;
+        }
+
+        table {
+            margin-top: 5%;
+        }
+
+        tr {
+            height: 6rem !important;
+            line-height: 40px;
+        }
+
+        .table > thead > tr > th,
+        .table > tbody > tr > th,
+        .table > tfoot > tr > th,
+        .table > thead > tr > td,
+        .table > tbody > tr > td,
+        .table > tfoot > tr > td {
+            padding: 0 0;
+            padding-top: 2.1%;
+        }
+
+        .table-border {
+            border: 1px solid #333;
+            /*height: 50px;
+            line-height: 50px;*/
+        }
+
+        .container {
+            width: 1170px !important;
+        }
+
+        .report-titles {
+            padding-top: 5%;
+            font-size: 30px;
+        }
+
+        label {
+            font-weight: 400;
+        }
+
+        .report-content {
+            font-size: 20px !important;
+            margin-top: 1% !important;
+        }
+
+        .base-info {
+            line-height: 3rem !important;
+        }
+
+        .foot-content {
+            margin-top: 3% !important;
+        }
+    </style>
+<script type="text/x-handlebars-template" id="content-html">
+        {{#each this}}
+        <div class="container page-break-before">
+            <p class="row text-center report-titles">
+                <label>睿莱园所儿童体质档案</label>
+            </p>
+            <div class="report-content">
+                <div class="base-info">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-right">姓名：</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-left">{{ChildName}}</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-right">性别：</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-left">{{Gender}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-right">年龄：</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-left">{{AgeGroup}}岁</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-right">班级：</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-left">{{ClassName}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-right">生日：</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-left">{{BirthDate}}</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-right">测试日期：</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-left">{{TestDate}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-right">检测编号：</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-left">{{TestCode}}</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-right">幼儿园：</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-left">{{KindergartenName}}</div>
+                    </div>
+                </div>
+                <div style="width: 100% !important">
+                    <table class="table table-bordered text-center" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <td style="width: 20%">内容</td>
+                                <td style="width: 30%">测试指标</td>
+                                <td style="width: 25%">测试值</td>
+                                <td style="width: 25%">评分</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="2" style="padding-top: 4% !important">形态</td>
+                                <td>身高（厘米）</td>
+                                <td>{{Height}}</td>
+                                <td>{{HeightScore}}</td>
+                            </tr>
+                            <tr>
+                                <td>身高标准体重（千克）</td>
+                                <td>{{Weight}}</td>
+                                <td>{{WeightScore}}</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="6" style="padding-top: 14%">素质</td>
+                                <td>10米折返跑（秒）</td>
+                                <td>{{ShuttleRun}}</td>
+                                <td>{{ShuttleRunScore}}</td>
+                            </tr>
+                            <tr>
+                                <td>坐位体前屈（厘米）</td>
+                                <td>{{SitReach}}</td>
+                                <td>{{SitReachScore}}</td>
+                            </tr>
+                            <tr>
+                                <td>立定跳远（厘米）</td>
+                                <td>{{BroadJump}}</td>
+                                <td>{{BroadJumpScore}}</td>
+                            </tr>
+                            <tr>
+                                <td>双脚连续跳（秒）</td>
+                                <td>{{DoubleJump}}</td>
+                                <td>{{DoubleJumpScore}}</td>
+                            </tr>
+                            <tr>
+                                <td>网球掷远（米）</td>
+                                <td>{{Throw}}</td>
+                                <td>{{ThrowScore}}</td>
+                            </tr>
+                            <tr>
+                                <td>走平衡木（秒）</td>
+                                <td>{{Balance}}</td>
+                                <td>{{BalanceScore}}</td>
+                            </tr>
+                            <tr>
+                                <td>综合评级</td>
+                                <td>{{gradeResult GradeResult}}</td>
+                                <td>总分</td>
+                                <td>{{TotalScore}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-left">
+                                    <label style="width:100%;margin-top: 10%;padding-left: 30px;padding-right: 30px;line-height:28px">
+                                        {{{commentContent CommentContent}}}
+                                        <br /><br />
+                                        身体素质测试评分与幼儿的【动作发展】、【运动心理】密切相关，例如网球掷远代表孩子上肢力量与腰腹力量的素质，但与此同时也代表着孩子的投掷动作发展情况。
+                                        <br /><br />
+                                        得分仅供参考，如需了解进一步详细的情况请与中心工作人员联系。
+                                    </label>
+                                </td>
+                                <td colspan="2">
+                                    <label id="summary-chart-{{Id}}">
+                                    </label>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row foot-content">
+                        <p style="float: left; position: relative; left: 2%;">*X代表该幼儿因心理或动作发展因素未参与该项测试，故无法记录测试值</p>
+                        <p style="float: right; position: relative; right: 2%;">检测站：{{TestingStation}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </script>
+    <script type="text/javascript">
+			var rTProjectCorrespondence = {
+				'HeightScore': 1,
+				'WeightScore': 2,
+				'BroadJumpScore': 4,
+				'DoubleJumpScore': 5,
+				'ThrowScore': 7,
+				'BalanceScore': 8,
+				'SitReachScore': 3,
+				'ShuttleRunScore': 6
+			};
+			var gradeContent = function(totalScore) {
+				var gradeContent = "";
+				if(totalScore >= 32) {
+					gradeContent = "优秀";
+				} else if(totalScore >= 28 && totalScore <= 31) {
+					gradeContent = "良好";
+				} else if(totalScore >= 20 && totalScore <= 27) {
+					gradeContent = "合格";
+				} else {
+					gradeContent = "不合格";
+				}
+				return gradeContent;
+			}
+			var RTPhysicalProject = {
+				"1": "身高",
+				"2": "体重",
+				"3": "坐位体前屈",
+				"4": "立定跳远",
+				"5": "双脚连续跳",
+				"6": "十米折返跑",
+				"7": "网球掷远",
+				"8": "走平衡木",
+				"9": "位移能力",
+				"10": "物体控制能力"
+			};
+			var recordItemComment = function(dataArr) {
+				var projectContent = "";
+
+				for(var i = 0, l = dataArr.length; i < l; i++) {
+					if(i == l - 1) {
+						projectContent += RTPhysicalProject[dataArr[i]];
+					} else {
+						projectContent += (RTPhysicalProject[dataArr[i]] + "、");
+					}
+				}
+				return projectContent;
+			};
+			Handlebars.registerHelper("commentContent", function(dataInfo) {
+				var fineArr = [];
+				var favorableArr = [];
+				var badArr = [];
+				var regularArr = [];
+				var underproofArr = [];
+				var notTestArr = [];
+				var commentContent = "祝贺您完成了所有指标的测试，现对您的测试结果进行简评，和同龄人比，您的体质处于" + gradeContent(dataInfo.TotalScore) + "水平,各项发展如下：<br/><br/>";
+				for(var testType in rTProjectCorrespondence) {
+					var single = rTProjectCorrespondence[testType];
+//					if(dataInfo[testType] != 0) {
+					switch (dataInfo[testType]) {
+					    case 0:
+					        underproofArr.push(single);
+                            break;
+							case 1:
+								underproofArr.push(single);
+								break;
+							case 2:
+								regularArr.push(single);
+								break;
+							case 3:
+								badArr.push(single);
+								break;
+							case 4:
+								favorableArr.push(single);
+								break;
+							case 5:
+								fineArr.push(single);
+								break;
+						}
+//					} else {
+//						notTestArr.push(single);
+//					}
+				}
+				if(fineArr.length != 0) {
+					commentContent += (recordItemComment(fineArr) + "发展优秀；");
+				}
+				if(favorableArr.length != 0) {
+					commentContent += (recordItemComment(favorableArr) + "发展良好；");
+				}
+				if(badArr.length != 0) {
+					commentContent += (recordItemComment(badArr) + "发展合格；");
+				}
+				if(regularArr.length != 0) {
+					commentContent += (recordItemComment(regularArr) + "发展较差；");
+				}
+				if(underproofArr.length != 0) {
+					commentContent += (recordItemComment(underproofArr) + "不合格，需要特别注意。");
+				}
+//				if(notTestArr.length != 0) {
+//					commentContent += (recordItemComment(notTestArr) + "分数为0，可能没有测试；");
+//				}
+				return commentContent;
+			});
+			Handlebars.registerHelper("gradeResult", function(totalScore) {
+				return gradeContent(totalScore);
+			});
+			Date.prototype.format = function(fmt) { //author: meizz
+				var o = {
+					"M+": this.getMonth() + 1, //月份
+					"d+": this.getDate(), //日
+					"h+": this.getHours(), //小时
+					"m+": this.getMinutes(), //分
+					"s+": this.getSeconds(), //秒
+					"q+": Math.floor((this.getMonth() + 3) / 3), //季度
+					"S": this.getMilliseconds() //毫秒
+				};
+				if(/(y+)/.test(fmt))
+					fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+				for(var k in o)
+					if(new RegExp("(" + k + ")").test(fmt))
+						fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+				return fmt;
+			}
+			String.prototype.CharpStr2Date = function() {
+				//[\+\-]:+ is for datetime offset, - is for datetime
+				var dateReg = /\/Date\((-?\d+)([\+\-]?\d+)\)\//;
+				var date = new Date(parseInt(this.replace(/\/Date\((-?\d+)([\+\-]?\d+)?\)\//, '$1')));
+				var createTime = date.format("yyyy-MM-dd");
+				return createTime;
+			}
+
+			$(function() {
+
+			    var physicalResult = {"AgencyInfo":"睿莱儿童体质检测中心","PhyResult":[{"__type":"BabybusSSApi.DatabaseModel.UV_RT_TestResult, BabybusSSApi.DatabaseModel","Id":65688,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":20946,"Gender":2,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613469893+0800)\/","Height":112.200,"Weight":18.700,"DoubleJump":4.860,"BroadJump":74.800,"ShuttleRun":10.980,"Throw":3.300,"Balance":15.480,"SitReach":11.700,"HeightScore":3,"WeightScore":5,"DoubleJumpScore":4,"BroadJumpScore":2,"ShuttleRunScore":0,"ThrowScore":1,"BalanceScore":1,"SitReachScore":3,"ChildName":"杨雨涵","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1310515200000+0800)\/","ChildCode":"61005001011228      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":8,"BodyDiathesisTotalScore":11,"TotalScore":19,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65689,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":20925,"Gender":2,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613469986+0800)\/","Height":116.600,"Weight":19.800,"DoubleJump":5.490,"BroadJump":80.300,"ShuttleRun":7.650,"Throw":4.950,"Balance":41.130,"SitReach":6.300,"HeightScore":3,"WeightScore":5,"DoubleJumpScore":3,"BroadJumpScore":2,"ShuttleRunScore":2,"ThrowScore":2,"BalanceScore":0,"SitReachScore":2,"ChildName":"荀若冰","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1312243200000+0800)\/","ChildCode":"61005001011011      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":8,"BodyDiathesisTotalScore":11,"TotalScore":19,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65690,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":20919,"Gender":2,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613470096+0800)\/","Height":122.100,"Weight":20.900,"DoubleJump":5.850,"BroadJump":88.000,"ShuttleRun":8.460,"Throw":4.400,"Balance":15.660,"SitReach":9.000,"HeightScore":5,"WeightScore":-3,"DoubleJumpScore":3,"BroadJumpScore":3,"ShuttleRunScore":2,"ThrowScore":2,"BalanceScore":1,"SitReachScore":2,"ChildName":"刘瑾萱","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1304208000000+0800)\/","ChildCode":"61005001010956      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":8,"BodyDiathesisTotalScore":13,"TotalScore":21,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65691,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":38327,"Gender":2,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613470221+0800)\/","Height":124.300,"Weight":24.200,"DoubleJump":4.770,"BroadJump":100.100,"ShuttleRun":6.750,"Throw":6.050,"Balance":5.040,"SitReach":8.100,"HeightScore":5,"WeightScore":5,"DoubleJumpScore":4,"BroadJumpScore":3,"ShuttleRunScore":3,"ThrowScore":3,"BalanceScore":3,"SitReachScore":2,"ChildName":"张研脉","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1309392000000+0800)\/","ChildCode":"61005001014930      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":10,"BodyDiathesisTotalScore":18,"TotalScore":28,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65692,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":38328,"Gender":2,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613470424+0800)\/","Height":127.600,"Weight":24.200,"DoubleJump":5.220,"BroadJump":94.600,"ShuttleRun":8.190,"Throw":3.850,"Balance":5.220,"SitReach":4.500,"HeightScore":5,"WeightScore":5,"DoubleJumpScore":3,"BroadJumpScore":3,"ShuttleRunScore":2,"ThrowScore":2,"BalanceScore":3,"SitReachScore":1,"ChildName":"李芝林","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1279152000000+0800)\/","ChildCode":"61005001014941      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":10,"BodyDiathesisTotalScore":14,"TotalScore":24,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65693,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":38329,"Gender":2,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613470533+0800)\/","Height":126.500,"Weight":22.000,"DoubleJump":5.040,"BroadJump":100.100,"ShuttleRun":6.750,"Throw":6.600,"Balance":6.300,"SitReach":4.500,"HeightScore":5,"WeightScore":-3,"DoubleJumpScore":4,"BroadJumpScore":3,"ShuttleRunScore":3,"ThrowScore":4,"BalanceScore":2,"SitReachScore":1,"ChildName":"孙楚鈊","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1303430400000+0800)\/","ChildCode":"61005001014956      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":8,"BodyDiathesisTotalScore":17,"TotalScore":25,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65694,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":38330,"Gender":2,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613470627+0800)\/","Height":127.600,"Weight":23.100,"DoubleJump":4.950,"BroadJump":99.000,"ShuttleRun":6.840,"Throw":4.400,"Balance":9.630,"SitReach":7.200,"HeightScore":5,"WeightScore":-3,"DoubleJumpScore":4,"BroadJumpScore":3,"ShuttleRunScore":3,"ThrowScore":2,"BalanceScore":2,"SitReachScore":2,"ChildName":"杜晴雯","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1284163200000+0800)\/","ChildCode":"61005001014967      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":8,"BodyDiathesisTotalScore":16,"TotalScore":24,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65695,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":20937,"Gender":2,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613470705+0800)\/","Height":127.600,"Weight":21.400,"DoubleJump":4.950,"BroadJump":67.100,"ShuttleRun":7.200,"Throw":3.300,"Balance":18.990,"SitReach":-3.600,"HeightScore":5,"WeightScore":-1,"DoubleJumpScore":4,"BroadJumpScore":1,"ShuttleRunScore":3,"ThrowScore":1,"BalanceScore":0,"SitReachScore":0,"ChildName":"闵晨茜","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1299801600000+0800)\/","ChildCode":"61005001011133      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":6,"BodyDiathesisTotalScore":9,"TotalScore":15,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65696,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":20950,"Gender":2,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613470861+0800)\/","Height":126.500,"Weight":20.900,"DoubleJump":4.410,"BroadJump":88.000,"ShuttleRun":6.660,"Throw":6.600,"Balance":14.220,"SitReach":8.100,"HeightScore":5,"WeightScore":-1,"DoubleJumpScore":5,"BroadJumpScore":3,"ShuttleRunScore":3,"ThrowScore":4,"BalanceScore":1,"SitReachScore":2,"ChildName":"李奕萱","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1307232000000+0800)\/","ChildCode":"61005001011266      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":6,"BodyDiathesisTotalScore":18,"TotalScore":24,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65697,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":20945,"Gender":2,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613471033+0800)\/","Height":128.700,"Weight":23.100,"DoubleJump":4.680,"BroadJump":100.100,"ShuttleRun":7.200,"Throw":6.050,"Balance":8.280,"SitReach":8.100,"HeightScore":5,"WeightScore":-3,"DoubleJumpScore":4,"BroadJumpScore":3,"ShuttleRunScore":3,"ThrowScore":3,"BalanceScore":2,"SitReachScore":2,"ChildName":"张紫熙","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1313193600000+0800)\/","ChildCode":"61005001011218      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":8,"BodyDiathesisTotalScore":17,"TotalScore":25,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65698,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":20947,"Gender":2,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613471268+0800)\/","Height":127.600,"Weight":23.100,"DoubleJump":4.500,"BroadJump":121.000,"ShuttleRun":6.570,"Throw":4.400,"Balance":9.720,"SitReach":15.300,"HeightScore":5,"WeightScore":-3,"DoubleJumpScore":5,"BroadJumpScore":5,"ShuttleRunScore":3,"ThrowScore":2,"BalanceScore":2,"SitReachScore":4,"ChildName":"徐睿晗","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1296864000000+0800)\/","ChildCode":"61005001011233      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":8,"BodyDiathesisTotalScore":21,"TotalScore":29,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65699,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":38331,"Gender":2,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613471361+0800)\/","Height":129.800,"Weight":26.400,"DoubleJump":4.950,"BroadJump":113.300,"ShuttleRun":5.760,"Throw":3.850,"Balance":8.820,"SitReach":9.090,"HeightScore":5,"WeightScore":5,"DoubleJumpScore":4,"BroadJumpScore":4,"ShuttleRunScore":5,"ThrowScore":2,"BalanceScore":2,"SitReachScore":2,"ChildName":"卢妙霖","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1302566400000+0800)\/","ChildCode":"61005001014972      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":10,"BodyDiathesisTotalScore":19,"TotalScore":29,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65700,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":20939,"Gender":2,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613471455+0800)\/","Height":132.000,"Weight":24.800,"DoubleJump":5.040,"BroadJump":70.400,"ShuttleRun":7.110,"Throw":4.400,"Balance":11.880,"SitReach":3.870,"HeightScore":5,"WeightScore":-3,"DoubleJumpScore":4,"BroadJumpScore":1,"ShuttleRunScore":3,"ThrowScore":2,"BalanceScore":1,"SitReachScore":1,"ChildName":"陈尔岚","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1293580800000+0800)\/","ChildCode":"61005001011158      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":8,"BodyDiathesisTotalScore":12,"TotalScore":20,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65701,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":20921,"Gender":2,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613471549+0800)\/","Height":135.300,"Weight":24.200,"DoubleJump":4.140,"BroadJump":103.400,"ShuttleRun":6.120,"Throw":4.400,"Balance":7.830,"SitReach":7.290,"HeightScore":5,"WeightScore":-1,"DoubleJumpScore":5,"BroadJumpScore":4,"ShuttleRunScore":4,"ThrowScore":2,"BalanceScore":2,"SitReachScore":2,"ChildName":"崔紫怡","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1297036800000+0800)\/","ChildCode":"61005001010971      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":6,"BodyDiathesisTotalScore":19,"TotalScore":25,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65702,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":20949,"Gender":2,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613471643+0800)\/","Height":134.200,"Weight":27.500,"DoubleJump":5.400,"BroadJump":108.900,"ShuttleRun":5.850,"Throw":6.600,"Balance":4.410,"SitReach":14.760,"HeightScore":5,"WeightScore":5,"DoubleJumpScore":3,"BroadJumpScore":4,"ShuttleRunScore":5,"ThrowScore":4,"BalanceScore":3,"SitReachScore":4,"ChildName":"赵璇","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1282348800000+0800)\/","ChildCode":"61005001011256      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":10,"BodyDiathesisTotalScore":23,"TotalScore":33,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65703,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":20926,"Gender":2,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613471752+0800)\/","Height":130.900,"Weight":30.200,"DoubleJump":5.400,"BroadJump":77.000,"ShuttleRun":6.840,"Throw":7.700,"Balance":18.000,"SitReach":8.730,"HeightScore":5,"WeightScore":3,"DoubleJumpScore":3,"BroadJumpScore":2,"ShuttleRunScore":3,"ThrowScore":4,"BalanceScore":0,"SitReachScore":2,"ChildName":"金俊怡","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1314748800000+0800)\/","ChildCode":"61005001011024      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":8,"BodyDiathesisTotalScore":14,"TotalScore":22,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65704,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":20940,"Gender":2,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613472096+0800)\/","Height":134.200,"Weight":30.800,"DoubleJump":5.220,"BroadJump":69.300,"ShuttleRun":7.290,"Throw":5.500,"Balance":9.990,"SitReach":5.130,"HeightScore":5,"WeightScore":3,"DoubleJumpScore":3,"BroadJumpScore":1,"ShuttleRunScore":2,"ThrowScore":3,"BalanceScore":2,"SitReachScore":1,"ChildName":"王诺冰","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1287446400000+0800)\/","ChildCode":"61005001011160      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":8,"BodyDiathesisTotalScore":12,"TotalScore":20,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65705,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":20924,"Gender":2,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613472236+0800)\/","Height":138.600,"Weight":28.600,"DoubleJump":4.410,"BroadJump":82.500,"ShuttleRun":6.840,"Throw":6.600,"Balance":13.500,"SitReach":7.650,"HeightScore":5,"WeightScore":-3,"DoubleJumpScore":5,"BroadJumpScore":2,"ShuttleRunScore":3,"ThrowScore":4,"BalanceScore":1,"SitReachScore":2,"ChildName":"许秋月","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1288224000000+0800)\/","ChildCode":"61005001011000      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":8,"BodyDiathesisTotalScore":17,"TotalScore":25,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65706,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":20941,"Gender":2,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613472377+0800)\/","Height":138.600,"Weight":26.400,"DoubleJump":5.040,"BroadJump":69.300,"ShuttleRun":7.200,"Throw":5.500,"Balance":4.590,"SitReach":1.800,"HeightScore":5,"WeightScore":-1,"DoubleJumpScore":4,"BroadJumpScore":1,"ShuttleRunScore":3,"ThrowScore":3,"BalanceScore":3,"SitReachScore":0,"ChildName":"李鑫怡","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1287273600000+0800)\/","ChildCode":"61005001011170      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":6,"BodyDiathesisTotalScore":14,"TotalScore":20,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65707,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":38332,"Gender":2,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613472471+0800)\/","Height":135.300,"Weight":34.600,"DoubleJump":7.380,"BroadJump":85.800,"ShuttleRun":7.110,"Throw":2.750,"Balance":28.170,"SitReach":7.650,"HeightScore":5,"WeightScore":3,"DoubleJumpScore":2,"BroadJumpScore":2,"ShuttleRunScore":3,"ThrowScore":0,"BalanceScore":0,"SitReachScore":2,"ChildName":"钟怡冉","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1295654400000+0800)\/","ChildCode":"61005001014982      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":8,"BodyDiathesisTotalScore":9,"TotalScore":17,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65708,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":38333,"Gender":1,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613472565+0800)\/","Height":122.100,"Weight":23.100,"DoubleJump":4.770,"BroadJump":106.700,"ShuttleRun":6.210,"Throw":6.600,"Balance":28.080,"SitReach":2.700,"HeightScore":4,"WeightScore":5,"DoubleJumpScore":4,"BroadJumpScore":3,"ShuttleRunScore":3,"ThrowScore":2,"BalanceScore":0,"SitReachScore":1,"ChildName":"都宇航","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1312156800000+0800)\/","ChildCode":"61005001014996      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":9,"BodyDiathesisTotalScore":13,"TotalScore":22,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65709,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":38334,"Gender":1,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613472643+0800)\/","Height":124.300,"Weight":23.100,"DoubleJump":4.680,"BroadJump":103.400,"ShuttleRun":6.660,"Throw":5.500,"Balance":4.950,"SitReach":0.180,"HeightScore":5,"WeightScore":5,"DoubleJumpScore":4,"BroadJumpScore":3,"ShuttleRunScore":3,"ThrowScore":2,"BalanceScore":3,"SitReachScore":0,"ChildName":"陈星翰","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1280707200000+0800)\/","ChildCode":"61005001015008      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":10,"BodyDiathesisTotalScore":15,"TotalScore":25,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65710,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":38335,"Gender":1,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613472861+0800)\/","Height":126.500,"Weight":25.300,"DoubleJump":4.500,"BroadJump":112.200,"ShuttleRun":6.120,"Throw":8.800,"Balance":5.130,"SitReach":6.120,"HeightScore":5,"WeightScore":5,"DoubleJumpScore":4,"BroadJumpScore":4,"ShuttleRunScore":4,"ThrowScore":3,"BalanceScore":3,"SitReachScore":2,"ChildName":"侯乐轩","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1290816000000+0800)\/","ChildCode":"61005001015011      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":10,"BodyDiathesisTotalScore":20,"TotalScore":30,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65711,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":20948,"Gender":1,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613473033+0800)\/","Height":126.500,"Weight":24.200,"DoubleJump":4.770,"BroadJump":103.400,"ShuttleRun":6.660,"Throw":7.700,"Balance":6.030,"SitReach":7.290,"HeightScore":5,"WeightScore":5,"DoubleJumpScore":4,"BroadJumpScore":3,"ShuttleRunScore":3,"ThrowScore":3,"BalanceScore":2,"SitReachScore":3,"ChildName":"王鹏超","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1302134400000+0800)\/","ChildCode":"61005001011241      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":10,"BodyDiathesisTotalScore":18,"TotalScore":28,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65712,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":38336,"Gender":1,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613473127+0800)\/","Height":121.000,"Weight":22.000,"DoubleJump":4.770,"BroadJump":105.600,"ShuttleRun":8.010,"Throw":4.950,"Balance":5.040,"SitReach":4.680,"HeightScore":4,"WeightScore":5,"DoubleJumpScore":4,"BroadJumpScore":3,"ShuttleRunScore":1,"ThrowScore":2,"BalanceScore":3,"SitReachScore":2,"ChildName":"胡朔航","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1295654400000+0800)\/","ChildCode":"61005001015020      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":9,"BodyDiathesisTotalScore":15,"TotalScore":24,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65713,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":20922,"Gender":1,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613473221+0800)\/","Height":134.200,"Weight":29.700,"DoubleJump":5.310,"BroadJump":119.900,"ShuttleRun":6.300,"Throw":6.600,"Balance":11.610,"SitReach":-3.690,"HeightScore":5,"WeightScore":5,"DoubleJumpScore":3,"BroadJumpScore":4,"ShuttleRunScore":3,"ThrowScore":2,"BalanceScore":1,"SitReachScore":0,"ChildName":"苏垚旭","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1293494400000+0800)\/","ChildCode":"61005001010988      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":10,"BodyDiathesisTotalScore":13,"TotalScore":23,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65714,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":20927,"Gender":1,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613473315+0800)\/","Height":127.600,"Weight":22.000,"DoubleJump":4.410,"BroadJump":123.200,"ShuttleRun":6.030,"Throw":4.400,"Balance":6.840,"SitReach":4.770,"HeightScore":5,"WeightScore":-3,"DoubleJumpScore":4,"BroadJumpScore":4,"ShuttleRunScore":4,"ThrowScore":1,"BalanceScore":2,"SitReachScore":2,"ChildName":"王嘉霖","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1306108800000+0800)\/","ChildCode":"61005001011035      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":8,"BodyDiathesisTotalScore":17,"TotalScore":25,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65715,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":38337,"Gender":1,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613473393+0800)\/","Height":136.400,"Weight":25.300,"DoubleJump":4.770,"BroadJump":107.800,"ShuttleRun":5.670,"Throw":6.600,"Balance":4.680,"SitReach":8.190,"HeightScore":5,"WeightScore":-1,"DoubleJumpScore":4,"BroadJumpScore":3,"ShuttleRunScore":5,"ThrowScore":2,"BalanceScore":3,"SitReachScore":3,"ChildName":"韩腾飞","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1290902400000+0800)\/","ChildCode":"61005001015035      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":6,"BodyDiathesisTotalScore":20,"TotalScore":26,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65716,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":20931,"Gender":1,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613473471+0800)\/","Height":126.500,"Weight":26.400,"DoubleJump":4.590,"BroadJump":116.600,"ShuttleRun":6.480,"Throw":6.600,"Balance":5.580,"SitReach":3.600,"HeightScore":5,"WeightScore":5,"DoubleJumpScore":4,"BroadJumpScore":4,"ShuttleRunScore":3,"ThrowScore":2,"BalanceScore":2,"SitReachScore":2,"ChildName":"李远博","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1313884800000+0800)\/","ChildCode":"61005001011072      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":10,"BodyDiathesisTotalScore":17,"TotalScore":27,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65717,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":20943,"Gender":1,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613473721+0800)\/","Height":126.500,"Weight":23.100,"DoubleJump":5.310,"BroadJump":133.100,"ShuttleRun":5.850,"Throw":6.600,"Balance":4.500,"SitReach":11.070,"HeightScore":5,"WeightScore":5,"DoubleJumpScore":3,"BroadJumpScore":5,"ShuttleRunScore":4,"ThrowScore":2,"BalanceScore":3,"SitReachScore":4,"ChildName":"马博霖","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1307923200000+0800)\/","ChildCode":"61005001011198      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":10,"BodyDiathesisTotalScore":21,"TotalScore":31,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65718,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":20944,"Gender":1,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613473908+0800)\/","Height":126.500,"Weight":22.000,"DoubleJump":4.680,"BroadJump":124.300,"ShuttleRun":5.670,"Throw":8.250,"Balance":4.050,"SitReach":8.550,"HeightScore":5,"WeightScore":5,"DoubleJumpScore":4,"BroadJumpScore":4,"ShuttleRunScore":5,"ThrowScore":3,"BalanceScore":3,"SitReachScore":3,"ChildName":"袁昊","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1283817600000+0800)\/","ChildCode":"61005001011204      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":10,"BodyDiathesisTotalScore":22,"TotalScore":32,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65719,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":20934,"Gender":1,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613474033+0800)\/","Height":126.500,"Weight":23.100,"DoubleJump":5.220,"BroadJump":81.400,"ShuttleRun":6.390,"Throw":6.050,"Balance":5.040,"SitReach":4.950,"HeightScore":5,"WeightScore":5,"DoubleJumpScore":3,"BroadJumpScore":2,"ShuttleRunScore":3,"ThrowScore":2,"BalanceScore":3,"SitReachScore":2,"ChildName":"王泽轩","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1310601600000+0800)\/","ChildCode":"61005001011101      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":10,"BodyDiathesisTotalScore":15,"TotalScore":25,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65720,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":20928,"Gender":1,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613474174+0800)\/","Height":136.400,"Weight":27.500,"DoubleJump":7.380,"BroadJump":81.400,"ShuttleRun":7.920,"Throw":7.150,"Balance":11.430,"SitReach":3.600,"HeightScore":5,"WeightScore":5,"DoubleJumpScore":2,"BroadJumpScore":2,"ShuttleRunScore":1,"ThrowScore":3,"BalanceScore":1,"SitReachScore":2,"ChildName":"刘浩宇","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1300665600000+0800)\/","ChildCode":"61005001011044      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":10,"BodyDiathesisTotalScore":11,"TotalScore":21,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65721,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":38338,"Gender":1,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613474299+0800)\/","Height":134.200,"Weight":31.900,"DoubleJump":5.850,"BroadJump":105.600,"ShuttleRun":6.120,"Throw":9.900,"Balance":5.760,"SitReach":10.800,"HeightScore":5,"WeightScore":5,"DoubleJumpScore":3,"BroadJumpScore":3,"ShuttleRunScore":4,"ThrowScore":4,"BalanceScore":2,"SitReachScore":4,"ChildName":"杜子谦","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1308614400000+0800)\/","ChildCode":"61005001015040      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":10,"BodyDiathesisTotalScore":20,"TotalScore":30,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65722,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":38339,"Gender":1,"AgeGroup":5.5,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613474393+0800)\/","Height":134.200,"Weight":25.300,"DoubleJump":6.210,"BroadJump":106.700,"ShuttleRun":7.560,"Throw":5.500,"Balance":10.170,"SitReach":8.460,"HeightScore":5,"WeightScore":-3,"DoubleJumpScore":3,"BroadJumpScore":4,"ShuttleRunScore":2,"ThrowScore":2,"BalanceScore":2,"SitReachScore":3,"ChildName":"张奕晨","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1320796800000+0800)\/","ChildCode":"61005001015052      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":8,"BodyDiathesisTotalScore":16,"TotalScore":24,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65723,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":20929,"Gender":1,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613474565+0800)\/","Height":124.300,"Weight":22.000,"DoubleJump":7.830,"BroadJump":70.400,"ShuttleRun":7.560,"Throw":5.500,"Balance":-89.100,"SitReach":8.730,"HeightScore":5,"WeightScore":5,"DoubleJumpScore":2,"BroadJumpScore":1,"ShuttleRunScore":2,"ThrowScore":2,"BalanceScore":0,"SitReachScore":3,"ChildName":"刘瑞东","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1293062400000+0800)\/","ChildCode":"61005001011052      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":10,"BodyDiathesisTotalScore":10,"TotalScore":20,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65724,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":20936,"Gender":1,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613474815+0800)\/","Height":132.000,"Weight":27.500,"DoubleJump":4.680,"BroadJump":79.200,"ShuttleRun":7.470,"Throw":8.800,"Balance":8.730,"SitReach":4.860,"HeightScore":5,"WeightScore":5,"DoubleJumpScore":4,"BroadJumpScore":2,"ShuttleRunScore":2,"ThrowScore":3,"BalanceScore":2,"SitReachScore":2,"ChildName":"陈昱安","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1297382400000+0800)\/","ChildCode":"61005001011126      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":10,"BodyDiathesisTotalScore":15,"TotalScore":25,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65725,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":38340,"Gender":1,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613474908+0800)\/","Height":132.000,"Weight":24.200,"DoubleJump":6.480,"BroadJump":96.800,"ShuttleRun":7.290,"Throw":6.600,"Balance":19.125,"SitReach":5.940,"HeightScore":5,"WeightScore":-3,"DoubleJumpScore":2,"BroadJumpScore":3,"ShuttleRunScore":2,"ThrowScore":2,"BalanceScore":0,"SitReachScore":2,"ChildName":"丁志涵","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1299628800000+0800)\/","ChildCode":"61005001015067      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":8,"BodyDiathesisTotalScore":11,"TotalScore":19,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true},{"Id":65726,"PlanId":446,"DataId":0,"KindergartenId":116,"ClassId":194296,"ChildId":38341,"Gender":2,"AgeGroup":6.0,"PlanTime":"\/Date(1490613428986+0800)\/","CreateTime":"\/Date(1490613475018+0800)\/","Height":128.700,"Weight":23.100,"DoubleJump":5.760,"BroadJump":92.400,"ShuttleRun":6.840,"Throw":4.950,"Balance":11.250,"SitReach":5.400,"HeightScore":5,"WeightScore":-3,"DoubleJumpScore":3,"BroadJumpScore":3,"ShuttleRunScore":3,"ThrowScore":2,"BalanceScore":1,"SitReachScore":2,"ChildName":"浮雅雯","ClassName":"大二班","KindergartenName":"万国金色幼儿园","Birthday":"\/Date(1305936000000+0800)\/","ChildCode":"61005001015072      ","IsMentalFaction":false,"IsMentalBalance":false,"IsMentalBroadJump":false,"IsMentalDoubleJump":false,"IsMentalShuttleRun":false,"IsMentalSitReach":false,"IsMentalThrow":false,"IsMotorBalance":false,"IsMotorBroadJump":false,"IsMotorDoubleJump":false,"IsMotorShuttleRun":false,"IsMotorSitReach":false,"IsMotorThrow":false,"BodyShapTotalScore":8,"BodyDiathesisTotalScore":14,"TotalScore":22,"MissDataType":0,"ActionDevTotalScore":false,"ClassType":0,"IsExported":true}]};
+			    console.log(physicalResult);
+				var charInfoJson = {};
+				var contentHtml = [];
+				for (var i = 0, l = physicalResult.PhyResult.length; i < l; i++) {
+				    var result = physicalResult.PhyResult[i];
+					var itemContent = {
+
+						ChildName: result.ChildName,
+						Gender: result.Gender == 1 ? "男" : "女",
+						AgeGroup: result.AgeGroup,
+						BirthDate: result.Birthday.CharpStr2Date(),
+						TestDate: result.CreateTime.CharpStr2Date(),
+						ClassName:result.ClassName,
+						TestCode: result.ChildCode.substr(0, 4) + "-" + result.ChildCode.substr(4, 4) + "-" + result.ChildCode.substr(8, 4) + "-" + result.ChildCode.substr(12, 6),
+						KindergartenName: result.KindergartenName,
+						Height: result.Height == 0 || result.Height == -99 || result.Height == null ?"X":result.Height,
+						HeightScore: result.HeightScore,
+						Weight: result.Weight == 0 || result.Weight == -99 || result.Weight == null ? "X":result.Weight,
+						WeightScore: Math.abs(result.WeightScore),
+						ShuttleRun: result.ShuttleRun == 0 || result.ShuttleRun == null || result.ShuttleRun == -99 ? "X":result.ShuttleRun,
+						ShuttleRunScore: result.ShuttleRunScore,
+						SitReach: result.SitReach == 0 || result.SitReach == null || result.SitReach == -99 ? "X" : result.SitReach,
+						SitReachScore: result.SitReachScore,
+						BroadJump: result.BroadJump == 0 || result.BroadJump == -99 || result.BroadJump == null ? "X":result.BroadJump,
+						BroadJumpScore: result.BroadJumpScore,
+						DoubleJump: result.DoubleJump == 0 || result.DoubleJump == -99 || result.DoubleJump == null ? "X" : result.DoubleJump,
+						DoubleJumpScore: result.DoubleJumpScore,
+						Throw: result.Throw == 0 || result.Throw == null || result.Throw == -99 ? "X": result.Throw,
+						ThrowScore: result.ThrowScore,
+						Balance: result.Balance == 0 || result.Balance == -99 || result.Balance == null ? "X": result.Balance,
+						BalanceScore: result.BalanceScore,
+						CommentContent: result,
+						TotalScore: result.TotalScore,
+						GradeResult: result.TotalScore,
+						Id: result.Id,
+						TestingStation: physicalResult.AgencyInfo
+					};
+					var itemChildeveryObjectScore = [];
+					for(var s in rTProjectCorrespondence){
+						itemChildeveryObjectScore.push(itemContent[s]);
+					}
+					charInfoJson[result.Id] = itemChildeveryObjectScore;
+					contentHtml.push(itemContent);
+				}
+				var template = Handlebars.compile($("#content-html").html());
+				var htmlText = template(contentHtml);
+				$("#record-content").html(htmlText);
+				var testName = [];
+				for(var p in rTProjectCorrespondence){
+					testName.push(RTPhysicalProject[rTProjectCorrespondence[p]])
+				}
+				for(var charJson in charInfoJson) {
+					$('#summary-chart-' + charJson).highcharts({
+						chart: {
+							polar: true,
+							type: 'area',
+							width: 500,
+							height: 500
+						},
+						credits: {
+							enabled: false,
+						},
+						title: {
+							text: '',
+							floating: true
+						},
+
+						pane: {
+							size: '80%'
+						},
+
+						xAxis: {
+							categories: testName,
+							tickmarkPlacement: 'on',
+							lineWidth: 0,
+							gridLineColor: '#000000',
+							lineColor: '#000000',
+						},
+
+						yAxis: {
+							gridLineInterpolation: 'polygon',
+							tickInterval: 1,
+							lineWidth: 0,
+							max: 5,
+							min: 0,
+							gridLineColor: '#000000',
+							lineColor: '#000000',
+						},
+
+						tooltip: {
+							shared: true,
+							pointFormat: '<span style="color:{series.color}">{point.y:,.1f}</span>',
+						},
+
+						legend: {
+							enabled: false
+						},
+
+						series: [{
+							name: '',
+							data: charInfoJson[charJson],
+							//backgroundColor:'#CE2C46'
+						}]
+					});
+
+				}
+			});
+    </script>
+</head>
+<body>
+    <div id="record-content">
+    </div>
+</body>
+</html>

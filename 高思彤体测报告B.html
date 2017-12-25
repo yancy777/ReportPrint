@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>家长报告B</title>
+    <link href="http://cdn.imreliable.net/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://cdn.imreliable.net/jquery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="http://cdn.imreliable.net/bootstrap/js/bootstrap.min.js"></script>
+    <script src="http://cdn.bootcss.com/underscore.js/1.8.3/underscore.js"></script>
+    <script src="http://cdn.bootcss.com/handlebars.js/4.0.6/handlebars.min.js"></script>
+    <script src="http://cdn.bootcss.com/jsbarcode/3.5.7/JsBarcode.all.min.js"></script>
+    <script type="text/javascript" src="http://cdn.imreliable.net/asset/js/jqbar.js"></script>
+    <style type="text/css">
+        ul,
+        ol {
+            list-style-type: none;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        body {
+            font-family: "microsoft yahei";
+        }
+
+        .report-box {
+            width: 794px;
+            height: 1123px;
+            margin: 0 auto;
+            /*	background: green;*/
+        }
+        /*头部*/
+
+        .header {
+            height: 260px;
+            background: url(http://cdn.imreliable.net/asset/image/BFamilyReport/header-bg.png)no-repeat center;
+            /*background: url(images/header-bg.png) no-repeat center;*/
+            background-size: cover;
+            color: #fff;
+        }
+
+        .headr-introduction {
+            width: 511px;
+            height: 186.5px;
+            margin-left: 100px;
+            margin-top: 12px;
+        }
+
+            .headr-introduction h1,
+            .headr-introduction span {
+                padding-left: 85px;
+            }
+
+            .headr-introduction h1 {
+                font-size: 29px;
+                font-weight: bold;
+                padding-bottom: 15px;
+                letter-spacing: 4px;
+            }
+
+            .headr-introduction span {
+                font-size: 15px;
+                font-weight: bold;
+                letter-spacing: 1px;
+            }
+
+            .headr-introduction p {
+                font-size: 10px;
+                -webkit-transform: scale(0.83);
+                text-indent: 2em;
+                line-height: 20px;
+            }
+
+        .heder-child-info {
+            margin-top: 32.6px;
+            margin-left: 35px;
+        }
+
+            .heder-child-info li {
+                margin-bottom: 19px;
+                text-align: right;
+                letter-spacing: 1px;
+            }
+
+            .heder-child-info span {
+                font-size: 19px;
+                font-weight: bold;
+            }
+
+            .heder-child-info img {
+                width: 32.6px;
+                float: right;
+                margin-left: 10px;
+            }
+        /*内容*/
+
+        .content-box {
+            height: 765px;
+        }
+
+        .content-box-left {
+            width: 388px;
+            height: 765px;
+            padding-top: 6px;
+        }
+
+        .content-text-box {
+            background: #eeeeee;
+            margin-right: 12px;
+            padding-top: 12px;
+            margin-bottom: 24px;
+        }
+
+        .content-text-box-title {
+            height: 29px;
+            font-size: 15.3px;
+            line-height: 30px;
+            font-weight: bold;
+            padding-left: 48px;
+            margin-right: 30px;
+            color: #FFFFFF;
+        }
+
+        .content-text-box:nth-child(1) .content-text-box-title {
+            background: url(http://cdn.imreliable.net/asset/image/BFamilyReport/content-text-box-title-bg.png) no-repeat left, url(http://cdn.imreliable.net/asset/image/BFamilyReport/centent-text-box-body-icon.png)no-repeat right;
+            background-size: contain;
+        }
+
+        .content-text-box:nth-child(3) .content-text-box-title {
+            background: url(http://cdn.imreliable.net/asset/image/BFamilyReport/content-text-box-title-bg.png) no-repeat left, url(http://cdn.imreliable.net/asset/image/BFamilyReport/centent-text-box-muscle-icon.png)no-repeat right;
+            background-size: contain;
+        }
+
+        .content-text-box-text {
+            padding-right: 6px;
+            padding-left: 6px;
+            line-height: 21px;
+        }
+
+            .content-text-box-text p {
+                font-size: 12px;
+                -webkit-transform: scale(0.958);
+            }
+
+            .content-text-box-text b {
+                color: #d55e36;
+            }
+
+        .content-box-right {
+            width: 406px;
+            height: 765px;
+            padding-left: 48px;
+        }
+
+        .content-box-right-top {
+            width: 305px;
+            /*height: 218px;*/
+            font-size: 12px;
+            -webkit-transform: scale(0.958);
+        }
+
+            .content-box-right-top h6 b {
+                font-size: 30px;
+                vertical-align: sub;
+            }
+
+        .this-that-time-title {
+            width: 44px;
+            height: 26px;
+            /*background: red;*/
+            margin-right: 12px;
+            margin-top: 34px;
+            line-height: 13px;
+        }
+
+        .this-that-time {
+            width: 248.3px;
+            margin-top: 2px;
+        }
+
+            .this-that-time img {
+                height: 17px;
+            }
+
+            .this-that-time ul {
+                clear: both;
+            }
+
+                .this-that-time ul li {
+                    width: 80px;
+                    text-align: center;
+                    float: left;
+                    margin-bottom: 10px;
+                }
+
+                    .this-that-time ul li:first-child {
+                        margin-left: 0px;
+                    }
+
+            .this-that-time .font-bold {
+                font-weight: bold;
+            }
+
+        .BMI-centent {
+            height: 108px;
+            position: relative;
+            clear: both;
+        }
+
+            .BMI-centent ul li {
+                width: 90px;
+                text-align: center;
+                float: left;
+                margin: 5px 0;
+            }
+
+        .weight-bar-bg,
+        .content-bar-box {
+            clear: both;
+            width: 266px;
+            height: 80px;
+            position: relative;
+            /*z-index: 0;*/
+        }
+
+        .weight-bar-bg {
+            background: url(http://cdn.imreliable.net/asset/image/BFamilyReport/content-box-right-top-bar-bg.png)no-repeat center top, url(http://cdn.imreliable.net/asset/image/BFamilyReport/bg-bar-three.png) repeat-y left top;
+            background-size: contain;
+            padding-top: 40px;
+        }
+
+        .content-bar-box {
+            background: url(http://cdn.imreliable.net/asset/image/BFamilyReport/bg-bar-two.png) repeat-y left top;
+            background-size: contain;
+            padding-top: 40px;
+        }
+
+        .fist-bar-bg {
+            background: url(http://cdn.imreliable.net/asset/image/BFamilyReport/content-box-right-bottom-bar-bg.png)no-repeat center top, url(http://cdn.imreliable.net/asset/image/BFamilyReport/bg-bar-two.png) repeat-y left top !important;
+            background-size: contain !important;
+        }
+
+        .item-bar-content-box .content-bar-box:first-of-type {
+            background: url(http://cdn.imreliable.net/asset/image/BFamilyReport/content-box-right-bottom-bar-bg.png)no-repeat center top, url(http://cdn.imreliable.net/asset/image/BFamilyReport/bg-bar-two.png) repeat-y left top !important;
+            background-size: contain !important;
+        }
+
+        .BMI-this-that-time-title {
+            z-index: 22;
+            position: absolute;
+            line-height: 24px;
+            font-size: 12px;
+            margin-left: -11px;
+        }
+
+            .BMI-this-that-time-title b {
+                font-size: 14px;
+            }
+
+        .bars-css {
+            margin-top: -44px;
+            margin-left: 49px;
+            position: relative;
+        }
+
+            .bars-css .bar-percent {
+                font-size: 13px !important;
+                margin-left: 10px;
+                position: absolute;
+                z-index: 999;
+                font-weight: normal;
+            }
+
+            .bars-css .bars div:first-of-type .bar-percent {
+                color: #01a89e;
+            }
+
+            .bars-css .bars div:last-of-type .bar-percent {
+                color: #d55e36;
+            }
+
+            .bars-css img {
+                height: 15px;
+                position: absolute;
+            }
+
+                .bars-css img:nth-of-type(1) {
+                    left: 110px;
+                    top: 2px;
+                }
+
+                .bars-css img:nth-of-type(2) {
+                    left: 220px;
+                    top: 2px;
+                }
+
+                .bars-css img:nth-of-type(3) {
+                    left: 110px;
+                    top: 26px;
+                }
+
+                .bars-css img:nth-of-type(4) {
+                    left: 220px;
+                    top: 26px;
+                }
+
+        .content-box-right-bottom {
+            width: 305px;
+            /*height: 534px;*/
+            font-size: 12px;
+            -webkit-transform: scale(0.958);
+        }
+        /*底部*/
+
+        .footer {
+            height: 98px;
+            background: url(http://cdn.imreliable.net/asset/image/BFamilyReport/footer-bg.png)no-repeat center;
+            background-size: contain;
+        }
+
+            .footer .footer-code-box {
+                width: 407.4px;
+                height: 98px;
+                padding-left: 13.6px;
+                padding-top: 17.6px;
+            }
+
+            .footer .footer-font-css {
+                font-size: 11.5px;
+                color: #FFFFFF;
+            }
+
+            .footer .footer-code-box p {
+                margin-left: 4.5px;
+                margin-top: 6px;
+                margin-right: 6px;
+            }
+
+            .footer .QR-code {
+                width: 64px;
+            }
+
+            .footer .bar-code {
+                width: 130.5px;
+            }
+
+            .footer .footer-logo-box {
+                width: 310px;
+                margin-top: 57px;
+            }
+
+            .footer .footer-logo {
+                height: 21.7px;
+                margin-top: -2px;
+            }
+        /**/
+
+        .bar-that,
+        .bar-last {
+            height: 12px;
+            float: left;
+        }
+
+        .bar-that {
+            background: #01a89e;
+        }
+
+        .bar-last {
+            background: #d55e36;
+            clear: both;
+            margin-top: 9px;
+        }
+
+        .result-that,
+        .result-last {
+            font-size: 12px;
+            float: left;
+        }
+
+        .result-that {
+            color: #01a89e;
+            margin-top: -3px;
+        }
+
+        .result-last {
+            color: #d55e36;
+            padding-top: 6px;
+        }
+        /*6岁以上css*/
+
+        .BMI-centent .content-box-right-top-bar-bg {
+            clear: both;
+            width: 266px;
+            height: 80px;
+            background: url(http://cdn.imreliable.net/asset/image/BFamilyReport/content-box-right-top-bar-bg.png)no-repeat center top;
+            background-size: contain;
+            position: relative;
+        }
+
+        .bar-bg-left,
+        .bar-bg-right,
+        .bar-bg-center {
+            width: 33.5%;
+            height: 77px;
+            float: left;
+            margin-top: 1px;
+            z-index: -2;
+            position: absolute;
+        }
+
+        .bar-bg-left,
+        .bar-bg-right {
+            background: #eeeeee;
+        }
+
+        .bar-bg-right {
+            left: 67%;
+        }
+
+        .bar-bg-center {
+            background: #f7f7f7;
+            left: 33.5%;
+        }
+
+        .bar-margin-size {
+            position: relative;
+            bottom: 8px;
+        }
+
+        .test-time {
+            position: relative;
+            bottom: 5px;
+        }
+    </style>
+    <script type="text/x-handlebars-template" id="item-test-result">
+
+        <div class="BMI-this-that-time-title" style="position: absolute !important; top:{{Class}}px !important">
+            <b>（{{DisPlayName}}）-{{ProjectName}}</b><br> &nbsp;本 次
+            <span class="test-time" style="visibility:{{lastContent ResultContent}}"><br> &nbsp;上 次</span>
+            <div class="bars-css">
+                <div>
+                    <div class="bars ">
+                        <div id="item-bar-{{Id}}">
+                        </div>
+                        <div class="bar-margin-size" style="visibility:{{lastContent ResultContent}}" id="item-bars-{{Id}}">
+                        </div>
+                    </div>
+                </div>
+                <!--<label style="height: 200px;border-left: 1px #ffffff solid;z-index: 100000;position: relative;bottom:54px;left: 90px;" id="{{LabelBarHLine}}"></label> </div>-->
+            </div>
+
+    </script>
+    <script type="text/x-handlebars-template" id="item-bar-html">
+
+        <div class="content-bar-box pull-right ">
+            <div class="BMI-this-that-time-title pull-left" style="position: absolute;left:-40px;top:9px !important">
+                <b>（{{DisPlayName}}）-{{ProjectName}}</b>
+                <br> &nbsp;&nbsp;本 次<br>&nbsp;&nbsp;<span style="visibility:{{lastContent ResultContent}}">上 次</span>
+            </div>
+            <div class="bar-that" style="width: {{BarWidth}}px;"></div><span class="result-that">&nbsp;{{Result}}</span>
+            <div class="bar-last" style="visibility:{{lastContent ResultContent}};width: {{BarWidthLast}}px"></div>
+            <span class="result-last" style="visibility:{{lastContent ResultContent}}">&nbsp;{{ResultLast}}</span>
+        </div>
+
+    </script>
+    <script type="text/x-handlebars-template" id="content-above-html">
+        <div class="report-box">
+            <!--头部-->
+            <div class="header">
+                <div class="headr-introduction pull-left">
+                    <h1>睿莱®体质测评报告</h1>
+                    <span>&nbsp;{{ServiceName}}</span>
+                    <p> 睿莱健康测评体系主要来源于美国库珀(Cooper Institute)研究所和国家体育总局颁布的《国民体质测定标准（幼儿部分）》。测试体系内的所有测试项目均与孩子的运动生活紧密相关，我们针对不同年龄段的孩子提供定制化的测试项目，主要测试身体形态、力量素质、柔韧性、协调性、灵敏素质、平衡能力、有氧能力等7大部分。本测评体系摒弃了世界大部分体系所使用的对单项成绩评分，对所有测试项目总评的评价办法，而是设置了健康区域，这样的评价方法有助于让家长有明确的目标，来帮助孩子提升健康水平。</p>
+                </div>
+                <div class="heder-child-info pull-left">
+                    <ul>
+                        <li>
+                            <span>
+                                {{ChildName}}
+                            </span>
+                            <img src="http://cdn.imreliable.net/asset/image/BFamilyReport/name-icon.png" />
+                        </li>
+                        <li>
+                            <span>
+                                {{Gender}}
+                            </span>
+                            <img src="http://cdn.imreliable.net/asset/image/BFamilyReport/gender-icon.png" />
+                        </li>
+                        <li>
+                            <span>
+                                {{Age}}岁
+                            </span>
+                            <img src="http://cdn.imreliable.net/asset/image/BFamilyReport/age-icon.png" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--内容-->
+            <div class="content-box">
+                <div class="content-box-left pull-left">
+                    <div class="content-text-box">
+                        <div class="content-text-box-title">
+                            身体成分
+                        </div>
+                        <div class="content-text-box-text">
+                            <p>
+                                • 身体成分是指身体中脂肪和无脂肪组织的相对比例。身体质量指数(BMI)是一个常用测量指标，它反映了一个人与之身高相对应的健康体重范围。它的计算公式是BMI=体重（kg）÷身高²（m）.<br> •
+                                <b>重要性</b>：超重的青少年多有成年后肥胖的风险，成人肥胖与许多慢性疾病密切相关。许多健康问题在儿童时期就开始潜伏在孩子的身体里，尽早开始健康的饮食和规律的运动是非常重要的。<br>
+                                <b>
+                                    • {{Age}}岁{{Gender}}孩在该项目的健康区域：<br>
+                                    ■ BMI指数：{{BMIStandards}}
+                                </b>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="content-text-box">
+                        <div class="content-text-box-title" style="background: url(http://cdn.imreliable.net/asset/image/BFamilyReport/content-text-box-title-bg.png) no-repeat left, url(http://cdn.imreliable.net/asset/image/BFamilyReport/{{AbilityImg}})no-repeat right; background-size: contain;">
+                            {{ChangeAbilityName}}
+                        </div>
+                        <div class="content-text-box-text">
+                            <p>
+                                {{{AbilityDescription}}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="content-text-box">
+                        <div class="content-text-box-title">
+                            肌肉力量、耐力和柔韧性
+                        </div>
+                        <div class="content-text-box-text">
+                            <p>
+                                • 这些指标均与孩子的生长发育密切相关，可用来衡量孩子肌肉骨骼系统的整体健康状况。我们通过多个测试项目来完成对肌肉力量、耐力和柔韧性的评估。<br /> •
+                                <b>重要性</b>：肌肉的健康水平对预防伤病和保持身体机能非常重要，同时，肌肉的力量、耐力和柔韧性对保持良好的姿势、腰椎健康和身体机能非常重要。<br>
+                                <b>
+                                    • {{Age}}岁{{Gender}}孩应达到的健康区域：<br />
+                                    ■ 仰卧卷腹：{{CrunchStandard}}个  &nbsp;■ 俯卧背伸：{{ProneBackStandard}} &nbsp; ■ 俯卧撑：{{PushUpStandard}}个 <br />
+                                    ■ 坐位体前屈：{{SitStandard}}厘米 &nbsp;■ 立定跳远：{{BrodJumpStandard}}厘米
+                                </b>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-box-right pull-right">
+                    <div class="content-box-right-top">
+                        <h6>测试教师：{{CreateTeacher}}</h6>
+                        <div class="this-that-time-title pull-left" style="position: relative;bottom: 8px;">
+                            <b style="position:relative;top:7px;">本 次</b><br><br>
+                            <b style="visibility:{{lastContent ResultContent}};position:relative;top:5px">上次</b><br><br>
+
+                        </div>
+                        <div class="this-that-time pull-left ">
+                            <ul class="font-bold">
+                                <li><img src="http://cdn.imreliable.net/asset/image/BFamilyReport/time-icon.png" /> 时间</li>
+                                <li> <img src="http://cdn.imreliable.net/asset/image/BFamilyReport/height-icon.png" /> 身高</li>
+                                <li><img src="http://cdn.imreliable.net/asset/image/BFamilyReport/weight-icon.png" /> 体重</li>
+                            </ul>
+                            <ul class="font-bold">
+                                <li>{{CreateTime}}</li>
+                                <li>{{Height}}cm</li>
+                                <li>{{Weight}}kg</li>
+                            </ul>
+                            <ul class="font-bold" style="visibility:{{lastContent ResultContent}}">
+                                <li>{{CreateTimeLast}}</li>
+                                <li>{{HeightLast}}cm</li>
+                                <li>{{WeightLast}}kg</li>
+                            </ul>
+                        </div>
+                        <div class="BMI-centent">
+                            <ul class="font-bold pull-right">
+                                <li>太轻</li>
+                                <li>健康区域</li>
+                                <li>需减重</li>
+                            </ul>
+                            <div class="content-box-right-top-bar-bg pull-right">
+                                <div class="bar-bg-left">
+
+                                </div>
+                                <div class="bar-bg-center">
+
+                                </div>
+                                <div class="bar-bg-right">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="BMI-this-that-time-title pull-left" style="position: absolute;top:140px !important">
+                            <b>（身体成分）-BMI指数</b><br> &nbsp;本 次
+                            <!--<br> &nbsp;上次-->
+                            <span class="test-time" style="visibility:{{lastContent ResultContent}}"><br> &nbsp;上 次</span>
+                            <div class="bars-css">
+                                <div>
+                                    <div class="bars">
+                                        <div id="{{BMIId}}"></div>
+                                        <div class="bar-margin-size" style="visibility:{{lastContent ResultContent}}" id="{{BMIIdLast}}"></div>
+                                    </div>
+                                </div>
+                                <!--<label style="height: 20px;border-left: 1px #ffffff solid;z-index: 100000;position: relative;bottom:24px;left: 90px;" id="{{BarLine}}"></label>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-box-right-bottom" id="item-test-content{{ChildId}}">
+                        <div class="BMI-centent">
+                            <ul class="font-bold pull-right">
+                                <li style="margin-right: 40px;">需努力</li>
+                                <li style="margin-right: 40px;">健康区域</li>
+                            </ul>
+                            <div class="content-box-right-top-bar-bg pull-right" style="background: url(http://cdn.imreliable.net/asset/image/BFamilyReport/content-box-right-bottom-bar-bg.png)no-repeat top; background-size: contain;">
+                                <div class="bar-bg-left" style="height: 540px;">
+                                </div>
+                                <div class="bar-bg-center" style="width: 67%;height: 540px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--底部-->
+            <div class="footer">
+                <div class="footer-code-box pull-left">
+                    <img class="QR-code pull-left" src="{{CodeImage}}" />
+                    <p class="footer-font-css pull-left">
+                        扫描二维码<br> 输入孩子专属ID，或扫描条形码
+                        <br> 查看孩子的健康成长档案
+                    </p>
+                    <p class="bar-code pull-left">
+                        <svg id="{{Id}}"></svg>
+                    </p>
+                </div>
+                <div class="footer-logo-box pull-right">
+                    <p class="footer-font-css pull-left">
+                        技术支持：&nbsp;&nbsp;&nbsp;&nbsp;
+                    </p>
+                    <img class="footer-logo pull-left" src="http://cdn.imreliable.net/asset/image/BFamilyReport/footer-logo.png">
+                    <p class="footer-font-css pull-left">&nbsp;睿莱体测&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                    <p class="footer-font-css pull-left">Cooper&nbsp;&nbsp;Institute&nbsp;&nbsp;&nbsp;</p>
+                </div>
+            </div>
+        </div>
+
+    </script>
+    <!--6岁 以下-->
+    <script type="text/x-handlebars-template" id="content-under-html">
+        <div class="report-box">
+            <!--头部-->
+            <div class="header">
+                <div class="headr-introduction pull-left">
+                    <h1>睿莱®体质测评报告</h1>
+                    <span>&nbsp;{{ServiceName}}</span>
+                    <p> 睿莱健康测评体系主要来源于美国库珀(Cooper Institute)研究所和国家体育总局颁布的《国民体质测定标准（幼儿部分）》。测试体系内的所有测试项目均与孩子的运动生活紧密相关，我们针对不同年龄段的孩子提供定制化的测试项目，主要测试身体形态、力量素质、柔韧性、协调性、灵敏素质、平衡能力、有氧能力等7大部分。本测评体系摒弃了世界大部分体系所使用的对单项成绩评分，对所有测试项目总评的评价办法，而是设置了健康区域，这样的评价方法有助于让家长有明确的目标，来帮助孩子提升健康水平。</p>
+                </div>
+                <div class="heder-child-info pull-left">
+                    <ul>
+                        <li>
+                            <span>
+                                {{ChildName}}
+                            </span>
+                            <img src="http://cdn.imreliable.net/asset/image/BFamilyReport/name-icon.png" />
+                        </li>
+                        <li>
+                            <span>
+                                {{Gender}}
+                            </span>
+                            <img src="http://cdn.imreliable.net/asset/image/BFamilyReport/gender-icon.png" />
+                        </li>
+                        <li>
+                            <span>
+                                {{Age}}岁
+                            </span>
+                            <img src="http://cdn.imreliable.net/asset/image/BFamilyReport/age-icon.png" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--内容-->
+            <div class="content-box">
+                <div class="content-box-left pull-left">
+                    <div class="content-text-box">
+                        <div class="content-text-box-title">
+                            身体形态
+                        </div>
+                        <div class="content-text-box-text">
+                            <p>
+                                • 身体形态是指儿童身体的外部形状和特征，主要包括了体形、身体姿势等方面，是通过身高和体重进行测量的，反应了孩子的骨骼、肌肉、皮下脂肪以及内脏器官的综合发育状况。<br> •
+                                <b>重要性</b>：超重的青少年多有成年后肥胖的风险，成人肥胖与许多慢性疾病密切相关。许多健康问题在儿童时期就开始潜伏在孩子的身体里，尽早开始健康的饮食和规律的运动是非常重要的。<br>
+                                <b>
+                                    • {{Age}}岁{{Gender}}孩在该项目的健康区域：<br>
+                                    ■ 身高：{{HeightStandard}}cm   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    ■ 体重：{{WeightStandard}}kg
+                                </b>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="content-text-box">
+                        <div class="content-text-box-title" style="background: url(http://cdn.imreliable.net/asset/image/BFamilyReport/content-text-box-title-bg.png) no-repeat left, url(http://cdn.imreliable.net/asset/image/BFamilyReport/centent-text-box-aerobic-icon.png)no-repeat right; background-size: contain;">
+                            灵敏性、协调性和平衡力
+                        </div>
+                        <div class="content-text-box-text">
+                            <p>
+                                • 灵敏、协调、平衡力是由神经系统控制的且内容复杂的综合身体素质，它是孩子形成运动（活动）技能的基础，与孩子的许多运动（活动）紧密相关。它是通过10米折返跑、双脚连续跳和走平衡木进行测量的。<br> •
+                                <b>重要性</b>：良好的灵敏、协调、平衡能力可以提升孩子的反应能力和自信心，这些身体素质与孩子的日常活动有着密切的关系，加强这方面的锻炼，可以预防孩子反应慢、学习精力不集中、易摔跤和多动症等问题。<br>
+                                <b>
+                                    • {{Age}}岁{{Gender}}孩在该项目的健康区域：<br>
+                                    ■ 10米折返跑：{{ShuttleRunStandard}}s  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;■ 双脚连续跳：{{DoubleJumpStandard }}s&nbsp; <br />
+                                    ■ 走平衡木：{{BalanceWoodStandard}}s &nbsp;
+                                </b>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="content-text-box">
+                        <div class="content-text-box-title">
+                            肌肉力量和柔韧性
+                        </div>
+                        <div class="content-text-box-text">
+                            <p>
+                                • 这些指标均与孩子的生长发育密切相关，可用来衡量孩子肌肉骨骼系统的整体健康状况。我们通过多个测试项目来完成对肌肉力量、耐力和柔韧性的评估<br /> •
+                                <b>重要性</b>：肌肉的健康水平对预防伤病和保持身体机能非常重要，同时，肌肉的力量和柔韧性对保持良好的姿势、腰椎健康和身体机能非常重要。<br>
+                                <b>
+                                    • {{Age}}岁{{Gender}}孩应达到的健康区域：<br />
+                                    ■ 网球掷远：{{TennisThrowsStandard}}m  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;■ 立定跳远：{{StandJumpStandard}}cm&nbsp; <br />
+                                    ■ 坐位体前屈：{{SitReachStandard}}cm &nbsp;
+                                </b>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-box-right pull-right">
+                    <div class="content-box-right-top">
+                        <h6>测试教师：{{CreateTeacher}}</h6>
+                        <h6>测试时间：<b style="color:#01a89e;">•</b><span>本 次：{{CreateTimeThat}}</span>&nbsp;&nbsp;<b style="visibility:{{lastContent ResultContent}};color:#d55e36">•</b><span style="visibility:{{lastContent ResultContent}}">上次：{{CreateTimeLast}}</span></h6>
+                        <div class="BMI-centent">
+                            <ul class="font-bold pull-right">
+                                <li style="margin-right: 40px;">需努力</li>
+                                <li style="margin-right: 40px;">健康区域</li>
+                            </ul>
+                            <div class="content-bar-box pull-right fist-bar-bg">
+                                <div class="BMI-this-that-time-title pull-left" style="position: absolute;left:-40px;top:9px !important">
+                                    <b>（身高标准体重）-身高</b>
+                                    <br> &nbsp;&nbsp;本 次<br>&nbsp;&nbsp;<span style="visibility:{{lastContent ResultContent}}">上 次</span>
+                                </div>
+                                <div class="bar-that" style="width: {{HeightBar}}px;"></div><span class="result-that">&nbsp;{{Height}}</span>
+                                <div class="bar-last" style="visibility:{{lastContent ResultContent}};width: {{HeightBarLast}}px;"></div><span class="result-last" style="visibility:{{lastContent ResultContent}}">&nbsp;{{HeightLast}}</span>
+                            </div>
+                        </div>
+
+                        <div class="BMI-centent">
+                            <ul class="font-bold pull-right">
+                                <li>太轻</li>
+                                <li>健康区域</li>
+                                <li>需减重</li>
+                            </ul>
+                            <div class="pull-right weight-bar-bg">
+                                <div class="BMI-this-that-time-title pull-left" style="position: absolute;left:-40px;top:9px !important">
+                                    <b>（身高标准体重）-体重</b>
+                                    <br> &nbsp;&nbsp;本 次<br>&nbsp;&nbsp;<span style="visibility:{{lastContent ResultContent}}">上 次</span>
+                                </div>
+                                <div class="bar-that" style="width: {{WeightBar}}px;"></div><span class="result-that">&nbsp;{{Weight}}</span>
+                                <div class="bar-last" style="visibility:{{lastContent ResultContent}};width: {{WeightBarLast}}px;"></div><span class="result-last" style="visibility:{{lastContent ResultContent}}">&nbsp;{{WeightLast}}</span>
+                                <!--<div class="bar-last" style="width: 176px;"></div><span class="result-last">&nbsp;{{WeightLast}}</span>-->
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="content-box-right-bottom" id="item-test-content{{ChildId}}">
+                        <div class="BMI-centent">
+                            <ul class="font-bold pull-right">
+                                <li style="margin-right: 40px;">需努力</li>
+                                <li style="margin-right: 40px;">健康区域</li>
+                            </ul>
+                            <div id="item-bar-content{{ChildId}}" class="item-bar-content-box"> </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--底部-->
+            <div class="footer">
+                <div class="footer-code-box pull-left">
+                    <img class="QR-code pull-left" src="{{CodeImage}}" />
+                    <p class="footer-font-css pull-left">
+                        扫描二维码<br> 输入孩子专属ID，或扫描条形码
+                        <br> 查看孩子的健康成长档案
+                    </p>
+                    <p class="bar-code pull-left">
+                        <svg id="{{Id}}"></svg>
+                    </p>
+
+                </div>
+                <div class="footer-logo-box pull-right">
+                    <p class="footer-font-css pull-left">
+                        技术支持：&nbsp;&nbsp;&nbsp;&nbsp;
+                    </p>
+                    <img class="footer-logo pull-left" src="http://cdn.imreliable.net/asset/image/BFamilyReport/footer-logo.png">
+                    <p class="footer-font-css pull-left">&nbsp;睿莱体测&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                    <p class="footer-font-css pull-left">Cooper&nbsp;&nbsp;Institute&nbsp;&nbsp;&nbsp;</p>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/javascript">
+			//  	var PhysicalProjectToQuality = {
+			//              "12": "身高",
+			//              "13": "体重",
+			//              "14": "柔韧性",
+			//              "15": "下肢力量",
+			//              "16": "协调性",
+			//              "17": "灵敏性",
+			//              "18": "上肢力量",
+			//              "19": "平衡力",
+			//
+			//          };
+			$(document).ready(function() {
+				 var result = {"Program":[{"__type":"BabybusSSApi.DatabaseModel.RT_Program, BabybusSSApi.DatabaseModel","Id":675,"CreateTime":"\/Date(1513497510017-0000)\/","Title":"123","ServiceUnitId":12,"Type":1,"CreateTeacher":"宏宏","Status":true,"Cancel":false,"GUID":"3ccb2845-6ced-4f14-843b-c256df9e9416","Count":0}],"TestResult":{"2991":[{"__type":"<>f__AnonymousType2`3[[BabybusSSApi.DatabaseModel.RT_ResultMaster, BabybusSSApi.DatabaseModel],[System.Collections.Generic.List`1[[BabybusSSApi.DatabaseModel.UV_RT_RestultDetail_Project, BabybusSSApi.DatabaseModel]], mscorlib],[BabybusSSApi.DatabaseModel.DB_Child, BabybusSSApi.DatabaseModel]], Foundation.ServiceInterface","master":{"Id":3001,"CreateTime":"\/Date(1513497510047-0000)\/","ProgramId":675,"ServiceUnitId":12,"ServiceUnitName":"Super-K少儿体适能","ClassId":173,"ClassName":"体验班","ChildId":2991,"ChildName":"高思彤","Gender":2,"Age":4.0,"Birthday":"\/Date(1374537600000-0000)\/","TestStatus":true,"Phone":"18191509715","Cancel":false,"GUID":"a97c240c-3436-42e4-b160-dd347e20a769"},"detail":[{"Id":13290,"ProjectId":10,"MasterId":3001,"Result":11.47,"IsTest":false,"Rank":1,"GUID":"87447881-4bee-4ae3-9438-07b2f3cf957b","Name":"走平衡木","DisplayName":"平衡力"},{"Id":13291,"ProjectId":7,"MasterId":3001,"Result":0.00,"IsTest":false,"Rank":1,"GUID":"01ba27a8-6eb4-4ee7-b7f5-8f05caff9520","Name":"90°俯卧撑","DisplayName":"上肢力量与耐力"},{"Id":13292,"ProjectId":1,"MasterId":3001,"Result":105.00,"IsTest":false,"Rank":0,"GUID":"7e0665b4-9bfb-4c57-9191-2b27a96d345d","Name":"身高"},{"Id":13293,"ProjectId":6,"MasterId":3001,"Result":2.00,"IsTest":false,"Rank":1,"GUID":"ee130c0a-8560-4441-8ae9-56d7d96f2bc5","Name":"俯卧背伸","DisplayName":"躯干力量与柔韧性"},{"Id":13294,"ProjectId":5,"MasterId":3001,"Result":0.00,"IsTest":false,"Rank":1,"GUID":"f9a8bebd-a81d-479f-ad6b-7de099445a4b","Name":"仰卧卷腹","DisplayName":"腹部力量与耐力"},{"Id":13295,"ProjectId":9,"MasterId":3001,"Result":24.00,"IsTest":false,"Rank":1,"GUID":"cfbf77d1-cd27-4457-81dd-766a409165a3","Name":"立定跳远","DisplayName":"下肢力量"},{"Id":13296,"ProjectId":8,"MasterId":3001,"Result":5.50,"IsTest":false,"Rank":1,"GUID":"1dafe50a-2550-43d9-bb1d-3818b62b4020","Name":"坐位体前屈","DisplayName":"身体柔韧性"},{"Id":13297,"ProjectId":2,"MasterId":3001,"Result":15.75,"IsTest":false,"Rank":0,"GUID":"50f6b898-6af1-4d89-9879-2f99d0d8359c","Name":"体重"},{"Id":13298,"ProjectId":3,"MasterId":3001,"Result":14.29,"IsTest":false,"Rank":2,"Name":"BMI指数","DisplayName":"身体成分"}],"childCode":{"Id":2991,"CreateTime":"\/Date(1513497510000-0000)\/","ServiceUnitId":12,"ClassId":173,"ChildName":"高思彤","Gender":2,"Birthday":"\/Date(1374537600000-0000)\/","Cancel":false,"Code":"610100070029461","Phone":"18191509715","ResponsibleTeacher":"宏宏","GUID":"b49814ba-87d4-4343-82bf-b1991c045f06"}}]},"ServiceUnit":{"__type":"BabybusSSApi.DatabaseModel.DB_ServiceUnit, BabybusSSApi.DatabaseModel","Id":12,"Name":"Super-K少儿体适能","CreateTime":"\/Date(1501056698627-0000)\/","City":"西安","Cancel":false,"UnitType":2,"Code":"su61010007","Count":0,"Description":"Super-K少儿体适能","RegionCode":"610113","Address":"雁塔区","WxImage":"su61010007Wx_Img.png"},"Standard":[{"__type":"BabybusSSApi.DatabaseModel.RT_Standard, BabybusSSApi.DatabaseModel","Id":1,"ProjectId":3,"Age":3.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":13.50,"Rank":-1},{"Id":2,"ProjectId":3,"Age":3.0,"Gender":2,"RankLowerLimit":13.60,"RankUpperLimit":16.80,"Rank":2},{"Id":3,"ProjectId":3,"Age":3.0,"Gender":2,"RankLowerLimit":16.90,"RankUpperLimit":40.00,"Rank":1},{"Id":4,"ProjectId":3,"Age":4.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":13.50,"Rank":-1},{"Id":5,"ProjectId":3,"Age":4.0,"Gender":2,"RankLowerLimit":13.60,"RankUpperLimit":16.80,"Rank":2},{"Id":6,"ProjectId":3,"Age":4.0,"Gender":2,"RankLowerLimit":16.90,"RankUpperLimit":40.00,"Rank":1},{"Id":7,"ProjectId":3,"Age":5.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":13.50,"Rank":-1},{"Id":8,"ProjectId":3,"Age":5.0,"Gender":2,"RankLowerLimit":13.60,"RankUpperLimit":16.80,"Rank":2},{"Id":9,"ProjectId":3,"Age":5.0,"Gender":2,"RankLowerLimit":16.90,"RankUpperLimit":40.00,"Rank":1},{"Id":10,"ProjectId":3,"Age":6.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":13.50,"Rank":-1},{"Id":11,"ProjectId":3,"Age":6.0,"Gender":2,"RankLowerLimit":13.60,"RankUpperLimit":16.80,"Rank":2},{"Id":12,"ProjectId":3,"Age":6.0,"Gender":2,"RankLowerLimit":16.90,"RankUpperLimit":40.00,"Rank":1},{"Id":13,"ProjectId":3,"Age":7.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":13.50,"Rank":-1},{"Id":14,"ProjectId":3,"Age":7.0,"Gender":2,"RankLowerLimit":13.60,"RankUpperLimit":16.80,"Rank":2},{"Id":15,"ProjectId":3,"Age":7.0,"Gender":2,"RankLowerLimit":16.90,"RankUpperLimit":40.00,"Rank":1},{"Id":16,"ProjectId":3,"Age":8.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":13.50,"Rank":-1},{"Id":17,"ProjectId":3,"Age":8.0,"Gender":2,"RankLowerLimit":13.60,"RankUpperLimit":16.80,"Rank":2},{"Id":18,"ProjectId":3,"Age":8.0,"Gender":2,"RankLowerLimit":16.90,"RankUpperLimit":40.00,"Rank":1},{"Id":19,"ProjectId":3,"Age":9.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":13.90,"Rank":-1},{"Id":20,"ProjectId":3,"Age":9.0,"Gender":2,"RankLowerLimit":14.00,"RankUpperLimit":19.40,"Rank":2},{"Id":21,"ProjectId":3,"Age":9.0,"Gender":2,"RankLowerLimit":19.50,"RankUpperLimit":40.00,"Rank":1},{"Id":22,"ProjectId":3,"Age":10.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":14.20,"Rank":-1},{"Id":23,"ProjectId":3,"Age":10.0,"Gender":2,"RankLowerLimit":14.30,"RankUpperLimit":20.30,"Rank":2},{"Id":24,"ProjectId":3,"Age":10.0,"Gender":2,"RankLowerLimit":20.40,"RankUpperLimit":40.00,"Rank":1},{"Id":25,"ProjectId":3,"Age":11.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":14.60,"Rank":-1},{"Id":26,"ProjectId":3,"Age":11.0,"Gender":2,"RankLowerLimit":14.70,"RankUpperLimit":21.20,"Rank":2},{"Id":27,"ProjectId":3,"Age":11.0,"Gender":2,"RankLowerLimit":21.30,"RankUpperLimit":40.00,"Rank":1},{"Id":28,"ProjectId":3,"Age":12.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":15.10,"Rank":-1},{"Id":29,"ProjectId":3,"Age":12.0,"Gender":2,"RankLowerLimit":15.20,"RankUpperLimit":22.10,"Rank":2},{"Id":30,"ProjectId":3,"Age":12.0,"Gender":2,"RankLowerLimit":22.20,"RankUpperLimit":40.00,"Rank":1},{"Id":31,"ProjectId":3,"Age":13.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":15.60,"Rank":-1},{"Id":32,"ProjectId":3,"Age":13.0,"Gender":2,"RankLowerLimit":15.70,"RankUpperLimit":22.90,"Rank":2},{"Id":33,"ProjectId":3,"Age":13.0,"Gender":2,"RankLowerLimit":23.00,"RankUpperLimit":40.00,"Rank":1},{"Id":34,"ProjectId":3,"Age":14.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":16.10,"Rank":-1},{"Id":35,"ProjectId":3,"Age":14.0,"Gender":2,"RankLowerLimit":16.20,"RankUpperLimit":23.60,"Rank":2},{"Id":36,"ProjectId":3,"Age":14.0,"Gender":2,"RankLowerLimit":23.70,"RankUpperLimit":40.00,"Rank":1},{"Id":37,"ProjectId":3,"Age":15.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":16.60,"Rank":-1},{"Id":38,"ProjectId":3,"Age":15.0,"Gender":2,"RankLowerLimit":16.70,"RankUpperLimit":24.30,"Rank":2},{"Id":39,"ProjectId":3,"Age":15.0,"Gender":2,"RankLowerLimit":24.40,"RankUpperLimit":40.00,"Rank":1},{"Id":40,"ProjectId":3,"Age":16.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":17.00,"Rank":-1},{"Id":41,"ProjectId":3,"Age":16.0,"Gender":2,"RankLowerLimit":17.10,"RankUpperLimit":24.80,"Rank":2},{"Id":42,"ProjectId":3,"Age":16.0,"Gender":2,"RankLowerLimit":24.90,"RankUpperLimit":40.00,"Rank":1},{"Id":43,"ProjectId":3,"Age":17.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":17.40,"Rank":-1},{"Id":44,"ProjectId":3,"Age":17.0,"Gender":2,"RankLowerLimit":17.50,"RankUpperLimit":24.90,"Rank":2},{"Id":45,"ProjectId":3,"Age":17.0,"Gender":2,"RankLowerLimit":25.00,"RankUpperLimit":40.00,"Rank":1},{"Id":46,"ProjectId":4,"Age":9.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":7.00,"Rank":1},{"Id":47,"ProjectId":4,"Age":9.0,"Gender":2,"RankLowerLimit":7.00,"RankUpperLimit":41.00,"Rank":2},{"Id":48,"ProjectId":4,"Age":10.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":7.00,"Rank":1},{"Id":49,"ProjectId":4,"Age":10.0,"Gender":2,"RankLowerLimit":7.00,"RankUpperLimit":41.00,"Rank":2},{"Id":50,"ProjectId":4,"Age":11.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":15.00,"Rank":1},{"Id":51,"ProjectId":4,"Age":11.0,"Gender":2,"RankLowerLimit":15.00,"RankUpperLimit":51.00,"Rank":2},{"Id":52,"ProjectId":4,"Age":12.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":15.00,"Rank":1},{"Id":53,"ProjectId":4,"Age":12.0,"Gender":2,"RankLowerLimit":15.00,"RankUpperLimit":51.00,"Rank":2},{"Id":54,"ProjectId":4,"Age":13.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":23.00,"Rank":1},{"Id":55,"ProjectId":4,"Age":13.0,"Gender":2,"RankLowerLimit":23.00,"RankUpperLimit":51.00,"Rank":2},{"Id":56,"ProjectId":4,"Age":14.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":23.00,"Rank":1},{"Id":57,"ProjectId":4,"Age":14.0,"Gender":2,"RankLowerLimit":23.00,"RankUpperLimit":51.00,"Rank":2},{"Id":58,"ProjectId":4,"Age":15.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":32.00,"Rank":1},{"Id":59,"ProjectId":4,"Age":15.0,"Gender":2,"RankLowerLimit":32.00,"RankUpperLimit":51.00,"Rank":2},{"Id":60,"ProjectId":4,"Age":16.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":32.00,"Rank":1},{"Id":61,"ProjectId":4,"Age":16.0,"Gender":2,"RankLowerLimit":32.00,"RankUpperLimit":61.00,"Rank":2},{"Id":62,"ProjectId":4,"Age":17.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":41.00,"Rank":1},{"Id":63,"ProjectId":4,"Age":17.0,"Gender":2,"RankLowerLimit":41.00,"RankUpperLimit":61.00,"Rank":2},{"Id":64,"ProjectId":5,"Age":3.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":1.00,"Rank":1},{"Id":65,"ProjectId":5,"Age":3.0,"Gender":2,"RankLowerLimit":1.00,"RankUpperLimit":5.00,"Rank":2},{"Id":66,"ProjectId":5,"Age":4.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":1.00,"Rank":1},{"Id":67,"ProjectId":5,"Age":4.0,"Gender":2,"RankLowerLimit":1.00,"RankUpperLimit":5.00,"Rank":2},{"Id":68,"ProjectId":5,"Age":5.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":2.00,"Rank":1},{"Id":69,"ProjectId":5,"Age":5.0,"Gender":2,"RankLowerLimit":2.00,"RankUpperLimit":10.00,"Rank":2},{"Id":70,"ProjectId":5,"Age":6.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":2.00,"Rank":1},{"Id":71,"ProjectId":5,"Age":6.0,"Gender":2,"RankLowerLimit":2.00,"RankUpperLimit":10.00,"Rank":2},{"Id":72,"ProjectId":5,"Age":7.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":4.00,"Rank":1},{"Id":73,"ProjectId":5,"Age":7.0,"Gender":2,"RankLowerLimit":4.00,"RankUpperLimit":14.00,"Rank":2},{"Id":74,"ProjectId":5,"Age":8.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":6.00,"Rank":1},{"Id":75,"ProjectId":5,"Age":8.0,"Gender":2,"RankLowerLimit":6.00,"RankUpperLimit":20.00,"Rank":2},{"Id":76,"ProjectId":5,"Age":9.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":9.00,"Rank":1},{"Id":77,"ProjectId":5,"Age":9.0,"Gender":2,"RankLowerLimit":9.00,"RankUpperLimit":22.00,"Rank":2},{"Id":78,"ProjectId":5,"Age":10.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":12.00,"Rank":1},{"Id":79,"ProjectId":5,"Age":10.0,"Gender":2,"RankLowerLimit":12.00,"RankUpperLimit":26.00,"Rank":2},{"Id":80,"ProjectId":5,"Age":11.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":15.00,"Rank":1},{"Id":81,"ProjectId":5,"Age":11.0,"Gender":2,"RankLowerLimit":15.00,"RankUpperLimit":29.00,"Rank":2},{"Id":82,"ProjectId":5,"Age":12.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":18.00,"Rank":1},{"Id":83,"ProjectId":5,"Age":12.0,"Gender":2,"RankLowerLimit":18.00,"RankUpperLimit":32.00,"Rank":2},{"Id":84,"ProjectId":5,"Age":13.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":18.00,"Rank":1},{"Id":85,"ProjectId":5,"Age":13.0,"Gender":2,"RankLowerLimit":18.00,"RankUpperLimit":32.00,"Rank":2},{"Id":86,"ProjectId":5,"Age":14.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":18.00,"Rank":1},{"Id":87,"ProjectId":5,"Age":14.0,"Gender":2,"RankLowerLimit":18.00,"RankUpperLimit":32.00,"Rank":2},{"Id":88,"ProjectId":5,"Age":15.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":18.00,"Rank":1},{"Id":89,"ProjectId":5,"Age":15.0,"Gender":2,"RankLowerLimit":18.00,"RankUpperLimit":35.00,"Rank":2},{"Id":90,"ProjectId":5,"Age":16.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":18.00,"Rank":1},{"Id":91,"ProjectId":5,"Age":16.0,"Gender":2,"RankLowerLimit":18.00,"RankUpperLimit":35.00,"Rank":2},{"Id":92,"ProjectId":5,"Age":17.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":18.00,"Rank":1},{"Id":93,"ProjectId":5,"Age":17.0,"Gender":2,"RankLowerLimit":18.00,"RankUpperLimit":35.00,"Rank":2},{"Id":94,"ProjectId":6,"Age":3.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":6.00,"Rank":1},{"Id":95,"ProjectId":6,"Age":3.0,"Gender":2,"RankLowerLimit":6.00,"RankUpperLimit":12.00,"Rank":2},{"Id":96,"ProjectId":6,"Age":4.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":6.00,"Rank":1},{"Id":97,"ProjectId":6,"Age":4.0,"Gender":2,"RankLowerLimit":6.00,"RankUpperLimit":12.00,"Rank":2},{"Id":98,"ProjectId":6,"Age":5.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":6.00,"Rank":1},{"Id":99,"ProjectId":6,"Age":5.0,"Gender":2,"RankLowerLimit":6.00,"RankUpperLimit":12.00,"Rank":2},{"Id":100,"ProjectId":6,"Age":6.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":6.00,"Rank":1},{"Id":101,"ProjectId":6,"Age":6.0,"Gender":2,"RankLowerLimit":6.00,"RankUpperLimit":12.00,"Rank":2},{"Id":102,"ProjectId":6,"Age":7.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":6.00,"Rank":1},{"Id":103,"ProjectId":6,"Age":7.0,"Gender":2,"RankLowerLimit":6.00,"RankUpperLimit":12.00,"Rank":2},{"Id":104,"ProjectId":6,"Age":8.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":6.00,"Rank":1},{"Id":105,"ProjectId":6,"Age":8.0,"Gender":2,"RankLowerLimit":6.00,"RankUpperLimit":12.00,"Rank":2},{"Id":106,"ProjectId":6,"Age":9.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":6.00,"Rank":1},{"Id":107,"ProjectId":6,"Age":9.0,"Gender":2,"RankLowerLimit":6.00,"RankUpperLimit":12.00,"Rank":2},{"Id":108,"ProjectId":6,"Age":10.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":9.00,"Rank":1},{"Id":109,"ProjectId":6,"Age":10.0,"Gender":2,"RankLowerLimit":9.00,"RankUpperLimit":12.00,"Rank":2},{"Id":110,"ProjectId":6,"Age":11.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":9.00,"Rank":1},{"Id":111,"ProjectId":6,"Age":11.0,"Gender":2,"RankLowerLimit":9.00,"RankUpperLimit":12.00,"Rank":2},{"Id":112,"ProjectId":6,"Age":12.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":9.00,"Rank":1},{"Id":113,"ProjectId":6,"Age":12.0,"Gender":2,"RankLowerLimit":9.00,"RankUpperLimit":12.00,"Rank":2},{"Id":114,"ProjectId":6,"Age":13.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":9.00,"Rank":1},{"Id":115,"ProjectId":6,"Age":13.0,"Gender":2,"RankLowerLimit":9.00,"RankUpperLimit":12.00,"Rank":2},{"Id":116,"ProjectId":6,"Age":14.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":9.00,"Rank":1},{"Id":117,"ProjectId":6,"Age":14.0,"Gender":2,"RankLowerLimit":9.00,"RankUpperLimit":12.00,"Rank":2},{"Id":118,"ProjectId":6,"Age":15.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":9.00,"Rank":1},{"Id":119,"ProjectId":6,"Age":15.0,"Gender":2,"RankLowerLimit":9.00,"RankUpperLimit":12.00,"Rank":2},{"Id":120,"ProjectId":6,"Age":16.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":9.00,"Rank":1},{"Id":121,"ProjectId":6,"Age":16.0,"Gender":2,"RankLowerLimit":9.00,"RankUpperLimit":12.00,"Rank":2},{"Id":122,"ProjectId":6,"Age":17.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":9.00,"Rank":1},{"Id":123,"ProjectId":6,"Age":17.0,"Gender":2,"RankLowerLimit":9.00,"RankUpperLimit":12.00,"Rank":2},{"Id":124,"ProjectId":7,"Age":3.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":1.00,"Rank":1},{"Id":125,"ProjectId":7,"Age":3.0,"Gender":2,"RankLowerLimit":1.00,"RankUpperLimit":5.00,"Rank":2},{"Id":126,"ProjectId":7,"Age":4.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":2.00,"Rank":1},{"Id":127,"ProjectId":7,"Age":4.0,"Gender":2,"RankLowerLimit":2.00,"RankUpperLimit":7.00,"Rank":2},{"Id":128,"ProjectId":7,"Age":5.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":3.00,"Rank":1},{"Id":129,"ProjectId":7,"Age":5.0,"Gender":2,"RankLowerLimit":3.00,"RankUpperLimit":8.00,"Rank":2},{"Id":130,"ProjectId":7,"Age":6.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":3.00,"Rank":1},{"Id":131,"ProjectId":7,"Age":6.0,"Gender":2,"RankLowerLimit":3.00,"RankUpperLimit":8.00,"Rank":2},{"Id":132,"ProjectId":7,"Age":7.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":4.00,"Rank":1},{"Id":133,"ProjectId":7,"Age":7.0,"Gender":2,"RankLowerLimit":4.00,"RankUpperLimit":10.00,"Rank":2},{"Id":134,"ProjectId":7,"Age":8.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":5.00,"Rank":1},{"Id":135,"ProjectId":7,"Age":8.0,"Gender":2,"RankLowerLimit":5.00,"RankUpperLimit":13.00,"Rank":2},{"Id":136,"ProjectId":7,"Age":9.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":6.00,"Rank":1},{"Id":137,"ProjectId":7,"Age":9.0,"Gender":2,"RankLowerLimit":6.00,"RankUpperLimit":15.00,"Rank":2},{"Id":138,"ProjectId":7,"Age":10.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":7.00,"Rank":1},{"Id":139,"ProjectId":7,"Age":10.0,"Gender":2,"RankLowerLimit":7.00,"RankUpperLimit":15.00,"Rank":2},{"Id":140,"ProjectId":7,"Age":11.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":7.00,"Rank":1},{"Id":141,"ProjectId":7,"Age":11.0,"Gender":2,"RankLowerLimit":7.00,"RankUpperLimit":15.00,"Rank":2},{"Id":142,"ProjectId":7,"Age":12.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":7.00,"Rank":1},{"Id":143,"ProjectId":7,"Age":12.0,"Gender":2,"RankLowerLimit":7.00,"RankUpperLimit":15.00,"Rank":2},{"Id":144,"ProjectId":7,"Age":13.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":7.00,"Rank":1},{"Id":145,"ProjectId":7,"Age":13.0,"Gender":2,"RankLowerLimit":7.00,"RankUpperLimit":15.00,"Rank":2},{"Id":146,"ProjectId":7,"Age":14.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":7.00,"Rank":1},{"Id":147,"ProjectId":7,"Age":14.0,"Gender":2,"RankLowerLimit":7.00,"RankUpperLimit":15.00,"Rank":2},{"Id":148,"ProjectId":7,"Age":15.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":7.00,"Rank":1},{"Id":149,"ProjectId":7,"Age":15.0,"Gender":2,"RankLowerLimit":7.00,"RankUpperLimit":15.00,"Rank":2},{"Id":150,"ProjectId":7,"Age":16.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":7.00,"Rank":1},{"Id":151,"ProjectId":7,"Age":16.0,"Gender":2,"RankLowerLimit":7.00,"RankUpperLimit":15.00,"Rank":2},{"Id":152,"ProjectId":7,"Age":17.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":7.00,"Rank":1},{"Id":153,"ProjectId":7,"Age":17.0,"Gender":2,"RankLowerLimit":7.00,"RankUpperLimit":15.00,"Rank":2},{"Id":154,"ProjectId":8,"Age":3.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":10.00,"Rank":1},{"Id":155,"ProjectId":8,"Age":3.0,"Gender":2,"RankLowerLimit":10.00,"RankUpperLimit":16.00,"Rank":2},{"Id":156,"ProjectId":8,"Age":4.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":10.00,"Rank":1},{"Id":157,"ProjectId":8,"Age":4.0,"Gender":2,"RankLowerLimit":10.00,"RankUpperLimit":16.00,"Rank":2},{"Id":158,"ProjectId":8,"Age":5.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":11.00,"Rank":1},{"Id":159,"ProjectId":8,"Age":5.0,"Gender":2,"RankLowerLimit":11.00,"RankUpperLimit":17.00,"Rank":2},{"Id":160,"ProjectId":8,"Age":6.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":12.00,"Rank":1},{"Id":161,"ProjectId":8,"Age":6.0,"Gender":2,"RankLowerLimit":12.00,"RankUpperLimit":17.00,"Rank":2},{"Id":162,"ProjectId":8,"Age":7.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":13.40,"Rank":1},{"Id":163,"ProjectId":8,"Age":7.0,"Gender":2,"RankLowerLimit":13.40,"RankUpperLimit":18.60,"Rank":2},{"Id":164,"ProjectId":8,"Age":8.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":13.30,"Rank":1},{"Id":165,"ProjectId":8,"Age":8.0,"Gender":2,"RankLowerLimit":13.30,"RankUpperLimit":18.90,"Rank":2},{"Id":166,"ProjectId":8,"Age":9.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":13.20,"Rank":1},{"Id":167,"ProjectId":8,"Age":9.0,"Gender":2,"RankLowerLimit":13.20,"RankUpperLimit":19.20,"Rank":2},{"Id":168,"ProjectId":8,"Age":10.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":13.10,"Rank":1},{"Id":169,"ProjectId":8,"Age":10.0,"Gender":2,"RankLowerLimit":13.10,"RankUpperLimit":19.50,"Rank":2},{"Id":170,"ProjectId":8,"Age":11.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":12.90,"Rank":1},{"Id":171,"ProjectId":8,"Age":11.0,"Gender":2,"RankLowerLimit":12.90,"RankUpperLimit":19.80,"Rank":2},{"Id":172,"ProjectId":8,"Age":12.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":13.00,"Rank":1},{"Id":173,"ProjectId":8,"Age":12.0,"Gender":2,"RankLowerLimit":13.00,"RankUpperLimit":19.90,"Rank":2},{"Id":174,"ProjectId":8,"Age":13.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":15.00,"Rank":1},{"Id":175,"ProjectId":8,"Age":13.0,"Gender":2,"RankLowerLimit":15.00,"RankUpperLimit":21.80,"Rank":2},{"Id":176,"ProjectId":8,"Age":14.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":15.90,"Rank":1},{"Id":177,"ProjectId":8,"Age":14.0,"Gender":2,"RankLowerLimit":15.90,"RankUpperLimit":22.70,"Rank":2},{"Id":178,"ProjectId":8,"Age":15.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":16.70,"Rank":1},{"Id":179,"ProjectId":8,"Age":15.0,"Gender":2,"RankLowerLimit":16.70,"RankUpperLimit":23.50,"Rank":2},{"Id":180,"ProjectId":8,"Age":16.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":17.40,"Rank":1},{"Id":181,"ProjectId":8,"Age":16.0,"Gender":2,"RankLowerLimit":17.40,"RankUpperLimit":24.20,"Rank":2},{"Id":182,"ProjectId":8,"Age":17.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":18.00,"Rank":1},{"Id":183,"ProjectId":8,"Age":17.0,"Gender":2,"RankLowerLimit":18.00,"RankUpperLimit":24.80,"Rank":2},{"Id":184,"ProjectId":9,"Age":3.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":46.00,"Rank":1},{"Id":185,"ProjectId":9,"Age":3.0,"Gender":2,"RankLowerLimit":46.00,"RankUpperLimit":80.00,"Rank":2},{"Id":186,"ProjectId":9,"Age":4.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":66.00,"Rank":1},{"Id":187,"ProjectId":9,"Age":4.0,"Gender":2,"RankLowerLimit":66.00,"RankUpperLimit":96.00,"Rank":2},{"Id":188,"ProjectId":9,"Age":5.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":81.00,"Rank":1},{"Id":189,"ProjectId":9,"Age":5.0,"Gender":2,"RankLowerLimit":81.00,"RankUpperLimit":109.00,"Rank":2},{"Id":190,"ProjectId":9,"Age":6.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":92.00,"Rank":1},{"Id":191,"ProjectId":9,"Age":6.0,"Gender":2,"RankLowerLimit":92.00,"RankUpperLimit":116.00,"Rank":2},{"Id":192,"ProjectId":9,"Age":7.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":99.00,"Rank":1},{"Id":193,"ProjectId":9,"Age":7.0,"Gender":2,"RankLowerLimit":99.00,"RankUpperLimit":136.00,"Rank":2},{"Id":194,"ProjectId":9,"Age":8.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":110.00,"Rank":1},{"Id":195,"ProjectId":9,"Age":8.0,"Gender":2,"RankLowerLimit":110.00,"RankUpperLimit":147.00,"Rank":2},{"Id":196,"ProjectId":9,"Age":9.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":119.00,"Rank":1},{"Id":197,"ProjectId":9,"Age":9.0,"Gender":2,"RankLowerLimit":119.00,"RankUpperLimit":158.00,"Rank":2},{"Id":198,"ProjectId":9,"Age":10.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":130.00,"Rank":1},{"Id":199,"ProjectId":9,"Age":10.0,"Gender":2,"RankLowerLimit":130.00,"RankUpperLimit":164.00,"Rank":2},{"Id":200,"ProjectId":9,"Age":11.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":134.00,"Rank":1},{"Id":201,"ProjectId":9,"Age":11.0,"Gender":2,"RankLowerLimit":134.00,"RankUpperLimit":168.00,"Rank":2},{"Id":202,"ProjectId":9,"Age":12.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":140.00,"Rank":1},{"Id":203,"ProjectId":9,"Age":12.0,"Gender":2,"RankLowerLimit":140.00,"RankUpperLimit":170.00,"Rank":2},{"Id":204,"ProjectId":9,"Age":13.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":144.00,"Rank":1},{"Id":205,"ProjectId":9,"Age":13.0,"Gender":2,"RankLowerLimit":144.00,"RankUpperLimit":174.00,"Rank":2},{"Id":206,"ProjectId":9,"Age":14.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":146.00,"Rank":1},{"Id":207,"ProjectId":9,"Age":14.0,"Gender":2,"RankLowerLimit":146.00,"RankUpperLimit":176.00,"Rank":2},{"Id":208,"ProjectId":9,"Age":15.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":148.00,"Rank":1},{"Id":209,"ProjectId":9,"Age":15.0,"Gender":2,"RankLowerLimit":148.00,"RankUpperLimit":178.00,"Rank":2},{"Id":210,"ProjectId":9,"Age":16.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":149.00,"Rank":1},{"Id":211,"ProjectId":9,"Age":16.0,"Gender":2,"RankLowerLimit":149.00,"RankUpperLimit":179.00,"Rank":2},{"Id":212,"ProjectId":9,"Age":17.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":150.00,"Rank":1},{"Id":213,"ProjectId":9,"Age":17.0,"Gender":2,"RankLowerLimit":150.00,"RankUpperLimit":180.00,"Rank":2},{"Id":226,"ProjectId":11,"Age":9.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":40.20,"Rank":1},{"Id":227,"ProjectId":11,"Age":9.0,"Gender":2,"RankLowerLimit":40.20,"RankUpperLimit":47.00,"Rank":2},{"Id":228,"ProjectId":11,"Age":10.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":40.20,"Rank":1},{"Id":229,"ProjectId":11,"Age":10.0,"Gender":2,"RankLowerLimit":40.20,"RankUpperLimit":47.00,"Rank":2},{"Id":230,"ProjectId":11,"Age":11.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":40.20,"Rank":1},{"Id":231,"ProjectId":11,"Age":11.0,"Gender":2,"RankLowerLimit":40.20,"RankUpperLimit":46.00,"Rank":2},{"Id":232,"ProjectId":11,"Age":12.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":40.10,"Rank":1},{"Id":233,"ProjectId":11,"Age":12.0,"Gender":2,"RankLowerLimit":40.10,"RankUpperLimit":45.00,"Rank":2},{"Id":234,"ProjectId":11,"Age":13.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":39.70,"Rank":1},{"Id":235,"ProjectId":11,"Age":13.0,"Gender":2,"RankLowerLimit":39.70,"RankUpperLimit":44.00,"Rank":2},{"Id":236,"ProjectId":11,"Age":14.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":39.40,"Rank":1},{"Id":237,"ProjectId":11,"Age":14.0,"Gender":2,"RankLowerLimit":39.40,"RankUpperLimit":43.00,"Rank":2},{"Id":238,"ProjectId":11,"Age":15.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":39.10,"Rank":1},{"Id":239,"ProjectId":11,"Age":15.0,"Gender":2,"RankLowerLimit":39.10,"RankUpperLimit":43.00,"Rank":2},{"Id":240,"ProjectId":11,"Age":16.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":38.90,"Rank":1},{"Id":241,"ProjectId":11,"Age":16.0,"Gender":2,"RankLowerLimit":38.90,"RankUpperLimit":43.00,"Rank":2},{"Id":242,"ProjectId":11,"Age":17.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":38.80,"Rank":1},{"Id":243,"ProjectId":11,"Age":17.0,"Gender":2,"RankLowerLimit":38.80,"RankUpperLimit":43.00,"Rank":2},{"Id":244,"ProjectId":3,"Age":3.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":13.80,"Rank":-1},{"Id":245,"ProjectId":3,"Age":3.0,"Gender":1,"RankLowerLimit":13.90,"RankUpperLimit":16.80,"Rank":2},{"Id":246,"ProjectId":3,"Age":3.0,"Gender":1,"RankLowerLimit":16.90,"RankUpperLimit":40.00,"Rank":1},{"Id":247,"ProjectId":3,"Age":4.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":13.80,"Rank":-1},{"Id":248,"ProjectId":3,"Age":4.0,"Gender":1,"RankLowerLimit":13.90,"RankUpperLimit":16.80,"Rank":2},{"Id":249,"ProjectId":3,"Age":4.0,"Gender":1,"RankLowerLimit":16.90,"RankUpperLimit":40.00,"Rank":1},{"Id":250,"ProjectId":3,"Age":5.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":13.80,"Rank":-1},{"Id":251,"ProjectId":3,"Age":5.0,"Gender":1,"RankLowerLimit":13.90,"RankUpperLimit":16.80,"Rank":2},{"Id":252,"ProjectId":3,"Age":5.0,"Gender":1,"RankLowerLimit":16.90,"RankUpperLimit":40.00,"Rank":1},{"Id":253,"ProjectId":3,"Age":6.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":13.70,"Rank":-1},{"Id":254,"ProjectId":3,"Age":6.0,"Gender":1,"RankLowerLimit":13.80,"RankUpperLimit":17.10,"Rank":2},{"Id":255,"ProjectId":3,"Age":6.0,"Gender":1,"RankLowerLimit":17.20,"RankUpperLimit":40.00,"Rank":1},{"Id":256,"ProjectId":3,"Age":7.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":13.70,"Rank":-1},{"Id":257,"ProjectId":3,"Age":7.0,"Gender":1,"RankLowerLimit":13.80,"RankUpperLimit":17.60,"Rank":2},{"Id":258,"ProjectId":3,"Age":7.0,"Gender":1,"RankLowerLimit":17.70,"RankUpperLimit":40.00,"Rank":1},{"Id":259,"ProjectId":3,"Age":8.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":13.90,"Rank":-1},{"Id":260,"ProjectId":3,"Age":8.0,"Gender":1,"RankLowerLimit":14.00,"RankUpperLimit":18.20,"Rank":2},{"Id":261,"ProjectId":3,"Age":8.0,"Gender":1,"RankLowerLimit":18.30,"RankUpperLimit":40.00,"Rank":1},{"Id":262,"ProjectId":3,"Age":9.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":13.90,"Rank":-1},{"Id":263,"ProjectId":3,"Age":9.0,"Gender":1,"RankLowerLimit":14.00,"RankUpperLimit":19.40,"Rank":2},{"Id":264,"ProjectId":3,"Age":9.0,"Gender":1,"RankLowerLimit":19.50,"RankUpperLimit":40.00,"Rank":1},{"Id":265,"ProjectId":3,"Age":10.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":14.40,"Rank":-1},{"Id":266,"ProjectId":3,"Age":10.0,"Gender":1,"RankLowerLimit":14.50,"RankUpperLimit":19.70,"Rank":2},{"Id":267,"ProjectId":3,"Age":10.0,"Gender":1,"RankLowerLimit":19.80,"RankUpperLimit":40.00,"Rank":1},{"Id":268,"ProjectId":3,"Age":11.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":14.80,"Rank":-1},{"Id":269,"ProjectId":3,"Age":11.0,"Gender":1,"RankLowerLimit":14.90,"RankUpperLimit":20.50,"Rank":2},{"Id":270,"ProjectId":3,"Age":11.0,"Gender":1,"RankLowerLimit":20.60,"RankUpperLimit":40.00,"Rank":1},{"Id":271,"ProjectId":3,"Age":12.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":15.20,"Rank":-1},{"Id":272,"ProjectId":3,"Age":12.0,"Gender":1,"RankLowerLimit":15.30,"RankUpperLimit":21.30,"Rank":2},{"Id":273,"ProjectId":3,"Age":12.0,"Gender":1,"RankLowerLimit":21.40,"RankUpperLimit":40.00,"Rank":1},{"Id":274,"ProjectId":3,"Age":13.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":15.70,"Rank":-1},{"Id":275,"ProjectId":3,"Age":13.0,"Gender":1,"RankLowerLimit":15.80,"RankUpperLimit":22.20,"Rank":2},{"Id":276,"ProjectId":3,"Age":13.0,"Gender":1,"RankLowerLimit":22.30,"RankUpperLimit":40.00,"Rank":1},{"Id":277,"ProjectId":3,"Age":14.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":16.30,"Rank":-1},{"Id":278,"ProjectId":3,"Age":14.0,"Gender":1,"RankLowerLimit":16.40,"RankUpperLimit":23.00,"Rank":2},{"Id":279,"ProjectId":3,"Age":14.0,"Gender":1,"RankLowerLimit":23.10,"RankUpperLimit":40.00,"Rank":1},{"Id":280,"ProjectId":3,"Age":15.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":16.80,"Rank":-1},{"Id":281,"ProjectId":3,"Age":15.0,"Gender":1,"RankLowerLimit":16.90,"RankUpperLimit":23.70,"Rank":2},{"Id":282,"ProjectId":3,"Age":15.0,"Gender":1,"RankLowerLimit":23.80,"RankUpperLimit":40.00,"Rank":1},{"Id":283,"ProjectId":3,"Age":16.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":17.40,"Rank":-1},{"Id":284,"ProjectId":3,"Age":16.0,"Gender":1,"RankLowerLimit":17.50,"RankUpperLimit":24.50,"Rank":2},{"Id":285,"ProjectId":3,"Age":16.0,"Gender":1,"RankLowerLimit":24.60,"RankUpperLimit":40.00,"Rank":1},{"Id":286,"ProjectId":3,"Age":17.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":18.00,"Rank":-1},{"Id":287,"ProjectId":3,"Age":17.0,"Gender":1,"RankLowerLimit":18.10,"RankUpperLimit":24.90,"Rank":2},{"Id":288,"ProjectId":3,"Age":17.0,"Gender":1,"RankLowerLimit":25.00,"RankUpperLimit":40.00,"Rank":1},{"Id":289,"ProjectId":4,"Age":9.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":15.00,"Rank":1},{"Id":290,"ProjectId":4,"Age":9.0,"Gender":1,"RankLowerLimit":15.00,"RankUpperLimit":51.00,"Rank":2},{"Id":291,"ProjectId":4,"Age":10.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":23.00,"Rank":1},{"Id":292,"ProjectId":4,"Age":10.0,"Gender":1,"RankLowerLimit":23.00,"RankUpperLimit":61.00,"Rank":2},{"Id":293,"ProjectId":4,"Age":11.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":23.00,"Rank":1},{"Id":294,"ProjectId":4,"Age":11.0,"Gender":1,"RankLowerLimit":23.00,"RankUpperLimit":72.00,"Rank":2},{"Id":295,"ProjectId":4,"Age":12.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":32.00,"Rank":1},{"Id":296,"ProjectId":4,"Age":12.0,"Gender":1,"RankLowerLimit":32.00,"RankUpperLimit":72.00,"Rank":2},{"Id":297,"ProjectId":4,"Age":13.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":41.00,"Rank":1},{"Id":298,"ProjectId":4,"Age":13.0,"Gender":1,"RankLowerLimit":41.00,"RankUpperLimit":83.00,"Rank":2},{"Id":299,"ProjectId":4,"Age":14.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":41.00,"Rank":1},{"Id":300,"ProjectId":4,"Age":14.0,"Gender":1,"RankLowerLimit":41.00,"RankUpperLimit":83.00,"Rank":2},{"Id":301,"ProjectId":4,"Age":15.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":51.00,"Rank":1},{"Id":302,"ProjectId":4,"Age":15.0,"Gender":1,"RankLowerLimit":51.00,"RankUpperLimit":94.00,"Rank":2},{"Id":303,"ProjectId":4,"Age":16.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":61.00,"Rank":1},{"Id":304,"ProjectId":4,"Age":16.0,"Gender":1,"RankLowerLimit":61.00,"RankUpperLimit":94.00,"Rank":2},{"Id":305,"ProjectId":4,"Age":17.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":61.00,"Rank":1},{"Id":306,"ProjectId":4,"Age":17.0,"Gender":1,"RankLowerLimit":61.00,"RankUpperLimit":106.00,"Rank":2},{"Id":307,"ProjectId":5,"Age":3.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":1.00,"Rank":1},{"Id":308,"ProjectId":5,"Age":3.0,"Gender":1,"RankLowerLimit":1.00,"RankUpperLimit":5.00,"Rank":2},{"Id":309,"ProjectId":5,"Age":4.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":1.00,"Rank":1},{"Id":310,"ProjectId":5,"Age":4.0,"Gender":1,"RankLowerLimit":1.00,"RankUpperLimit":8.00,"Rank":2},{"Id":311,"ProjectId":5,"Age":5.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":2.00,"Rank":1},{"Id":312,"ProjectId":5,"Age":5.0,"Gender":1,"RankLowerLimit":2.00,"RankUpperLimit":10.00,"Rank":2},{"Id":313,"ProjectId":5,"Age":6.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":2.00,"Rank":1},{"Id":314,"ProjectId":5,"Age":6.0,"Gender":1,"RankLowerLimit":2.00,"RankUpperLimit":10.00,"Rank":2},{"Id":315,"ProjectId":5,"Age":7.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":4.00,"Rank":1},{"Id":316,"ProjectId":5,"Age":7.0,"Gender":1,"RankLowerLimit":4.00,"RankUpperLimit":14.00,"Rank":2},{"Id":317,"ProjectId":5,"Age":8.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":6.00,"Rank":1},{"Id":318,"ProjectId":5,"Age":8.0,"Gender":1,"RankLowerLimit":6.00,"RankUpperLimit":20.00,"Rank":2},{"Id":319,"ProjectId":5,"Age":9.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":9.00,"Rank":1},{"Id":320,"ProjectId":5,"Age":9.0,"Gender":1,"RankLowerLimit":9.00,"RankUpperLimit":24.00,"Rank":2},{"Id":321,"ProjectId":5,"Age":10.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":12.00,"Rank":1},{"Id":322,"ProjectId":5,"Age":10.0,"Gender":1,"RankLowerLimit":12.00,"RankUpperLimit":24.00,"Rank":2},{"Id":323,"ProjectId":5,"Age":11.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":15.00,"Rank":1},{"Id":324,"ProjectId":5,"Age":11.0,"Gender":1,"RankLowerLimit":15.00,"RankUpperLimit":28.00,"Rank":2},{"Id":325,"ProjectId":5,"Age":12.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":18.00,"Rank":1},{"Id":326,"ProjectId":5,"Age":12.0,"Gender":1,"RankLowerLimit":18.00,"RankUpperLimit":36.00,"Rank":2},{"Id":327,"ProjectId":5,"Age":13.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":21.00,"Rank":1},{"Id":328,"ProjectId":5,"Age":13.0,"Gender":1,"RankLowerLimit":21.00,"RankUpperLimit":45.00,"Rank":2},{"Id":329,"ProjectId":5,"Age":14.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":24.00,"Rank":1},{"Id":330,"ProjectId":5,"Age":14.0,"Gender":1,"RankLowerLimit":24.00,"RankUpperLimit":45.00,"Rank":2},{"Id":331,"ProjectId":5,"Age":15.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":24.00,"Rank":1},{"Id":332,"ProjectId":5,"Age":15.0,"Gender":1,"RankLowerLimit":24.00,"RankUpperLimit":45.00,"Rank":2},{"Id":333,"ProjectId":5,"Age":16.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":24.00,"Rank":1},{"Id":334,"ProjectId":5,"Age":16.0,"Gender":1,"RankLowerLimit":24.00,"RankUpperLimit":47.00,"Rank":2},{"Id":335,"ProjectId":5,"Age":17.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":24.00,"Rank":1},{"Id":336,"ProjectId":5,"Age":17.0,"Gender":1,"RankLowerLimit":24.00,"RankUpperLimit":47.00,"Rank":2},{"Id":337,"ProjectId":6,"Age":3.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":6.00,"Rank":1},{"Id":338,"ProjectId":6,"Age":3.0,"Gender":1,"RankLowerLimit":6.00,"RankUpperLimit":12.00,"Rank":2},{"Id":339,"ProjectId":6,"Age":4.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":6.00,"Rank":1},{"Id":340,"ProjectId":6,"Age":4.0,"Gender":1,"RankLowerLimit":6.00,"RankUpperLimit":12.00,"Rank":2},{"Id":341,"ProjectId":6,"Age":5.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":6.00,"Rank":1},{"Id":342,"ProjectId":6,"Age":5.0,"Gender":1,"RankLowerLimit":6.00,"RankUpperLimit":12.00,"Rank":2},{"Id":343,"ProjectId":6,"Age":6.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":6.00,"Rank":1},{"Id":344,"ProjectId":6,"Age":6.0,"Gender":1,"RankLowerLimit":6.00,"RankUpperLimit":12.00,"Rank":2},{"Id":345,"ProjectId":6,"Age":7.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":6.00,"Rank":1},{"Id":346,"ProjectId":6,"Age":7.0,"Gender":1,"RankLowerLimit":6.00,"RankUpperLimit":12.00,"Rank":2},{"Id":347,"ProjectId":6,"Age":8.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":6.00,"Rank":1},{"Id":348,"ProjectId":6,"Age":8.0,"Gender":1,"RankLowerLimit":6.00,"RankUpperLimit":12.00,"Rank":2},{"Id":349,"ProjectId":6,"Age":9.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":6.00,"Rank":1},{"Id":350,"ProjectId":6,"Age":9.0,"Gender":1,"RankLowerLimit":6.00,"RankUpperLimit":12.00,"Rank":2},{"Id":351,"ProjectId":6,"Age":10.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":9.00,"Rank":1},{"Id":352,"ProjectId":6,"Age":10.0,"Gender":1,"RankLowerLimit":9.00,"RankUpperLimit":12.00,"Rank":2},{"Id":353,"ProjectId":6,"Age":11.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":9.00,"Rank":1},{"Id":354,"ProjectId":6,"Age":11.0,"Gender":1,"RankLowerLimit":9.00,"RankUpperLimit":12.00,"Rank":2},{"Id":355,"ProjectId":6,"Age":12.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":9.00,"Rank":1},{"Id":356,"ProjectId":6,"Age":12.0,"Gender":1,"RankLowerLimit":9.00,"RankUpperLimit":12.00,"Rank":2},{"Id":357,"ProjectId":6,"Age":13.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":9.00,"Rank":1},{"Id":358,"ProjectId":6,"Age":13.0,"Gender":1,"RankLowerLimit":9.00,"RankUpperLimit":12.00,"Rank":2},{"Id":359,"ProjectId":6,"Age":14.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":9.00,"Rank":1},{"Id":360,"ProjectId":6,"Age":14.0,"Gender":1,"RankLowerLimit":9.00,"RankUpperLimit":12.00,"Rank":2},{"Id":361,"ProjectId":6,"Age":15.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":9.00,"Rank":1},{"Id":362,"ProjectId":6,"Age":15.0,"Gender":1,"RankLowerLimit":9.00,"RankUpperLimit":12.00,"Rank":2},{"Id":363,"ProjectId":6,"Age":16.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":9.00,"Rank":1},{"Id":364,"ProjectId":6,"Age":16.0,"Gender":1,"RankLowerLimit":9.00,"RankUpperLimit":12.00,"Rank":2},{"Id":365,"ProjectId":6,"Age":17.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":9.00,"Rank":1},{"Id":366,"ProjectId":6,"Age":17.0,"Gender":1,"RankLowerLimit":9.00,"RankUpperLimit":12.00,"Rank":2},{"Id":367,"ProjectId":8,"Age":3.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":9.00,"Rank":1},{"Id":368,"ProjectId":8,"Age":3.0,"Gender":1,"RankLowerLimit":9.00,"RankUpperLimit":15.00,"Rank":2},{"Id":369,"ProjectId":8,"Age":4.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":9.00,"Rank":1},{"Id":370,"ProjectId":8,"Age":4.0,"Gender":1,"RankLowerLimit":9.00,"RankUpperLimit":15.00,"Rank":2},{"Id":371,"ProjectId":8,"Age":5.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":10.00,"Rank":1},{"Id":372,"ProjectId":8,"Age":5.0,"Gender":1,"RankLowerLimit":10.00,"RankUpperLimit":15.00,"Rank":2},{"Id":373,"ProjectId":8,"Age":6.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":10.00,"Rank":1},{"Id":374,"ProjectId":8,"Age":6.0,"Gender":1,"RankLowerLimit":10.00,"RankUpperLimit":15.00,"Rank":2},{"Id":375,"ProjectId":8,"Age":7.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":11.00,"Rank":1},{"Id":376,"ProjectId":8,"Age":7.0,"Gender":1,"RankLowerLimit":11.00,"RankUpperLimit":16.10,"Rank":2},{"Id":377,"ProjectId":8,"Age":8.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":10.60,"Rank":1},{"Id":378,"ProjectId":8,"Age":8.0,"Gender":1,"RankLowerLimit":10.60,"RankUpperLimit":16.20,"Rank":2},{"Id":379,"ProjectId":8,"Age":9.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":10.20,"Rank":1},{"Id":380,"ProjectId":8,"Age":9.0,"Gender":1,"RankLowerLimit":10.20,"RankUpperLimit":16.30,"Rank":2},{"Id":381,"ProjectId":8,"Age":10.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":9.80,"Rank":1},{"Id":382,"ProjectId":8,"Age":10.0,"Gender":1,"RankLowerLimit":9.80,"RankUpperLimit":16.40,"Rank":2},{"Id":383,"ProjectId":8,"Age":11.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":9.40,"Rank":1},{"Id":384,"ProjectId":8,"Age":11.0,"Gender":1,"RankLowerLimit":9.40,"RankUpperLimit":16.50,"Rank":2},{"Id":385,"ProjectId":8,"Age":12.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":9.00,"Rank":1},{"Id":386,"ProjectId":8,"Age":12.0,"Gender":1,"RankLowerLimit":9.00,"RankUpperLimit":16.60,"Rank":2},{"Id":387,"ProjectId":8,"Age":13.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":10.40,"Rank":1},{"Id":388,"ProjectId":8,"Age":13.0,"Gender":1,"RankLowerLimit":10.40,"RankUpperLimit":17.60,"Rank":2},{"Id":389,"ProjectId":8,"Age":14.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":11.60,"Rank":1},{"Id":390,"ProjectId":8,"Age":14.0,"Gender":1,"RankLowerLimit":11.60,"RankUpperLimit":19.60,"Rank":2},{"Id":391,"ProjectId":8,"Age":15.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":13.80,"Rank":1},{"Id":392,"ProjectId":8,"Age":15.0,"Gender":1,"RankLowerLimit":13.80,"RankUpperLimit":21.60,"Rank":2},{"Id":393,"ProjectId":8,"Age":16.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":15.00,"Rank":1},{"Id":394,"ProjectId":8,"Age":16.0,"Gender":1,"RankLowerLimit":15.00,"RankUpperLimit":23.60,"Rank":2},{"Id":395,"ProjectId":8,"Age":17.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":16.10,"Rank":1},{"Id":396,"ProjectId":8,"Age":17.0,"Gender":1,"RankLowerLimit":16.10,"RankUpperLimit":24.30,"Rank":2},{"Id":397,"ProjectId":9,"Age":3.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":51.00,"Rank":1},{"Id":398,"ProjectId":9,"Age":3.0,"Gender":1,"RankLowerLimit":51.00,"RankUpperLimit":85.00,"Rank":2},{"Id":399,"ProjectId":9,"Age":4.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":72.00,"Rank":1},{"Id":400,"ProjectId":9,"Age":4.0,"Gender":1,"RankLowerLimit":72.00,"RankUpperLimit":102.00,"Rank":2},{"Id":401,"ProjectId":9,"Age":5.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":88.00,"Rank":1},{"Id":402,"ProjectId":9,"Age":5.0,"Gender":1,"RankLowerLimit":88.00,"RankUpperLimit":120.00,"Rank":2},{"Id":403,"ProjectId":9,"Age":6.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":101.00,"Rank":1},{"Id":404,"ProjectId":9,"Age":6.0,"Gender":1,"RankLowerLimit":101.00,"RankUpperLimit":127.00,"Rank":2},{"Id":405,"ProjectId":9,"Age":7.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":107.00,"Rank":1},{"Id":406,"ProjectId":9,"Age":7.0,"Gender":1,"RankLowerLimit":107.00,"RankUpperLimit":147.00,"Rank":2},{"Id":407,"ProjectId":9,"Age":8.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":117.00,"Rank":1},{"Id":408,"ProjectId":9,"Age":8.0,"Gender":1,"RankLowerLimit":117.00,"RankUpperLimit":156.00,"Rank":2},{"Id":409,"ProjectId":9,"Age":9.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":127.00,"Rank":1},{"Id":410,"ProjectId":9,"Age":9.0,"Gender":1,"RankLowerLimit":127.00,"RankUpperLimit":168.00,"Rank":2},{"Id":411,"ProjectId":9,"Age":10.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":135.00,"Rank":1},{"Id":412,"ProjectId":9,"Age":10.0,"Gender":1,"RankLowerLimit":135.00,"RankUpperLimit":178.00,"Rank":2},{"Id":413,"ProjectId":9,"Age":11.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":146.00,"Rank":1},{"Id":414,"ProjectId":9,"Age":11.0,"Gender":1,"RankLowerLimit":146.00,"RankUpperLimit":187.00,"Rank":2},{"Id":415,"ProjectId":9,"Age":12.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":155.00,"Rank":1},{"Id":416,"ProjectId":9,"Age":12.0,"Gender":1,"RankLowerLimit":155.00,"RankUpperLimit":198.00,"Rank":2},{"Id":417,"ProjectId":9,"Age":13.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":163.00,"Rank":1},{"Id":418,"ProjectId":9,"Age":13.0,"Gender":1,"RankLowerLimit":163.00,"RankUpperLimit":210.00,"Rank":2},{"Id":419,"ProjectId":9,"Age":14.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":170.00,"Rank":1},{"Id":420,"ProjectId":9,"Age":14.0,"Gender":1,"RankLowerLimit":107.00,"RankUpperLimit":225.00,"Rank":2},{"Id":421,"ProjectId":9,"Age":15.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":182.00,"Rank":1},{"Id":422,"ProjectId":9,"Age":15.0,"Gender":1,"RankLowerLimit":182.00,"RankUpperLimit":235.00,"Rank":2},{"Id":423,"ProjectId":9,"Age":16.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":195.00,"Rank":1},{"Id":424,"ProjectId":9,"Age":16.0,"Gender":1,"RankLowerLimit":195.00,"RankUpperLimit":240.00,"Rank":2},{"Id":425,"ProjectId":9,"Age":17.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":200.00,"Rank":1},{"Id":426,"ProjectId":9,"Age":17.0,"Gender":1,"RankLowerLimit":200.00,"RankUpperLimit":245.00,"Rank":2},{"Id":439,"ProjectId":11,"Age":9.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":40.20,"Rank":1},{"Id":440,"ProjectId":11,"Age":9.0,"Gender":1,"RankLowerLimit":40.20,"RankUpperLimit":52.00,"Rank":2},{"Id":441,"ProjectId":11,"Age":10.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":40.20,"Rank":1},{"Id":442,"ProjectId":11,"Age":10.0,"Gender":1,"RankLowerLimit":40.20,"RankUpperLimit":52.00,"Rank":2},{"Id":443,"ProjectId":11,"Age":11.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":40.20,"Rank":1},{"Id":444,"ProjectId":11,"Age":11.0,"Gender":1,"RankLowerLimit":40.20,"RankUpperLimit":52.00,"Rank":2},{"Id":445,"ProjectId":11,"Age":12.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":40.30,"Rank":1},{"Id":446,"ProjectId":11,"Age":12.0,"Gender":1,"RankLowerLimit":40.30,"RankUpperLimit":52.00,"Rank":2},{"Id":447,"ProjectId":11,"Age":13.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":41.10,"Rank":1},{"Id":448,"ProjectId":11,"Age":13.0,"Gender":1,"RankLowerLimit":41.10,"RankUpperLimit":52.00,"Rank":2},{"Id":449,"ProjectId":11,"Age":14.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":42.50,"Rank":1},{"Id":450,"ProjectId":11,"Age":14.0,"Gender":1,"RankLowerLimit":42.50,"RankUpperLimit":52.00,"Rank":2},{"Id":451,"ProjectId":11,"Age":15.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":43.60,"Rank":1},{"Id":452,"ProjectId":11,"Age":15.0,"Gender":1,"RankLowerLimit":43.60,"RankUpperLimit":52.00,"Rank":2},{"Id":453,"ProjectId":11,"Age":16.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":44.10,"Rank":1},{"Id":454,"ProjectId":11,"Age":16.0,"Gender":1,"RankLowerLimit":44.10,"RankUpperLimit":52.00,"Rank":2},{"Id":455,"ProjectId":11,"Age":17.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":41.20,"Rank":1},{"Id":456,"ProjectId":11,"Age":17.0,"Gender":1,"RankLowerLimit":41.20,"RankUpperLimit":52.00,"Rank":2},{"Id":457,"ProjectId":7,"Age":3.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":1.00,"Rank":1},{"Id":458,"ProjectId":7,"Age":3.0,"Gender":1,"RankLowerLimit":1.00,"RankUpperLimit":5.00,"Rank":2},{"Id":459,"ProjectId":7,"Age":4.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":2.00,"Rank":1},{"Id":460,"ProjectId":7,"Age":4.0,"Gender":1,"RankLowerLimit":2.00,"RankUpperLimit":7.00,"Rank":2},{"Id":461,"ProjectId":7,"Age":5.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":3.00,"Rank":1},{"Id":462,"ProjectId":7,"Age":5.0,"Gender":1,"RankLowerLimit":3.00,"RankUpperLimit":8.00,"Rank":2},{"Id":463,"ProjectId":7,"Age":6.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":3.00,"Rank":1},{"Id":464,"ProjectId":7,"Age":6.0,"Gender":1,"RankLowerLimit":3.00,"RankUpperLimit":8.00,"Rank":2},{"Id":465,"ProjectId":7,"Age":7.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":4.00,"Rank":1},{"Id":466,"ProjectId":7,"Age":7.0,"Gender":1,"RankLowerLimit":4.00,"RankUpperLimit":10.00,"Rank":2},{"Id":467,"ProjectId":7,"Age":8.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":5.00,"Rank":1},{"Id":468,"ProjectId":7,"Age":8.0,"Gender":1,"RankLowerLimit":5.00,"RankUpperLimit":13.00,"Rank":2},{"Id":469,"ProjectId":7,"Age":9.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":6.00,"Rank":1},{"Id":470,"ProjectId":7,"Age":9.0,"Gender":1,"RankLowerLimit":6.00,"RankUpperLimit":15.00,"Rank":2},{"Id":471,"ProjectId":7,"Age":10.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":7.00,"Rank":1},{"Id":472,"ProjectId":7,"Age":10.0,"Gender":1,"RankLowerLimit":7.00,"RankUpperLimit":20.00,"Rank":2},{"Id":473,"ProjectId":7,"Age":11.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":8.00,"Rank":1},{"Id":474,"ProjectId":7,"Age":11.0,"Gender":1,"RankLowerLimit":8.00,"RankUpperLimit":20.00,"Rank":2},{"Id":475,"ProjectId":7,"Age":12.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":10.00,"Rank":1},{"Id":476,"ProjectId":7,"Age":12.0,"Gender":1,"RankLowerLimit":10.00,"RankUpperLimit":20.00,"Rank":2},{"Id":477,"ProjectId":7,"Age":13.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":12.00,"Rank":1},{"Id":478,"ProjectId":7,"Age":13.0,"Gender":1,"RankLowerLimit":12.00,"RankUpperLimit":25.00,"Rank":2},{"Id":479,"ProjectId":7,"Age":14.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":14.00,"Rank":1},{"Id":480,"ProjectId":7,"Age":14.0,"Gender":1,"RankLowerLimit":14.00,"RankUpperLimit":30.00,"Rank":2},{"Id":481,"ProjectId":7,"Age":15.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":16.00,"Rank":1},{"Id":482,"ProjectId":7,"Age":15.0,"Gender":1,"RankLowerLimit":16.00,"RankUpperLimit":35.00,"Rank":2},{"Id":483,"ProjectId":7,"Age":16.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":18.00,"Rank":1},{"Id":484,"ProjectId":7,"Age":16.0,"Gender":1,"RankLowerLimit":18.00,"RankUpperLimit":35.00,"Rank":2},{"Id":485,"ProjectId":7,"Age":17.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":18.00,"Rank":1},{"Id":486,"ProjectId":7,"Age":17.0,"Gender":1,"RankLowerLimit":18.00,"RankUpperLimit":35.00,"Rank":2},{"Id":487,"ProjectId":10,"Age":3.0,"Gender":2,"RankLowerLimit":24.00,"RankUpperLimit":7.00,"Rank":1},{"Id":488,"ProjectId":10,"Age":3.0,"Gender":2,"RankLowerLimit":7.00,"RankUpperLimit":0.00,"Rank":2},{"Id":489,"ProjectId":10,"Age":4.0,"Gender":2,"RankLowerLimit":16.00,"RankUpperLimit":6.00,"Rank":1},{"Id":490,"ProjectId":10,"Age":4.0,"Gender":2,"RankLowerLimit":6.00,"RankUpperLimit":0.00,"Rank":2},{"Id":491,"ProjectId":10,"Age":5.0,"Gender":2,"RankLowerLimit":11.00,"RankUpperLimit":5.00,"Rank":1},{"Id":492,"ProjectId":10,"Age":5.0,"Gender":2,"RankLowerLimit":5.00,"RankUpperLimit":0.00,"Rank":2},{"Id":493,"ProjectId":10,"Age":6.0,"Gender":2,"RankLowerLimit":8.00,"RankUpperLimit":4.00,"Rank":1},{"Id":494,"ProjectId":10,"Age":6.0,"Gender":2,"RankLowerLimit":4.00,"RankUpperLimit":0.00,"Rank":2},{"Id":495,"ProjectId":10,"Age":7.0,"Gender":2,"RankLowerLimit":6.00,"RankUpperLimit":3.00,"Rank":1},{"Id":496,"ProjectId":10,"Age":7.0,"Gender":2,"RankLowerLimit":3.00,"RankUpperLimit":0.00,"Rank":2},{"Id":497,"ProjectId":10,"Age":8.0,"Gender":2,"RankLowerLimit":6.00,"RankUpperLimit":3.00,"Rank":1},{"Id":498,"ProjectId":10,"Age":8.0,"Gender":2,"RankLowerLimit":3.00,"RankUpperLimit":0.00,"Rank":2},{"Id":499,"ProjectId":10,"Age":3.0,"Gender":1,"RankLowerLimit":16.00,"RankUpperLimit":8.00,"Rank":1},{"Id":500,"ProjectId":10,"Age":3.0,"Gender":1,"RankLowerLimit":8.00,"RankUpperLimit":0.00,"Rank":2},{"Id":501,"ProjectId":10,"Age":4.0,"Gender":1,"RankLowerLimit":12.00,"RankUpperLimit":7.00,"Rank":1},{"Id":502,"ProjectId":10,"Age":4.0,"Gender":1,"RankLowerLimit":7.00,"RankUpperLimit":0.00,"Rank":2},{"Id":503,"ProjectId":10,"Age":5.0,"Gender":1,"RankLowerLimit":8.00,"RankUpperLimit":6.00,"Rank":1},{"Id":504,"ProjectId":10,"Age":5.0,"Gender":1,"RankLowerLimit":6.00,"RankUpperLimit":0.00,"Rank":2},{"Id":505,"ProjectId":10,"Age":6.0,"Gender":1,"RankLowerLimit":6.00,"RankUpperLimit":5.00,"Rank":1},{"Id":506,"ProjectId":10,"Age":6.0,"Gender":1,"RankLowerLimit":5.00,"RankUpperLimit":0.00,"Rank":2},{"Id":507,"ProjectId":10,"Age":7.0,"Gender":1,"RankLowerLimit":5.00,"RankUpperLimit":4.00,"Rank":1},{"Id":508,"ProjectId":10,"Age":7.0,"Gender":1,"RankLowerLimit":4.00,"RankUpperLimit":0.00,"Rank":2},{"Id":509,"ProjectId":10,"Age":8.0,"Gender":1,"RankLowerLimit":4.00,"RankUpperLimit":3.00,"Rank":1},{"Id":510,"ProjectId":10,"Age":8.0,"Gender":1,"RankLowerLimit":3.00,"RankUpperLimit":0.00,"Rank":2},{"Id":511,"ProjectId":12,"Age":3.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":91.10,"Rank":1},{"Id":512,"ProjectId":14,"Age":3.0,"Gender":1,"RankLowerLimit":2.90,"RankUpperLimit":4.80,"Rank":1},{"Id":513,"ProjectId":17,"Age":3.0,"Gender":1,"RankLowerLimit":15.80,"RankUpperLimit":12.90,"Rank":1},{"Id":514,"ProjectId":15,"Age":3.0,"Gender":1,"RankLowerLimit":21.00,"RankUpperLimit":29.90,"Rank":1},{"Id":515,"ProjectId":18,"Age":3.0,"Gender":1,"RankLowerLimit":1.50,"RankUpperLimit":1.90,"Rank":1},{"Id":516,"ProjectId":16,"Age":3.0,"Gender":1,"RankLowerLimit":25.00,"RankUpperLimit":19.70,"Rank":1},{"Id":517,"ProjectId":19,"Age":3.0,"Gender":1,"RankLowerLimit":48.50,"RankUpperLimit":30.10,"Rank":1},{"Id":518,"ProjectId":12,"Age":3.5,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":94.00,"Rank":1},{"Id":519,"ProjectId":14,"Age":3.5,"Gender":1,"RankLowerLimit":2.70,"RankUpperLimit":4.60,"Rank":1},{"Id":520,"ProjectId":17,"Age":3.5,"Gender":1,"RankLowerLimit":14.00,"RankUpperLimit":11.40,"Rank":1},{"Id":521,"ProjectId":15,"Age":3.5,"Gender":1,"RankLowerLimit":27.00,"RankUpperLimit":34.90,"Rank":1},{"Id":522,"ProjectId":18,"Age":3.5,"Gender":1,"RankLowerLimit":1.50,"RankUpperLimit":1.90,"Rank":1},{"Id":523,"ProjectId":16,"Age":3.5,"Gender":1,"RankLowerLimit":21.80,"RankUpperLimit":17.00,"Rank":1},{"Id":524,"ProjectId":19,"Age":3.5,"Gender":1,"RankLowerLimit":41.10,"RankUpperLimit":27.10,"Rank":1},{"Id":525,"ProjectId":12,"Age":4.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":97.40,"Rank":1},{"Id":526,"ProjectId":14,"Age":4.0,"Gender":1,"RankLowerLimit":2.40,"RankUpperLimit":4.40,"Rank":1},{"Id":527,"ProjectId":17,"Age":4.0,"Gender":1,"RankLowerLimit":12.40,"RankUpperLimit":10.20,"Rank":1},{"Id":528,"ProjectId":15,"Age":4.0,"Gender":1,"RankLowerLimit":35.00,"RankUpperLimit":46.90,"Rank":1},{"Id":529,"ProjectId":18,"Age":4.0,"Gender":1,"RankLowerLimit":2.00,"RankUpperLimit":2.90,"Rank":1},{"Id":530,"ProjectId":16,"Age":4.0,"Gender":1,"RankLowerLimit":17.00,"RankUpperLimit":13.20,"Rank":1},{"Id":531,"ProjectId":19,"Age":4.0,"Gender":1,"RankLowerLimit":33.20,"RankUpperLimit":21.60,"Rank":1},{"Id":532,"ProjectId":12,"Age":4.5,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":99.90,"Rank":1},{"Id":533,"ProjectId":14,"Age":4.5,"Gender":1,"RankLowerLimit":1.80,"RankUpperLimit":4.10,"Rank":1},{"Id":534,"ProjectId":17,"Age":4.5,"Gender":1,"RankLowerLimit":11.80,"RankUpperLimit":9.80,"Rank":1},{"Id":535,"ProjectId":15,"Age":4.5,"Gender":1,"RankLowerLimit":40.00,"RankUpperLimit":54.90,"Rank":1},{"Id":536,"ProjectId":18,"Age":4.5,"Gender":1,"RankLowerLimit":2.50,"RankUpperLimit":2.90,"Rank":1},{"Id":537,"ProjectId":16,"Age":4.5,"Gender":1,"RankLowerLimit":14.50,"RankUpperLimit":11.30,"Rank":1},{"Id":538,"ProjectId":19,"Age":4.5,"Gender":1,"RankLowerLimit":28.40,"RankUpperLimit":17.90,"Rank":1},{"Id":539,"ProjectId":12,"Age":5.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":103.00,"Rank":1},{"Id":540,"ProjectId":14,"Age":5.0,"Gender":1,"RankLowerLimit":1.10,"RankUpperLimit":3.40,"Rank":1},{"Id":541,"ProjectId":17,"Age":5.0,"Gender":1,"RankLowerLimit":10.30,"RankUpperLimit":9.00,"Rank":1},{"Id":542,"ProjectId":15,"Age":5.0,"Gender":1,"RankLowerLimit":50.00,"RankUpperLimit":64.90,"Rank":1},{"Id":543,"ProjectId":18,"Age":5.0,"Gender":1,"RankLowerLimit":3.00,"RankUpperLimit":3.90,"Rank":1},{"Id":544,"ProjectId":16,"Age":5.0,"Gender":1,"RankLowerLimit":12.50,"RankUpperLimit":9.90,"Rank":1},{"Id":545,"ProjectId":19,"Age":5.0,"Gender":1,"RankLowerLimit":22.20,"RankUpperLimit":14.10,"Rank":1},{"Id":546,"ProjectId":12,"Age":5.5,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":104.50,"Rank":1},{"Id":547,"ProjectId":14,"Age":5.5,"Gender":1,"RankLowerLimit":1.00,"RankUpperLimit":3.20,"Rank":1},{"Id":548,"ProjectId":17,"Age":5.5,"Gender":1,"RankLowerLimit":10.00,"RankUpperLimit":8.60,"Rank":1},{"Id":549,"ProjectId":15,"Age":5.5,"Gender":1,"RankLowerLimit":56.00,"RankUpperLimit":69.90,"Rank":1},{"Id":550,"ProjectId":18,"Age":5.5,"Gender":1,"RankLowerLimit":3.00,"RankUpperLimit":3.90,"Rank":1},{"Id":551,"ProjectId":16,"Age":5.5,"Gender":1,"RankLowerLimit":11.90,"RankUpperLimit":9.40,"Rank":1},{"Id":552,"ProjectId":19,"Age":5.5,"Gender":1,"RankLowerLimit":19.20,"RankUpperLimit":12.10,"Rank":1},{"Id":553,"ProjectId":12,"Age":6.0,"Gender":1,"RankLowerLimit":0.00,"RankUpperLimit":108.10,"Rank":1},{"Id":554,"ProjectId":14,"Age":6.0,"Gender":1,"RankLowerLimit":1.00,"RankUpperLimit":3.10,"Rank":1},{"Id":555,"ProjectId":17,"Age":6.0,"Gender":1,"RankLowerLimit":9.40,"RankUpperLimit":8.00,"Rank":1},{"Id":556,"ProjectId":15,"Age":6.0,"Gender":1,"RankLowerLimit":61.00,"RankUpperLimit":78.90,"Rank":1},{"Id":557,"ProjectId":18,"Age":6.0,"Gender":1,"RankLowerLimit":3.50,"RankUpperLimit":4.40,"Rank":1},{"Id":558,"ProjectId":16,"Age":6.0,"Gender":1,"RankLowerLimit":10.40,"RankUpperLimit":8.30,"Rank":1},{"Id":559,"ProjectId":19,"Age":6.0,"Gender":1,"RankLowerLimit":16.00,"RankUpperLimit":9.40,"Rank":1},{"Id":560,"ProjectId":12,"Age":3.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":89.90,"Rank":1},{"Id":561,"ProjectId":14,"Age":3.0,"Gender":2,"RankLowerLimit":3.20,"RankUpperLimit":6.20,"Rank":1},{"Id":562,"ProjectId":17,"Age":3.0,"Gender":2,"RankLowerLimit":16.80,"RankUpperLimit":13.50,"Rank":1},{"Id":563,"ProjectId":15,"Age":3.0,"Gender":2,"RankLowerLimit":21.00,"RankUpperLimit":28.90,"Rank":1},{"Id":564,"ProjectId":18,"Age":3.0,"Gender":2,"RankLowerLimit":1.00,"RankUpperLimit":1.40,"Rank":1},{"Id":565,"ProjectId":16,"Age":3.0,"Gender":2,"RankLowerLimit":25.90,"RankUpperLimit":20.10,"Rank":1},{"Id":566,"ProjectId":19,"Age":3.0,"Gender":2,"RankLowerLimit":49.80,"RankUpperLimit":32.50,"Rank":1},{"Id":567,"ProjectId":12,"Age":3.5,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":92.90,"Rank":1},{"Id":568,"ProjectId":14,"Age":3.5,"Gender":2,"RankLowerLimit":3.50,"RankUpperLimit":6.20,"Rank":1},{"Id":569,"ProjectId":17,"Age":3.5,"Gender":2,"RankLowerLimit":14.90,"RankUpperLimit":12.10,"Rank":1},{"Id":570,"ProjectId":15,"Age":3.5,"Gender":2,"RankLowerLimit":25.00,"RankUpperLimit":33.90,"Rank":1},{"Id":571,"ProjectId":18,"Age":3.5,"Gender":2,"RankLowerLimit":1.50,"RankUpperLimit":1.90,"Rank":1},{"Id":572,"ProjectId":16,"Age":3.5,"Gender":2,"RankLowerLimit":21.90,"RankUpperLimit":17.10,"Rank":1},{"Id":573,"ProjectId":19,"Age":3.5,"Gender":2,"RankLowerLimit":40.40,"RankUpperLimit":27.50,"Rank":1},{"Id":574,"ProjectId":12,"Age":4.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":96.50,"Rank":1},{"Id":575,"ProjectId":14,"Age":4.0,"Gender":2,"RankLowerLimit":3.40,"RankUpperLimit":5.90,"Rank":1},{"Id":576,"ProjectId":17,"Age":4.0,"Gender":2,"RankLowerLimit":13.20,"RankUpperLimit":10.90,"Rank":1},{"Id":577,"ProjectId":15,"Age":4.0,"Gender":2,"RankLowerLimit":32.00,"RankUpperLimit":43.90,"Rank":1},{"Id":578,"ProjectId":18,"Age":4.0,"Gender":2,"RankLowerLimit":2.00,"RankUpperLimit":2.40,"Rank":1},{"Id":579,"ProjectId":16,"Age":4.0,"Gender":2,"RankLowerLimit":17.20,"RankUpperLimit":13.50,"Rank":1},{"Id":580,"ProjectId":19,"Age":4.0,"Gender":2,"RankLowerLimit":32.20,"RankUpperLimit":22.60,"Rank":1},{"Id":581,"ProjectId":12,"Age":4.5,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":98.90,"Rank":1},{"Id":582,"ProjectId":14,"Age":4.5,"Gender":2,"RankLowerLimit":3.00,"RankUpperLimit":5.90,"Rank":1},{"Id":583,"ProjectId":17,"Age":4.5,"Gender":2,"RankLowerLimit":12.40,"RankUpperLimit":10.30,"Rank":1},{"Id":584,"ProjectId":15,"Age":4.5,"Gender":2,"RankLowerLimit":40.00,"RankUpperLimit":49.90,"Rank":1},{"Id":585,"ProjectId":18,"Age":4.5,"Gender":2,"RankLowerLimit":2.00,"RankUpperLimit":2.40,"Rank":1},{"Id":586,"ProjectId":16,"Age":4.5,"Gender":2,"RankLowerLimit":14.90,"RankUpperLimit":12.00,"Rank":1},{"Id":587,"ProjectId":19,"Age":4.5,"Gender":2,"RankLowerLimit":26.50,"RankUpperLimit":18.70,"Rank":1},{"Id":588,"ProjectId":12,"Age":5.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":101.90,"Rank":1},{"Id":589,"ProjectId":14,"Age":5.0,"Gender":2,"RankLowerLimit":3.00,"RankUpperLimit":5.40,"Rank":1},{"Id":590,"ProjectId":17,"Age":5.0,"Gender":2,"RankLowerLimit":11.20,"RankUpperLimit":9.70,"Rank":1},{"Id":591,"ProjectId":15,"Age":5.0,"Gender":2,"RankLowerLimit":50.00,"RankUpperLimit":59.90,"Rank":1},{"Id":592,"ProjectId":18,"Age":5.0,"Gender":2,"RankLowerLimit":2.50,"RankUpperLimit":3.40,"Rank":1},{"Id":593,"ProjectId":16,"Age":5.0,"Gender":2,"RankLowerLimit":12.70,"RankUpperLimit":10.10,"Rank":1},{"Id":594,"ProjectId":19,"Age":5.0,"Gender":2,"RankLowerLimit":23.70,"RankUpperLimit":14.10,"Rank":1},{"Id":595,"ProjectId":12,"Age":5.5,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":104.40,"Rank":1},{"Id":596,"ProjectId":14,"Age":5.5,"Gender":2,"RankLowerLimit":3.00,"RankUpperLimit":5.40,"Rank":1},{"Id":597,"ProjectId":17,"Age":5.5,"Gender":2,"RankLowerLimit":10.50,"RankUpperLimit":9.10,"Rank":1},{"Id":598,"ProjectId":15,"Age":5.5,"Gender":2,"RankLowerLimit":54.00,"RankUpperLimit":65.90,"Rank":1},{"Id":599,"ProjectId":18,"Age":5.5,"Gender":2,"RankLowerLimit":3.00,"RankUpperLimit":3.40,"Rank":1},{"Id":600,"ProjectId":16,"Age":5.5,"Gender":2,"RankLowerLimit":11.50,"RankUpperLimit":9.30,"Rank":1},{"Id":601,"ProjectId":19,"Age":5.5,"Gender":2,"RankLowerLimit":20.10,"RankUpperLimit":12.60,"Rank":1},{"Id":602,"ProjectId":12,"Age":6.0,"Gender":2,"RankLowerLimit":0.00,"RankUpperLimit":106.90,"Rank":1},{"Id":603,"ProjectId":14,"Age":6.0,"Gender":2,"RankLowerLimit":3.00,"RankUpperLimit":5.30,"Rank":1},{"Id":604,"ProjectId":17,"Age":6.0,"Gender":2,"RankLowerLimit":10.20,"RankUpperLimit":8.60,"Rank":1},{"Id":605,"ProjectId":15,"Age":6.0,"Gender":2,"RankLowerLimit":60.00,"RankUpperLimit":70.90,"Rank":1},{"Id":606,"ProjectId":18,"Age":6.0,"Gender":2,"RankLowerLimit":3.00,"RankUpperLimit":3.40,"Rank":1},{"Id":607,"ProjectId":16,"Age":6.0,"Gender":2,"RankLowerLimit":10.50,"RankUpperLimit":8.40,"Rank":1},{"Id":608,"ProjectId":19,"Age":6.0,"Gender":2,"RankLowerLimit":17.00,"RankUpperLimit":10.80,"Rank":1},{"Id":609,"ProjectId":12,"Age":3.0,"Gender":1,"RankLowerLimit":91.20,"RankUpperLimit":95.40,"Rank":2},{"Id":610,"ProjectId":14,"Age":3.0,"Gender":1,"RankLowerLimit":4.90,"RankUpperLimit":8.50,"Rank":2},{"Id":611,"ProjectId":17,"Age":3.0,"Gender":1,"RankLowerLimit":12.80,"RankUpperLimit":10.30,"Rank":2},{"Id":612,"ProjectId":15,"Age":3.0,"Gender":1,"RankLowerLimit":30.00,"RankUpperLimit":42.90,"Rank":2},{"Id":613,"ProjectId":18,"Age":3.0,"Gender":1,"RankLowerLimit":2.00,"RankUpperLimit":2.90,"Rank":2},{"Id":614,"ProjectId":16,"Age":3.0,"Gender":1,"RankLowerLimit":19.60,"RankUpperLimit":13.10,"Rank":2},{"Id":615,"ProjectId":19,"Age":3.0,"Gender":1,"RankLowerLimit":30.00,"RankUpperLimit":16.90,"Rank":2},{"Id":616,"ProjectId":12,"Age":3.5,"Gender":1,"RankLowerLimit":94.10,"RankUpperLimit":98.20,"Rank":2},{"Id":617,"ProjectId":14,"Age":3.5,"Gender":1,"RankLowerLimit":4.70,"RankUpperLimit":8.40,"Rank":2},{"Id":618,"ProjectId":17,"Age":3.5,"Gender":1,"RankLowerLimit":11.30,"RankUpperLimit":9.50,"Rank":2},{"Id":619,"ProjectId":15,"Age":3.5,"Gender":1,"RankLowerLimit":35.00,"RankUpperLimit":52.90,"Rank":2},{"Id":620,"ProjectId":18,"Age":3.5,"Gender":1,"RankLowerLimit":2.00,"RankUpperLimit":2.90,"Rank":2},{"Id":621,"ProjectId":16,"Age":3.5,"Gender":1,"RankLowerLimit":16.90,"RankUpperLimit":11.20,"Rank":2},{"Id":622,"ProjectId":19,"Age":3.5,"Gender":1,"RankLowerLimit":27.00,"RankUpperLimit":15.10,"Rank":2},{"Id":623,"ProjectId":12,"Age":4.0,"Gender":1,"RankLowerLimit":97.50,"RankUpperLimit":101.90,"Rank":2},{"Id":624,"ProjectId":14,"Age":4.0,"Gender":1,"RankLowerLimit":4.50,"RankUpperLimit":8.40,"Rank":2},{"Id":625,"ProjectId":17,"Age":4.0,"Gender":1,"RankLowerLimit":10.10,"RankUpperLimit":8.60,"Rank":2},{"Id":626,"ProjectId":15,"Age":4.0,"Gender":1,"RankLowerLimit":47.00,"RankUpperLimit":64.90,"Rank":2},{"Id":627,"ProjectId":18,"Age":4.0,"Gender":1,"RankLowerLimit":3.00,"RankUpperLimit":3.90,"Rank":2},{"Id":628,"ProjectId":16,"Age":4.0,"Gender":1,"RankLowerLimit":13.10,"RankUpperLimit":9.20,"Rank":2},{"Id":629,"ProjectId":19,"Age":4.0,"Gender":1,"RankLowerLimit":21.50,"RankUpperLimit":11.60,"Rank":2},{"Id":630,"ProjectId":12,"Age":4.5,"Gender":1,"RankLowerLimit":100.00,"RankUpperLimit":104.60,"Rank":2},{"Id":631,"ProjectId":14,"Age":4.5,"Gender":1,"RankLowerLimit":4.20,"RankUpperLimit":7.90,"Rank":2},{"Id":632,"ProjectId":17,"Age":4.5,"Gender":1,"RankLowerLimit":9.70,"RankUpperLimit":8.10,"Rank":2},{"Id":633,"ProjectId":15,"Age":4.5,"Gender":1,"RankLowerLimit":55.00,"RankUpperLimit":72.90,"Rank":2},{"Id":634,"ProjectId":18,"Age":4.5,"Gender":1,"RankLowerLimit":3.00,"RankUpperLimit":4.40,"Rank":2},{"Id":635,"ProjectId":16,"Age":4.5,"Gender":1,"RankLowerLimit":11.20,"RankUpperLimit":8.20,"Rank":2},{"Id":636,"ProjectId":19,"Age":4.5,"Gender":1,"RankLowerLimit":17.80,"RankUpperLimit":9.70,"Rank":2},{"Id":637,"ProjectId":12,"Age":5.0,"Gender":1,"RankLowerLimit":103.10,"RankUpperLimit":107.80,"Rank":2},{"Id":638,"ProjectId":14,"Age":5.0,"Gender":1,"RankLowerLimit":3.50,"RankUpperLimit":7.50,"Rank":2},{"Id":639,"ProjectId":17,"Age":5.0,"Gender":1,"RankLowerLimit":8.90,"RankUpperLimit":7.70,"Rank":2},{"Id":640,"ProjectId":15,"Age":5.0,"Gender":1,"RankLowerLimit":65.00,"RankUpperLimit":79.90,"Rank":2},{"Id":641,"ProjectId":18,"Age":5.0,"Gender":1,"RankLowerLimit":4.00,"RankUpperLimit":5.40,"Rank":2},{"Id":642,"ProjectId":16,"Age":5.0,"Gender":1,"RankLowerLimit":9.80,"RankUpperLimit":7.30,"Rank":2},{"Id":643,"ProjectId":19,"Age":5.0,"Gender":1,"RankLowerLimit":14.00,"RankUpperLimit":7.90,"Rank":2},{"Id":644,"ProjectId":12,"Age":5.5,"Gender":1,"RankLowerLimit":104.60,"RankUpperLimit":110.10,"Rank":2},{"Id":645,"ProjectId":14,"Age":5.5,"Gender":1,"RankLowerLimit":3.30,"RankUpperLimit":7.50,"Rank":2},{"Id":646,"ProjectId":17,"Age":5.5,"Gender":1,"RankLowerLimit":8.50,"RankUpperLimit":7.40,"Rank":2},{"Id":647,"ProjectId":15,"Age":5.5,"Gender":1,"RankLowerLimit":70.00,"RankUpperLimit":89.90,"Rank":2},{"Id":648,"ProjectId":18,"Age":5.5,"Gender":1,"RankLowerLimit":4.00,"RankUpperLimit":5.90,"Rank":2},{"Id":649,"ProjectId":16,"Age":5.5,"Gender":1,"RankLowerLimit":9.30,"RankUpperLimit":6.90,"Rank":2},{"Id":650,"ProjectId":19,"Age":5.5,"Gender":1,"RankLowerLimit":12.00,"RankUpperLimit":6.80,"Rank":2},{"Id":651,"ProjectId":12,"Age":6.0,"Gender":1,"RankLowerLimit":108.20,"RankUpperLimit":113.20,"Rank":2},{"Id":652,"ProjectId":14,"Age":6.0,"Gender":1,"RankLowerLimit":3.20,"RankUpperLimit":7.00,"Rank":2},{"Id":653,"ProjectId":17,"Age":6.0,"Gender":1,"RankLowerLimit":7.90,"RankUpperLimit":6.90,"Rank":2},{"Id":654,"ProjectId":15,"Age":6.0,"Gender":1,"RankLowerLimit":79.00,"RankUpperLimit":94.90,"Rank":2},{"Id":655,"ProjectId":18,"Age":6.0,"Gender":1,"RankLowerLimit":4.50,"RankUpperLimit":6.90,"Rank":2},{"Id":656,"ProjectId":16,"Age":6.0,"Gender":1,"RankLowerLimit":8.20,"RankUpperLimit":6.20,"Rank":2},{"Id":657,"ProjectId":19,"Age":6.0,"Gender":1,"RankLowerLimit":9.30,"RankUpperLimit":5.40,"Rank":2},{"Id":658,"ProjectId":12,"Age":3.0,"Gender":2,"RankLowerLimit":90.00,"RankUpperLimit":94.60,"Rank":2},{"Id":659,"ProjectId":14,"Age":3.0,"Gender":2,"RankLowerLimit":6.30,"RankUpperLimit":9.90,"Rank":2},{"Id":660,"ProjectId":17,"Age":3.0,"Gender":2,"RankLowerLimit":13.40,"RankUpperLimit":10.60,"Rank":2},{"Id":661,"ProjectId":15,"Age":3.0,"Gender":2,"RankLowerLimit":29.00,"RankUpperLimit":39.90,"Rank":2},{"Id":662,"ProjectId":18,"Age":3.0,"Gender":2,"RankLowerLimit":1.50,"RankUpperLimit":2.40,"Rank":2},{"Id":663,"ProjectId":16,"Age":3.0,"Gender":2,"RankLowerLimit":20.00,"RankUpperLimit":13.50,"Rank":2},{"Id":664,"ProjectId":19,"Age":3.0,"Gender":2,"RankLowerLimit":32.40,"RankUpperLimit":17.40,"Rank":2},{"Id":665,"ProjectId":12,"Age":3.5,"Gender":2,"RankLowerLimit":93.00,"RankUpperLimit":97.50,"Rank":2},{"Id":666,"ProjectId":14,"Age":3.5,"Gender":2,"RankLowerLimit":6.30,"RankUpperLimit":9.90,"Rank":2},{"Id":667,"ProjectId":17,"Age":3.5,"Gender":2,"RankLowerLimit":12.00,"RankUpperLimit":9.80,"Rank":2},{"Id":668,"ProjectId":15,"Age":3.5,"Gender":2,"RankLowerLimit":34.00,"RankUpperLimit":49.90,"Rank":2},{"Id":669,"ProjectId":18,"Age":3.5,"Gender":2,"RankLowerLimit":2.00,"RankUpperLimit":2.90,"Rank":2},{"Id":670,"ProjectId":16,"Age":3.5,"Gender":2,"RankLowerLimit":17.00,"RankUpperLimit":11.30,"Rank":2},{"Id":671,"ProjectId":19,"Age":3.5,"Gender":2,"RankLowerLimit":27.40,"RankUpperLimit":15.10,"Rank":2},{"Id":672,"ProjectId":12,"Age":4.0,"Gender":2,"RankLowerLimit":96.60,"RankUpperLimit":100.90,"Rank":2},{"Id":673,"ProjectId":14,"Age":4.0,"Gender":2,"RankLowerLimit":6.00,"RankUpperLimit":9.90,"Rank":2},{"Id":674,"ProjectId":17,"Age":4.0,"Gender":2,"RankLowerLimit":10.80,"RankUpperLimit":9.10,"Rank":2},{"Id":675,"ProjectId":15,"Age":4.0,"Gender":2,"RankLowerLimit":44.00,"RankUpperLimit":59.90,"Rank":2},{"Id":676,"ProjectId":18,"Age":4.0,"Gender":2,"RankLowerLimit":2.50,"RankUpperLimit":3.40,"Rank":2},{"Id":677,"ProjectId":16,"Age":4.0,"Gender":2,"RankLowerLimit":13.40,"RankUpperLimit":9.60,"Rank":2},{"Id":678,"ProjectId":19,"Age":4.0,"Gender":2,"RankLowerLimit":22.50,"RankUpperLimit":12.30,"Rank":2},{"Id":679,"ProjectId":12,"Age":4.5,"Gender":2,"RankLowerLimit":99.00,"RankUpperLimit":103.60,"Rank":2},{"Id":680,"ProjectId":14,"Age":4.5,"Gender":2,"RankLowerLimit":6.00,"RankUpperLimit":9.90,"Rank":2},{"Id":681,"ProjectId":17,"Age":4.5,"Gender":2,"RankLowerLimit":10.20,"RankUpperLimit":8.60,"Rank":2},{"Id":682,"ProjectId":15,"Age":4.5,"Gender":2,"RankLowerLimit":50.00,"RankUpperLimit":67.90,"Rank":2},{"Id":683,"ProjectId":18,"Age":4.5,"Gender":2,"RankLowerLimit":2.50,"RankUpperLimit":3.40,"Rank":2},{"Id":684,"ProjectId":16,"Age":4.5,"Gender":2,"RankLowerLimit":11.90,"RankUpperLimit":8.60,"Rank":2},{"Id":685,"ProjectId":19,"Age":4.5,"Gender":2,"RankLowerLimit":18.60,"RankUpperLimit":10.20,"Rank":2},{"Id":686,"ProjectId":12,"Age":5.0,"Gender":2,"RankLowerLimit":102.00,"RankUpperLimit":106.50,"Rank":2},{"Id":687,"ProjectId":14,"Age":5.0,"Gender":2,"RankLowerLimit":5.50,"RankUpperLimit":9.60,"Rank":2},{"Id":688,"ProjectId":17,"Age":5.0,"Gender":2,"RankLowerLimit":9.60,"RankUpperLimit":8.10,"Rank":2},{"Id":689,"ProjectId":15,"Age":5.0,"Gender":2,"RankLowerLimit":60.00,"RankUpperLimit":74.90,"Rank":2},{"Id":690,"ProjectId":18,"Age":5.0,"Gender":2,"RankLowerLimit":3.50,"RankUpperLimit":4.40,"Rank":2},{"Id":691,"ProjectId":16,"Age":5.0,"Gender":2,"RankLowerLimit":10.00,"RankUpperLimit":7.60,"Rank":2},{"Id":692,"ProjectId":19,"Age":5.0,"Gender":2,"RankLowerLimit":14.00,"RankUpperLimit":8.30,"Rank":2},{"Id":693,"ProjectId":12,"Age":5.5,"Gender":2,"RankLowerLimit":104.50,"RankUpperLimit":109.20,"Rank":2},{"Id":694,"ProjectId":14,"Age":5.5,"Gender":2,"RankLowerLimit":5.50,"RankUpperLimit":9.60,"Rank":2},{"Id":695,"ProjectId":17,"Age":5.5,"Gender":2,"RankLowerLimit":9.00,"RankUpperLimit":7.70,"Rank":2},{"Id":696,"ProjectId":15,"Age":5.5,"Gender":2,"RankLowerLimit":66.00,"RankUpperLimit":81.90,"Rank":2},{"Id":697,"ProjectId":18,"Age":5.5,"Gender":2,"RankLowerLimit":3.50,"RankUpperLimit":4.90,"Rank":2},{"Id":698,"ProjectId":16,"Age":5.5,"Gender":2,"RankLowerLimit":9.20,"RankUpperLimit":7.00,"Rank":2},{"Id":699,"ProjectId":19,"Age":5.5,"Gender":2,"RankLowerLimit":12.50,"RankUpperLimit":7.50,"Rank":2},{"Id":700,"ProjectId":12,"Age":6.0,"Gender":2,"RankLowerLimit":107.00,"RankUpperLimit":111.90,"Rank":2},{"Id":701,"ProjectId":14,"Age":6.0,"Gender":2,"RankLowerLimit":5.40,"RankUpperLimit":9.50,"Rank":2},{"Id":702,"ProjectId":17,"Age":6.0,"Gender":2,"RankLowerLimit":8.50,"RankUpperLimit":7.30,"Rank":2},{"Id":703,"ProjectId":15,"Age":6.0,"Gender":2,"RankLowerLimit":71.00,"RankUpperLimit":86.90,"Rank":2},{"Id":704,"ProjectId":18,"Age":6.0,"Gender":2,"RankLowerLimit":3.50,"RankUpperLimit":4.90,"Rank":2},{"Id":705,"ProjectId":16,"Age":6.0,"Gender":2,"RankLowerLimit":8.30,"RankUpperLimit":6.30,"Rank":2},{"Id":706,"ProjectId":19,"Age":6.0,"Gender":2,"RankLowerLimit":10.70,"RankUpperLimit":6.20,"Rank":2},{"Id":707,"ProjectId":12,"Age":3.0,"Gender":1,"RankLowerLimit":95.50,"RankUpperLimit":99.30,"Rank":3},{"Id":708,"ProjectId":14,"Age":3.0,"Gender":1,"RankLowerLimit":8.60,"RankUpperLimit":11.60,"Rank":3},{"Id":709,"ProjectId":17,"Age":3.0,"Gender":1,"RankLowerLimit":10.20,"RankUpperLimit":9.10,"Rank":3},{"Id":710,"ProjectId":15,"Age":3.0,"Gender":1,"RankLowerLimit":43.00,"RankUpperLimit":58.90,"Rank":3},{"Id":711,"ProjectId":18,"Age":3.0,"Gender":1,"RankLowerLimit":3.00,"RankUpperLimit":3.90,"Rank":3},{"Id":712,"ProjectId":16,"Age":3.0,"Gender":1,"RankLowerLimit":13.00,"RankUpperLimit":9.20,"Rank":3},{"Id":713,"ProjectId":19,"Age":3.0,"Gender":1,"RankLowerLimit":16.80,"RankUpperLimit":10.60,"Rank":3},{"Id":714,"ProjectId":12,"Age":3.5,"Gender":1,"RankLowerLimit":98.30,"RankUpperLimit":102.00,"Rank":3},{"Id":715,"ProjectId":14,"Age":3.5,"Gender":1,"RankLowerLimit":8.50,"RankUpperLimit":11.50,"Rank":3},{"Id":716,"ProjectId":17,"Age":3.5,"Gender":1,"RankLowerLimit":9.40,"RankUpperLimit":8.40,"Rank":3},{"Id":717,"ProjectId":15,"Age":3.5,"Gender":1,"RankLowerLimit":53.00,"RankUpperLimit":69.90,"Rank":3},{"Id":718,"ProjectId":18,"Age":3.5,"Gender":1,"RankLowerLimit":3.00,"RankUpperLimit":4.40,"Rank":3},{"Id":719,"ProjectId":16,"Age":3.5,"Gender":1,"RankLowerLimit":11.10,"RankUpperLimit":8.30,"Rank":3},{"Id":720,"ProjectId":19,"Age":3.5,"Gender":1,"RankLowerLimit":15.00,"RankUpperLimit":9.40,"Rank":3},{"Id":721,"ProjectId":12,"Age":4.0,"Gender":1,"RankLowerLimit":102.00,"RankUpperLimit":105.40,"Rank":3},{"Id":722,"ProjectId":14,"Age":4.0,"Gender":1,"RankLowerLimit":8.50,"RankUpperLimit":11.40,"Rank":3},{"Id":723,"ProjectId":17,"Age":4.0,"Gender":1,"RankLowerLimit":8.50,"RankUpperLimit":7.70,"Rank":3},{"Id":724,"ProjectId":15,"Age":4.0,"Gender":1,"RankLowerLimit":65.00,"RankUpperLimit":79.90,"Rank":3},{"Id":725,"ProjectId":18,"Age":4.0,"Gender":1,"RankLowerLimit":4.00,"RankUpperLimit":4.90,"Rank":3},{"Id":726,"ProjectId":16,"Age":4.0,"Gender":1,"RankLowerLimit":9.10,"RankUpperLimit":7.10,"Rank":3},{"Id":727,"ProjectId":19,"Age":4.0,"Gender":1,"RankLowerLimit":11.50,"RankUpperLimit":7.40,"Rank":3},{"Id":728,"ProjectId":12,"Age":4.5,"Gender":1,"RankLowerLimit":104.70,"RankUpperLimit":108.40,"Rank":3},{"Id":729,"ProjectId":14,"Age":4.5,"Gender":1,"RankLowerLimit":8.00,"RankUpperLimit":10.90,"Rank":3},{"Id":730,"ProjectId":17,"Age":4.5,"Gender":1,"RankLowerLimit":8.00,"RankUpperLimit":7.30,"Rank":3},{"Id":731,"ProjectId":15,"Age":4.5,"Gender":1,"RankLowerLimit":73.00,"RankUpperLimit":88.90,"Rank":3},{"Id":732,"ProjectId":18,"Age":4.5,"Gender":1,"RankLowerLimit":4.50,"RankUpperLimit":6.40,"Rank":3},{"Id":733,"ProjectId":16,"Age":4.5,"Gender":1,"RankLowerLimit":8.10,"RankUpperLimit":6.50,"Rank":3},{"Id":734,"ProjectId":19,"Age":4.5,"Gender":1,"RankLowerLimit":9.60,"RankUpperLimit":6.30,"Rank":3},{"Id":735,"ProjectId":12,"Age":5.0,"Gender":1,"RankLowerLimit":107.90,"RankUpperLimit":111.90,"Rank":3},{"Id":736,"ProjectId":14,"Age":5.0,"Gender":1,"RankLowerLimit":7.60,"RankUpperLimit":10.90,"Rank":3},{"Id":737,"ProjectId":17,"Age":5.0,"Gender":1,"RankLowerLimit":7.60,"RankUpperLimit":7.00,"Rank":3},{"Id":738,"ProjectId":15,"Age":5.0,"Gender":1,"RankLowerLimit":80.00,"RankUpperLimit":95.90,"Rank":3},{"Id":739,"ProjectId":18,"Age":5.0,"Gender":1,"RankLowerLimit":5.50,"RankUpperLimit":7.40,"Rank":3},{"Id":740,"ProjectId":16,"Age":5.0,"Gender":1,"RankLowerLimit":7.20,"RankUpperLimit":6.00,"Rank":3},{"Id":741,"ProjectId":19,"Age":5.0,"Gender":1,"RankLowerLimit":7.80,"RankUpperLimit":5.30,"Rank":3},{"Id":742,"ProjectId":12,"Age":5.5,"Gender":1,"RankLowerLimit":110.20,"RankUpperLimit":114.60,"Rank":3},{"Id":743,"ProjectId":14,"Age":5.5,"Gender":1,"RankLowerLimit":7.60,"RankUpperLimit":10.90,"Rank":3},{"Id":744,"ProjectId":17,"Age":5.5,"Gender":1,"RankLowerLimit":7.30,"RankUpperLimit":6.80,"Rank":3},{"Id":745,"ProjectId":15,"Age":5.5,"Gender":1,"RankLowerLimit":90.00,"RankUpperLimit":102.90,"Rank":3},{"Id":746,"ProjectId":18,"Age":5.5,"Gender":1,"RankLowerLimit":6.00,"RankUpperLimit":7.90,"Rank":3},{"Id":747,"ProjectId":16,"Age":5.5,"Gender":1,"RankLowerLimit":6.80,"RankUpperLimit":5.70,"Rank":3},{"Id":748,"ProjectId":19,"Age":5.5,"Gender":1,"RankLowerLimit":6.70,"RankUpperLimit":4.60,"Rank":3},{"Id":749,"ProjectId":12,"Age":6.0,"Gender":1,"RankLowerLimit":113.30,"RankUpperLimit":117.70,"Rank":3},{"Id":750,"ProjectId":14,"Age":6.0,"Gender":1,"RankLowerLimit":7.10,"RankUpperLimit":10.40,"Rank":3},{"Id":751,"ProjectId":17,"Age":6.0,"Gender":1,"RankLowerLimit":6.80,"RankUpperLimit":6.30,"Rank":3},{"Id":752,"ProjectId":15,"Age":6.0,"Gender":1,"RankLowerLimit":95.00,"RankUpperLimit":110.90,"Rank":3},{"Id":753,"ProjectId":18,"Age":6.0,"Gender":1,"RankLowerLimit":7.00,"RankUpperLimit":9.40,"Rank":3},{"Id":754,"ProjectId":16,"Age":6.0,"Gender":1,"RankLowerLimit":6.10,"RankUpperLimit":5.20,"Rank":3},{"Id":755,"ProjectId":19,"Age":6.0,"Gender":1,"RankLowerLimit":5.30,"RankUpperLimit":3.80,"Rank":3},{"Id":756,"ProjectId":12,"Age":3.0,"Gender":2,"RankLowerLimit":94.70,"RankUpperLimit":98.00,"Rank":3},{"Id":757,"ProjectId":14,"Age":3.0,"Gender":2,"RankLowerLimit":10.00,"RankUpperLimit":12.90,"Rank":3},{"Id":758,"ProjectId":17,"Age":3.0,"Gender":2,"RankLowerLimit":10.50,"RankUpperLimit":9.40,"Rank":3},{"Id":759,"ProjectId":15,"Age":3.0,"Gender":2,"RankLowerLimit":40.00,"RankUpperLimit":54.90,"Rank":3},{"Id":760,"ProjectId":18,"Age":3.0,"Gender":2,"RankLowerLimit":2.50,"RankUpperLimit":3.40,"Rank":3},{"Id":761,"ProjectId":16,"Age":3.0,"Gender":2,"RankLowerLimit":13.40,"RankUpperLimit":9.80,"Rank":3},{"Id":762,"ProjectId":19,"Age":3.0,"Gender":2,"RankLowerLimit":17.30,"RankUpperLimit":10.80,"Rank":3},{"Id":763,"ProjectId":12,"Age":3.5,"Gender":2,"RankLowerLimit":97.60,"RankUpperLimit":101.10,"Rank":3},{"Id":764,"ProjectId":14,"Age":3.5,"Gender":2,"RankLowerLimit":10.00,"RankUpperLimit":12.90,"Rank":3},{"Id":765,"ProjectId":17,"Age":3.5,"Gender":2,"RankLowerLimit":9.70,"RankUpperLimit":8.70,"Rank":3},{"Id":766,"ProjectId":15,"Age":3.5,"Gender":2,"RankLowerLimit":50.00,"RankUpperLimit":64.90,"Rank":3},{"Id":767,"ProjectId":18,"Age":3.5,"Gender":2,"RankLowerLimit":3.00,"RankUpperLimit":3.90,"Rank":3},{"Id":768,"ProjectId":16,"Age":3.5,"Gender":2,"RankLowerLimit":11.20,"RankUpperLimit":8.50,"Rank":3},{"Id":769,"ProjectId":19,"Age":3.5,"Gender":2,"RankLowerLimit":15.00,"RankUpperLimit":9.70,"Rank":3},{"Id":770,"ProjectId":12,"Age":4.0,"Gender":2,"RankLowerLimit":101.00,"RankUpperLimit":104.40,"Rank":3},{"Id":771,"ProjectId":14,"Age":4.0,"Gender":2,"RankLowerLimit":10.00,"RankUpperLimit":12.90,"Rank":3},{"Id":772,"ProjectId":17,"Age":4.0,"Gender":2,"RankLowerLimit":9.00,"RankUpperLimit":8.10,"Rank":3},{"Id":773,"ProjectId":15,"Age":4.0,"Gender":2,"RankLowerLimit":60.00,"RankUpperLimit":73.90,"Rank":3},{"Id":774,"ProjectId":18,"Age":4.0,"Gender":2,"RankLowerLimit":3.50,"RankUpperLimit":4.40,"Rank":3},{"Id":775,"ProjectId":16,"Age":4.0,"Gender":2,"RankLowerLimit":9.50,"RankUpperLimit":7.40,"Rank":3},{"Id":776,"ProjectId":19,"Age":4.0,"Gender":2,"RankLowerLimit":12.20,"RankUpperLimit":8.20,"Rank":3},{"Id":777,"ProjectId":12,"Age":4.5,"Gender":2,"RankLowerLimit":103.70,"RankUpperLimit":107.30,"Rank":3},{"Id":778,"ProjectId":14,"Age":4.5,"Gender":2,"RankLowerLimit":10.00,"RankUpperLimit":12.90,"Rank":3},{"Id":779,"ProjectId":17,"Age":4.5,"Gender":2,"RankLowerLimit":8.50,"RankUpperLimit":7.70,"Rank":3},{"Id":780,"ProjectId":15,"Age":4.5,"Gender":2,"RankLowerLimit":68.00,"RankUpperLimit":80.90,"Rank":3},{"Id":781,"ProjectId":18,"Age":4.5,"Gender":2,"RankLowerLimit":3.50,"RankUpperLimit":4.40,"Rank":3},{"Id":782,"ProjectId":16,"Age":4.5,"Gender":2,"RankLowerLimit":8.50,"RankUpperLimit":6.80,"Rank":3},{"Id":783,"ProjectId":19,"Age":4.5,"Gender":2,"RankLowerLimit":10.10,"RankUpperLimit":7.00,"Rank":3},{"Id":784,"ProjectId":12,"Age":5.0,"Gender":2,"RankLowerLimit":106.60,"RankUpperLimit":110.40,"Rank":3},{"Id":785,"ProjectId":14,"Age":5.0,"Gender":2,"RankLowerLimit":9.70,"RankUpperLimit":13.10,"Rank":3},{"Id":786,"ProjectId":17,"Age":5.0,"Gender":2,"RankLowerLimit":8.00,"RankUpperLimit":7.30,"Rank":3},{"Id":787,"ProjectId":15,"Age":5.0,"Gender":2,"RankLowerLimit":75.00,"RankUpperLimit":88.90,"Rank":3},{"Id":788,"ProjectId":18,"Age":5.0,"Gender":2,"RankLowerLimit":4.50,"RankUpperLimit":5.90,"Rank":3},{"Id":789,"ProjectId":16,"Age":5.0,"Gender":2,"RankLowerLimit":7.50,"RankUpperLimit":6.20,"Rank":3},{"Id":790,"ProjectId":19,"Age":5.0,"Gender":2,"RankLowerLimit":8.20,"RankUpperLimit":5.80,"Rank":3},{"Id":791,"ProjectId":12,"Age":5.5,"Gender":2,"RankLowerLimit":109.30,"RankUpperLimit":113.40,"Rank":3},{"Id":792,"ProjectId":14,"Age":5.5,"Gender":2,"RankLowerLimit":9.70,"RankUpperLimit":12.90,"Rank":3},{"Id":793,"ProjectId":17,"Age":5.5,"Gender":2,"RankLowerLimit":7.60,"RankUpperLimit":7.00,"Rank":3},{"Id":794,"ProjectId":15,"Age":5.5,"Gender":2,"RankLowerLimit":82.00,"RankUpperLimit":95.90,"Rank":3},{"Id":795,"ProjectId":18,"Age":5.5,"Gender":2,"RankLowerLimit":5.00,"RankUpperLimit":6.40,"Rank":3},{"Id":796,"ProjectId":16,"Age":5.5,"Gender":2,"RankLowerLimit":6.90,"RankUpperLimit":5.80,"Rank":3},{"Id":797,"ProjectId":19,"Age":5.5,"Gender":2,"RankLowerLimit":7.40,"RankUpperLimit":5.10,"Rank":3},{"Id":798,"ProjectId":12,"Age":6.0,"Gender":2,"RankLowerLimit":112.00,"RankUpperLimit":116.60,"Rank":3},{"Id":799,"ProjectId":14,"Age":6.0,"Gender":2,"RankLowerLimit":9.60,"RankUpperLimit":12.90,"Rank":3},{"Id":800,"ProjectId":17,"Age":6.0,"Gender":2,"RankLowerLimit":7.20,"RankUpperLimit":6.60,"Rank":3},{"Id":801,"ProjectId":15,"Age":6.0,"Gender":2,"RankLowerLimit":87.00,"RankUpperLimit":100.90,"Rank":3},{"Id":802,"ProjectId":18,"Age":6.0,"Gender":2,"RankLowerLimit":5.00,"RankUpperLimit":6.40,"Rank":3},{"Id":803,"ProjectId":16,"Age":6.0,"Gender":2,"RankLowerLimit":6.20,"RankUpperLimit":5.30,"Rank":3},{"Id":804,"ProjectId":19,"Age":6.0,"Gender":2,"RankLowerLimit":6.10,"RankUpperLimit":4.30,"Rank":3},{"Id":805,"ProjectId":12,"Age":3.0,"Gender":1,"RankLowerLimit":99.40,"RankUpperLimit":104.10,"Rank":4},{"Id":806,"ProjectId":14,"Age":3.0,"Gender":1,"RankLowerLimit":11.70,"RankUpperLimit":14.90,"Rank":4},{"Id":807,"ProjectId":17,"Age":3.0,"Gender":1,"RankLowerLimit":9.00,"RankUpperLimit":8.00,"Rank":4},{"Id":808,"ProjectId":15,"Age":3.0,"Gender":1,"RankLowerLimit":59.00,"RankUpperLimit":76.90,"Rank":4},{"Id":809,"ProjectId":18,"Age":3.0,"Gender":1,"RankLowerLimit":4.00,"RankUpperLimit":5.90,"Rank":4},{"Id":810,"ProjectId":16,"Age":3.0,"Gender":1,"RankLowerLimit":9.10,"RankUpperLimit":6.60,"Rank":4},{"Id":811,"ProjectId":19,"Age":3.0,"Gender":1,"RankLowerLimit":10.50,"RankUpperLimit":6.60,"Rank":4},{"Id":812,"ProjectId":12,"Age":3.5,"Gender":1,"RankLowerLimit":102.10,"RankUpperLimit":106.90,"Rank":4},{"Id":813,"ProjectId":14,"Age":3.5,"Gender":1,"RankLowerLimit":11.60,"RankUpperLimit":14.90,"Rank":4},{"Id":814,"ProjectId":17,"Age":3.5,"Gender":1,"RankLowerLimit":8.30,"RankUpperLimit":7.50,"Rank":4},{"Id":815,"ProjectId":15,"Age":3.5,"Gender":1,"RankLowerLimit":70.00,"RankUpperLimit":84.90,"Rank":4},{"Id":816,"ProjectId":18,"Age":3.5,"Gender":1,"RankLowerLimit":4.50,"RankUpperLimit":5.90,"Rank":4},{"Id":817,"ProjectId":16,"Age":3.5,"Gender":1,"RankLowerLimit":8.20,"RankUpperLimit":6.10,"Rank":4},{"Id":818,"ProjectId":19,"Age":3.5,"Gender":1,"RankLowerLimit":9.30,"RankUpperLimit":5.90,"Rank":4},{"Id":819,"ProjectId":12,"Age":4.0,"Gender":1,"RankLowerLimit":105.50,"RankUpperLimit":110.40,"Rank":4},{"Id":820,"ProjectId":14,"Age":4.0,"Gender":1,"RankLowerLimit":11.50,"RankUpperLimit":14.90,"Rank":4},{"Id":821,"ProjectId":17,"Age":4.0,"Gender":1,"RankLowerLimit":7.60,"RankUpperLimit":6.90,"Rank":4},{"Id":822,"ProjectId":15,"Age":4.0,"Gender":1,"RankLowerLimit":80.00,"RankUpperLimit":95.90,"Rank":4},{"Id":823,"ProjectId":18,"Age":4.0,"Gender":1,"RankLowerLimit":5.00,"RankUpperLimit":6.40,"Rank":4},{"Id":824,"ProjectId":16,"Age":4.0,"Gender":1,"RankLowerLimit":7.00,"RankUpperLimit":5.60,"Rank":4},{"Id":825,"ProjectId":19,"Age":4.0,"Gender":1,"RankLowerLimit":7.30,"RankUpperLimit":4.90,"Rank":4},{"Id":826,"ProjectId":12,"Age":4.5,"Gender":1,"RankLowerLimit":108.50,"RankUpperLimit":113.10,"Rank":4},{"Id":827,"ProjectId":14,"Age":4.5,"Gender":1,"RankLowerLimit":11.00,"RankUpperLimit":14.40,"Rank":4},{"Id":828,"ProjectId":17,"Age":4.5,"Gender":1,"RankLowerLimit":7.20,"RankUpperLimit":6.70,"Rank":4},{"Id":829,"ProjectId":15,"Age":4.5,"Gender":1,"RankLowerLimit":89.00,"RankUpperLimit":102.90,"Rank":4},{"Id":830,"ProjectId":18,"Age":4.5,"Gender":1,"RankLowerLimit":6.50,"RankUpperLimit":8.40,"Rank":4},{"Id":831,"ProjectId":16,"Age":4.5,"Gender":1,"RankLowerLimit":6.40,"RankUpperLimit":5.30,"Rank":4},{"Id":832,"ProjectId":19,"Age":4.5,"Gender":1,"RankLowerLimit":6.20,"RankUpperLimit":4.30,"Rank":4},{"Id":833,"ProjectId":12,"Age":5.0,"Gender":1,"RankLowerLimit":112.00,"RankUpperLimit":116.90,"Rank":4},{"Id":834,"ProjectId":14,"Age":5.0,"Gender":1,"RankLowerLimit":11.00,"RankUpperLimit":14.40,"Rank":4},{"Id":835,"ProjectId":17,"Age":5.0,"Gender":1,"RankLowerLimit":6.90,"RankUpperLimit":6.40,"Rank":4},{"Id":836,"ProjectId":15,"Age":5.0,"Gender":1,"RankLowerLimit":96.00,"RankUpperLimit":110.90,"Rank":4},{"Id":837,"ProjectId":18,"Age":5.0,"Gender":1,"RankLowerLimit":7.50,"RankUpperLimit":9.40,"Rank":4},{"Id":838,"ProjectId":16,"Age":5.0,"Gender":1,"RankLowerLimit":5.90,"RankUpperLimit":5.10,"Rank":4},{"Id":839,"ProjectId":19,"Age":5.0,"Gender":1,"RankLowerLimit":5.20,"RankUpperLimit":3.70,"Rank":4},{"Id":840,"ProjectId":12,"Age":5.5,"Gender":1,"RankLowerLimit":114.70,"RankUpperLimit":119.70,"Rank":4},{"Id":841,"ProjectId":14,"Age":5.5,"Gender":1,"RankLowerLimit":11.00,"RankUpperLimit":14.40,"Rank":4},{"Id":842,"ProjectId":17,"Age":5.5,"Gender":1,"RankLowerLimit":6.70,"RankUpperLimit":6.20,"Rank":4},{"Id":843,"ProjectId":15,"Age":5.5,"Gender":1,"RankLowerLimit":103.00,"RankUpperLimit":119.90,"Rank":4},{"Id":844,"ProjectId":18,"Age":5.5,"Gender":1,"RankLowerLimit":8.00,"RankUpperLimit":10.40,"Rank":4},{"Id":845,"ProjectId":16,"Age":5.5,"Gender":1,"RankLowerLimit":5.60,"RankUpperLimit":4.90,"Rank":4},{"Id":846,"ProjectId":19,"Age":5.5,"Gender":1,"RankLowerLimit":4.50,"RankUpperLimit":3.30,"Rank":4},{"Id":847,"ProjectId":12,"Age":6.0,"Gender":1,"RankLowerLimit":117.80,"RankUpperLimit":123.00,"Rank":4},{"Id":848,"ProjectId":14,"Age":6.0,"Gender":1,"RankLowerLimit":10.50,"RankUpperLimit":14.40,"Rank":4},{"Id":849,"ProjectId":17,"Age":6.0,"Gender":1,"RankLowerLimit":6.20,"RankUpperLimit":5.80,"Rank":4},{"Id":850,"ProjectId":15,"Age":6.0,"Gender":1,"RankLowerLimit":111.00,"RankUpperLimit":127.90,"Rank":4},{"Id":851,"ProjectId":18,"Age":6.0,"Gender":1,"RankLowerLimit":9.50,"RankUpperLimit":12.40,"Rank":4},{"Id":852,"ProjectId":16,"Age":6.0,"Gender":1,"RankLowerLimit":5.10,"RankUpperLimit":4.40,"Rank":4},{"Id":853,"ProjectId":19,"Age":6.0,"Gender":1,"RankLowerLimit":3.70,"RankUpperLimit":2.70,"Rank":4},{"Id":854,"ProjectId":12,"Age":3.0,"Gender":2,"RankLowerLimit":98.10,"RankUpperLimit":103.00,"Rank":4},{"Id":855,"ProjectId":14,"Age":3.0,"Gender":2,"RankLowerLimit":13.00,"RankUpperLimit":15.90,"Rank":4},{"Id":856,"ProjectId":17,"Age":3.0,"Gender":2,"RankLowerLimit":9.30,"RankUpperLimit":8.20,"Rank":4},{"Id":857,"ProjectId":15,"Age":3.0,"Gender":2,"RankLowerLimit":55.00,"RankUpperLimit":71.90,"Rank":4},{"Id":858,"ProjectId":18,"Age":3.0,"Gender":2,"RankLowerLimit":3.50,"RankUpperLimit":5.40,"Rank":4},{"Id":859,"ProjectId":16,"Age":3.0,"Gender":2,"RankLowerLimit":9.70,"RankUpperLimit":7.10,"Rank":4},{"Id":860,"ProjectId":19,"Age":3.0,"Gender":2,"RankLowerLimit":10.70,"RankUpperLimit":6.90,"Rank":4},{"Id":861,"ProjectId":12,"Age":3.5,"Gender":2,"RankLowerLimit":101.20,"RankUpperLimit":105.50,"Rank":4},{"Id":862,"ProjectId":14,"Age":3.5,"Gender":2,"RankLowerLimit":13.00,"RankUpperLimit":15.90,"Rank":4},{"Id":863,"ProjectId":17,"Age":3.5,"Gender":2,"RankLowerLimit":8.60,"RankUpperLimit":7.70,"Rank":4},{"Id":864,"ProjectId":15,"Age":3.5,"Gender":2,"RankLowerLimit":65.00,"RankUpperLimit":81.90,"Rank":4},{"Id":865,"ProjectId":18,"Age":3.5,"Gender":2,"RankLowerLimit":4.00,"RankUpperLimit":5.40,"Rank":4},{"Id":866,"ProjectId":16,"Age":3.5,"Gender":2,"RankLowerLimit":8.40,"RankUpperLimit":6.20,"Rank":4},{"Id":867,"ProjectId":19,"Age":3.5,"Gender":2,"RankLowerLimit":9.60,"RankUpperLimit":6.10,"Rank":4},{"Id":868,"ProjectId":12,"Age":4.0,"Gender":2,"RankLowerLimit":104.50,"RankUpperLimit":108.90,"Rank":4},{"Id":869,"ProjectId":14,"Age":4.0,"Gender":2,"RankLowerLimit":13.00,"RankUpperLimit":15.90,"Rank":4},{"Id":870,"ProjectId":17,"Age":4.0,"Gender":2,"RankLowerLimit":8.00,"RankUpperLimit":7.20,"Rank":4},{"Id":871,"ProjectId":15,"Age":4.0,"Gender":2,"RankLowerLimit":74.00,"RankUpperLimit":89.90,"Rank":4},{"Id":872,"ProjectId":18,"Age":4.0,"Gender":2,"RankLowerLimit":4.50,"RankUpperLimit":5.40,"Rank":4},{"Id":873,"ProjectId":16,"Age":4.0,"Gender":2,"RankLowerLimit":7.30,"RankUpperLimit":5.90,"Rank":4},{"Id":874,"ProjectId":19,"Age":4.0,"Gender":2,"RankLowerLimit":8.10,"RankUpperLimit":5.30,"Rank":4},{"Id":875,"ProjectId":12,"Age":4.5,"Gender":2,"RankLowerLimit":107.40,"RankUpperLimit":111.90,"Rank":4},{"Id":876,"ProjectId":14,"Age":4.5,"Gender":2,"RankLowerLimit":13.00,"RankUpperLimit":16.00,"Rank":4},{"Id":877,"ProjectId":17,"Age":4.5,"Gender":2,"RankLowerLimit":7.60,"RankUpperLimit":7.00,"Rank":4},{"Id":878,"ProjectId":15,"Age":4.5,"Gender":2,"RankLowerLimit":81.00,"RankUpperLimit":96.90,"Rank":4},{"Id":879,"ProjectId":18,"Age":4.5,"Gender":2,"RankLowerLimit":4.50,"RankUpperLimit":5.90,"Rank":4},{"Id":880,"ProjectId":16,"Age":4.5,"Gender":2,"RankLowerLimit":6.70,"RankUpperLimit":5.50,"Rank":4},{"Id":881,"ProjectId":19,"Age":4.5,"Gender":2,"RankLowerLimit":6.90,"RankUpperLimit":4.70,"Rank":4},{"Id":882,"ProjectId":12,"Age":5.0,"Gender":2,"RankLowerLimit":110.50,"RankUpperLimit":115.40,"Rank":4},{"Id":883,"ProjectId":14,"Age":5.0,"Gender":2,"RankLowerLimit":13.20,"RankUpperLimit":16.60,"Rank":4},{"Id":884,"ProjectId":17,"Age":5.0,"Gender":2,"RankLowerLimit":7.20,"RankUpperLimit":6.70,"Rank":4},{"Id":885,"ProjectId":15,"Age":5.0,"Gender":2,"RankLowerLimit":89.00,"RankUpperLimit":102.90,"Rank":4},{"Id":886,"ProjectId":18,"Age":5.0,"Gender":2,"RankLowerLimit":6.00,"RankUpperLimit":8.90,"Rank":4},{"Id":887,"ProjectId":16,"Age":5.0,"Gender":2,"RankLowerLimit":6.10,"RankUpperLimit":5.20,"Rank":4},{"Id":888,"ProjectId":19,"Age":5.0,"Gender":2,"RankLowerLimit":5.70,"RankUpperLimit":4.10,"Rank":4},{"Id":889,"ProjectId":12,"Age":5.5,"Gender":2,"RankLowerLimit":113.50,"RankUpperLimit":118.40,"Rank":4},{"Id":890,"ProjectId":14,"Age":5.5,"Gender":2,"RankLowerLimit":13.00,"RankUpperLimit":16.70,"Rank":4},{"Id":891,"ProjectId":17,"Age":5.5,"Gender":2,"RankLowerLimit":6.90,"RankUpperLimit":6.40,"Rank":4},{"Id":892,"ProjectId":15,"Age":5.5,"Gender":2,"RankLowerLimit":96.00,"RankUpperLimit":109.90,"Rank":4},{"Id":893,"ProjectId":18,"Age":5.5,"Gender":2,"RankLowerLimit":6.50,"RankUpperLimit":8.90,"Rank":4},{"Id":894,"ProjectId":16,"Age":5.5,"Gender":2,"RankLowerLimit":5.70,"RankUpperLimit":4.90,"Rank":4},{"Id":895,"ProjectId":19,"Age":5.5,"Gender":2,"RankLowerLimit":5.00,"RankUpperLimit":3.60,"Rank":4},{"Id":896,"ProjectId":12,"Age":6.0,"Gender":2,"RankLowerLimit":116.70,"RankUpperLimit":121.70,"Rank":4},{"Id":897,"ProjectId":14,"Age":6.0,"Gender":2,"RankLowerLimit":13.00,"RankUpperLimit":16.70,"Rank":4},{"Id":898,"ProjectId":17,"Age":6.0,"Gender":2,"RankLowerLimit":6.50,"RankUpperLimit":6.10,"Rank":4},{"Id":899,"ProjectId":15,"Age":6.0,"Gender":2,"RankLowerLimit":101.00,"RankUpperLimit":116.90,"Rank":4},{"Id":900,"ProjectId":18,"Age":6.0,"Gender":2,"RankLowerLimit":6.50,"RankUpperLimit":8.40,"Rank":4},{"Id":901,"ProjectId":16,"Age":6.0,"Gender":2,"RankLowerLimit":5.20,"RankUpperLimit":4.60,"Rank":4},{"Id":902,"ProjectId":19,"Age":6.0,"Gender":2,"RankLowerLimit":4.20,"RankUpperLimit":3.00,"Rank":4},{"Id":903,"ProjectId":12,"Age":3.0,"Gender":1,"RankLowerLimit":104.20,"RankUpperLimit":500.00,"Rank":5},{"Id":904,"ProjectId":14,"Age":3.0,"Gender":1,"RankLowerLimit":15.00,"RankUpperLimit":500.00,"Rank":5},{"Id":905,"ProjectId":17,"Age":3.0,"Gender":1,"RankLowerLimit":7.90,"RankUpperLimit":0.00,"Rank":5},{"Id":906,"ProjectId":15,"Age":3.0,"Gender":1,"RankLowerLimit":77.00,"RankUpperLimit":500.00,"Rank":5},{"Id":907,"ProjectId":18,"Age":3.0,"Gender":1,"RankLowerLimit":6.00,"RankUpperLimit":500.00,"Rank":5},{"Id":908,"ProjectId":16,"Age":3.0,"Gender":1,"RankLowerLimit":6.50,"RankUpperLimit":0.00,"Rank":5},{"Id":909,"ProjectId":19,"Age":3.0,"Gender":1,"RankLowerLimit":6.50,"RankUpperLimit":0.00,"Rank":5},{"Id":910,"ProjectId":12,"Age":3.5,"Gender":1,"RankLowerLimit":107.00,"RankUpperLimit":500.00,"Rank":5},{"Id":911,"ProjectId":14,"Age":3.5,"Gender":1,"RankLowerLimit":15.00,"RankUpperLimit":500.00,"Rank":5},{"Id":912,"ProjectId":17,"Age":3.5,"Gender":1,"RankLowerLimit":7.40,"RankUpperLimit":0.00,"Rank":5},{"Id":913,"ProjectId":15,"Age":3.5,"Gender":1,"RankLowerLimit":85.00,"RankUpperLimit":500.00,"Rank":5},{"Id":914,"ProjectId":18,"Age":3.5,"Gender":1,"RankLowerLimit":6.00,"RankUpperLimit":500.00,"Rank":5},{"Id":915,"ProjectId":16,"Age":3.5,"Gender":1,"RankLowerLimit":6.00,"RankUpperLimit":0.00,"Rank":5},{"Id":916,"ProjectId":19,"Age":3.5,"Gender":1,"RankLowerLimit":5.80,"RankUpperLimit":0.00,"Rank":5},{"Id":917,"ProjectId":12,"Age":4.0,"Gender":1,"RankLowerLimit":110.50,"RankUpperLimit":500.00,"Rank":5},{"Id":918,"ProjectId":14,"Age":4.0,"Gender":1,"RankLowerLimit":15.00,"RankUpperLimit":500.00,"Rank":5},{"Id":919,"ProjectId":17,"Age":4.0,"Gender":1,"RankLowerLimit":6.80,"RankUpperLimit":0.00,"Rank":5},{"Id":920,"ProjectId":15,"Age":4.0,"Gender":1,"RankLowerLimit":96.00,"RankUpperLimit":500.00,"Rank":5},{"Id":921,"ProjectId":18,"Age":4.0,"Gender":1,"RankLowerLimit":6.50,"RankUpperLimit":500.00,"Rank":5},{"Id":922,"ProjectId":16,"Age":4.0,"Gender":1,"RankLowerLimit":5.50,"RankUpperLimit":0.00,"Rank":5},{"Id":923,"ProjectId":19,"Age":4.0,"Gender":1,"RankLowerLimit":4.80,"RankUpperLimit":0.00,"Rank":5},{"Id":924,"ProjectId":12,"Age":4.5,"Gender":1,"RankLowerLimit":113.20,"RankUpperLimit":500.00,"Rank":5},{"Id":925,"ProjectId":14,"Age":4.5,"Gender":1,"RankLowerLimit":14.50,"RankUpperLimit":500.00,"Rank":5},{"Id":926,"ProjectId":17,"Age":4.5,"Gender":1,"RankLowerLimit":6.60,"RankUpperLimit":0.00,"Rank":5},{"Id":927,"ProjectId":15,"Age":4.5,"Gender":1,"RankLowerLimit":103.00,"RankUpperLimit":500.00,"Rank":5},{"Id":928,"ProjectId":18,"Age":4.5,"Gender":1,"RankLowerLimit":8.50,"RankUpperLimit":500.00,"Rank":5},{"Id":929,"ProjectId":16,"Age":4.5,"Gender":1,"RankLowerLimit":5.20,"RankUpperLimit":0.00,"Rank":5},{"Id":930,"ProjectId":19,"Age":4.5,"Gender":1,"RankLowerLimit":4.20,"RankUpperLimit":0.00,"Rank":5},{"Id":931,"ProjectId":12,"Age":5.0,"Gender":1,"RankLowerLimit":117.00,"RankUpperLimit":500.00,"Rank":5},{"Id":932,"ProjectId":14,"Age":5.0,"Gender":1,"RankLowerLimit":14.50,"RankUpperLimit":500.00,"Rank":5},{"Id":933,"ProjectId":17,"Age":5.0,"Gender":1,"RankLowerLimit":6.30,"RankUpperLimit":0.00,"Rank":5},{"Id":934,"ProjectId":15,"Age":5.0,"Gender":1,"RankLowerLimit":111.00,"RankUpperLimit":500.00,"Rank":5},{"Id":935,"ProjectId":18,"Age":5.0,"Gender":1,"RankLowerLimit":9.50,"RankUpperLimit":500.00,"Rank":5},{"Id":936,"ProjectId":16,"Age":5.0,"Gender":1,"RankLowerLimit":5.00,"RankUpperLimit":0.00,"Rank":5},{"Id":937,"ProjectId":19,"Age":5.0,"Gender":1,"RankLowerLimit":3.60,"RankUpperLimit":0.00,"Rank":5},{"Id":938,"ProjectId":12,"Age":5.5,"Gender":1,"RankLowerLimit":119.80,"RankUpperLimit":500.00,"Rank":5},{"Id":939,"ProjectId":14,"Age":5.5,"Gender":1,"RankLowerLimit":14.50,"RankUpperLimit":500.00,"Rank":5},{"Id":940,"ProjectId":17,"Age":5.5,"Gender":1,"RankLowerLimit":6.10,"RankUpperLimit":0.00,"Rank":5},{"Id":941,"ProjectId":15,"Age":5.5,"Gender":1,"RankLowerLimit":120.00,"RankUpperLimit":500.00,"Rank":5},{"Id":942,"ProjectId":18,"Age":5.5,"Gender":1,"RankLowerLimit":10.50,"RankUpperLimit":500.00,"Rank":5},{"Id":943,"ProjectId":16,"Age":5.5,"Gender":1,"RankLowerLimit":4.80,"RankUpperLimit":0.00,"Rank":5},{"Id":944,"ProjectId":19,"Age":5.5,"Gender":1,"RankLowerLimit":3.20,"RankUpperLimit":0.00,"Rank":5},{"Id":945,"ProjectId":12,"Age":6.0,"Gender":1,"RankLowerLimit":123.10,"RankUpperLimit":500.00,"Rank":5},{"Id":946,"ProjectId":14,"Age":6.0,"Gender":1,"RankLowerLimit":14.50,"RankUpperLimit":500.00,"Rank":5},{"Id":947,"ProjectId":17,"Age":6.0,"Gender":1,"RankLowerLimit":5.70,"RankUpperLimit":0.00,"Rank":5},{"Id":948,"ProjectId":15,"Age":6.0,"Gender":1,"RankLowerLimit":128.00,"RankUpperLimit":500.00,"Rank":5},{"Id":949,"ProjectId":18,"Age":6.0,"Gender":1,"RankLowerLimit":12.50,"RankUpperLimit":500.00,"Rank":5},{"Id":950,"ProjectId":16,"Age":6.0,"Gender":1,"RankLowerLimit":4.30,"RankUpperLimit":0.00,"Rank":5},{"Id":951,"ProjectId":19,"Age":6.0,"Gender":1,"RankLowerLimit":2.60,"RankUpperLimit":0.00,"Rank":5},{"Id":952,"ProjectId":12,"Age":3.0,"Gender":2,"RankLowerLimit":103.10,"RankUpperLimit":500.00,"Rank":5},{"Id":953,"ProjectId":14,"Age":3.0,"Gender":2,"RankLowerLimit":16.00,"RankUpperLimit":500.00,"Rank":5},{"Id":954,"ProjectId":17,"Age":3.0,"Gender":2,"RankLowerLimit":8.10,"RankUpperLimit":0.00,"Rank":5},{"Id":955,"ProjectId":15,"Age":3.0,"Gender":2,"RankLowerLimit":72.00,"RankUpperLimit":500.00,"Rank":5},{"Id":956,"ProjectId":18,"Age":3.0,"Gender":2,"RankLowerLimit":5.50,"RankUpperLimit":500.00,"Rank":5},{"Id":957,"ProjectId":16,"Age":3.0,"Gender":2,"RankLowerLimit":7.00,"RankUpperLimit":0.00,"Rank":5},{"Id":958,"ProjectId":19,"Age":3.0,"Gender":2,"RankLowerLimit":6.80,"RankUpperLimit":0.00,"Rank":5},{"Id":959,"ProjectId":12,"Age":3.5,"Gender":2,"RankLowerLimit":105.60,"RankUpperLimit":500.00,"Rank":5},{"Id":960,"ProjectId":14,"Age":3.5,"Gender":2,"RankLowerLimit":16.00,"RankUpperLimit":500.00,"Rank":5},{"Id":961,"ProjectId":17,"Age":3.5,"Gender":2,"RankLowerLimit":7.60,"RankUpperLimit":0.00,"Rank":5},{"Id":962,"ProjectId":15,"Age":3.5,"Gender":2,"RankLowerLimit":82.00,"RankUpperLimit":500.00,"Rank":5},{"Id":963,"ProjectId":18,"Age":3.5,"Gender":2,"RankLowerLimit":5.50,"RankUpperLimit":500.00,"Rank":5},{"Id":964,"ProjectId":16,"Age":3.5,"Gender":2,"RankLowerLimit":6.10,"RankUpperLimit":0.00,"Rank":5},{"Id":965,"ProjectId":19,"Age":3.5,"Gender":2,"RankLowerLimit":6.00,"RankUpperLimit":0.00,"Rank":5},{"Id":966,"ProjectId":12,"Age":4.0,"Gender":2,"RankLowerLimit":109.00,"RankUpperLimit":500.00,"Rank":5},{"Id":967,"ProjectId":14,"Age":4.0,"Gender":2,"RankLowerLimit":16.00,"RankUpperLimit":500.00,"Rank":5},{"Id":968,"ProjectId":17,"Age":4.0,"Gender":2,"RankLowerLimit":7.10,"RankUpperLimit":0.00,"Rank":5},{"Id":969,"ProjectId":15,"Age":4.0,"Gender":2,"RankLowerLimit":90.00,"RankUpperLimit":500.00,"Rank":5},{"Id":970,"ProjectId":18,"Age":4.0,"Gender":2,"RankLowerLimit":5.50,"RankUpperLimit":500.00,"Rank":5},{"Id":971,"ProjectId":16,"Age":4.0,"Gender":2,"RankLowerLimit":5.80,"RankUpperLimit":0.00,"Rank":5},{"Id":972,"ProjectId":19,"Age":4.0,"Gender":2,"RankLowerLimit":5.20,"RankUpperLimit":0.00,"Rank":5},{"Id":973,"ProjectId":12,"Age":4.5,"Gender":2,"RankLowerLimit":112.00,"RankUpperLimit":500.00,"Rank":5},{"Id":974,"ProjectId":14,"Age":4.5,"Gender":2,"RankLowerLimit":16.10,"RankUpperLimit":500.00,"Rank":5},{"Id":975,"ProjectId":17,"Age":4.5,"Gender":2,"RankLowerLimit":6.90,"RankUpperLimit":0.00,"Rank":5},{"Id":976,"ProjectId":15,"Age":4.5,"Gender":2,"RankLowerLimit":97.00,"RankUpperLimit":500.00,"Rank":5},{"Id":977,"ProjectId":18,"Age":4.5,"Gender":2,"RankLowerLimit":6.00,"RankUpperLimit":500.00,"Rank":5},{"Id":978,"ProjectId":16,"Age":4.5,"Gender":2,"RankLowerLimit":5.40,"RankUpperLimit":0.00,"Rank":5},{"Id":979,"ProjectId":19,"Age":4.5,"Gender":2,"RankLowerLimit":4.60,"RankUpperLimit":0.00,"Rank":5},{"Id":980,"ProjectId":12,"Age":5.0,"Gender":2,"RankLowerLimit":115.50,"RankUpperLimit":500.00,"Rank":5},{"Id":981,"ProjectId":14,"Age":5.0,"Gender":2,"RankLowerLimit":16.70,"RankUpperLimit":500.00,"Rank":5},{"Id":982,"ProjectId":17,"Age":5.0,"Gender":2,"RankLowerLimit":6.60,"RankUpperLimit":0.00,"Rank":5},{"Id":983,"ProjectId":15,"Age":5.0,"Gender":2,"RankLowerLimit":103.00,"RankUpperLimit":500.00,"Rank":5},{"Id":984,"ProjectId":18,"Age":5.0,"Gender":2,"RankLowerLimit":9.00,"RankUpperLimit":500.00,"Rank":5},{"Id":985,"ProjectId":16,"Age":5.0,"Gender":2,"RankLowerLimit":5.10,"RankUpperLimit":0.00,"Rank":5},{"Id":986,"ProjectId":19,"Age":5.0,"Gender":2,"RankLowerLimit":4.00,"RankUpperLimit":0.00,"Rank":5},{"Id":987,"ProjectId":12,"Age":5.5,"Gender":2,"RankLowerLimit":118.50,"RankUpperLimit":500.00,"Rank":5},{"Id":988,"ProjectId":14,"Age":5.5,"Gender":2,"RankLowerLimit":16.80,"RankUpperLimit":500.00,"Rank":5},{"Id":989,"ProjectId":17,"Age":5.5,"Gender":2,"RankLowerLimit":6.30,"RankUpperLimit":0.00,"Rank":5},{"Id":990,"ProjectId":15,"Age":5.5,"Gender":2,"RankLowerLimit":110.00,"RankUpperLimit":500.00,"Rank":5},{"Id":991,"ProjectId":18,"Age":5.5,"Gender":2,"RankLowerLimit":9.00,"RankUpperLimit":500.00,"Rank":5},{"Id":992,"ProjectId":16,"Age":5.5,"Gender":2,"RankLowerLimit":4.80,"RankUpperLimit":0.00,"Rank":5},{"Id":993,"ProjectId":19,"Age":5.5,"Gender":2,"RankLowerLimit":3.50,"RankUpperLimit":0.00,"Rank":5},{"Id":994,"ProjectId":12,"Age":6.0,"Gender":2,"RankLowerLimit":121.80,"RankUpperLimit":500.00,"Rank":5},{"Id":995,"ProjectId":14,"Age":6.0,"Gender":2,"RankLowerLimit":16.80,"RankUpperLimit":500.00,"Rank":5},{"Id":996,"ProjectId":17,"Age":6.0,"Gender":2,"RankLowerLimit":6.00,"RankUpperLimit":0.00,"Rank":5},{"Id":997,"ProjectId":15,"Age":6.0,"Gender":2,"RankLowerLimit":117.00,"RankUpperLimit":500.00,"Rank":5},{"Id":998,"ProjectId":18,"Age":6.0,"Gender":2,"RankLowerLimit":8.50,"RankUpperLimit":500.00,"Rank":5},{"Id":999,"ProjectId":16,"Age":6.0,"Gender":2,"RankLowerLimit":4.50,"RankUpperLimit":0.00,"Rank":5},{"Id":1000,"ProjectId":19,"Age":6.0,"Gender":2,"RankLowerLimit":2.90,"RankUpperLimit":0.00,"Rank":5}]};
+				 console.log(result);
+			    var serviceUnitInfo = result.ServiceUnit;
+				for(var itemChildTest in result.TestResult) {
+					var itemChildResult = result.TestResult[itemChildTest];
+					if(itemChildResult.length == 0) {
+						continue;
+					}
+					var itemResult = itemChildResult[0];
+					if(itemResult.master.Age < 6&&result.ServiceUnit.UnitType===3) {
+						var itemResultLast = itemChildResult.length < 2 ? itemChildResult[0] : itemChildResult[1];
+						var itemChild = {};
+						var standardsList = _.where(result.Standard, {
+							Age: itemResult.master.Age,
+							Gender: itemResult.master.Gender
+						});
+						var standardsWeightArr = _.where(result.WeightStandard, {
+							Gender: itemResult.master.Gender,
+						});
+						itemChild.Gender = itemResult.master.Gender == 1 ? "男" : "女";
+						itemChild.ChildName = itemResult.master.ChildName;
+						itemChild.Age = itemResult.master.Age;
+						itemChild.ChildId = itemResult.master.ChildId;
+						itemChild.ServiceName = itemResult.master.ServiceUnitName;
+						itemChild.Id = "barcode" + itemResult.master.ChildId;
+						itemChild.HeightStandard = "≥" + Standard(standardsList, 12);
+						itemChild.SitReachStandard = "≥" + Standard(standardsList, 14);
+						itemChild.StandJumpStandard = "≥" + Standard(standardsList, 15);
+						itemChild.DoubleJumpStandard = "≤" + Standard(standardsList, 16);
+						itemChild.ShuttleRunStandard = "≤" + Standard(standardsList, 17);
+						itemChild.TennisThrowsStandard = "≥" + Standard(standardsList, 18);
+						itemChild.BalanceWoodStandard = "≤" + Standard(standardsList, 19);
+						itemChild.CreateTimeThat = FormatDate(itemResult.master.CreateTime);
+						itemChild.CreateTimeLast = FormatDate(itemResultLast.master.CreateTime);
+						itemChild.CreateTeacher = result.Program[0].CreateTeacher;
+						itemChild.Height = ItemResultFn(itemResult.detail, "身高");
+						itemChild.HeightLast = ItemResultFn(itemResultLast.detail, "身高");
+						itemChild.Weight = ItemResultFn(itemResult.detail, "体重");
+						itemChild.WeightLast = ItemResultFn(itemResultLast.detail, "体重");
+						var WeightStandardsArr = WeightStandardFn(standardsWeightArr, itemChild.Height);
+						itemChild.WeightStandard = WeightStandardsArr.Normal5PointsMinimum + "-" + WeightStandardsArr.Normal5PointsMaximum;
+						itemChild.HeightBar = (88 / Standard(standardsList, 12)) * (itemChild.Height);
+						itemChild.HeightBarLast = (88 / Standard(standardsList, 12)) * (itemChild.HeightLast);
+
+						//针对体重：太轻，健康，需减重情况得出对应进度条宽度比例；
+						if(itemChild.Weight >= WeightStandardsArr.Fat3PointsMaximum) {
+							itemChild.WeightBar = 220;
+						} else if(itemChild.Weight >= WeightStandardsArr.Normal5PointsMaximum) {
+							itemChild.WeightBar = (176 / (WeightStandardsArr.Normal5PointsMaximum)) * (itemChild.Weight);
+						} else if(itemChild.Weight >= WeightStandardsArr.Normal5PointsMinimum) {
+							itemChild.WeightBar = (150 / (WeightStandardsArr.Normal5PointsMaximum)) * (itemChild.Weight);
+						} else {
+							itemChild.WeightBar = (88 / (WeightStandardsArr.Normal5PointsMinimum)) * (itemChild.Weight);
+						};
+
+						if(itemChild.WeightLast >= WeightStandardsArr.Fat3PointsMaximum) {
+							itemChild.WeightBarLast = (165 / (WeightStandardsArr.Fat3PointsMaximum)) * (itemChild.WeightLast);
+						} else if(itemChild.WeightLast >= WeightStandardsArr.Normal5PointsMaximum) {
+							itemChild.WeightBarLast = (176 / (WeightStandardsArr.Normal5PointsMaximum)) * (itemChild.WeightLast);
+						} else if(itemChild.WeightLast >= WeightStandardsArr.Normal5PointsMinimum) {
+							itemChild.WeightBarLast = (150 / (WeightStandardsArr.Normal5PointsMaximum)) * (itemChild.WeightLast);
+						} else {
+							itemChild.WeightBarLast = (88 / (WeightStandardsArr.Normal5PointsMinimum)) * (itemChild.WeightLast);
+						};
+
+						itemChild.BarLine = "bar-line-" + itemResult.master.ChildId;
+						itemChild.CodeImage = result.ServiceUnit.WxImage == null ? "http://ruilai-image.oss-cn-qingdao.aliyuncs.com/su61010001Wx_Img.png" : ("http://ruilai-image.oss-cn-qingdao.aliyuncs.com/" + result.ServiceUnit.WxImage);
+						itemChild.ResultContent = itemChildResult.length;
+						var template = Handlebars.compile($("#content-under-html").html());
+						var htmlText = template(itemChild);
+						$("#content-above").append(htmlText);
+
+						var itemResultDetail = _.sortBy(itemResult.detail, "ProjectId");
+						var itemResultDetailLast = _.sortBy(itemResultLast.detail, "ProjectId");
+						for(var test in itemResultDetail) {
+							var itemTestResult = itemResultDetail[test];
+							if(itemResultDetail[test].ProjectId > 13) {
+								var itemsResultHtml = {};
+								itemsResultHtml.DisPlayName = itemTestResult.DisplayName;
+								itemsResultHtml.ProjectName = itemTestResult.Name;
+								itemsResultHtml.Result = itemTestResult.Result;
+								itemsResultHtml.ResultLast = itemResultDetailLast[test].Result;
+								itemsResultHtml.ResultContent = itemChildResult.length;
+								if(itemTestResult.ProjectId === 17 || itemTestResult.ProjectId === 16 || itemTestResult.ProjectId === 19) {
+									itemsResultHtml.BarWidth = (176 - (88 / Standard(standardsList, itemTestResult.ProjectId)) * (itemTestResult.Result));
+									itemsResultHtml.BarWidthLast = (176 - (88 / Standard(standardsList, itemTestResult.ProjectId)) * (itemResultDetailLast[test].Result));
+								} else {
+									itemsResultHtml.BarWidth = (88 / Standard(standardsList, itemTestResult.ProjectId)) * (itemTestResult.Result);
+									itemsResultHtml.BarWidthLast = (88 / Standard(standardsList, itemTestResult.ProjectId)) * (itemResultDetailLast[test].Result);
+								}
+								if(itemsResultHtml.BarWidthLast >= 230) {
+									itemsResultHtml.BarWidthLast = 230
+								} else if(itemsResultHtml.BarWidthLast <= 5) {
+									itemsResultHtml.BarWidthLast = 5
+								}
+
+								if(itemsResultHtml.BarWidth >= 230) {
+									itemsResultHtml.BarWidth = 230
+								} else if(itemsResultHtml.BarWidth <= 5) {
+									itemsResultHtml.BarWidth = 5
+								}
+								var template = Handlebars.compile($("#item-bar-html").html());
+								var htmlText = template(itemsResultHtml);
+								$("#item-bar-content" + itemChild.ChildId).append(htmlText);
+							}
+						}
+
+						if(itemChildResult.length < 2) {
+							$(".visibility-hiden").css("visibility", "hidden");
+						};
+						if(itemResult.childCode != null) {
+							JsBarcode("#barcode" + itemResult.master.ChildId, itemResult.childCode.Code, {
+								width: "1",
+								height: "30px",
+								fontSize: 12,
+								marginLeft: 10,
+								margin: 10,
+								textAlign: "center !important"
+							});
+						}
+					} else  {
+						var itemResultLast = itemChildResult.length < 2 ? itemChildResult[0] : itemChildResult[1]
+						var itemChild = {};
+						var standardsList = _.where(result.Standard, {
+							Age: itemResult.master.Age,
+							Gender: itemResult.master.Gender
+						});
+						var bmiBarValue = 0;
+						var bmiBarValueLast = 0;
+						var bmiStandard = _.where(standardsList, {
+							ProjectId: 3,
+							Rank: 2
+						});
+						var bmiStandardtwo = _.where(standardsList, {
+							ProjectId: 3,
+							Rank: 1
+						});
+						itemChild.Gender = itemResult.master.Gender == 1 ? "男" : "女";
+						if(itemResult.master.Age >= 9) {
+							itemChild.ChangeAbilityName = "有氧能力";
+							itemChild.AbilityDescription = " • 有氧能力是一种衡量心肺和肌肉进行持续体力活动的能力，一般来说，孩子参与运动越多，有氧能力就越好。有氧能力是通过“15米节奏往返跑”来测量的。 同时，测量结果能计算出人的最大摄氧量（VO2max），它代表了孩子在高强度中进行跑步、游泳等运动的能力。<br /> • <b>重要性</b>：良好的有氧能力可以降低心脏病、中风和糖尿病的风险。虽然这些疾病通常不会出现在儿童身上，但这些疾病会在从儿童或青少年时期开始潜伏。<br><b>• " + itemResult.master.Age + "岁" + itemChild.Gender + "孩在该项目的健康区域：<br />■ 15米节奏往返跑：≥" + StandardObove(standardsList, 4) + "圈   &nbsp; ■ 最大摄氧量（VO2max）：≥" + StandardObove(standardsList, 11) + "</b>";
+							itemChild.AbilityImg = "centent-text-box-aerobic-icon.png";
+						} else {
+							itemChild.ChangeAbilityName = "平衡能力";
+							itemChild.AbilityDescription = " • 平衡能力是维持身体姿势的能力，是人体的中枢神经、前庭分析器、本体感受器及视觉感受器等机能的综合反映。平衡能力是通过“走平衡木”来测量的。<br /> • <b>重要性</b>：平衡能力是完成日常生活各种动作的先决条件，如果儿童早期平衡能力没有得到正常发展，对后期更复杂的动作技能如跑、跳等动作的学习造成潜在影响，还可能增加孩子在体育活动中受伤的风险。<br><b>• " + itemResult.master.Age + "岁" + itemChild.Gender + "孩在该项目的健康区域：<br />■ 走平衡木：≤" + StandardObove(standardsList, 10) + "秒";
+							itemChild.AbilityImg = "balance_icon.png";
+						}
+						itemChild.ChildName = itemResult.master.ChildName;
+						itemChild.Age = itemResult.master.Age;
+						itemChild.ChildId = itemResult.master.ChildId;
+						itemChild.MasterId = itemResult.master.Id;
+						itemChild.MasterIdLast = itemResultLast.master.Id;
+						itemChild.ServiceName = itemResult.master.ServiceUnitName;
+						itemChild.BMIStandards = bmiStandard[0].RankLowerLimit + "—" + bmiStandard[0].RankUpperLimit;
+						itemChild.CrunchStandard = "≥" + StandardObove(standardsList, 5);
+						itemChild.ProneBackStandard = "≥" + StandardObove(standardsList, 6);
+						itemChild.PushUpStandard = "≥" + StandardObove(standardsList, 7);
+						itemChild.SitStandard = "≥" + StandardObove(standardsList, 8);
+						itemChild.BrodJumpStandard = "≥" + StandardObove(standardsList, 9);
+						itemChild.Id = "barcode" + itemResult.master.ChildId;
+						itemChild.BMIId = "bmi-bars-" + itemResult.master.Id;
+						itemChild.BMIIdLast = "bmi-bar-" + itemResultLast.master.Id;
+						itemChild.Height = (_.where(itemResult.detail, {
+							Name: "身高"
+						}))[0].Result;
+						itemChild.HeightLast = (_.where(itemResultLast.detail, {
+							Name: "身高"
+						}))[0].Result;
+
+						itemChild.Weight = (_.where(itemResult.detail, {
+							Name: "体重"
+						}))[0].Result;
+						itemChild.WeightLast = (_.where(itemResultLast.detail, {
+							Name: "体重"
+						}))[0].Result;
+						itemChild.CreateTime = FormatDate(itemResult.master.CreateTime);
+						itemChild.CreateTimeLast = FormatDate(itemResultLast.master.CreateTime);
+						itemChild.CreateTeacher = result.Program[0].CreateTeacher;
+
+						itemChild.BarLine = "bar-line-" + itemResult.master.ChildId;
+						itemChild.CodeImage = result.ServiceUnit.WxImage == null ? "http://ruilai-image.oss-cn-qingdao.aliyuncs.com/su61010001Wx_Img.png" : ("http://ruilai-image.oss-cn-qingdao.aliyuncs.com/" + result.ServiceUnit.WxImage);
+
+						itemChild.ResultContent = itemChildResult.length;
+						var template = Handlebars.compile($("#content-above-html").html());
+						var htmlText = template(itemChild);
+						$("#content-above").append(htmlText);
+						if(itemChildResult.length < 2) {
+							$(".visibility-hiden").css("visibility", "hidden");
+						};
+						var startClass = 45;
+						var bmiResult = 0;
+						var bmiResultLast = 0;
+						var bmiIsTest = false;
+						var baseClassLong = 0
+						if(itemResult.master.Age < 9) {
+							baseClassLong = 80;
+						} else {
+							baseClassLong = 75;
+						}
+
+						var itemResultDetail = (_.sortBy(itemResult.detail, "ProjectId")).reverse();
+						var itemResultDetailLast = (_.sortBy(itemResultLast.detail, "ProjectId")).reverse();
+						var itemResultDetailLastgb;
+						if(itemResultDetailLast.length > 0) {
+							itemResultDetailLastgb = _.groupBy(itemResultDetailLast, function(num) {
+								return num.ProjectId;
+							});
+							for(var item in itemResultDetailLast) {
+								var itemTestResultLast = itemResultDetailLast[item];
+								if(itemTestResultLast.ProjectId == 3) {
+									bmiResultLast = (itemTestResultLast.Result == null ? 0 : itemTestResultLast.Result);
+								}
+							}
+						}
+						for(var test in itemResultDetail) {
+							debugger;
+							var itemTestResult = itemResultDetail[test];
+							if(itemTestResult.ProjectId == 1) {
+								$("#height-" + itemResult.master.Id).text(itemTestResult.Result + "cm");
+							} else if(itemTestResult.ProjectId == 2) {
+								$("#weight-" + itemResult.master.Id).text(itemTestResult.Result + "kg");
+							} else if(itemTestResult.ProjectId == 3) {
+								bmiResult = (itemTestResult.Result == null ? 0 : itemTestResult.Result);
+								bmiIsTest = itemTestResult.IsTest;
+							} else {
+								var itemResultHtml = {};
+								itemResultHtml.Id = itemTestResult.Id;
+								itemResultHtml.DisPlayName = itemTestResult.DisplayName;
+								itemResultHtml.ProjectName = itemTestResult.Name;
+								itemResultHtml.Class = startClass;
+								itemResultHtml.LabelBarHLine = "label-bar-line-" + itemTestResult.Id;
+								itemResultHtml.ResultContent = itemChildResult.length;
+								startClass += baseClassLong;
+								var template = Handlebars.compile($("#item-test-result").html());
+								var htmlText = template(itemResultHtml);
+								$("#item-test-content" + itemChild.ChildId).append(htmlText);
+
+								var itemStandard = _.where(standardsList, {
+									ProjectId: itemTestResult.ProjectId,
+									Rank: 2
+								});
+								var barValue = CalceBarLong(itemTestResult, standardsList, itemStandard,serviceUnitInfo);
+							}
+							if(barValue <= 32) {
+								$("#label-bar-line-" + itemTestResult.Id).css({
+									"display": "none"
+								});
+							}
+							$('#item-bar-' + itemTestResult.Id).jqbar({
+								label: '',
+								value: barValue,
+								barColor: '#01a89e',
+								actualValue: itemTestResult.IsTest ? 0 : itemTestResult.Result
+							});
+							if(itemResultDetailLast.length > 0) {
+								var lasterBarValue = CalceBarLong(itemResultDetailLastgb[itemTestResult.ProjectId][0], standardsList, itemStandard,serviceUnitInfo);
+								debugger;
+								$("#item-bars-" + itemTestResult.Id).jqbar({
+									label: '',
+									value: lasterBarValue,
+									barColor: '#D55E36',
+									actualValue: itemResultDetailLastgb[itemTestResult.ProjectId][0].IsTest ? 0 : itemResultDetailLastgb[itemTestResult.ProjectId][0].Result
+								});
+							}
+						}
+
+						if(itemResult.childCode != null) {
+							JsBarcode("#barcode" + itemResult.master.ChildId, itemResult.childCode.Code, {
+								width: "1",
+								height: "30px",
+								fontSize: 12,
+								marginLeft: 10,
+								margin: 10,
+								textAlign: "center !important"
+							});
+						}
+						if(!bmiIsTest) {
+							if(bmiResult < bmiStandard[0].RankLowerLimit) {
+								bmiBarValue = Math.round(32 / (bmiStandard[0].RankLowerLimit) * bmiResult);
+							} else if(bmiResult < bmiStandard[0].RankUpperLimit) {
+								bmiBarValue = Math.round(32 / (bmiStandard[0].RankUpperLimit - bmiStandard[0].RankLowerLimit) * (bmiResult - bmiStandard[0].RankLowerLimit) + 32);
+							} else {
+								bmiBarValue = Math.round(26 / (bmiStandardtwo[0].RankUpperLimit - bmiStandard[0].RankUpperLimit) * (bmiResult - bmiStandard[0].RankUpperLimit) + 64);
+							}
+						}
+						if(!bmiIsTest) {
+							if(bmiResultLast < bmiStandard[0].RankLowerLimit) {
+								bmiBarValueLast = Math.round(32 / (bmiStandard[0].RankLowerLimit) * bmiResultLast);
+							} else if(bmiResultLast < bmiStandard[0].RankUpperLimit) {
+								bmiBarValueLast = Math.round(32 / (bmiStandard[0].RankUpperLimit - bmiStandard[0].RankLowerLimit) * (bmiResult - bmiStandard[0].RankLowerLimit) + 32);
+							} else {
+								bmiBarValueLast = Math.round(26 / (bmiStandardtwo[0].RankUpperLimit - bmiStandard[0].RankUpperLimit) * (bmiResult - bmiStandard[0].RankUpperLimit) + 64);
+							}
+						}
+						if(bmiBarValue <= 32) {
+							$("#bar-line-" + itemResult.master.ChildId).css({
+								"display": "none"
+							});
+						}
+						$("#bmi-bars-" + itemResult.master.Id).jqbar({
+							label: '',
+							value: bmiBarValue,
+							barColor: '#01a89e',
+							actualValue: bmiResult
+						});
+						$("#bmi-bar-" + itemResultLast.master.Id).jqbar({
+							label: '',
+							value: bmiBarValueLast,
+							barColor: '#D55E36',
+							actualValue: bmiResultLast
+						});
+
+					};
+				}
+
+			});
+
+			function FormatDate(dateTimes) {
+				var dt = new Date(parseInt(dateTimes.slice(6, 19)));
+				var year = dt.getFullYear();
+				var month = dt.getMonth() + 1;
+				var date = dt.getDate();
+				var dateTime = (year + "." + month + "." + date).replace(/\b(\w)\b/g, '0$1');
+				return dateTime;
+			}
+			//对年龄、性别筛选7项标准数组，再二次筛选：ProjectId，Rank=3及格；
+			function StandardObove(standardList, project) {
+				var thisProjectStandard = _.where(standardList, {
+					ProjectId: project,
+					Rank: 2
+				});
+				return thisProjectStandard[0].RankLowerLimit;
+			}
+
+			function Standard(standardList, project) {
+				var thisProjectStandard = _.where(standardList, {
+					ProjectId: project,
+					Rank: 3
+				});
+				return thisProjectStandard[0].RankLowerLimit;
+			}
+
+			function ItemResultFn(detailList, project) {
+				var thisProjectResult = _.where(detailList, {
+					Name: project
+				});
+				return thisProjectResult[0].Result;
+			}
+
+			//对性别筛选体重项标准数组，再二次筛选：HeightMinimum~HeightMaximum区间；
+			function WeightStandardFn(weights, height) {
+				var weightStandards = {};
+				for(var item in weights) {
+					var itemWeightInfo = weights[item];
+					if(itemWeightInfo.HeightMinimum <= height && height <= itemWeightInfo.HeightMaximum) {
+						weightStandards = itemWeightInfo;
+					}
+				}
+				return weightStandards;
+			};
+			// 计算进度条长度公共方法
+			function CalceBarLong(itemTestResult, standardsList, itemStandard,serviceUnitInfo) {
+				var barValue = 0;
+				if(!itemTestResult.IsTest) {
+					if(itemTestResult.ProjectId == 10) {
+						var balanceStandard = _.where(standardsList, {
+							ProjectId: 10
+						});
+						var groupBy = _.groupBy(balanceStandard, function(num) {
+							return num.Rank
+						});
+						if(itemTestResult.Result > groupBy[2][0].RankLowerLimit) {
+							barValue = Math.round((32 / (groupBy[1][0].RankLowerLimit - groupBy[2][0].RankLowerLimit)) * ((groupBy[1][0].RankLowerLimit - itemTestResult.Result) <= 0 ? 2 : (groupBy[1][0].RankLowerLimit - itemTestResult.Result)));
+						} else {
+							barValue = Math.round((58 / groupBy[2][0].RankLowerLimit) * ((groupBy[2][0].RankLowerLimit - itemTestResult.Result) <= 0 ? 0 : (groupBy[2][0].RankLowerLimit - itemTestResult.Result)) + 32);
+						}
+					} else {
+					    if(serviceUnitInfo.UnitType != 3 && (itemTestResult.ProjectId == 9 || itemTestResult.ProjectId == 6)) {
+							itemTestResult.Result = (itemTestResult.Result * 2.54).toFixed(2);
+						}
+						if(itemTestResult.Result < itemStandard[0].RankLowerLimit) {
+							barValue = Math.round((32 / (itemStandard[0].RankLowerLimit)) * (itemTestResult.Result)) <= 0 ? (itemTestResult.Result == 0 ? 0 : 2) : Math.round((32 / (itemStandard[0].RankLowerLimit)) * (itemTestResult.Result));;
+						} else {
+							var sline = 0;
+							if(itemTestResult.Result >= itemStandard[0].RankUpperLimit) {
+								sline = itemStandard[0].RankUpperLimit;
+							} else {
+								sline = itemTestResult.Result;
+							}
+							barValue = Math.round(58 / (itemStandard[0].RankUpperLimit - itemStandard[0].RankLowerLimit) * (sline - itemStandard[0].RankLowerLimit) + 32);
+						}
+					}
+				}
+				return barValue;
+			}
+			Handlebars.registerHelper("lastContent", function(num) {
+				if(num < 2) {
+					return "hidden";
+				} else {
+					return "inherit";
+				}
+			});
+    </script>
+</head>
+
+<body>
+    <div id="content-above">
+
+    </div>
+    <div id="content-under">
+
+    </div>
+</body>
+
+</html>

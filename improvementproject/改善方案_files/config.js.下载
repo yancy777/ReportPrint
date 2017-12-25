@@ -1,0 +1,213 @@
+﻿define([], function () {
+    "use strict";
+
+    return {
+        GenderDisplay: {
+            "1": "男孩",
+            "2": "女孩"
+        },
+
+        ProjectScoreEnum: [
+            'HeightScore', 'WeightScore',
+            'StandingJumpScore',
+            'BothFeetJumpScore',
+            'TennisThrowFarScore',
+            'WalkBalanceBeamScore',
+            'SitAndReachScore',
+            'TenMetersShuttleRunScore'
+        ],
+        RTProjectResultScoreEnum:[
+            'HeightScore', 'WeightScore',
+            'BroadJumpScore',
+            'DoubleJumpScore',
+            'ThrowScore',
+            'BalanceScore',
+            'SitReachScore',
+            'ShuttleRunScore'
+        ],
+        RTProjectScoreEnum: [
+            'HeightAVGScore', 'WeightAVGScore',
+            'BroadJumpAVGScore',
+            'DoubleJumpAVGScore',
+            'ThrowAVGScore',
+            'BalanceAVGScore',
+            'SitReachAVGScore',
+            'ShuttleRunAVGScore'
+        ],
+        RTProjectCorrespondence: {
+            'HeightScore':1, 'WeightScore':2,
+            'BroadJumpScore':4,
+            'DoubleJumpScore':5,
+            'ThrowScore':7,
+            'BalanceScore':8,
+            'SitReachScore':3,
+            'ShuttleRunScore':6  
+        },
+        RTAbstractProjectReation: {
+            'HeightAVGScore':1,
+            'WeightAVGScore':2,
+            'BroadJumpAVGScore':4,
+            'DoubleJumpAVGScore':5,
+            'ThrowAVGScore':7,
+            'BalanceAVGScore':8,
+            'SitReachAVGScore':3,
+            'ShuttleRunAVGScore':6
+        },
+        ProjectScoreText: {
+            'HeightAVGScore': '身高',
+            'WeightAVGScore': '体重',
+            'BroadJumpAVGScore': '下肢力量',
+            'DoubleJumpAVGScore': '协调性',
+            'ThrowAVGScore': '上肢力量',
+            'BalanceAVGScore': '平衡力',
+            'SitReachAVGScore': '柔韧性',
+            'ShuttleRunAVGScore': '灵敏性',
+            'LocomotorAVGScore': '位移能力',
+            'ObjectControlAVGScore':'物体控制能力'
+        },
+        PhysicalProject: {
+            "1": "身高",
+            "2": "体重",
+            "3": "坐位体前屈",
+            "4": "立定跳远",
+            "5": "双脚连续跳",
+            "6": "十米折返跑",
+            "7": "网球掷远",
+            "8": "走平衡木"
+        },
+        RTPhysicalProject: {
+            "1": "身高",
+            "2": "体重",
+            "3": "坐位体前屈",
+            "4": "立定跳远",
+            "5": "双脚连续跳",
+            "6": "十米折返跑",
+            "7": "网球掷远",
+            "8": "走平衡木",
+            "9": "位移能力",
+            "10": "物体控制能力"
+        },
+        KindergartenClassesType: {
+            "0": "大班",
+            "1": "中班",
+            "2": "小班",
+            "3": "托班",
+            "4":"混龄班",
+            "5":"学前班"
+        },
+        PhysicalProjectUnit: {
+            "1": "厘米",
+            "2": "千克",
+            "3": "厘米",
+            "4": "厘米",
+            "5": "秒",
+            "6": "秒",
+            "7": "米",
+            "8": "秒"
+        },
+        PhysicalProjectToQuality: {
+            "1": "骨骼生长水平",
+            "2": "身体发育水平",
+            "3": "柔韧性",
+            "4": "下肢力量",
+            "5": "协调性",
+            "6": "灵敏性",
+            "7": "上肢力量",
+            "8": "平衡力",
+            "9": "位移能力",
+            "10": "物体控制"
+        },
+        PhysicalProjectToQuality2: {
+            "1": "身高",
+            "2": "体重",
+            "3": "柔韧性",
+            "4": "下肢力量",
+            "5": "协调性",
+            "6": "灵敏性",
+            "7": "上肢力量",
+            "8": "平衡力",
+            "9": "位移能力",
+            "10": "物体控制"
+        },
+        //临时
+        PhysicalProjectToQuality3: {
+            "1": "身高",
+            "2": "体重",
+            "3": "下肢力量",
+            "4": "协调性",
+            "5": "上肢力量",
+            "6": "平衡力",
+            "7": "柔韧性",
+            "8": "灵敏性",
+            "9": "位移能力",
+            "10": "物体控制"
+        },
+        PhysicalProjectDescriptions: {
+            "1": {
+                TestDescription: "宝宝赤脚、呈立正姿势站在身高计的地板上（躯干挺直，上肢自然下垂，脚跟并拢，脚尖分开约60），脚跟、骶骨部及两肩胛间与身高计的立柱接触，头部正直，两眼平视前方，耳屏上缘与眼眶下缘最低点呈水平。记录以厘米为单位，保留小数点后1位。",
+                Purpose: "反应人体骨骼的纵向生长水平。"
+            },
+            "2": {
+                TestDescription: "使用体重秤测试，精度为0.1千克。测试时，宝宝自然站在体重秤中央，站稳后，读取数据记录以千克为单位，保留小数点后一位。",
+                Purpose: "反应人体发育程度和营养状况。"
+            },
+            "3": {
+                TestDescription: "使用柔韧性测试仪测试。如果没有仪器，可以使用简便方法。测试时，宝宝坐在垫上，双腿伸直，脚跟并拢，脚尖自然分开，全脚掌蹬在测试仪平板上；然后掌心向下，双臂并拢平伸，上体前屈，用双手中指指尖推动游标平滑前移，直至不能移动为止。测试两次，取最大值，记录以厘米为单位，保留小数点后一位。",
+                Purpose: "柔韧素质是关节、肌肉和韧带活动时的伸展能力。柔韧性协调、力量、速度等有促进作用，有效降低活动疲劳感及受伤的可能性。"
+            },
+            "4": {
+                TestDescription: "使用软地面、卷尺和三角板测试。测试时，受试者双脚自然分开，站立在起跳线后，然后摆动双臂，双脚蹬地尽力向前跳，测量起跳线距最近脚跟之间的直线距离。测试两次，取最大值，记录以厘米为单位，不计小数。",
+                Purpose: "力量是儿童活动的基础，下肢力量站立、行走、跑跳的基础。"
+            },
+            "5": {
+                TestDescription: "使用卷尺和秒表测试。在平坦地面上让宝宝连续跳跃5米的距离，测试时间。注意要双脚并拢，两只脚同时起跳。",
+                Purpose: "协调素质是神经中枢、神经、肌肉控制的结果。培养幼儿的协调能力，能发展和完善神经系统的调节功能，使身体活动更加自然、省力。"
+            },
+            "6": {
+                TestDescription: "使用秒表测试。在平坦的地面上画长10米、宽1.22米的直线跑道，使用秒表计时。宝宝以站立式起跑姿势站在起跑线前，当听到“跑”的口令后，全力跑向折返线。宝宝跑到折返处，转身跑向目标线，当胸部到达起终点线的垂直面时，停表。记录以秒为单位，保留小数点后一位。",
+                Purpose: "灵敏素质是指人体在各种突然变换的条件下，快速、协调、敏捷、准确地完成动作的能力，是运动、神经反应和身体素质的综合表现。"
+            },
+            "7": {
+                TestDescription: "宝宝身体面向投掷方向，两脚前后分开，站在投掷线后约一步距离，单手持球举过头顶，尽力向前掷出。有效成绩为投掷线至球着地点之间的直线距离。用卷尺丈量；如果球的着地点超出场地的宽度，则重新投掷。测试两次，取最大值，记录以米为单位。",
+                Purpose: "力量是儿童活动的基础，上肢力量是举物，攀爬的基础。"
+            },
+            "8": {
+                TestDescription: "测试时，受试者站在平台上，面向平衡木，双臂侧平举，当听到“开始”口令后，前进。测试员试受试者起动开表计时，当受试者任意一个脚尖超过终点线时，测试员停表。测试两次，取最好成绩，记录以秒为单位。",
+                Purpose: "平衡力与内耳前庭器官功能有关，在幼儿时期是各种感、知觉能力发展的关键期。对平衡力的训练会让宝贝的大脑格外敏锐。"
+            },
+            "9": {
+                TestDescription: "通过对测试过程中的位移能力相关动作的观察，如走、跑步、跳跃等方面的动作，来得出幼儿在位移运动方面的发展水平。",
+                Purpose: "反映了幼儿从一个方向向另一方向移动时所需要的身体灵活、协调、优美的大肌肉群的运动能力。"
+            },
+            "10": {
+                TestDescription: "通过对测试过程中的物体控制能力相关动作的观察，如投掷、接球、拍球和击球等方面的动作，来得出幼儿在物体控制运动方面的发展水平。",
+                Purpose: "反映了幼儿有效的抛接和击球等运动而体现的大肌肉群运动能力。"
+            }
+
+        },
+        PhExOverviewType: {
+            Kindergarten: 1,
+            Group: 2
+        },
+        ClassCorresponding: {
+            0: "大班",
+            1: "中班",
+            2: "小班",
+            3: "托班",
+            4:"混龄班",
+            5:"学前班"
+        },
+        AgeGroups: [3, 3.5, 4, 4.5, 5, 5.5, 6],
+        ClassTypeArr: [0, 1, 2, 3]
+
+    //,NormalDistributeFactorArr: {
+    //    "13": 0.03,
+    //    "14": 0.07,
+    //    "15": 0.15,
+    //    "16": 0.5,
+    //    "17": 0.15,
+    //    "18": 0.07,
+    //    "19": 0.03
+    //}
+}
+});

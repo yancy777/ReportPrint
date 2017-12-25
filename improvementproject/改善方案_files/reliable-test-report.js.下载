@@ -1,0 +1,2678 @@
+﻿define(["utilities", "config"], function (utilities, config) {
+    "use strict";
+    var physicalProject = config.RTPhysicalProject;
+    var kindergarClassType = config.KindergartenClassesType;
+    var physicalProjectToQuality = config.PhysicalProjectToQuality;
+    var physicalProjectToQuality2 = config.PhysicalProjectToQuality2;
+    var physicalProjectDescriptions = config.PhysicalProjectDescriptions;
+    var physicalProjectUnit = config.PhysicalProjectUnit;
+    var genderDisplay = config.GenderDisplay;
+    var url;
+    Array.prototype.max = function () {   //最大值
+        return Math.max.apply({}, this);
+    }
+    //保留小数点后两位数并且去掉无效的0
+    var disposeDecimalValue = function (value) {
+        if (value == undefined) {
+            return 0;
+        }
+        else {
+            return typeof value == "string" ? value : parseFloat(value.toFixed(2));
+        }
+    }
+    //    //控制表中分数过低或过高的孩子
+    //    var tableChildColor = function (value, typeRow) {
+    //        if (value < 3) {
+    //            return {
+    //                classes: 'danger'
+    //            }
+    //        } else {
+    //            return {};
+    //        }
+    //        return {};
+    //    };
+    var phExOverviewType = config.PhExOverviewType.Kindergarten;
+
+
+    var generateKindergartenOverview = function () {
+        url = "/reliableTest/classChildCountByKgId";
+        var kgId = $.cookie("KindergartenId");
+        var parms = {
+            KindergartenId: kgId
+        };
+
+        utilities.CallGetApi(url, parms).done(function (data) {
+            if (data == null) {
+                alert("没有本园体测总览信息及体测数据");
+                return;
+            }
+            var childCount = 0;
+            var ClassNames = [];
+            var ClassChildCounts = [];
+            for (var i = 0, s = data.length; i < s; i++) {
+                var item = data[i];
+                childCount += item.Count;
+
+                ClassNames.push(item.Key.ClassName == undefined ? "" : item.Key.ClassName);
+                ClassChildCounts.push(item.Count);
+            }
+            var childTotal = {
+                ChildTotal: childCount
+            };
+            var htmlTotal = utilities.HandlebarsHelp("#child-count-html", childTotal);
+            $("#overview").append(htmlTotal);
+
+            $('#class-child-count-chart').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: '',
+                    x: -20 //center
+                },
+                xAxis: {
+                    categories: ClassNames
+                },
+                credits: false,
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: '人数'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:1f} 人</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                series: [
+                {
+                    name: "人数",
+                    data: ClassChildCounts,
+                    color: '#00bcab'
+                }]
+            });
+        });
+    };
+
+    //生成评语
+    var generateAbstractComment = function (datas) {
+        var text = '';
+        var absDatas; //集团或者园的总览数据
+        var provinceData; //全省的总览数据
+        if (phExOverviewType == config.PhExOverviewType.Kindergarten) {
+            text += '我幼儿园';
+        } else {
+            text += '我集团';
+        }
+        text += config.GenderDisplay[datas[0].Gender] + '各项身体素质';
+
+        for (var item in datas) {
+            if (datas[item].ClassType == 7) {
+                absDatas = datas[item];
+            }
+            if (datas[item].ClassType == 8) {
+                provinceData = datas[item];
+            }
+        }
+
+        if (absDatas != undefined) {
+            var totalScore = absDatas.HeightAVGScore + absDatas.WeightAVGScore +
+                absDatas.BroadJumpAVGScore +
+                absDatas.DoubleJumpAVGScore +
+                absDatas.ThrowAVGScore +
+                absDatas.BalanceAVGScore +
+                absDatas.SitReachAVGScore +
+                absDatas.ShuttleRunAVGScore;
+
+            if (totalScore >= 28) {
+                text += '优异，';
+            } else if (totalScore >= 20) {
+                text += '一般，';
+            } else {
+                text += '较弱，';
+            }
+
+            var betterProjects = '';
+            var worseProjects = '';
+            var betterIndex = 0;
+            var worseIndex = 0;
+            for (var project in config.RTProjectScoreEnum) {
+                var projectScore = config.RTProjectScoreEnum[project];
+                if (absDatas[projectScore] == null || absDatas == undefined || absDatas == 0) {
+                    continue;
+                }
+                if (absDatas[projectScore] >= provinceData[projectScore]) {
+                    if (betterIndex == 0) {
+                        betterProjects += config.ProjectScoreText[projectScore];
+                    } else {
+                        betterProjects += ("、" + config.ProjectScoreText[projectScore]);
+                    }
+                    betterIndex++;
+                } else {
+                    if (worseIndex == 0) {
+                        worseProjects += config.ProjectScoreText[projectScore];
+                    } else {
+                        worseProjects += ("、" + config.ProjectScoreText[projectScore]);
+                    }
+                    worseIndex++;
+                }
+            }
+            if (betterProjects != "") {
+                text += betterProjects + '高于该年龄段平均水平，';
+            }
+            if (worseProjects != "") {
+                text += worseProjects + '相对薄弱需要进一步加强。';
+            }
+        }
+
+        //用这个对象来存最弱的年龄组和分数
+        var minAgeGroup = {
+            ClassType: 0,
+            Score: 100
+        };
+        debugger;
+        for (var i = 0; i < datas.length; i++) {
+            if (datas[i].KindergartenId != 0 && datas[i].ClassType <= 5)
+                var score = datas[i].HeightAVGScore + datas[i].WeightAVGScore +
+                    datas[i].BroadJumpAVGScore +
+                    datas[i].DoubleJumpAVGScore +
+                    datas[i].ThrowAVGScore +
+                    datas[i].BalanceAVGScore +
+                    datas[i].SitReachAVGScore +
+                    datas[i].ShuttleRunAVGScore;
+            if (score < minAgeGroup.Score) {
+                minAgeGroup.ClassType = datas[i].ClassType;
+                minAgeGroup.Score = score;
+            }
+        }
+
+        text += '在各个年级分组中，' + config.ClassCorresponding[minAgeGroup.ClassType] + '评分低于其他年级组，需要进一步关注。';
+
+        return text;
+
+
+    };
+    //控制表中分数过低或过高的孩子
+    var tableChildColor = function (value, typeRow, className) {
+        if (className != '该年龄段平均') {
+            if (value < 3) {
+                return {
+                    classes: 'danger'
+                }
+            } else {
+                return {};
+            }
+        }
+        return {};
+    };
+    /** 
+     * 生成体测总览表格, 报告总览和各班体测公用的
+     * @id table的id后缀
+     * @tableCol table的第一列配置
+     * @datas  数据
+     * @type  是报告总览孩子各班体测
+     */
+    var generateAbstractTable = function (id, tableCol, datas, type) {
+        $('#' + id).bootstrapTable({
+            columns:
+            [
+                [
+
+                    tableCol,
+                    {
+                        title: '身体形态',
+                        align: 'center',
+                        valign: 'middle',
+                        colspan: 2
+                    },
+                    {
+                        title: '身体素质',
+                        align: 'center',
+                        valign: 'middle',
+                        colspan: 6
+                    },
+                    //{
+                    //    title: '动作发展',
+                    //    align: 'center',
+                    //    valign: 'middle',
+                    //    colspan: 2
+                    //}
+                ],
+                [
+                    {
+                        field: 'Height',
+                        title: '身高',
+                        align: 'center',
+                        valign: 'middle',
+                        titleTooltip: '反应人体骨骼的纵向生长水平',
+                        cellStyle: function cellStyle(value, row, index) {
+                            return tableChildColor(value, type, row.Age);
+                        }
+                    },
+                    {
+                        field: 'Weight',
+                        title: '体重',
+                        align: 'center',
+                        valign: 'middle',
+                        titleTooltip: '反应人体发育程度和营养状况',
+                        cellStyle: function cellStyle(value, row, index) {
+                            return tableChildColor(value, type, row.Age);
+                        }
+                    },
+                    {
+                        field: 'TenMetersShuttleRun',
+                        title: '灵敏性',
+                        align: 'center',
+                        valign: 'middle',
+                        titleTooltip: '灵敏素质是指人体在各种突然变换的条件下，快速、协调、敏捷、准确地完成动作的能力，是运动、神经反应和身体素质的综合表现',
+                        cellStyle: function cellStyle(value, row, index) {
+                            return tableChildColor(value, type, row.Age);
+                        }
+                    },
+                    {
+                        field: 'SitAndReach',
+                        title: '柔韧性',
+                        align: 'center',
+                        valign: 'middle',
+                        titleTooltip: '柔韧素质是关节、肌肉和韧带活动时的伸展能力。柔韧性协调、力量、速度等有促进作用，有效降低活动疲劳感及受伤的可能性',
+                        cellStyle: function cellStyle(value, row, index) {
+                            return tableChildColor(value, type, row.Age);
+                        }
+                    },
+                    {
+                        field: 'StandingLongJump',
+                        title: '下肢力量',
+                        align: 'center',
+                        valign: 'middle',
+                        titleTooltip: '力量是儿童活动的基础，下肢力量站立、行走、跑跳的基础',
+                        cellStyle: function cellStyle(value, row, index) {
+                            return tableChildColor(value, type, row.Age);
+                        }
+                    },
+                    {
+                        field: 'JumpWithBothFeet',
+                        title: '协调性',
+                        align: 'center',
+                        valign: 'middle',
+                        titleTooltip: '协调素质是神经中枢、神经、肌肉控制的结果。培养幼儿的协调能力，能发展和完善神经系统的调节功能，使身体活动更加自然、省力',
+                        cellStyle: function cellStyle(value, row, index) {
+                            return tableChildColor(value, type, row.Age);
+                        }
+                    },
+                    {
+                        field: 'TennisThrowFar',
+                        title: '上肢力量',
+                        align: 'center',
+                        valign: 'middle',
+                        titleTooltip: '力量是儿童活动的基础，上肢力量是举物，攀爬的基础',
+                        cellStyle: function cellStyle(value, row, index) {
+                            return tableChildColor(value, type, row.Age);
+                        }
+                    },
+                    {
+                        field: 'WalkOnTheBalanceBeam',
+                        title: '平衡力',
+                        align: 'center',
+                        valign: 'middle',
+                        titleTooltip: '平衡力与内耳前庭器官功能有关，在幼儿时期是各种感、知觉能力发展的关键期。对平衡力的训练会让宝贝的大脑格外敏锐',
+                        cellStyle: function cellStyle(value, row, index) {
+                            return tableChildColor(value, type, row.Age);
+                        }
+                    },
+                    //{
+                    //    field: 'Locomotor',
+                    //    title: '位移能力',
+                    //    align: 'center',
+                    //    valign: 'middle',
+                    //    titleTooltip: '平衡力与内耳前庭器官功能有关，在幼儿时期是各种感、知觉能力发展的关键期。对平衡力的训练会让宝贝的大脑格外敏锐',
+                    //    cellStyle: function cellStyle(value, row, index) {
+                    //        return tableChildColor(value, type);
+                    //    }
+                    //},
+                    // {
+                    //     field: 'ObjectControl',
+                    //     title: '物体控制',
+                    //     align: 'center',
+                    //     valign: 'middle',
+                    //     titleTooltip: '平衡力与内耳前庭器官功能有关，在幼儿时期是各种感、知觉能力发展的关键期。对平衡力的训练会让宝贝的大脑格外敏锐',
+                    //     cellStyle: function cellStyle(value, row, index) {
+                    //         return tableChildColor(value, type);
+                    //     }
+                    // }
+                ]
+            ],
+            data: datas,
+
+            rowStyle: function setRowStyle(value, row) {
+                if (type == "kinderPhy") {
+                    if (row == datas.length - 2) {
+                        return {
+                            classes: 'info'
+                        }
+                    }
+                    if (row == datas.length - 1) {
+                        return {
+                            classes: 'success'
+                        }
+                    }
+                    return {}
+                } else {
+                    return {}
+                }
+            },
+            cellStyle: function cellStyle(value, row, index) {
+                return {
+                    classes: 'info'
+                };
+            }
+        });
+    }
+    /**
+     * 报告总览===>总体评价  
+     * @datas 集团各年龄组数据, 集团总数据以及全省总数据
+     */
+    var generatePhExAbstract = function (datas) {
+        var tableDatas = [];
+        var titleVal = '';
+        var compareChartDatas = [];
+        var gender = datas[0].Gender;
+        if (gender == 1) {
+            titleVal = "男孩总体评价";
+        }
+        else {
+            titleVal = "女孩总体评价";
+        }
+        var scopeText = '';
+        if (phExOverviewType == config.PhExOverviewType.Kindergarten) {
+            scopeText += '我幼儿园';
+        }
+        else {
+            scopeText += '我集团';
+        }
+
+        var classTypeArr = [0, 1, 2, 3, 4, 5];
+        for (var i = 0; i < datas.length; i++) {
+            var classType = datas[i].ClassType;
+            if (classTypeArr.some(function (s) {
+                return s == classType;
+            }) && (datas[i].KindergartenId == 0 && datas[i].GroupId == 0)) {
+                continue;
+            }
+            if (classType == 7) {
+
+                classType = scopeText + "平均";
+                var oneselfItemArr = {
+                    type: 'area',
+                    name: scopeText + '平均评分',
+                    data: [
+                        disposeDecimalValue(datas[i].HeightAVGScore),
+                        disposeDecimalValue(datas[i].WeightAVGScore),
+                        disposeDecimalValue(datas[i].BroadJumpAVGScore),
+                        disposeDecimalValue(datas[i].DoubleJumpAVGScore),
+                        disposeDecimalValue(datas[i].ThrowAVGScore),
+                        disposeDecimalValue(datas[i].BalanceAVGScore),
+                        disposeDecimalValue(datas[i].SitReachAVGScore),
+                        disposeDecimalValue(datas[i].ShuttleRunAVGScore),
+                        //disposeDecimalValue(datas[i].LocomotorAVGScore),
+                        //disposeDecimalValue(datas[i].ObjectControlAVGScore)
+                    ],
+                    pointPlacement: 'on'
+                }
+                compareChartDatas.push(oneselfItemArr);
+            }
+            if (classType == 8) {
+                classType = "该年龄段平均";
+                var nationWideItemArr = {
+                    type: 'line',
+                    name: '该年龄段平均评分',
+                    data: [
+                         disposeDecimalValue(datas[i].HeightAVGScore),
+                        disposeDecimalValue(datas[i].WeightAVGScore),
+                        disposeDecimalValue(datas[i].BroadJumpAVGScore),
+                        disposeDecimalValue(datas[i].DoubleJumpAVGScore),
+                        disposeDecimalValue(datas[i].ThrowAVGScore),
+                        disposeDecimalValue(datas[i].BalanceAVGScore),
+                        disposeDecimalValue(datas[i].SitReachAVGScore),
+                        disposeDecimalValue(datas[i].ShuttleRunAVGScore),
+                        //disposeDecimalValue(datas[i].LocomotorAVGScore),
+                        //disposeDecimalValue(datas[i].ObjectControlAVGScore),
+
+                    ],
+                    pointPlacement: 'on'
+                };
+                compareChartDatas.push(nationWideItemArr);
+            }
+            var item = {
+                Age: classType <= 5 ? config.ClassCorresponding[classType] : classType,
+                Height: disposeDecimalValue(datas[i].HeightAVGScore),
+                Weight: disposeDecimalValue(datas[i].WeightAVGScore),
+                TenMetersShuttleRun: disposeDecimalValue(datas[i].ShuttleRunAVGScore),
+                SitAndReach: disposeDecimalValue(datas[i].SitReachAVGScore),
+                StandingLongJump: disposeDecimalValue(datas[i].BroadJumpAVGScore),
+                JumpWithBothFeet: disposeDecimalValue(datas[i].DoubleJumpAVGScore),
+                TennisThrowFar: disposeDecimalValue(datas[i].ThrowAVGScore),
+                WalkOnTheBalanceBeam: disposeDecimalValue(datas[i].BalanceAVGScore),
+                //Locomotor: disposeDecimalValue(datas[i].LocomotorAVGScore),
+                //ObjectControl: disposeDecimalValue(datas[i].ObjectControlAVGScore)
+            };
+            tableDatas.push(item);
+        }
+        var idVal = 'tableEvaluation' + gender;
+        var tableColFirst = {
+            field: 'Age',
+            title: '班级',
+            align: 'center',
+            valign: 'middle',
+            rowspan: 2
+        }
+        generateAbstractTable(idVal, tableColFirst, tableDatas, "kinderPhy");
+        //if (oneselfArr.length > 0 && nationwideArr > 0) {
+        $('#abstractChart' + gender).highcharts({
+            chart: {
+                height: 300,
+                polar: true
+            },
+
+            title: {
+                text: $.cookie("KindergartenName") + titleVal,
+                x: -60
+            },
+            credits: false,
+
+
+            xAxis: {
+                categories: [
+                    '身高', '体重', '下肢力量', '协调性',
+                    '上肢力量', '平衡力', '柔韧性', '灵敏性', '位移能力', '物体控制'
+                ],
+                tickmarkPlacement: 'on',
+                lineWidth: 0
+            },
+
+            yAxis: {
+                gridLineInterpolation: 'polygon',
+                lineWidth: 0,
+                min: 0
+            },
+
+            tooltip: {
+                shared: true,
+                pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.1f}</b><br/>'
+            },
+
+            legend: {
+                align: 'right',
+                verticalAlign: 'top',
+                y: 70,
+                layout: 'vertical'
+            },
+
+            series: compareChartDatas
+        });
+        //} else {
+        //    $('#abstractChar' + gender).text("数据不全，无法显示雷达图");
+        //}
+    }
+
+
+    var itemPhyScore = function (testProject, itemPhyInfo) {
+        var itemScore;
+        if (itemPhyInfo.length <= 0) {
+            itemScore = 0;
+        } else {
+            switch (testProject) {
+                case "1":
+                    itemScore = itemPhyInfo.HeightAVG;
+                    break;
+                case "2":
+                    itemScore = itemPhyInfo.WeightAVG;
+                    break;
+                case "3":
+                    itemScore = itemPhyInfo.SitReachAVGScore;
+                    break;
+                case "6":
+                    itemScore = itemPhyInfo.ShuttleRunAVGScore;
+                    break;
+                case "4":
+                    itemScore = itemPhyInfo.BroadJumpAVGScore;
+                    break;
+                case "5":
+                    itemScore = itemPhyInfo.DoubleJumpAVGScore;
+                    break;
+                case "8":
+                    itemScore = itemPhyInfo.BalanceAVGScore;
+                    break;
+                case "7":
+                    itemScore = itemPhyInfo.ThrowAVGScore;
+                    break;
+                case "9":
+                    itemScore = itemPhyInfo.LocomotorAVGScore;
+                    break;
+                case "10":
+                    itemScore = itemPhyInfo.ObjectControlAVGScore;
+                default:
+            }
+
+        }
+        return itemScore;
+    };
+    var itemTalbeCell = function (gender, avg, sd, provinceAvg) {
+        var itemPhyCellArr;
+        if (gender == 1) {
+            itemPhyCellArr = {
+                AVGBoy: avg,
+                SDBoy: sd,
+                ProvinceBoyAVG: provinceAvg,
+                Gender: gender
+            }
+        } else if (gender == 2) {
+            itemPhyCellArr = {
+                AVGGirl: avg,
+                SDGirl: sd,
+                ProvinceGirlAVG: provinceAvg,
+                Gender: gender
+            }
+        }
+        return itemPhyCellArr;
+    }
+
+    var itemKindPhyTableInfo = function (gender, itemPhyInfo, testProject, provinceInfo) {
+        var itemPhyArr;
+        switch (testProject) {
+            case "1":
+                itemPhyArr = itemTalbeCell(gender, itemPhyInfo.HeightAVG, itemPhyInfo.HeightSD, provinceInfo.HeightAVG);
+                break;
+            case "2":
+                itemPhyArr = itemTalbeCell(gender, itemPhyInfo.WeightAVG, itemPhyInfo.WeightSD, provinceInfo.WeightAVG);
+                break;
+            case "3":
+                itemPhyArr = itemTalbeCell(gender, itemPhyInfo.SitReachAVG, itemPhyInfo.SitReachSD, provinceInfo.SitReachAVG);
+                break;
+            case "6":
+                itemPhyArr = itemTalbeCell(gender, itemPhyInfo.ShuttleRunAVG, itemPhyInfo.ShuttleRunSD, provinceInfo.ShuttleRunAVG);
+                break;
+            case "4":
+                itemPhyArr = itemTalbeCell(gender, itemPhyInfo.BroadJumpAVG, itemPhyInfo.BroadJumpSD, provinceInfo.BroadJumpAVG);
+                break;
+            case "5":
+                itemPhyArr = itemTalbeCell(gender, itemPhyInfo.DoubleJumpAVG, itemPhyInfo.DoubleJumpSD, provinceInfo.DoubleJumpAVG);
+                break;
+            case "8":
+                itemPhyArr = itemTalbeCell(gender, itemPhyInfo.BalanceAVG, itemPhyInfo.BalanceSD, provinceInfo.BalanceAVG);
+                break;
+            case "7":
+                itemPhyArr = itemTalbeCell(gender, itemPhyInfo.ThrowAVG, itemPhyInfo.ThrowSD, provinceInfo.ThrowAVG);
+                break;
+            case "9":
+                itemPhyArr = itemTalbeCell(gender, itemPhyInfo.LocomotorAVG, itemPhyInfo.LocomotorSD, provinceInfo.LocomotorAVG);
+                break;
+            case "10":
+                itemPhyArr = itemTalbeCell(gender, itemPhyInfo.ObjectControlAVG, itemPhyInfo.ObjectControlSD, provinceInfo.ObjectControlAVG);
+                break;
+            default:
+        }
+        return itemPhyArr;
+    };
+    /**
+     * 计算各项差值
+     * function:reckonDValue();
+     */
+    var reckonDValue = function (oneselfValue, provinceValue, testProject) {
+        var rekonDValue;
+        if (testProject == 5 || testProject == 6 || testProject == 8) {
+            rekonDValue = provinceValue - oneselfValue;
+        } else {
+            rekonDValue = oneselfValue - provinceValue;
+        }
+        return rekonDValue;
+    }
+
+    var itemParameter = function (dataArr, testProject) {
+        var avgBoy = "-";
+        var avgGirl = "-";
+        var sdBoy = "-";
+        var sdGirl = "-";
+        var provinceBoyAVG = "-";
+        var provinceGirlAVG = "-";
+        if (dataArr.length == 3) {
+            if (dataArr[1].Gender == 1) {
+                avgBoy = dataArr[1].AVGBoy;
+                sdBoy = dataArr[1].SDBoy;
+                provinceBoyAVG = dataArr[1].ProvinceBoyAVG;
+            } else {
+                avgGirl = dataArr[1].AVGGirl;
+                sdGirl = dataArr[1].SDGirl;
+                provinceGirlAVG = dataArr[1].ProvinceGirlAVG;
+            }
+            if (dataArr[2].Gender == 1) {
+                avgBoy = dataArr[2].AVGBoy;
+                sdBoy = dataArr[2].SDBoy;
+                provinceBoyAVG = dataArr[2].ProvinceBoyAVG;
+            } else {
+                avgGirl = dataArr[2].AVGGirl;
+                sdGirl = dataArr[2].SDGirl;
+                provinceGirlAVG = dataArr[2].ProvinceGirlAVG;
+            }
+        } else if (dataArr.length == 2) {
+            if (dataArr[1].Gender == 1) {
+                avgBoy = dataArr[1].AVGBoy;
+                sdBoy = dataArr[1].SDBoy;
+                provinceBoyAVG = dataArr[1].ProvinceBoyAVG;
+            } else {
+                avgGirl = dataArr[1].AVGGirl;
+                sdGirl = dataArr[1].SDGirl;
+                provinceGirlAVG = dataArr[1].ProvinceGirlAVG;
+            }
+        }
+        var item = {
+            Age: dataArr[0].Age,
+            AVGBoy: disposeDecimalValue(avgBoy),
+            SDBoy: disposeDecimalValue(reckonDValue(disposeDecimalValue(avgBoy), disposeDecimalValue(provinceBoyAVG), testProject)),
+            ProvinceBoyAVG: disposeDecimalValue(provinceBoyAVG),
+            AVGGirl: disposeDecimalValue(avgGirl),
+            SDGirl: disposeDecimalValue(reckonDValue(disposeDecimalValue(avgGirl), disposeDecimalValue(provinceGirlAVG), testProject)),
+            ProvinceGirlAVG: disposeDecimalValue(provinceGirlAVG)
+        };
+        return item;
+    };
+
+    //身体素质和身体形态table中分数比较
+
+    var bodyKindPhyQuality = function (value, provinceValue, testProject) {
+        if (testProject == 5 || testProject == 6 || testProject == 8) {
+            if (value < provinceValue) {
+                return {
+                    classes: 'success'
+                }
+            } else {
+                return {};
+            }
+        } else {
+            if (value > provinceValue) {
+                return {
+                    classes: 'success'
+                }
+            } else {
+                return {};
+            }
+        }
+    }
+
+    //身体素质和身体形态table
+    var bodyKindPhyView = function (testProject, dataInfo, testName) {
+        if (dataInfo.length <= 0) {
+            alert("数据出现问题，请联系管理员或刷新页面");
+            return;
+        }
+        $('#bodyTable' + testProject).bootstrapTable({
+            columns:
+            [
+            [
+            {
+                field: 'Age',
+                title: '班级',
+                align: 'center',
+                valign: 'middle',
+                rowspan: 2,
+                width: 500,
+                rowStyle: function rowStyle() {
+                    return {
+                        css: { "font-weight": "400" }
+                    };
+                },
+                cellStyle: function cellStyle() {
+                    return {
+                        css: { "font-weight": "400" }
+                    };
+                }
+            },
+            {
+                title: '男孩',
+                align: 'center',
+                valign: 'middle',
+                colspan: 3,
+                rowStyle: function rowStyle() {
+                    return {
+                        css: { "font-weight": "400" }
+                    };
+                }
+            },
+            {
+                title: '女孩',
+                align: 'center',
+                valign: 'middle',
+                colspan: 3,
+                rowStyle: function rowStyle() {
+                    return {
+                        css: { "font-weight": "400" }
+                    };
+                }
+            }
+            ],
+            [
+            {
+                field: 'AVGBoy',
+                title: '班级平均值',
+                align: 'center',
+                valign: 'middle',
+                cellStyle: function cellStyle(value, row) {
+                    return bodyKindPhyQuality(value, row['ProvinceBoyAVG'], testProject);
+                },
+                width: 500
+            },
+             {
+                 field: 'ProvinceBoyAVG',
+                 title: '该年龄段平均值',
+                 align: 'center',
+                 valign: 'middle',
+                 width: 500
+             },
+            {
+                field: 'SDBoy',
+                title: '差值',
+                align: 'center',
+                valign: 'middle',
+                width: 500
+            },
+
+            {
+                field: 'AVGGirl',
+                title: '班级平均值',
+                align: 'center',
+                valign: 'middle',
+                cellStyle: function cellStyle(value, row) {
+                    return bodyKindPhyQuality(value, row['ProvinceGirlAVG'], testProject);
+                },
+                width: 500
+
+            },
+            {
+                field: 'ProvinceGirlAVG',
+                title: '该年龄段平均值',
+                align: 'center',
+                valign: 'middle',
+                width: 500
+            },
+            {
+                field: 'SDGirl',
+                title: '差值',
+                align: 'center',
+                valign: 'middle',
+                width: 500
+            }
+            ]
+            ],
+            data: dataInfo
+        });
+
+
+    };
+
+    var itemBodyKindPhyChar = function (id, ageArr, bodyAVG, provinceAVG, testProject, gender) {
+        //Chart
+        if (testProject == 1 || testProject == 2) {
+            $('#' + id + testProject).highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: ''
+                },
+                yAxis: {
+                    title: {
+                        text: '测试值'
+                    }
+                },
+                xAxis: {
+                    categories: ageArr
+                },
+                tooltip: {
+                    valueSuffix: physicalProjectUnit[testProject]
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: '我园' + genderDisplay[gender] + '平均值',
+                    data: bodyAVG,
+                    color: '#adceed'
+
+                }, {
+                    name: '该年龄段' + genderDisplay[gender] + '平均值',
+                    data: provinceAVG,
+                    color: '#00bcab'
+                }]
+            });
+        }
+        else {
+            $('#' + id + testProject).highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: ''
+                },
+                yAxis: {
+                    title: {
+                        text: '得分'
+                    }
+                },
+                xAxis: {
+                    categories: ageArr
+                },
+                tooltip: {
+                    valueSuffix: '分'
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: '我园' + genderDisplay[gender] + '平均得分',
+                    data: bodyAVG,
+                    color: '#adceed'
+
+                }, {
+                    name: '该年龄段' + genderDisplay[gender] + '平均得分',
+                    data: provinceAVG,
+                    color: '#00bcab'
+                }]
+            });
+        }
+
+    };
+    /**
+    * 身体形态、身体素质 ==> 单项体测信息加载
+    * @param  {[type]}
+    * @param  {[type]}
+    * @param  {[type]}
+    */
+    var bodyItemPhyInfo = function (testProject, dataInfo, testName) {
+        var kGPhyInfoParameter = [];
+        var kindPhyScoreBoy = [];
+        var kindPhyScoreGirl = [];
+        var provincePhyScoreBoy = [];
+        var provincePhyScoreGirl = [];
+        var classTypeArr = [];
+        var provincePhExDatas = [];
+        var phExDatas = [];
+        var classTypeChartArr = [];
+        var kindergartenId = $.cookie("KindergartenId");
+        for (var i = 0; i < dataInfo.length; i++) {
+            if (classTypeChartArr.some(function (s) { return s == dataInfo[i].ClassType })) {
+
+            } else {
+                if (dataInfo[i].KindergartenId == kindergartenId && dataInfo[i].ClassType < 6) {
+                    classTypeChartArr.push(dataInfo[i].ClassType);
+                }
+            }
+            if (
+                ((phExOverviewType == config.PhExOverviewType.Kindergarten && dataInfo[i].KindergartenId == 0)
+                    || ((phExOverviewType == config.PhExOverviewType.Group && dataInfo[i].GroupId == 0)))
+                && dataInfo[i].ClassType <= 6) {
+                provincePhExDatas.push(dataInfo[i]);
+            } else if (
+                ((phExOverviewType == config.PhExOverviewType.Kindergarten && dataInfo[i].KindergartenId != 0)
+                    || ((phExOverviewType == config.PhExOverviewType.Group && dataInfo[i].GroupId != 0)))
+                && dataInfo[i].ClassType <= 6) {
+                phExDatas.push(dataInfo[i]);
+            }
+        }
+        for (var i = 0; i < provincePhExDatas.length; i++) {
+            if (classTypeChartArr.indexOf(provincePhExDatas[i].ClassType) != -1) {
+                if (provincePhExDatas[i].Gender == 1) {
+                    provincePhyScoreBoy.push(itemPhyScore(testProject, provincePhExDatas[i]));
+                } else if (provincePhExDatas[i].Gender == 2) {
+                    provincePhyScoreGirl.push(itemPhyScore(testProject, provincePhExDatas[i]));
+                }
+            }
+        }
+        for (var i = 0; i < phExDatas.length; i++) {
+            var testProjectArr = [];
+            var classType = phExDatas[i].ClassType;
+            var provincePhyBoyInfo;
+            var provincePhyGirlInfo;
+
+
+            if (phExDatas[i].Gender == 1) {
+                //Check NoExist AgeGroup
+                //                if (phExDatas[i].ClassType > config.ClassTypeArr[kindPhyScoreBoy.length]) {
+                //                    kindPhyScoreBoy.push(0);
+                //                }
+
+                kindPhyScoreBoy.push(itemPhyScore(testProject, phExDatas[i]));
+            }
+            if (phExDatas[i].Gender == 2) {
+                //Check NoExist AgeGroup
+                //                if (phExDatas[i].ClassType > config.ClassTypeArr[kindPhyScoreGirl.length]) {
+                //                    kindPhyScoreGirl.push(0);
+                //                }
+
+                kindPhyScoreGirl.push(itemPhyScore(testProject, phExDatas[i]));
+            }
+            if (classTypeArr.some(function (a) {
+                return a == classType;
+            })) {
+                continue;
+            }
+            for (var provinJson in provincePhExDatas) {
+                if (provincePhExDatas[provinJson].ClassType == classType && provincePhExDatas[provinJson].Gender == 1) {
+                    provincePhyBoyInfo = provincePhExDatas[provinJson];
+                } else if (provincePhExDatas[provinJson].ClassType == classType && provincePhExDatas[provinJson].Gender == 2) {
+                    provincePhyGirlInfo = provincePhExDatas[provinJson];
+                }
+            }
+
+            var itemAge = {
+                Age: config.ClassCorresponding[classType]
+            }
+            testProjectArr.push(itemAge);
+            for (var j = 0; j < phExDatas.length; j++) {
+                if (phExDatas[j].ClassType == classType) {
+                    if (phExDatas[j].Gender == 1) {
+                        testProjectArr.push(itemKindPhyTableInfo(phExDatas[j].Gender, phExDatas[j], testProject, provincePhyBoyInfo));
+                    } else if (phExDatas[j].Gender == 2) {
+                        testProjectArr.push(itemKindPhyTableInfo(phExDatas[j].Gender, phExDatas[j], testProject, provincePhyGirlInfo));
+                    }
+                }
+            }
+            kGPhyInfoParameter.push(itemParameter(testProjectArr, testProject));
+            classTypeArr.push(classType);
+        }
+        var classTypeNameArr = [];
+        for (var type in classTypeChartArr) {
+            classTypeNameArr.push(config.ClassCorresponding[classTypeChartArr[type]]);
+        }
+        bodyKindPhyView(testProject, kGPhyInfoParameter, testName);
+        itemBodyKindPhyChar("boyChart", classTypeNameArr, kindPhyScoreBoy, provincePhyScoreBoy, testProject, 1);
+        itemBodyKindPhyChar("girlChart", classTypeNameArr, kindPhyScoreGirl, provincePhyScoreGirl, testProject, 2);
+    };
+    /**
+    * 报告总览 ====> 生成身体形态和身体素质各个单项的数据 
+    * @datas 体测数据
+    */
+    var generatePhExProjects = function (datas) {
+
+        for (var jsonProject in physicalProject) {
+            var item;
+            var html;
+            var titleVal;
+            var itemTab;
+            var htmlTab;
+            itemTab = {
+                testProject: jsonProject,
+                physicalQuality: physicalProject[jsonProject]
+            };
+            htmlTab = utilities.HandlebarsHelp("#changeTabHTML", itemTab);
+            //var scoreArr = physicalitemScoreArr(jsonProject, datas);
+            titleVal = physicalProject[jsonProject] + "--" + physicalProjectToQuality[jsonProject];
+            if (jsonProject == 1 || jsonProject == 2) {
+                item = {
+                    testProject: jsonProject,
+                    title: titleVal,
+                    //boyMinValue: _.min(scoreArr['boy']),
+                    //boyMaxValue: _.max(scoreArr['boy']),
+                    //girlMinValue: _.min(scoreArr['girl']),
+                    //girlMaxValue: _.max(scoreArr['girl']),
+                    unit: physicalProjectUnit[jsonProject],
+                    testProjectName: physicalProject[jsonProject],
+                    description: physicalProjectDescriptions[jsonProject]
+                };
+                html = utilities.HandlebarsHelp("#figureHTML", item);
+                $("#figureContentId").append(html);
+                $("#message-hight-weight-btn").append(htmlTab);
+
+                bodyItemPhyInfo(jsonProject, datas, physicalProject[jsonProject]);
+                //$("#table" + jsonProject).css({ "margin-top": "5%", "margin-left": "10%" });
+            } else if (jsonProject == 3 || jsonProject == 4 || jsonProject == 5 || jsonProject == 6 || jsonProject == 7 || jsonProject == 8) {
+                item = {
+                    testProject: jsonProject,
+                    title: titleVal,
+                    //boyMinValue: _.min(scoreArr['boy']),
+                    //boyMaxValue: _.max(scoreArr['boy']),
+                    //girlMinValue: _.min(scoreArr['girl']),
+                    //girlMaxValue: _.max(scoreArr['girl']),
+                    unit: physicalProjectUnit[jsonProject],
+                    testProjectName: physicalProject[jsonProject],
+                    description: physicalProjectDescriptions[jsonProject]
+                };
+                html = utilities.HandlebarsHelp("#figureHTML", item);
+                $("#physicalQuality").append(html);
+                $("#physical-quality-btn").append(htmlTab);
+                $("#table" + jsonProject).css({ "margin-top": "3%", "margin-left": "5%" });
+                bodyItemPhyInfo(jsonProject, datas, physicalProject[jsonProject]);
+            } else if (jsonProject == 9) {
+
+                item = {
+                    testProject: jsonProject,
+                    title: titleVal,
+                    //boyMinValue: _.min(scoreArr['boy']),
+                    //boyMaxValue: _.max(scoreArr['boy']),
+                    //girlMinValue: _.min(scoreArr['girl']),
+                    //girlMaxValue: _.max(scoreArr['girl']),
+                    unit: physicalProjectUnit[jsonProject],
+                    testProjectName: physicalProject[jsonProject],
+                    description: physicalProjectDescriptions[jsonProject]
+                };
+                html = utilities.HandlebarsHelp("#figureHTML", item);
+                $("#locomoter-content").append(html);
+                bodyItemPhyInfo(jsonProject, datas, physicalProject[jsonProject]);
+            } else if (jsonProject == 10) {
+
+                item = {
+                    testProject: jsonProject,
+                    title: titleVal,
+                    //boyMinValue: _.min(scoreArr['boy']),
+                    //boyMaxValue: _.max(scoreArr['boy']),
+                    //girlMinValue: _.min(scoreArr['girl']),
+                    //girlMaxValue: _.max(scoreArr['girl']),
+                    unit: physicalProjectUnit[jsonProject],
+                    testProjectName: physicalProject[jsonProject],
+                    description: physicalProjectDescriptions[jsonProject]
+                };
+                html = utilities.HandlebarsHelp("#figureHTML", item);
+                $("#object-control-control").append(html);
+                bodyItemPhyInfo(jsonProject, datas, physicalProject[jsonProject]);
+            }
+
+        }
+    };
+    // 身体形态，身体素质数据处理
+    var physicalBtnScrollTop = function () {
+        $('#physical-quality-btn button').eq(1).click(function () {
+            $(document).scrollTop(900 * 1);
+        });
+
+        $('#physical-quality-btn button').eq(2).click(function () {
+            $(document).scrollTop(720 * 2);
+        });
+
+        $('#physical-quality-btn button').eq(3).click(function () {
+            $(document).scrollTop(720 * 3);
+        });
+        $('#physical-quality-btn button').eq(4).click(function () {
+            $(document).scrollTop(720 * 4);
+        });
+        $('#physical-quality-btn button').eq(5).click(function () {
+            $(document).scrollTop(730 * 5);
+        });
+
+
+        $('#message-hight-weight-btn  button').eq(1).click(function () {
+            $(document).scrollTop(690);
+
+        });
+    }
+    /**
+     * 体测总览数据请求及返回数据处理
+     * @returns {} 
+     */
+    var generateAbstractAndItemObjectInfo = function () {
+        //$("#evaluation-info-id").empty();
+        //$("#figureContentId").empty();
+        //$("#locomoter-content").empty();
+        //$("#physicalQuality").empty();
+        //$("#object-control-control").empty();
+        var kindergartenIdVal = $.cookie("KindergartenId");
+        url = "/reliableTest/kindergartenAbstract";
+        var parameter = {
+            KindergartenId: "[" + kindergartenIdVal + ", 0]",
+            ClassType: "[0,1,2,3,4,5,7,8]",
+            OrderBy: "ClassType"
+        }
+        //  utilities.ShowDiv();
+        utilities.CallGetApi(url, parameter).done(function (data) {
+            if (data.Total <= 0) {
+                alert("没有本园体测总览信息及体测数据");
+                utilities.NotySuccess();
+                return;
+            }
+            debugger;
+            var dataInfo = data.Results;
+            var generalBoy = [];
+            var generalGirl = [];
+            for (var i = 0; i < data.Total; i++) {
+                if (dataInfo[i].Gender == 1) {
+                    generalBoy.push(dataInfo[i]);
+                }
+                if (dataInfo[i].Gender == 2) {
+                    generalGirl.push(dataInfo[i]);
+                }
+            }
+            //生成总体评语
+            var boyAbstractText = generateAbstractComment(generalBoy);
+            var girlAbstractText = generateAbstractComment(generalGirl);
+
+            var itemHTML = {
+                Gender: generalBoy[0].Gender,
+                AbstractText: boyAbstractText
+            };
+            var itemGirlHTML = {
+                Gender: generalGirl[0].Gender,
+                AbstractText: girlAbstractText
+            }
+            var html = utilities.HandlebarsHelp("#evaluation-HTML", itemHTML);
+            $("#evaluation-info-id").append(html);
+            var girlHtml = utilities.HandlebarsHelp("#evaluation-HTML", itemGirlHTML);
+            $("#evaluation-info-id").append(girlHtml);
+            $("#abstract-title-id1").text($.cookie("KindergartenName") + "男孩总体评价");
+            $("#abstract-title-id2").text($.cookie("KindergartenName") + "女孩总体评价");
+            if (data.Total >= 10) {
+                generatePhExAbstract(generalBoy);
+                generatePhExAbstract(generalGirl);
+            } else {
+                alert("总评数据简介数据缺失");
+            }
+
+            //身体形态，身体素质数据处理
+            generatePhExProjects(dataInfo);
+            //身体形态，身体素质数据处理 按钮
+            physicalBtnScrollTop();
+
+        })
+            .fail(function () {
+
+            });
+    };
+
+    //肥胖管理图表
+    var obesityManagementView = function (sectionArr, childCountsArr, percentagesArr, tableInfoArr) {
+        $('#obesityNormalChart').highcharts({
+            chart: {
+                zoomType: 'xy'
+            },
+            title: {
+                text: '肥胖率分布曲线图'
+            },
+            xAxis: {
+                categories: sectionArr
+            },
+            yAxis: {
+                title: {
+                    text: '人数'
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                type: 'column',
+                name: 'BMI指标',
+                data: childCountsArr,
+                color: '#00bcab'
+            }, {
+                type: 'spline',
+                name: '正态分布曲线',
+                data: childCountsArr,
+                marker: {
+                    enabled: false
+                },
+                enableMouseTracking: false
+            }]
+        });
+
+        $('#percentagesChar').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: '肥胖率'
+            },
+            credits: {
+                enabled: false
+            },
+            tooltip: {
+                pointFormat: '{series.name}:<b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>:{point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor || 'black')
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: '比例',
+                data: percentagesArr
+            }]
+        });
+
+        var firstCol;
+        if (phExOverviewType == config.PhExOverviewType.Kindergarten) {
+            firstCol = {
+                field: 'ClassName',
+                title: '班级',
+                align: 'center',
+                valign: 'middle',
+                width: '200px'
+            };
+        }
+        else {
+            firstCol = {
+                field: 'KindergartenName',
+                title: '幼儿园',
+                align: 'center',
+                valign: 'middle',
+                width: '200px'
+            };
+        }
+
+        $('#obesityTable').bootstrapTable({
+            columns:
+            [
+            firstCol,
+            {
+                field: 'ChildName',
+                title: '幼儿姓名',
+                align: 'center',
+                valign: 'middle',
+                width: '10%'
+            },
+            {
+                field: 'Birthday',
+                title: '生日',
+                align: 'center',
+                valign: 'middle',
+                width: '13%'
+            },
+            {
+                field: 'Gender',
+                title: '性别',
+                align: 'center',
+                valign: 'middle',
+                width: '7%'
+            },
+            {
+                field: 'Age',
+                title: '年龄',
+                align: 'center',
+                valign: 'middle',
+                width: '8%'
+            },
+            {
+                field: 'Height',
+                title: '身高',
+                align: 'center',
+                valign: 'middle',
+                width: '10%'
+            },
+				{
+				    field: 'Weight',
+				    title: '体重',
+				    align: 'center',
+				    valign: 'middle',
+				    width: '10%'
+				},
+				{
+				    field: 'BMI',
+				    title: 'BMI指标',
+				    align: 'center',
+				    valign: 'middle',
+				    width: '10%'
+				},
+				{
+				    field: 'BMIType',
+				    title: '肥胖定义',
+				    align: 'center',
+				    valign: 'middle',
+				    width: '10%'
+				}, {
+				    field: 'BtnSend',
+				    title: '温馨提示',
+				    align: 'center',
+				    valign: 'middle',
+				    width: '10%'
+				}
+
+            ],
+            data: tableInfoArr,
+            rowStyle: function setRowStyle(value, row, index) {
+                if (value.BMIType == "偏重") {
+                    return {
+                        css: { "background-color": "" }
+                    }
+                }
+                if (value.BMIType == "肥胖") {
+                    return {
+                        css: { "background-color": "" }
+                    }
+                }
+                return {}
+            }
+        });
+
+        $('#obesityTable').bootstrapTable('load', tableInfoArr);
+    }
+    //肥胖管理Tab切换
+    var fatTabChanges = function (dataInfoArr) {
+        var bmiMin = Math.floor(dataInfoArr[0].BMI);
+        var bmiMax = Math.ceil(dataInfoArr[dataInfoArr.length - 1].BMI);
+        var sectionArr = [];
+        while (bmiMin <= bmiMax) {
+            sectionArr.push(bmiMin);
+            bmiMin += 0.5;
+        }
+        if (bmiMin > bmiMax && sectionArr[sectionArr.length - 1] != bmiMax) {
+            sectionArr.push(bmiMax);
+        }
+        var childCountsArr = [];
+        for (var i = 0; i < sectionArr.length; i++) {
+            var counts = 0;
+            for (var json in dataInfoArr) {
+                if (dataInfoArr[json].BMI >= sectionArr[i] && dataInfoArr[json].BMI < sectionArr[i + 1]) {
+                    counts++;
+                } else if ((i + 1) == sectionArr.length && sectionArr[i] == dataInfoArr[json].BMI) {
+                    counts++;
+                }
+            }
+            childCountsArr.push(counts);
+        }
+        var childTotalCount = eval(childCountsArr.join('+'));
+        var childOneCount = 0.0;
+        var childTwoCount = 0.0;
+        var childThreeCount = 0.0;
+        var childFourCount = 0.0;
+        var tableInfoArr = [];
+        var bmiTypeName = {
+            "3": "偏重",
+            "4": "肥胖"
+        };
+        for (var bmiTypeJson = 0; bmiTypeJson < dataInfoArr.length; bmiTypeJson++) {
+            if (dataInfoArr[bmiTypeJson].BMIType == 1) {
+                childOneCount++;
+            } else if (dataInfoArr[bmiTypeJson].BMIType == 2) {
+                childTwoCount++;
+            } else if (dataInfoArr[bmiTypeJson].BMIType == 3) {
+                childThreeCount++;
+            } else if (dataInfoArr[bmiTypeJson].BMIType == 4) {
+                childFourCount++;
+            }
+            var birthdayVal = (dataInfoArr[bmiTypeJson].Birthday).CharpStr2Date();
+            var genderVal = config.GenderDisplay[dataInfoArr[bmiTypeJson].Gender];
+
+            if (dataInfoArr[bmiTypeJson].BMIType == 3 || dataInfoArr[bmiTypeJson].BMIType == 4) {
+                var item = {
+                    //ClassName: dataInfoArr[bmiTypeJson].ClassName == null ? "-" : dataInfoArr[bmiTypeJson].ClassName,
+                    ChildName: dataInfoArr[bmiTypeJson].ChildName == null ? "-" : dataInfoArr[bmiTypeJson].ChildName,
+                    Birthday: birthdayVal,
+                    Gender: genderVal,
+                    Age: dataInfoArr[bmiTypeJson].AgeGroup == null ? "-" : dataInfoArr[bmiTypeJson].AgeGroup,
+                    Height: dataInfoArr[bmiTypeJson].Height == null ? "-" : dataInfoArr[bmiTypeJson].Height,
+                    Weight: dataInfoArr[bmiTypeJson].Weight == null ? "-" : dataInfoArr[bmiTypeJson].Weight,
+                    BMI: dataInfoArr[bmiTypeJson].BMI == null ? "-" : dataInfoArr[bmiTypeJson].BMI,
+                    BMIType: dataInfoArr[bmiTypeJson].BMIType == null ? "-" : bmiTypeName[dataInfoArr[bmiTypeJson].BMIType],
+                    BtnSend: '<input class="btn btn-default" type="button" value="一键发送"/>'
+                };
+                item[phExOverviewType == config.PhExOverviewType.Group ? "KindergartenName" : "ClassName"] =
+                    phExOverviewType == config.PhExOverviewType.Group ? (dataInfoArr[bmiTypeJson].KindergartenName == null ? "-" : dataInfoArr[bmiTypeJson].KindergartenName) :
+                    (dataInfoArr[bmiTypeJson].ClassName == null ? "-" : dataInfoArr[bmiTypeJson].ClassName);
+                tableInfoArr.push(item);
+            }
+        }
+        var percentagesArr = [
+            ['偏轻', (childOneCount / childTotalCount) * 100],
+            ['正常', (childTwoCount / childTotalCount) * 100],
+            ['偏重', (childThreeCount / childTotalCount) * 100],
+            ['肥胖', (childFourCount / childTotalCount) * 100]
+        ];
+        obesityManagementView(sectionArr, childCountsArr, percentagesArr, tableInfoArr);
+    }
+    /**
+    * *生成园肥胖管理
+    */
+    var generateObesityManagement = function () {
+        $("#physical-fat-btn").empty();
+        url = "/reliableTest/fatMessage";
+        var parameter = {
+            KindergartenId: $.cookie("KindergartenId"),
+            OrderBy: "BMIType,BMI"
+
+        };
+        // utilities.ShowDiv();
+        utilities.CallGetApi(url, parameter)
+            .done(function (data) {
+
+                if (data.Total <= 0) {
+                    alert("没有体测数据！");
+                    utilities.NotySuccess();
+                    return;
+                }
+                var dataInfoArr = [];
+                var childIdArr = [];
+
+                for (var i = 0; i < data.Total; i++) {
+
+                    if (data.Results[i] == null || data.Results[i].ClassName == "" || data.Results[i].ClassName == "undefined" || data.Results[i].ClassName == null
+                        ) {
+                        continue;
+
+                    }
+                    if (childIdArr.some(function (x) {
+                        return x == data.Results[i].ChildId;
+                    })) {
+                        continue;
+                    }
+
+                    dataInfoArr.push(data.Results[i]);
+                    childIdArr.push(data.Results[i].ChildId);
+                }
+                var classInfoArr = _.groupBy(dataInfoArr, function (info) { return info.ClassId; });
+                var itemTab = {
+                    ClassId: 0,
+                    ClassName: "全部"
+                };
+                var htmlTab = utilities.HandlebarsHelp("#obesityHTML", itemTab);
+                $("#physical-fat-btn").append(htmlTab);
+                _.forEach(classInfoArr,
+                    function (value, key) {
+                        if (value[0].ClassName == "删除") {
+
+                        } else {
+                            itemTab = {
+                                ClassId: key,
+                                ClassName: value[0].ClassName
+                            }
+                            var htmlTab = utilities.HandlebarsHelp("#obesityHTML", itemTab);
+                            $("#physical-fat-btn").append(htmlTab);
+                        }
+                    });
+                fatTabChanges(dataInfoArr);
+                $(".physical-fat-btn")
+                    .click(function () {
+                        var classId = $(this).attr("classId");
+                        if (classId != 0) {
+                            _.forEach(classInfoArr,
+                                function (value, key) {
+                                    if (key == classId) {
+                                        fatTabChanges(value);
+                                    }
+                                });
+                        } else {
+                            fatTabChanges(dataInfoArr);
+                        }
+                    });
+                // utilities.NotySuccess();
+            })
+            .fail(function () {
+                utilities.NotyFailure();
+            });
+    };
+
+    //各班体测Table
+    var generateClassPhysicalAbstractByClassType = function (id, tableCol, dataInfoArr, type) {
+        $('#' + id).bootstrapTable({
+            columns:
+            [
+                [
+
+                    tableCol,
+                    // {
+                    //     title: '人数',
+                    //     align: 'center',
+                    //     valign: 'middle',
+                    //     field: 'ClassCount',
+                    //     rowspan: 2
+                    // },
+                    {
+                        title: '总分',
+                        align: 'center',
+                        valign: 'middle',
+                        field: 'TotalScore',
+                        rowspan: 2
+                    },
+                    {
+                        title: '身体形态',
+                        align: 'center',
+                        valign: 'middle',
+                        colspan: 2
+                    },
+                    {
+                        title: '身体素质',
+                        align: 'center',
+                        valign: 'middle',
+                        colspan: 6
+                    },
+//                    {
+//                        title: '动作发展',
+//                        align: 'center',
+//                        valign: 'middle',
+//                        colspan: 2
+//                    }
+                ],
+                [
+                    {
+                        field: 'Height',
+                        title: '身高',
+                        align: 'center',
+                        valign: 'middle',
+                        titleTooltip: '反应人体骨骼的纵向生长水平',
+                        cellStyle: function cellStyle(value, row, index) {
+                            return tableChildColor(value, type);
+                        }
+                    },
+                    {
+                        field: 'Weight',
+                        title: '体重',
+                        align: 'center',
+                        valign: 'middle',
+                        titleTooltip: '反应人体发育程度和营养状况',
+                        cellStyle: function cellStyle(value, row, index) {
+                            return tableChildColor(value, type);
+                        }
+                    },
+                    {
+                        field: 'TenMetersShuttleRun',
+                        title: '灵敏性',
+                        align: 'center',
+                        valign: 'middle',
+                        titleTooltip: '灵敏素质是指人体在各种突然变换的条件下，快速、协调、敏捷、准确地完成动作的能力，是运动、神经反应和身体素质的综合表现',
+                        cellStyle: function cellStyle(value, row, index) {
+                            return tableChildColor(value, type);
+                        }
+                    },
+                    {
+                        field: 'SitAndReach',
+                        title: '柔韧性',
+                        align: 'center',
+                        valign: 'middle',
+                        titleTooltip: '柔韧素质是关节、肌肉和韧带活动时的伸展能力。柔韧性协调、力量、速度等有促进作用，有效降低活动疲劳感及受伤的可能性',
+                        cellStyle: function cellStyle(value, row, index) {
+                            return tableChildColor(value, type);
+                        }
+                    },
+                    {
+                        field: 'StandingLongJump',
+                        title: '下肢力量',
+                        align: 'center',
+                        valign: 'middle',
+                        titleTooltip: '力量是儿童活动的基础，下肢力量站立、行走、跑跳的基础',
+                        cellStyle: function cellStyle(value, row, index) {
+                            return tableChildColor(value, type);
+                        }
+                    },
+                    {
+                        field: 'JumpWithBothFeet',
+                        title: '协调性',
+                        align: 'center',
+                        valign: 'middle',
+                        titleTooltip: '协调素质是神经中枢、神经、肌肉控制的结果。培养幼儿的协调能力，能发展和完善神经系统的调节功能，使身体活动更加自然、省力',
+                        cellStyle: function cellStyle(value, row, index) {
+                            return tableChildColor(value, type);
+                        }
+                    },
+                    {
+                        field: 'TennisThrowFar',
+                        title: '上肢力量',
+                        align: 'center',
+                        valign: 'middle',
+                        titleTooltip: '力量是儿童活动的基础，上肢力量是举物，攀爬的基础',
+                        cellStyle: function cellStyle(value, row, index) {
+                            return tableChildColor(value, type);
+                        }
+                    },
+                    {
+                        field: 'WalkOnTheBalanceBeam',
+                        title: '平衡力',
+                        align: 'center',
+                        valign: 'middle',
+                        titleTooltip: '平衡力与内耳前庭器官功能有关，在幼儿时期是各种感、知觉能力发展的关键期。对平衡力的训练会让宝贝的大脑格外敏锐',
+                        cellStyle: function cellStyle(value, row, index) {
+                            return tableChildColor(value, type);
+                        }
+                    }
+
+//                    {
+//                        field: 'Locomotor',
+//                        title: '位移能力',
+//                        align: 'center',
+//                        valign: 'middle',
+//                        titleTooltip: '平衡力与内耳前庭器官功能有关，在幼儿时期是各种感、知觉能力发展的关键期。对平衡力的训练会让宝贝的大脑格外敏锐',
+//                        cellStyle: function cellStyle(value, row, index) {
+//                            return tableChildColor(value, type);
+//                        }
+//                    },
+//                {
+//                    field: 'ObjectControl',
+//                    title: '物体控制',
+//                    align: 'center',
+//                    valign: 'middle',
+//                    titleTooltip: '平衡力与内耳前庭器官功能有关，在幼儿时期是各种感、知觉能力发展的关键期。对平衡力的训练会让宝贝的大脑格外敏锐',
+//                    cellStyle: function cellStyle(value, row, index) {
+//                        return tableChildColor(value, type);
+//                    }
+//                }
+                ]
+            ],
+            data: dataInfoArr,
+
+            rowStyle: function setRowStyle(value, row) {
+                if (type == "kinderPhy") {
+                    if (row == dataInfoArr.length - 2) {
+                        return {
+                            classes: 'info'
+                        }
+                    }
+                    if (row == dataInfoArr.length - 1) {
+                        return {
+                            classes: 'success'
+                        }
+                    }
+                    return {}
+                } else {
+                    return {}
+                }
+            },
+            cellStyle: function cellStyle(value, row, index) {
+                return {
+                    classes: 'info'
+                };
+            }
+        });
+    }
+
+    var groomPhyCompare = function (classType, dataInfo) {
+        if (dataInfo.length <= 0 || dataInfo == null) {
+            return;
+        }
+        var classPhyInfoArr = [];
+        var dataArr = [];
+        for (var i = 0; i < dataInfo.length; i++) {
+            var item = {
+                ClassCount: 0,
+                TotalScore: disposeDecimalValue(dataInfo[i].HeightAVGScore + dataInfo[i].WeightAVGScore +
+                dataInfo[i].BroadJumpAVGScore +
+                dataInfo[i].DoubleJumpAVGScore +
+                dataInfo[i].ThrowAVGScore +
+                dataInfo[i].BalanceAVGScore +
+                dataInfo[i].SitReachAVGScore +
+                dataInfo[i].ShuttleRunAVGScore +
+                (dataInfo[i].LocomotorAVGScore == null ? 0 : dataInfo[i].LocomotorAVGScore) +
+                (dataInfo[i].ObjectControlAVGScore == null ? 0 : dataInfo[i].ObjectControlAVGScore)),
+                ClassName: dataInfo[i].ClassName,
+                Height: dataInfo[i].HeightAVGScore,
+                Weight: dataInfo[i].WeightAVGScore,
+                TenMetersShuttleRun: dataInfo[i].ShuttleRunAVGScore,
+                SitAndReach: dataInfo[i].SitReachAVGScore,
+                StandingLongJump: dataInfo[i].BroadJumpAVGScore,
+                JumpWithBothFeet: dataInfo[i].DoubleJumpAVGScore,
+                TennisThrowFar: dataInfo[i].ThrowAVGScore,
+                WalkOnTheBalanceBeam: dataInfo[i].BalanceAVGScore,
+                Locomotor: dataInfo[i].LocomotorAVGScore == null ? 0 : dataInfo[i].LocomotorAVGScore,
+                ObjectControl: dataInfo[i].ObjectControlAVGScore == null ? 0 : dataInfo[i].ObjectControlAVGScore
+
+
+            };
+            var itemClassData = {
+                name: dataInfo[i].ClassName,
+                data: [dataInfo[i].HeightAVGScore,
+                    dataInfo[i].WeightAVGScore,
+                    dataInfo[i].SitReachAVGScore,
+                    dataInfo[i].BroadJumpAVGScore,
+                    dataInfo[i].DoubleJumpAVGScore,
+                    dataInfo[i].ShuttleRunAVGScore,
+                    dataInfo[i].ThrowAVGScore,
+                    dataInfo[i].BalanceAVGScore
+//                    dataInfo[i].LocomotorAVGScore == null ? 0 : dataInfo[i].LocomotorAVGScore,
+//                    dataInfo[i].ObjectControlAVGScore == null ? 0 : dataInfo[i].ObjectControlAVGScore
+                ]
+            }
+            classPhyInfoArr.push(item);
+            dataArr.push(itemClassData);
+        }
+        var idVal = "groomClassPhyCompareTable" + classType;
+        var tableColFirst = {
+            field: 'ClassName',
+            title: '班级',
+            align: 'center',
+            valign: 'middle',
+            rowspan: 2
+        };
+        generateClassPhysicalAbstractByClassType(idVal, tableColFirst, classPhyInfoArr, "classPhy");
+        var physicalQuality = [];
+        for (var json in physicalProjectToQuality2) {
+            if (json > 8) {
+                continue;
+            }
+            physicalQuality.push(physicalProjectToQuality2[json]);
+        }
+        $('#groomClassPhyCompareChar' + classType).highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: '',
+                x: -20 //center
+            },
+            xAxis: {
+                categories: physicalQuality
+            },
+            credits: false,
+            yAxis: {
+                title: {
+                    text: '分数'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: dataArr
+        });
+    };
+    //各班体测对比
+    var generateClassPhyCompare = function () {
+        $("#classPhyCompare").empty();
+        $("#classPhyCompare").append('<div class="btn-group evaluation-btn-group hidden-print" role="group" id="class-physical-quality-btn"></div>');
+        url = "/reliableTest/classCompare";
+        var parameter = {
+            KindergartenId: $.cookie("KindergartenId"),
+            Cancel: false,
+            ClassType: "[0,1,2,3,4,5]",
+            OrderBy: "ClassType"
+        }
+        //utilities.ShowDiv();
+        utilities.CallGetApi(url, parameter).done(function (data) {
+            if (data.Total <= 0) {
+                alert("没有班级体测对比数据");
+                utilities.NotySuccess();
+                return;
+            }
+
+            var arrByClassType = _.groupBy(data.Results, function (info) { return info.ClassType; });
+            _.forEach(arrByClassType, function (value, key) {
+                var item = {
+                    ClassType: key
+                }
+                var itemTab = {
+                    ClassType: key,
+                    classTypeName: kindergarClassType[key]
+                }
+                var htmlTab = utilities.HandlebarsHelp("#changePhyClassTabHTML", itemTab);
+                $("#class-physical-quality-btn").append(htmlTab);
+                var html = utilities.HandlebarsHelp("#classPhyHTML", item);
+                $("#classPhyCompare").append(html);
+                $("#groomClassPhyCompareTitleId" + key).text($.cookie("KindergartenName") + kindergarClassType[key] + "体测数据");
+                groomPhyCompare(key, value);
+            });
+            for (var jsonType in kindergarClassType) {
+                if (jsonType == 0) {
+                    continue;
+                }
+                $("#classType-" + jsonType).hide();
+            }
+            $(".physical-class-btn").click(function () {
+                for (var jsonType in kindergarClassType) {
+                    if (jsonType == $(this).attr("classType")) {
+                        $("#classType-" + jsonType).show();
+                    } else {
+                        $("#classType-" + jsonType).hide();
+                    }
+                }
+            });
+            // utilities.NotySuccess();
+        }).fail(function () {
+            utilities.NotyFailure();
+        });
+    }
+    //////////////////////////////////////////
+    //末位改善
+    var generateBetterAssess = function () {
+        url = "/reliableTest/bateAssess";
+        var parameter =
+        {
+            KindergartenId: $.cookie("KindergartenId")
+        };
+        //utilities.ShowDiv();
+        utilities.CallGetApi(url, parameter).done(function (data) {
+            if (data == null) {
+                alert("暂无数据！");
+                utilities.NotySuccess();
+                return;
+            }
+            var totalScoreArr = [];
+            var phyCorrespondence = {};
+            var dataArr = [];
+            for (var json in data) {
+                var dataInfo = [];
+
+                var childTotalArr = {
+                    "1": 0,
+                    "2": 0,
+                    "3": 0,
+                    "4": 0,
+                    "5": 0
+                }
+                for (var info = 0, l = data[json].length; info < l; info++) {
+                    if (data[json][info].key == 0 || data[json][info].key == 1) {
+                        childTotalArr["1"] += data[json][info].scoreCount;
+                        continue;
+                    }
+                    childTotalArr[data[json][info].key] += data[json][info].scoreCount;
+                }
+                for (var jsonTotal in childTotalArr) {
+                    dataInfo.push(childTotalArr[jsonTotal]);
+                }
+                var item = {
+                    type: 'spline',
+                    name: physicalProject[json],
+                    data: dataInfo,
+                    marker: {
+                        enabled: false
+                    }
+                }
+                var totalScore = 0;
+                var childTotal = 0;
+                //Math.sum()
+                for (var i = 1; i <= dataInfo.length; i++) {
+                    totalScore += (i * dataInfo[i - 1]);
+                    childTotal += dataInfo[i - 1];
+                }
+                var sdChildTotal = ((totalScore / childTotal).toFixed(2)) * 1;
+                phyCorrespondence[sdChildTotal] = json;
+                totalScoreArr.push(sdChildTotal);
+                dataArr.push(item);
+            }
+            var phyMinProject = Math.min.apply(Math, totalScoreArr);
+            var phyName = physicalProject[phyCorrespondence[phyMinProject]];
+            var phyBower = physicalProjectToQuality[phyCorrespondence[phyMinProject]];
+            var textComments = '经过测试, 我们发现"' + phyName + '"项目差项人数较多, 这说明在园幼儿的' + phyBower + '较差, 所以在幼儿园的幼儿体育活动课程中应有目的的加入' + phyBower + '的体育活动.';
+            $("#end-improve-comments").text(textComments);
+            $('#chart5').highcharts({
+                title: {
+                    text: '体质水平正态分布图'
+                },
+                xAxis: {
+                    categories: ['差', '较差', '中等', '良好', '优秀']
+                },
+                yAxis: {
+                    title: {
+                        text: '人数'
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    crosshairs: true,
+                    shared: true,
+                    valueSuffix: '人'
+                },
+                series: dataArr
+            });
+
+        }).fail(function () {
+            utilities.NotyFailure();
+        });
+    }
+    var weekInfo = function (week) {
+        switch (week) {
+            case 1:
+                return "第一周";
+                break;
+            case 2:
+                return "第二周";
+                break;
+            case 3:
+                return "第三周";
+                break;
+            case 4:
+                return "第四周";
+                break;
+        }
+    };
+
+    ///////改善方案
+    var week = {
+        1: "一",
+        2: "二",
+        3: "三",
+        4: "四",
+        5: "五"
+    };
+    var generateImproveInfo = function () {
+        $("#table-content").empty();
+        $("#tableList").empty();
+        var ageVal = {
+            "0": 6,
+            "1": 5,
+            "2": 4,
+            "3": 3,
+            "4": 4,
+            "5": 6
+        };
+        url = "/reliableTest/improvePlan";
+        var par = $('input[type=radio][name=ClassId]:checked').val();
+        var parArry = par.split(",");
+        var parameter = {
+            KindergartenId: $.cookie("KindergartenId"),
+            ClassId: parArry[0],
+            AgeGroup: ageVal[parArry[1]]
+        }
+        utilities.CallGetApi(url, parameter).done(function (data) {
+            if (data == null) {
+                alert("没有班级改善方案数据");
+                utilities.NotySuccess();
+                return;
+            } else {
+                var kingArray = new Array();
+                var classArray = new Array();
+                kingArray[0] = data.ClassAbstract.HeightAVGScore;
+                kingArray[1] = data.ClassAbstract.WeightAVGScore;
+                kingArray[2] = data.ClassAbstract.BroadJumpAVGScore;
+                kingArray[3] = data.ClassAbstract.DoubleJumpAVGScore;
+                kingArray[4] = data.ClassAbstract.ThrowAVGScore;
+                kingArray[5] = data.ClassAbstract.BalanceAVGScore;
+                kingArray[6] = data.ClassAbstract.SitReachAVGScore;
+                kingArray[7] = data.ClassAbstract.ShuttleRunAVGScore;
+                if (data.KindergartenAbstract == null || undefined) {
+                    classArray = [0, 0, 0, 0, 0, 0, 0, 0];
+                } else {
+                    classArray[0] = data.KindergartenAbstract.HeightAVGScore;
+                    classArray[1] = data.KindergartenAbstract.WeightAVGScore;
+                    classArray[2] = data.KindergartenAbstract.BroadJumpAVGScore;
+                    classArray[3] = data.KindergartenAbstract.DoubleJumpAVGScore;
+                    classArray[4] = data.KindergartenAbstract.ThrowAVGScore;
+                    classArray[5] = data.KindergartenAbstract.BalanceAVGScore;
+                    classArray[6] = data.KindergartenAbstract.SitReachAVGScore;
+                    classArray[7] = data.KindergartenAbstract.ShuttleRunAVGScore;
+                }
+
+                var classPhyResultGrade;
+                var contranstGrade;
+                //                var generalCommentBadObject;
+                var par = $('input[type=radio][name=ClassId]:checked').val();
+                var parArry = par.split(",");
+                var classTotalScore = eval(kingArray.join("+"));
+                var kindergartenTotalScore = eval(classArray.join("+"));
+                if (classTotalScore > 31) {
+                    classPhyResultGrade = "优秀";
+                } else if (classTotalScore < 31 && classTotalScore >= 28) {
+                    classPhyResultGrade = "良好";
+                } else if (classTotalScore < 28 && classTotalScore >= 21) {
+                    classPhyResultGrade = "合格";
+                } else {
+                    classPhyResultGrade = "不合格";
+                }
+                var badItemArr = [];
+                var badComment = "";
+                var sortMapArr = [];
+                for (var i = 0, l = kingArray.length; i < l; i++) {
+                    var sortMap = {};
+                    sortMap['TestObject'] = i;
+                    sortMap['Score'] = kingArray[i];
+                    if (kingArray[i] < 3) {
+                        badItemArr.push(i);
+                    }
+                    sortMapArr.push(sortMap);
+                }
+                if (badItemArr.length > 0) {
+                    for (var t = 0; t < badItemArr.length; t++) {
+                        if (t == badItemArr.length - 1) {
+                            badComment += config.PhysicalProjectToQuality3[badItemArr[t] + 1];
+                        } else {
+                            badComment += (config.PhysicalProjectToQuality3[badItemArr[t] + 1] + "、");
+                        }
+                    }
+                } else {
+                    var sortResult = _.sortBy(sortMapArr, 'Score');
+                    badComment = config.PhysicalProjectToQuality3[sortResult[0].TestObject + 1] + '、' + config.PhysicalProjectToQuality3[sortResult[1].TestObject + 1];
+                }
+                var generalCommentContent = "体测结果显示," + parArry[2] + "孩子体质总体发展" + classPhyResultGrade + ",其中" + badComment + "相对较弱，需要重点关注";
+                $("#generalCommentContent").text(generalCommentContent);
+                if (classTotalScore < kindergartenTotalScore) {
+                    contranstGrade = "落后于";
+                } else if (classTotalScore == kindergartenTotalScore) {
+                    contranstGrade = "相当于";
+                } else if (classTotalScore > kindergartenTotalScore) {
+                    contranstGrade = "优秀于";
+                }
+                var contranstBadArr = [];
+                var contranstBadContent = "";
+                for (var c = 0; c < 8; c++) {
+                    if (kingArray[c] < classArray[c]) {
+                        contranstBadArr.push(c);
+                    }
+                }
+                if (contranstBadArr.length > 0) {
+                    for (var p = 0, d = contranstBadArr.length; p < d; p++) {
+                        if (p == d - 1) {
+                            contranstBadContent += config.PhysicalProjectToQuality3[contranstBadArr[p] + 1];
+                        } else {
+                            contranstBadContent += (config.PhysicalProjectToQuality3[contranstBadArr[p] + 1] + "、");
+                        }
+                    }
+                }
+                var generalAnalysisContent = parArry[2] + '与全园体测数据对比显示，本班孩子体质总体水平' + contranstGrade + "全园水平" + (contranstBadContent.length > 0 ? (",其中" + contranstBadContent + "低于全园对应测试项的平均水平。") : "。");
+                $("#generalAnalysisContent").text(generalAnalysisContent);
+                //                Highcharts.chart('container-hightchars', {
+                //                    chart:{
+                //                        polar: true,
+                //                        type: 'line'
+                //                    },
+                //                    title: {
+                //                        text: '',
+                //                    },
+                //                    subtitle :{
+                //                        text: '  '
+                //                    },
+                //                    xAxis:{
+                //                        categories: ['身高', '体重', '下肢力量', '协调性', '上肢力量', '平衡力', '柔韧性', '灵敏性'],
+                //                        tickmarkPlacement: 'on',
+                //                        lineWidth: 0
+                //                    },
+                //
+                //                    yAxis: {
+                //                        gridLineInterpolation: 'polygon',
+                //                        lineWidth: 0,
+                //                        min: 0,
+                //                        max: 5
+                //                    },
+                //
+                //                    tooltip: {
+                //                        shared: true,
+                //                        pointFormat: '<span style="color:{series.color}">{series.name}: <b>${point.y:,.0f}</b><br/>'
+                //                    },
+                //
+                //                    legend: {
+                //                        align: 'right',
+                //                        verticalAlign: 'top',
+                //                        y: 70,
+                //                        layout: 'vertical'
+                //                    },
+                //
+                //                    series: [
+                //                    {
+                //                        name: '班级平均分',
+                //                        data: kingArray,
+                //                        pointPlacement: 'on'
+                //                    }, {
+                //                        name: '园所平均分',
+                //                        data: classArray,
+                //                        pointPlacement: 'on'
+                //                    }
+                //                    ],
+                //                    credits :{
+                //                        enabled: false //不显示LOGO 
+                //                    }
+                //
+                //                });
+                var chart = {
+                    polar: true,
+                    type: 'line'
+                };
+                var title = {
+                    text: ' '
+                };
+                var subtitle = {
+                    text: '  '
+                };
+                var xAxis = {
+                    categories: ['身高', '体重', '下肢力量', '协调性', '上肢力量', '平衡力', '柔韧性', '灵敏性'],
+                    tickmarkPlacement: 'on',
+                    lineWidth: 0
+                };
+
+                var yAxis = {
+                    gridLineInterpolation: 'polygon',
+                    lineWidth: 0,
+                    min: 0,
+                    max: 5
+                };
+                var tooltip = {
+                    shared: true,
+                    pointFormat: '<span style="color:{series.color}">{series.name}: <b>${point.y:,.0f}</b><br/>'
+                };
+
+
+                var series = [
+                    {
+                        name: '班级平均分',
+                        data: kingArray,
+                        pointPlacement: 'on'
+                    }, {
+                        name: '园所平均分',
+                        data: classArray,
+                        pointPlacement: 'on'
+                    }
+                ];
+                var credits = {
+                    enabled: false //不显示LOGO 
+                };
+
+                var json = {};
+                json.chart = chart;
+                json.title = title;
+                json.subtitle = subtitle;
+                json.tooltip = tooltip;
+                json.xAxis = xAxis;
+                json.credits = credits;
+                json.yAxis = yAxis;
+                json.series = series;
+
+
+                $('#container-hightchars').highcharts(json);
+                var improveInformation = _.shuffle(data.ImproveInfo);
+                var index = 0;
+                var tableInfoArr = [];
+                var itemTypeIcon = {
+                    6: "course-lise-run-icon.png",
+                    8: "course-list-balance-icon.png",
+                    4: "course-list-broad-icon.png",
+                    3: "course-list-sit-icon.png",
+                    7: "course-list-throw-icon.png",
+                    5: "course-lis-double-icon.png"
+                }
+                var indexData = 12901;
+                for (var jsonInfo = 0, jsonLength = improveInformation.length; jsonInfo < jsonLength; jsonInfo++) {
+                    //for (var jsonInfo in improveInformation) {
+                    indexData++;
+                    var itemTable = {
+                        Title: improveInformation[jsonInfo].Name,
+                        ItemCourseIcon: itemTypeIcon[improveInformation[jsonInfo].ProjectType]
+                    };
+                    tableInfoArr.push(itemTable);
+                    if (index % 5 == 0) {
+                        var itemTitle = {
+                            NoNumber: week[index / 5 + 1]
+                        };
+                        var titleHtml = utilities.HandlebarsHelp("#week-course-title-html", itemTitle);
+                        $("#tableList").append(titleHtml);
+                    }
+                    var videoName = improveInformation[jsonInfo].VideoName;
+                    var itemInfo = {
+                        WeakDay: week[index % 5 + 1],
+                        Title: improveInformation[jsonInfo].Name,
+                        ActivityGetRead: improveInformation[jsonInfo].Equipments,
+                        ActivityProcess: improveInformation[jsonInfo].Content,
+                        VideoName: indexData,
+                        ActivityDifficult: (improveInformation[jsonInfo].Difficult == null || improveInformation[jsonInfo].Difficult == "") ? "没有设定增减难度" : improveInformation[jsonInfo].Difficult
+                    };
+
+                    var contentHtml = utilities.HandlebarsHelp("#item-content-template", itemInfo);
+                    var url = "http://testbao.imreliable.net/Pages/Static/VideoCourse.html?name=" + videoName;
+                    $("#tableList").append(contentHtml);
+                    $('#' + itemInfo.VideoName).qrcode({ width: 125, height: 125, text: url });
+                    if ((index + 1) % 5 == 0) {
+                        var htmlFooter = utilities.HandlebarsHelp("#footer-html");
+                        $("#tableList").append(htmlFooter);
+                    }
+                    index++;
+                }
+                var tableHtml = utilities.HandlebarsHelp("#table-template-html", tableInfoArr);
+
+                $("#table-content").append(tableHtml);
+                $("#tableList li:even").css("backgroundColor", "#fcf6f3");
+            }
+
+
+        }).fail(function () {
+            utilities.NotyFailure();
+        });
+    };
+    var homeHighChar = function (percentageData, histogramScale, histogramData, histogramScaleY) {
+        $('#hightchars-box').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: ''
+            },
+            credits: {
+                enabled: false //不显示LOGO
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            legend: {
+                layout: 'vertical',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            plotOptions: {
+                pie: {
+                    innerSize: 220,
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    colors: [
+                      "#00bcab",
+                      "#dbe474",
+                      "#ffae4b",
+                      "#ea5d56"
+                    ],
+                    dataLabels: {
+                        enabled: false
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: '比例',
+                data: percentageData
+            }]
+        });
+        var chart = {
+            type: 'column'
+        };
+        var title = {
+            text: '该年龄段水平 ',
+            align: 'left'
+
+        };
+        var subtitle = {
+            text: '  '
+        };
+        var xAxis = {
+            categories: histogramScale,
+            crosshair: true,
+            title: {
+                text: '分数'
+            }
+        };
+        var yAxis = {
+            min: 0,
+            title: {
+                text: '学校数'
+            },
+            tickPositions: histogramScaleY// 指定竖轴坐标点的值
+        };
+        var tooltip = {
+            headerFormat: '<span style="font-size:10px">分数：<b>{point.key}</b></span><table>',
+            pointFormat: '<tr style="font-size:10px " ><td style=";padding:0">该阶段学校数： </td>' +
+                '<td style="padding:0"><b>{point.y:1f} 个</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        };
+        var plotOptions = {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0,
+                showInLegend: false,
+                pointWidth: 10,
+                color: "#00bcab"
+            }
+        };
+        var credits = {
+            enabled: false
+        };
+
+        var series = [{
+            name: '幼儿园平均分',
+            data: histogramData
+        }];
+
+        var json = {};
+        json.chart = chart;
+        json.title = title;
+        json.subtitle = subtitle;
+        json.tooltip = tooltip;
+        json.xAxis = xAxis;
+        json.yAxis = yAxis;
+        json.series = series;
+        json.plotOptions = plotOptions;
+        json.credits = credits;
+        $('#container-box').highcharts(json);
+    };
+    //后台网站Home页面数据处理
+    var generateHomeInformations = function () {
+
+        var parameter = {
+            KindergartenId: $.cookie("KindergartenId")
+        }
+        url = "/reliableTest/homePageInfo";
+        utilities.ShowDiv();
+        utilities.CallGetApi(url, parameter).done(function (data) {
+
+            if (data == null || data.PhyInformation.length <= 0) {
+                alert("本幼儿园没有体测数据");
+                return;
+            }
+            var childCount = data.PhyInformation.length;
+            var avgScore = eval((_.pluck(data.PhyInformation, 'TotalScore')).join("+")) / childCount;
+            var fineChildCount = 0;
+            var favourableChildCount = 0;
+            var regularChildCount = 0;
+            var underproofChildCount = 0;
+            for (var jsonInfo in data.PhyInformation) {
+                if (data.PhyInformation[jsonInfo].TotalScore > 31) {
+                    fineChildCount++;
+                }
+                if (data.PhyInformation[jsonInfo].TotalScore >= 28 && data.PhyInformation[jsonInfo].TotalScore <= 31) {
+                    favourableChildCount++;
+                }
+                if (data.PhyInformation[jsonInfo].TotalScore >= 20 && data.PhyInformation[jsonInfo].TotalScore < 28) {
+                    regularChildCount++;
+                }
+                if (data.PhyInformation[jsonInfo].TotalScore < 20) {
+                    underproofChildCount++;
+                }
+            }
+            var content = {
+                KindergartenChildCount: childCount,
+                KindergarteAvgScore: disposeDecimalValue(avgScore * 2.5),
+                FindPercentage: disposeDecimalValue(fineChildCount / childCount * 100),
+                UnderproofPercentage: disposeDecimalValue(underproofChildCount / childCount * 100)
+            };
+            var percentage = {
+                FinePercentage: content.FindPercentage,
+                FavourablePercentage: disposeDecimalValue(favourableChildCount / childCount * 100),
+                RegularPercentage: disposeDecimalValue(regularChildCount / childCount * 100),
+                UnderproofPercentage: disposeDecimalValue(underproofChildCount / childCount * 100)
+            };
+            var percentageHtml = utilities.HandlebarsHelp("#percentage-html", percentage);
+            $("#percentage-content").append(percentageHtml);
+            var templateHtml = utilities.HandlebarsHelp("#abstract-info-html", content);
+            $("#abstract-content").append(templateHtml);
+            //准备柱状图数据
+            var percentageData = [['优秀', percentage.FinePercentage],
+                    ['良好', percentage.FavourablePercentage],
+                    ['合格', percentage.RegularPercentage],
+                    ['不合格', percentage.UnderproofPercentage]];
+            var kindergartenScore = _.pluck(data.KingdergartenAvgScore, 'AvgScore');
+            var minKindergartenScore = _.min(kindergartenScore);
+            var maxKindergartenScore = _.max(data.KingdergartenAvgScore, function (score) { return score.AvgScore });
+            //var maxKindergartenScore = kindergartenScore.max();
+            var histogramScale = [];
+
+            for (var i = minKindergartenScore * 2.5 - 2; i < maxKindergartenScore.AvgScore * 2.5; i++) {
+                histogramScale.push(Math.round(i));
+            }
+            var histogramData = [];
+            var kindergartenCountArr = [];
+            for (var i = 0; i < histogramScale.length - 1 ; i++) {
+                var kindergartenCount = 0;
+                for (var jsonScore in data.KingdergartenAvgScore) {
+                    var scoreInfo = disposeDecimalValue(data.KingdergartenAvgScore[jsonScore].AvgScore * 2.5);
+                    if (histogramScale[i] <= scoreInfo && scoreInfo < histogramScale[i + 1]) {
+                        kindergartenCount++;
+                    }
+                }
+                if (content.KindergarteAvgScore >= histogramScale[i] && histogramScale[i + 1] > content.KindergarteAvgScore) {
+                    var itemContent = {
+                        'color': 'red',
+                        'y': kindergartenCount
+                    }
+                    histogramData.push(itemContent);
+                } else {
+                    histogramData.push(kindergartenCount);
+                }
+                kindergartenCountArr.push(kindergartenCount);
+            }
+            var maxKindergartenCount = kindergartenCountArr.max()+5;
+            var histogramScaleY = [0, Math.ceil(maxKindergartenCount / 4), Math.ceil(maxKindergartenCount / 2), Math.ceil(maxKindergartenCount / 4 * 3), maxKindergartenCount];
+            homeHighChar(percentageData, histogramScale, histogramData, histogramScaleY);
+            utilities.NotySuccess();
+        }).fail(function () {
+            utilities.NotyFailure();
+        });
+    };
+   
+    //数组求和
+    var arrSum = function (arr) {
+        var count = 0;
+        for (var item = 0, l = arr.length; item < l; item++) {
+            count += arr[item];
+        }
+        return count;
+    }
+    //学年度相关月份计算
+    var semosterMonth = function () {
+        var nowDate = new Date();
+        var oneSemoster = [2, 3, 4, 5, 6, 7];
+        var twoSemoster = [8, 9, 10, 11, 12, 1];
+        var monthObj = {};
+        if (oneSemoster.some(function (s) {
+            return s == nowDate.getMonth() + 1;
+        })) {
+            monthObj.StartTime = nowDate.getFullYear() + '-02-01';
+            monthObj.FinishTime = nowDate.getFullYear() + '-07-31';
+            monthObj.MonthArr = oneSemoster;
+        } else {
+            var endYear = 0;
+            var startYear = 0;
+            if ((nowDate.getMonth() + 1) >= 8 && (nowDate.getMonth() + 1) <= 12) {
+                startYear = nowDate.getFullYear();
+                endYear = nowDate.getFullYear() + 1;
+            } else {
+                startYear = nowDate.getFullYear() - 1;
+                endYear = nowDate.getFullYear();
+            }
+            monthObj.StartTime = startYear + '-08-01';
+            monthObj.FinishTime = endYear + '-01-31';
+            monthObj.MonthArr = twoSemoster;
+        }
+        return monthObj;
+    };
+
+    var generateAgencyHome = function () {
+        var monthInfo = semosterMonth();
+        var parameter = {
+            //StartTime: monthInfo.StartTime,
+            //FinishTime: monthInfo.FinishTime,
+            StartTime: '2016-01-01',
+            FinishTime: monthInfo.FinishTime,
+            AgencyId: $.cookie("AgencyId")
+        }
+        url = "/reliableAgency/agencyHomePageInfo";
+        utilities.ShowDiv();
+        utilities.CallGetApi(url, parameter).done(function (data) {
+            if (data == null || data.length <= 0) {
+                alert("本幼儿园没有体测数据");
+                return;
+            }
+            console.log(data);
+            var monthKindergartenCount = data.MonthKindergartenCount;
+            var reportStock = data.ReportStock;
+            var semesterKindergartenCount = data.SemesterKindergartenCount;
+            var semesterSaleReport = data.SemesterSaleReport;
+
+            var content = {
+                MonthKindergartenCount: monthKindergartenCount,
+                ReportStock: reportStock,
+                SemesterKindergartenCount: semesterKindergartenCount,
+                SemesterSaleReport: semesterSaleReport
+            };
+            var templateHtml = utilities.HandlebarsHelp("#abstract-info-html", content);
+            $("#abstract-content").append(templateHtml);
+
+            for (var i = 0; i < data.ReportWater.length; i++) {
+                if (data.ReportWater[i].InvoicingType == 1) {
+                    $("#tableList").append("<tr>" +
+                        " <td class=\"align-left\">" + data.ReportWater[i].CreateTime.CharpStr2Date() + "</td>" +
+                        " <td class=\"align-left\">" +
+                        "    <img src=\"assets/img/report-pipelining-buy.png\" />购买报告" +
+                        "  </td>" +
+                        "  <td class=\"align-left\">" + data.ReportWater[i].ReportCount + "份</td>" +
+                        "</tr>");
+                } else {
+                    $("#tableList").append("<tr>" +
+                        "    <td class=\"align-left\">" + data.ReportWater[i].CreateTime.CharpStr2Date() + "</td>" +
+                        "    <td class=\"align-left\">" +
+                        "        <img src=\"assets/img/report-pipelining-sale.png\" />打印报告——" + data.ReportWater[i].KindergartenName +
+                        "    </td>" +
+                        "    <td class=\"align-left\">-" + data.ReportWater[i].ReportCount + "份</td>" +
+                        "</tr>");
+                }
+            }
+            var childCountArr = [];
+            var monthArr = monthInfo.MonthArr;
+            var nowDate = new Date();
+            var itemMonthChildCount = 0;
+            for (var mn = 0, l = monthArr.length; mn < l; mn++) {
+                if (monthArr[mn] > nowDate.getMonth() + 1) {
+                    childCountArr.push(null);
+                    continue;
+                }
+                for (var json in data.ServiceChild) {
+                    if (monthArr[mn] == data.ServiceChild[json].Month) {
+                        itemMonthChildCount += data.ServiceChild[json].ChildCount;
+                    }
+                }
+                childCountArr.push(itemMonthChildCount);
+            }
+
+            //堆叠图highcharts
+            $('#container-box').highcharts({
+                chart: {
+                    type: 'area'
+                },
+                title: {
+                    text: '本学期累计服务孩子数目',
+                    align: 'left'
+
+                },
+                xAxis: {
+                    categories: monthInfo.MonthArr,
+                    tickmarkPlacement: 'on',
+                    title: {
+                        text: '月份'
+
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: '孩子数目'
+
+                    },
+                    labels: {
+                        formatter: function () {
+                            return this.value;
+                        }
+                    }
+                },
+                tooltip: {
+                    shared: true,
+                    headerFormat: '<span style="font-size:10px">月份：<b>{point.key}月</b></span><br/>',
+                    pointFormat: '<span ">{series.name}: <b>{point.y:,1f}</b>个'
+
+                },
+                plotOptions: {
+                    area: {
+                        stacking: 'normal',
+                        lineColor: '#666666',
+                        lineWidth: 1,
+                        marker: {
+                            lineWidth: 1,
+                            lineColor: '#666666'
+                        }
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [
+                    {
+                        name: '服务',
+                        showInLegend: false, //隐藏注释
+                        color: "#aae9e3",
+                        // data: [502, 635, 809, 947, 1002, 1164, 1202, 1335, 1489, 2547, 3602, 5034]
+                        data: childCountArr
+                    }
+                ]
+            }); //end
+        }).fail(function () {
+            utilities.NotyFailure();
+        });;
+    };
+    var generateAgencyKindergartenInfo = function () {
+        var monthInfo = semosterMonth();
+        var parameter = {
+            StartTime: '2016-01-01',
+            FinishTime: monthInfo.FinishTime,
+            AgencyId: $.cookie("AgencyId"),
+            Cancel: false
+        }
+        url = "/reliableAgency/kindergartenInfo";
+        utilities.ShowDiv();
+        utilities.CallGetApi(url, parameter).done(function (data) {
+            var infoArr = [];
+            for (var i = 0; i < data.length; i++) {
+                var index = i + 1;
+                var itemInfo = {
+                    KindergartenName: data[i].KindergartenName,
+                    Code: data[i].Code,
+                    KindergartenId: data[i].KindergartenId,
+                    ChildCountInfo: data[i].ChildCountInfo,
+                    City: data[i].City,
+                    Address: data[i].Address
+                }
+                infoArr.push(itemInfo);
+            };
+            $("#listSum").append(index);
+            var contentHtml = utilities.HandlebarsHelp("#tbody-content-template", infoArr);
+            $("#tableList").append(contentHtml);
+        }).fail(function () {
+            utilities.NotyFailure();
+        });
+    };
+
+    return {
+        Init: function (type) {
+            phExOverviewType = type;
+        },
+
+        GenerateKindergartenOverview: function () {
+            generateKindergartenOverview();
+        },
+
+        GenerateAbstractAndItemObjectInfo: function () {
+            generateAbstractAndItemObjectInfo();
+        },
+
+        GenerateKgObesityManagement: function () {
+            generateObesityManagement();
+        },
+
+        GenderateClassPhyCompare: function () {
+            generateClassPhyCompare();
+        },
+        GenerateBetterAssess: function () {
+            generateBetterAssess();
+        },
+        GenerateImproveInfo: function () {
+            generateImproveInfo();
+        },
+        GenerateHomeInformation: function () {
+            generateHomeInformations();
+        },
+      
+        GenerateAgencyHome: function () {
+            generateAgencyHome();
+        },
+        GenerateAgencyKindergartenInfo: function () {
+            generateAgencyKindergartenInfo();
+        }
+    };
+});
