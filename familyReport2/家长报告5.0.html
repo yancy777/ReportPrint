@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>家长报告</title>
+		<script type="text/javascript" src="http://cdn.imreliable.net/jquery/jquery-1.10.2.min.js"></script>
+		<script src="http://cdn.bootcss.com/handlebars.js/4.0.6/handlebars.min.js"></script>
+		<script src="http://cdn.bootcss.com/jsbarcode/3.5.7/JsBarcode.all.min.js"></script>
+		<script src="http://cdn.bootcss.com/jsbarcode/3.5.7/JsBarcode.all.min.js"></script>
+		<script src="http://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+
+		<style type="text/css">
+			ul,
+			ol {
+				list-style-type: none;
+				padding: 0px;
+				margin: 0px;
+			}
+			
+			body {
+				font-family: "microsoft yahei";
+				color: #222222;
+				margin: 0;
+				padding: 0;
+			}
+			
+			.pull-left {
+				float: left;
+			}
+			
+			.report-box {
+				width: 794px;
+				height: 1123px;
+				margin: 0 auto;
+				position: relative;
+				/*background: red;*/
+			}
+			/*头部*/
+			
+			.head {
+				width: 794px;
+				height: 128px;
+				/*background: url(http://cdn.imreliable.net/asset/image/familyReport2/head-bg.png);*/
+				background: url(http://cdn.imreliable.net/asset/image/familyReport2/head-bg.png);
+				background-size: contain;
+				color: #fff;
+			}
+			
+			.head-title {
+				height: 90px;
+				width: 490px;
+				margin-top: 30px;
+				margin-left: 35px;
+			}
+			
+			.head-title strong {
+				font-size: 38px;
+				font-weight: normal;
+			}
+			
+			.head-title span {
+				font-size: 15px;
+			}
+			
+			.head-info {
+				width: 255px;
+				font-size: 15px;
+				line-height: 10px;
+				padding-top: 10px;
+			}
+			/*内容*/
+			
+			.content {
+				height: 800px;
+				padding: 15px 0
+			}
+			
+			.title-box,
+			.introduce-box,
+			.bar-box,
+			.about-box {
+				margin: 0 32px;
+			}
+			
+			.title-box {
+				width: 725px;
+				height: 40px;
+				color: #FFFFFF;
+				line-height: 35px;
+				border-bottom: 1px solid #a7a7a7;
+			}
+			
+			.title-box p {
+				display: inline;
+				font-size: 18px;
+			}
+			
+			.title-box span {
+				font-size: 14px;
+				padding-left: 55px;
+				color: #222222;
+			}
+			
+			.title-red {
+				background: url(http://cdn.imreliable.net/asset/image/familyReport2/title-red.png)no-repeat left;
+				background-size: contain;
+			}
+			
+			.title-orange {
+				background: url(http://cdn.imreliable.net/asset/image/familyReport2/title-orange.png)no-repeat left;
+				background-size: contain;
+			}
+			
+			.title-yellow {
+				background: url(http://cdn.imreliable.net/asset/image/familyReport2/title-yellow.png)no-repeat left;
+				background-size: contain;
+			}
+			
+			.title-green {
+				background: url(http://cdn.imreliable.net/asset/image/familyReport2/title-green.png)no-repeat left;
+				background-size: contain;
+			}
+			
+			.introduce-box {
+				height: 100px;
+			}
+			
+			.introduce-box p {
+				margin-top: 5px;
+				line-height: 30px;
+			}
+			
+			.bar-box {
+				height: 128px;
+			}
+			
+			.score {
+				width: 445px;
+				height: 116px;
+			}
+			
+			.score img {
+				height: 100px;
+				margin-left: 20px;
+				margin-top: 5px;
+			}
+			
+			.score p {
+				width: 240px;
+				padding-left: 30px;
+				line-height: 30px;
+				padding-top: 10px
+			}
+			
+			.bar {
+				width: 285px;
+				height: 116px;
+				margin-top: 10px
+			}
+			
+			.bar-border {
+				width: 160px;
+				height: 6px;
+				border: 1px solid #da2337;
+				border-radius: 3px;
+			}
+			
+			.bar-width {
+				height: 6px;
+				background: #da2337;
+				border-radius: 2px;
+			}
+			
+			.bar-txt {
+				color: #da2337;
+			}
+			
+			.bar-txt p {
+				font-size: 12px;
+				display: inline
+			}
+			
+			.bar-score {
+				clear: both;
+				margin-top: 40px
+			}
+			
+			.class-box {
+				height: 203px;
+				background: url(http://cdn.imreliable.net/asset/image/familyReport2/content-bg.png) no-repeat center;
+				background-size: contain;
+			}
+			
+			.class1 {
+				width: 200px;
+				height: 144px;
+				margin-top: 20px;
+				margin-left: 124px;
+				text-align: center;
+			}
+			
+			.class1 span {
+				font-size: 16px;
+			}
+			
+			.class1 img {
+				width: 90px;
+				height: 90px;
+				padding: 10px 0;
+			}
+			
+			.about-box {
+				height: 155px;
+				background: url(http://cdn.imreliable.net/asset/image/familyReport2/icon-group.png) no-repeat center top;
+				background-size: 90%;
+				margin-top: 10px;
+			}
+			
+			.about-box p {
+				text-indent: 30px;
+				padding-top: 90px;
+				font-size: 13px;
+				line-height: 30px;
+			}
+			/*二维码*/
+			
+			.foot {
+				height: 164px;
+				background: url(http://cdn.imreliable.net/asset/image/familyReport2/foot-bg.png);
+				background-size: contain;
+			}
+			
+			.Wchar-box,
+			.Wbar-box {
+				margin-left: 100px;
+				margin-top: 10px;
+				height: 120px;
+				color: #FFFFFF;
+			}
+			
+			.Wchar-box img {
+				width: 105px;
+				margin-left: 35px;
+				margin-top: 15px
+			}
+			
+			.Wbar-box svg {
+				width: 130px;
+				margin-left: 82px;
+				margin-top: 55px
+			}
+		</style>
+		<script type="text/x-handlebars-template" id="content-html">
+			{{#each this}}
+			<div class="report-box">
+				<!--头-->
+				<div class="head">
+					<div class="head-title pull-left">
+						<strong>睿莱体质检测说明</strong><br>
+						<span>Reliable Physical test report</sapn>                             
+                	</div>
+               		<div class="head-info pull-left">                    
+	                    <ul>
+	                        <li>
+	                            <p>姓名：{{ChildName}}&nbsp;&nbsp;&nbsp;&nbsp;{{genderfun Gender}}</p>
+	                        </li>
+	                        <li>
+	                            <p>学校：{{KindergartenName}}</p>
+	                        </li>
+	                        <li>
+	                            <p>班级：{{ClassName}}</p>
+	                        </li>
+	                        <li>
+	                            <p>测试时间：{{createtimefun CreateTime}}</p>
+	                        </li>
+	                    </ul>
+               		</div>
+            </div>
+            <div class="content">               
+				<div class="title-box title-red">
+					<p>&nbsp;&nbsp;&nbsp;体测介绍</p>
+				</div>
+				<div  class="introduce-box">
+					<p>身体素质是孩子活动、运动健康的基础。我们很欣喜的告诉您，您的孩子所在的幼儿园已经参加到“3-6岁幼儿体质监测提升计划”的项目当中，我们和园所每个学期都会花费大量的时间与精力着重关注孩子的体质健康情况。</p>
+				</div>
+				<div  class="title-box title-orange">
+					<p>&nbsp;&nbsp;&nbsp;能力象征</p>
+				</div>
+				<div  class="bar-box">
+					<div class="score pull-left">
+						<img class="pull-left" src="http://cdn.imreliable.net/asset/image/familyReport2/{{FitnessImg}}.png" />
+						<p class="pull-left">{{FitnessDesc}}</p>
+					</div>
+					<div class="bar pull-left">	
+						<div>
+							<p class="pull-left">{{ProjectName}}   &nbsp;&nbsp;&nbsp;</p>
+							<div class="bar-txt pull-left">
+								<span style="margin-left:{{barwidthfun Rank}}px;">{{Rank}}%</span>
+						<div class="bar-border">
+							<div class="bar-width" style="width:{{barwidthfun Rank}}px;"></div>
+						</div>
+						<p>超过了{{Rank}}%的同龄幼儿</p>
+					</div>
+				</div><br>
+				<div class="bar-score">
+					<p>{{ProjectName}} &nbsp;&nbsp;&nbsp;{{ProjectValue}}</p>
+				</div>
+			</div>
+			</div>
+			<div class="title-box title-yellow">
+				<p>&nbsp;&nbsp;&nbsp;相关分析</p>
+				<span>孩子下肢力量，上肢力量两项需要强化，通过针对性的练习，家长可以帮助孩子提升体质。</span>
+			</div>
+			<div class="class-box">
+				<div class="class1 pull-left">
+					<span>活动1：{{Video1Name}}</span><br>
+					<img  src="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket={{Video1Ticket}}" /><br>
+					<span>微信扫一扫查看课程</span>
+				</div>
+				<div class="class1 pull-left">
+					<span>活动2：{{Video2Name}}</span><br>
+					<img  src="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket={{Video2Ticket}}" /><br>
+					<span>微信扫一扫查看课程</span></div>
+			</div>
+			<div class="title-box title-green">
+				<p>&nbsp;&nbsp;&nbsp;体质相关</p>
+				<span>身体素质对生长发育，感觉统合，身体感知和适应能力有很大的影响。</span>
+			</div>
+			<div class="about-box">
+				<p>
+					亲爱的，你好，我是小睿。我们经常收到家长咨询孩子爱生病、体质弱怎么办，让宝宝合理运动是最好的解决方式。目前我们在全国已经为20多万孩子进行过体质测试，最懂中国宝贝的身体素质情况，及科学运动方法。了解更多内容与我们联系。
+				</p>
+			</div>
+			</div>
+			<div class="foot">
+				<div class="Wchar-box pull-left">
+					<span>第一步：关注“睿莱健康”</span><br>
+					<img class="Wchar" src="http://cdn.imreliable.net/asset/image/letter/wchat-icon.png" />
+				</div>
+				<div class="Wbar-box pull-left">
+					<span>第二步：点击“查看报告”，扫描条形码</span><br>
+					<!--<img class="Wbar" src="http://cdn.imreliable.net/asset/image/letter/wchat-bar.png" />-->
+					<svg id="barcode{{ChildId}}" style=""></svg><br>
+
+				</div>
+			</div>
+			</div>
+			{{/each }}
+		</script>
+		<script>
+			$(document).ready(function() {
+				var boyImgObj = {
+					"力量持久性": "boy-power-tiger",
+					"灵敏反应性": "boy-sensitive-leopard",
+					"协调灵活性": "boy-coordination-dolphin",
+					"平衡稳定性": "boy-balance-monkey"
+				};
+				var girlImgObj = {
+					"力量持久性": "girl-power-kangaroo",
+					"灵敏反应性": "girl-sensitive-deer",
+					"协调灵活性": "girl-coordination-goose",
+					"平衡稳定性": "girl-balance-cat"
+				};
+				var response = {    
+					"KindergartenName": "开元延长幼儿园",
+					    "Reports": [        {            
+						"ChildId": 252,
+						            "ChildName": "罗晨轩",
+						            "ClassName": "小一班",
+						            "Gender": 1,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001000122 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "平衡稳定性",
+						            "ProjectName": "走平衡木",
+						            "Rank": 75,
+						            "ProjectValue": "5.200s",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					},          {            
+						"ChildId": 257,
+						            "ChildName": "刘子煊",
+						            "ClassName": "小一班",
+						            "Gender": 1,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001000150 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "平衡稳定性",
+						            "ProjectName": "走平衡木",
+						            "Rank": 52,
+						            "ProjectValue": "11.500s",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					},          {            
+						"ChildId": 259,
+						            "ChildName": "苗田田",
+						            "ClassName": "小一班",
+						            "Gender": 1,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001000164 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "平衡稳定性",
+						            "ProjectName": "走平衡木",
+						            "Rank": 59,
+						            "ProjectValue": "5.900s",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					},          {            
+						"ChildId": 261,
+						            "ChildName": "谢孟乔",
+						            "ClassName": "小一班",
+						            "Gender": 2,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001000170 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "力量持久性",
+						            "ProjectName": "网球掷远",
+						            "Rank": 79,
+						            "ProjectValue": "7.700m",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					},          {            
+						"ChildId": 263,
+						            "ChildName": "刘钰彤",
+						            "ClassName": "小一班",
+						            "Gender": 2,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001000186 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "灵敏反应性",
+						            "ProjectName": "十米折返跑",
+						            "Rank": 79,
+						            "ProjectValue": "7.200s",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					},          {            
+						"ChildId": 265,
+						            "ChildName": "郭品萱",
+						            "ClassName": "小一班",
+						            "Gender": 2,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001000194 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "灵敏反应性",
+						            "ProjectName": "十米折返跑",
+						            "Rank": 75,
+						            "ProjectValue": "7.500s",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					},          {            
+						"ChildId": 267,
+						            "ChildName": "刘昊轩",
+						            "ClassName": "小一班",
+						            "Gender": 1,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001000208 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "灵敏反应性",
+						            "ProjectName": "十米折返跑",
+						            "Rank": 78,
+						            "ProjectValue": "6.900s",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					},          {            
+						"ChildId": 269,
+						            "ChildName": "白一晨",
+						            "ClassName": "小一班",
+						            "Gender": 1,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001000213 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "协调灵活性",
+						            "ProjectName": "双脚连续跳",
+						            "Rank": 69,
+						            "ProjectValue": "5.500cm",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					},          {            
+						"ChildId": 233,
+						            "ChildName": "王思南",
+						            "ClassName": "小一班",
+						            "Gender": 2,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001000025 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "灵敏反应性",
+						            "ProjectName": "十米折返跑",
+						            "Rank": 72,
+						            "ProjectValue": "7.800s",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					},          {            
+						"ChildId": 235,
+						            "ChildName": "魏嘉逸",
+						            "ClassName": "小一班",
+						            "Gender": 2,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001000037 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "平衡稳定性",
+						            "ProjectName": "走平衡木",
+						            "Rank": 63,
+						            "ProjectValue": "7.900s",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					},          {            
+						"ChildId": 237,
+						            "ChildName": "龙芷萱",
+						            "ClassName": "小一班",
+						            "Gender": 2,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001000047 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "灵敏反应性",
+						            "ProjectName": "十米折返跑",
+						            "Rank": 82,
+						            "ProjectValue": "6.900s",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					},          {            
+						"ChildId": 239,
+						            "ChildName": "吴雨桐",
+						            "ClassName": "小一班",
+						            "Gender": 2,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001000051 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "灵敏反应性",
+						            "ProjectName": "十米折返跑",
+						            "Rank": 75,
+						            "ProjectValue": "7.500s",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					},          {            
+						"ChildId": 1703,
+						            "ChildName": "张可意",
+						            "ClassName": "小一班",
+						            "Gender": 2,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001002994 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "灵敏反应性",
+						            "ProjectName": "十米折返跑",
+						            "Rank": 79,
+						            "ProjectValue": "7.200s",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					},          {            
+						"ChildId": 241,
+						            "ChildName": "张可心",
+						            "ClassName": "小一班",
+						            "Gender": 2,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001000065 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "灵敏反应性",
+						            "ProjectName": "十米折返跑",
+						            "Rank": 72,
+						            "ProjectValue": "7.800s",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					},          {            
+						"ChildId": 242,
+						            "ChildName": "樊雨桐",
+						            "ClassName": "小一班",
+						            "Gender": 2,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001000078 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "平衡稳定性",
+						            "ProjectName": "走平衡木",
+						            "Rank": 78,
+						            "ProjectValue": "4.500s",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					},          {            
+						"ChildId": 244,
+						            "ChildName": "包若辰",
+						            "ClassName": "小一班",
+						            "Gender": 1,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001000088 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "力量持久性",
+						            "ProjectName": "立定跳远",
+						            "Rank": 95,
+						            "ProjectValue": "90.000cm",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					},          {            
+						"ChildId": 246,
+						            "ChildName": "李嘉萱",
+						            "ClassName": "小一班",
+						            "Gender": 2,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001000096 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "协调灵活性",
+						            "ProjectName": "双脚连续跳",
+						            "Rank": 58,
+						            "ProjectValue": "4.600cm",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					},          {            
+						"ChildId": 248,
+						            "ChildName": "康钰晗",
+						            "ClassName": "小一班",
+						            "Gender": 2,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001000106 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "平衡稳定性",
+						            "ProjectName": "走平衡木",
+						            "Rank": 75,
+						            "ProjectValue": "5.500s",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					},          {            
+						"ChildId": 271,
+						            "ChildName": "梁蜜朵",
+						            "ClassName": "小一班",
+						            "Gender": 2,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001000227 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "协调灵活性",
+						            "ProjectName": "双脚连续跳",
+						            "Rank": 89,
+						            "ProjectValue": "3.600cm",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					},          {            
+						"ChildId": 275,
+						            "ChildName": "王肴琪",
+						            "ClassName": "小一班",
+						            "Gender": 1,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001000243 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "灵敏反应性",
+						            "ProjectName": "十米折返跑",
+						            "Rank": 75,
+						            "ProjectValue": "7.200s",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					},          {            
+						"ChildId": 277,
+						            "ChildName": "黄梓俊",
+						            "ClassName": "小一班",
+						            "Gender": 1,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001000250 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "平衡稳定性",
+						            "ProjectName": "走平衡木",
+						            "Rank": 61,
+						            "ProjectValue": "8.900s",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					},          {            
+						"ChildId": 283,
+						            "ChildName": "常皓然",
+						            "ClassName": "小一班",
+						            "Gender": 1,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001000284 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "灵敏反应性",
+						            "ProjectName": "十米折返跑",
+						            "Rank": 78,
+						            "ProjectValue": "6.900s",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					},          {            
+						"ChildId": 285,
+						            "ChildName": "孟琛鑫",
+						            "ClassName": "小一班",
+						            "Gender": 2,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001000298 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "灵敏反应性",
+						            "ProjectName": "十米折返跑",
+						            "Rank": 65,
+						            "ProjectValue": "8.500s",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					},          {            
+						"ChildId": 292,
+						            "ChildName": "赵辰馨予",
+						            "ClassName": "小一班",
+						            "Gender": 2,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001000328 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "灵敏反应性",
+						            "ProjectName": "十米折返跑",
+						            "Rank": 63,
+						            "ProjectValue": "8.500s",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					},          {            
+						"ChildId": 294,
+						            "ChildName": "张涵慕",
+						            "ClassName": "小一班",
+						            "Gender": 2,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001000331 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "灵敏反应性",
+						            "ProjectName": "十米折返跑",
+						            "Rank": 63,
+						            "ProjectValue": "8.500s",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					},          {            
+						"ChildId": 1737,
+						            "ChildName": "徐懿辰",
+						            "ClassName": "小一班",
+						            "Gender": 1,
+						            "CreateTime": "/Date(1448294400000-0000)/",
+						            "ChildCode": "61001001003013 ",
+						            "FitnessDesc": "您家的宝贝就像一头强壮的小老虎，特别牛逼，牛逼坏了。",
+						            "FitnessName": "协调灵活性",
+						            "ProjectName": "双脚连续跳",
+						            "Rank": 80,
+						            "ProjectValue": "4.500cm",
+						            "Video1Name": "拉个圆圈走走",
+						            "Video1Ticket": "gQGk8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyN1B3R28wVGhibF8xMDAwMDAwNzgAAgQUNlRaAwQAAAAA",
+						            "Video2Name": "直线挑战 ",
+						            "Video2Ticket": "gQFM8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydzk2cHAxVGhibF8xMDAwMGcwN0YAAgQUNlRaAwQAAAAA"        
+					}    ]
+				}
+				console.log(response);
+				Handlebars.registerHelper('genderfun', function(value) {
+					return value == 1 ? '♂' : value == 2 ? '♀' : '未知';
+				});
+				Handlebars.registerHelper('createtimefun', function(value) {
+					if(value) {
+						var dt = new Date(parseInt(value.slice(6, 19)));
+						var year = dt.getFullYear();
+						var month = dt.getMonth() + 1;
+						var date = dt.getDate();
+						var createTime = (year + "-" + month + "-" + date).replace(/\b(\w)\b/g, '0$1');
+						return createTime;
+					} else {
+						return '未知';
+					}
+				});
+				Handlebars.registerHelper('barwidthfun', function(value) {
+					var barwidth=value/100*160;
+					return barwidth;
+				});
+				for(item in response.Reports) {
+					response.Reports[item].KindergartenName = response.KindergartenName;
+					if(response.Reports[item].Gender == 1) {
+						response.Reports[item].FitnessImg = boyImgObj[response.Reports[item].FitnessName]
+
+					} else if(response.Reports[item].Gender == 2) {
+						response.Reports[item].FitnessImg = girlImgObj[response.Reports[item].FitnessName]
+					}
+				}
+
+				var template = Handlebars.compile($("#content-html").html());
+				var htmlText = template(response.Reports);
+				$("#content").append(htmlText);
+
+				for(var codejson in response.Reports) {
+					JsBarcode("#barcode" + response.Reports[codejson].ChildId, response.Reports[codejson].ChildCode, {
+						width: "1px",
+						height: "30px",
+						fontSize: 15,
+						textAlign: "center",
+					});
+				}
+
+			})
+		</script>
+	</head>
+
+	<body>
+		<div id="content">
+		</div>
+	</body>
+
+</html>
