@@ -1,0 +1,2070 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>改善方案</title>
+		<link href="http://cdn.imreliable.net/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="http://cdn.imreliable.net/jquery/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="http://cdn.imreliable.net/bootstrap/js/bootstrap.min.js"></script>
+		<script src="http://cdn.bootcss.com/highcharts/5.0.7/highcharts.js"></script>
+		<script src="http://cdn.bootcss.com/highcharts/5.0.7/highcharts-more.js"></script>
+		<script src="http://cdn.bootcss.com/underscore.js/1.8.3/underscore.js"></script>
+		<script src="http://cdn.bootcss.com/handlebars.js/4.0.6/handlebars.min.js"></script>
+		<script src="http://cdn.bootcss.com/jsbarcode/3.5.7/JsBarcode.all.min.js"></script>
+		<script src="http://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+
+		<style type="text/css">
+			ul,
+			ol {
+				list-style-type: none;
+				padding: 0px;
+				margin: 0px;
+			}
+			
+			body {
+				font-family: "microsoft yahei";
+				color: #222222;
+				margin: 0;
+				padding: 0;
+			}
+			
+			a {
+				color: grey;
+			}
+			
+			a:link {
+				text-decoration: none;
+			}
+			
+			a:hover {
+				cursor: pointer;
+			}
+			
+			ul {
+				list-style: none;
+			}
+			
+			img {
+				width: 28%;
+				float: left;
+			}
+			
+			body {
+				font-family: "microsoft yahei" !important;
+			}
+			
+			h4 {
+				font-size: 18px;
+				font-family: 'Microsoft YaHei';
+			}
+			
+			.report-box {
+				width: 794px;
+				height: 1123px;
+				margin: 0 auto;
+				position: relative;
+				clear: both;
+			}
+			
+			.head-title {
+				text-align: center;
+				display: inline-block;
+				/*height: 88px;*/
+				width: 100%;
+				padding-top: 35px;
+			}
+			
+			.hr-class {
+				margin-top: -2px;
+			}
+			
+			.result-conter {
+				height: 400px;
+				padding: 0 32px;
+				padding-top: 24px;
+			}
+			
+			.result-hightchart {
+				float: left;
+				width: 430px;
+				height: 318px;
+			}
+			
+			.result-text {
+				width: 298px;
+				float: right;
+				height: 318px;
+			}
+			
+			.result-text span {
+				color: #b92131;
+				font-size: 15px;
+				padding: 17px 0;
+				display: block;
+			}
+			
+			.result-text p {
+				color: #444444;
+				font-size: 13px;
+				line-height: 16px;
+				letter-spacing: 1px;
+			}
+			
+			.result-text .result-text-button img {
+				width: 8%;
+				height: 8%;
+				margin-left: 53px;
+				margin-top: -37px;
+			}
+			
+			.week-table {
+				padding: 0 32px;
+			}
+			
+			.table-box {
+				text-align: center !important;
+				color: #424142;
+			}
+			
+			.table-bordered>thead>tr>td {
+				border-right: 1px solid #919191 !important;
+			}
+			
+			.week-table h4 img,
+			.result-conter h4 img {
+				width: 3%;
+				margin-right: 9px;
+			}
+			
+			thead th {
+				padding: 15px 0px 8px 0px !important;
+				width: 120px !important;
+				text-align: center !important;
+			}
+			
+			thead tr {
+				height: 45px;
+			}
+			
+			thead {
+				border-bottom: none;
+			}
+			
+			thead tr:first-child th {
+				border-right: 2px solid #fff;
+			}
+			
+			thead tr:first-child th:last-child {
+				border-right: 1px solid #919191;
+			}
+			
+			thead tr:first-child {
+				background: #b92131;
+				color: white;
+			}
+			
+			thead tr:first-child th:nth-child(odd) {
+				background: #e4564e;
+			}
+			
+			thead tr:nth-child(2) {
+				font-size: 16px;
+			}
+			/*2page*/
+			
+			.week-background {
+				background: #fcf6f3 url(http://cdn.imreliable.net/asset/image/A4.1ImproveReport/improvementProgram-bgl.png) no-repeat bottom right;
+				background-size: 32%;
+			}
+			
+			.footer {
+				float: left;
+				width: 794px;
+				text-align: center;
+				font-size: 10px;
+				line-height: 6px;
+				padding-top: 19px;
+			}
+			
+			.footer:first-of-type {
+				display: none;
+			}
+			
+			.foot-zc {
+				color: #7f7f80;
+			}
+			
+			.foot-english {
+				color: #c6c2c1;
+			}
+			
+			.head {
+				clear: both;
+				width: 794px;
+				height: 64px;
+				background: #b92131;
+				color: white;
+				line-height: 64px;
+				font-size: 25px;
+				text-align: center;
+			}
+			/*内容*/
+			
+			.ul-list {
+				margin: 0;
+				padding: 0;
+			}
+			
+			.week-box {
+				height: 200px;
+				padding: 0 32px;
+			}
+			
+			.center-box {
+				width: 586px;
+				float: left;
+				font-size: 13px;
+				color: #444444;
+				line-height: 19px;
+			}
+			
+			.tile {
+				padding: 9px 0;
+				font-size: 19px;
+				color: black;
+			}
+			
+			.week-box .tile {
+				background: url(http://cdn.imreliable.net/asset/image/A4.1ImproveReport/xie-line.png) no-repeat 18px 10px;
+				background-size: 5.5%;
+				height: 53px;
+				width: 400px;
+			}
+			
+			.week-box .tile span {
+				float: left;
+				padding-right: 20px;
+				color: #b92131;
+				font-size: 13px;
+				font-weight: 600;
+			}
+			
+			.week-box .tile p {
+				float: left;
+				padding-top: 7px;
+				font-size: 18px;
+			}
+			
+			.week-box img {
+				float: right;
+				width: 17%;
+			}
+			
+			.remarks {
+				clear: both;
+				margin-top: 15px;
+			}
+			
+			.remarks input {
+				width: 507px;
+				margin-left: 10px;
+				border: 1px solid #a0a0a0;
+				background-color: transparent;
+			}
+			
+			.remarks span {
+				line-height: 25px;
+				display: block;
+				float: left;
+			}
+			
+			.tbody-left-tr {
+				padding-top: 10px;
+				width: 122px;
+				height: 94px;
+				border-right: 1px solid #ddd;
+				border-bottom: 1px solid #ddd;
+				font-size: 15px;
+				font-weight: 600;
+				background: #f8ece6;
+			}
+			
+			.tbody-left-tr b {
+				font-size: 25px;
+			}
+			
+			.tbody-right-tr {
+				width: 121.8px;
+				height: 94px;
+				border-right: 1px solid #ddd;
+				border-bottom: 1px solid #ddd;
+				text-align: center;
+				float: left;
+				background: #fcf6f4;
+			}
+			
+			.tbody-right-tr img {
+				float: left;
+				margin: 18px 0 3px 43px;
+			}
+			
+			.tbody-right-tr p {
+				float: left;
+				width: 120px;
+				clear: both;
+				font-size: 15px;
+			}
+			
+			.week-table .table {
+				margin-bottom: 0 !important;
+			}
+			
+			.showKinNameInfo,
+			#showKinNameInfoTitle {
+				margin-left: -6px;
+			}
+			
+			.className,
+			#className {
+				margin-left: -6px;
+				margin-right: -6px;
+			}
+			/*体育6项目*/
+			
+			.test-subjects {
+				margin: 0 -32px;
+			}
+			
+			.test-subjects li {
+				height: 239px;
+			}
+			
+			.test-subjects-title {
+				width: 231px;
+				height: 239px;
+				background: url('http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-E.png') no-repeat center right;
+				background-size: 10%;
+				float: left;
+				margin-left: 38px;
+			}
+			
+			.test-subjects-title img {
+				margin-top: 55px;
+				width: 46%;
+			}
+			
+			.test-subjects-title h4 {
+				color: #444444;
+				font-size: 14px;
+				margin: 113px 0 38px 129px;
+				font-weight: 600;
+			}
+			
+			.test-subjects-title b {
+				color: #323333;
+				font-size: 15px;
+				line-height: 30px;
+			}
+			
+			.test-subjects-title span {
+				color: #666666;
+				font-size: 12px;
+			}
+			
+			.test-subjects-text {
+				padding-top: 3px;
+			}
+			
+			.test-subjects-text li {
+				width: 500px;
+				height: 60px;
+				float: left;
+				margin-top: 15px;
+			}
+			
+			.test-subjects-text-img span {
+				float: left;
+				clear: both;
+				width: 80px;
+				text-align: center;
+			}
+			
+			.test-subjects-text li img {
+				width: 8%;
+				margin: 0 22px;
+			}
+			
+			.test-subjects-text li em {
+				font-size: 15px;
+				color: #b92131;
+				font-style: normal;
+				margin-bottom: 10px;
+			}
+			
+			.test-subjects-text li span {
+				color: #666666;
+				font-size: 12px;
+				line-height: 22px;
+			}
+			
+			.week-table h4 span {
+				font-size: 11px;
+				padding-left: 20px;
+			}
+			
+			.test-subjects .li-background {
+				background: #f6f6f6 url(http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-bg.png) no-repeat center right;
+				background-size: 100%;
+			}
+			/*课程+注意*/
+			
+			.course-conter {
+				height: 135px !important;
+				font-size: 14px;
+			}
+			
+			.dangerous-conter {
+				font-size: 14px;
+				height: 270px !important;
+			}
+			
+			.dangerous-conter p,
+			.course-conter p {
+				margin-left: 5px;
+			}
+			
+			.qrcode {
+				text-align: center;
+				float: right;
+				width: 17%;
+				height: auto;
+				margin-top: -15px;
+			}
+			
+			.btn-style {
+				width: 12rem;
+			}
+			
+			.breakpoint-1200 {
+				height: 7861px !important;
+			}
+		</style>
+		<script type="text/x-handlebars-template" id="bigClassHTML">
+			{{#each this}}
+			<div class="col-md-2 searchTypesButton">
+				<input type="radio" name="ClassId" value="{{ClassId}},{{ClassType}},{{ClassName}}" />
+				<label>{{ClassName}}</label>
+			</div>
+			{{/each}}
+		</script>
+		<script type="text/x-handlebars-template" id="middleClassHTML">
+			{{#each this}}
+			<div class="col-md-2 col-sm-2 col-xs-2 searchTypesButton">
+				<input type="radio" name="ClassId" value="{{ClassId}},{{ClassType}},{{ClassName}}" />
+				<label>{{ClassName}}</label>
+			</div>
+			{{/each}}
+		</script>
+		<script type="text/x-handlebars-template" id="smallClassHTML">
+			{{#each this}}
+			<div class="col-md-2 col-sm-2 col-xs-2 searchTypesButton">
+				<input type="radio" name="ClassId" value="{{ClassId}},{{ClassType}},{{ClassName}}" />
+				<label>{{ClassName}}</label>
+			</div>
+			{{/each}}
+		</script>
+		<script type="text/x-handlebars-template" id="bestSmallClassHTML">
+			{{#each this}}
+			<div class="col-md-2 col-sm-2 col-xs-2 searchTypesButton">
+				<input type="radio" name="ClassId" value="{{ClassId}},{{ClassType}},{{ClassName}}" />
+				<label>{{ClassName}}</label>
+			</div>
+			{{/each}}
+		</script>
+
+		<script id="PrincipalAttClsStuDetailInfo3Html" type="text/x-handlebars-template">
+			{{#each this}}
+			<td style="text-align:center;vertical-align:middle">
+				<nobr><span id="{{day}}cqInfo{{childId}}">{{cq}}</span></nobr>
+				<input type="hidden" value="{{cqStatus}}" id="{{day}}cqStatus{{childId}}" />
+			</td>
+			{{/each}}
+		</script>
+		<!-- 2page课程表 -->
+		<script id="item-content-template" type="text/x-handlebars-template">
+			<ul class="ul-list">
+				<li class="week-box ">
+					<div class="tile">
+						<span>{{WeakDay}}</span>
+						<p>{{Title}}</p>
+					</div>
+					<div class="center-box">
+						<p>活动准备：{{ActivityGetRead}}</p>
+						活动过程：{{ActivityProcess}}
+						<p class="remarks">调整难度：{{ActivityDifficult}}</p>
+					</div>
+					<div class="qrcode">
+						<div id="{{ClassId}}{{VideoName}}"></div>
+						<div>扫一扫，观看课程</div>
+					</div>
+				</li>
+			</ul>
+		</script>
+		<script type="text/x-handlebars-template" id="table-template-html">
+			{{#each this}}
+			<div class="tbody-right-tr">
+				<img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/{{ItemCourseIcon}}" alt="" />
+				<p>{{Title}}</p>
+			</div>
+			{{/each}}
+		</script>
+		<script type="text/x-handlebars-template" id="footer-html">
+			<div class="footer">
+				<p class="foot-zc">睿莱（RELIABLE）儿童体质检测中心</p>
+				<p class="foot-english">RELIABLE Children Physical Fitness Testing Center</p>
+			</div>
+		</script>
+		<script type="text/x-handlebars-template" id="week-course-title-html">
+			<div class="head  page-break-before">
+				第{{NoNumber}}月课程
+			</div>
+		</script>
+		<script type="text/x-handlebars-template" id="content-html">
+			{{#each this}}
+			<div class="report-box  page-break-before ">
+				<div class="head-title">
+					<h2>               
+             			 {{ClassTime}}{{ClassName}}体测结果分析
+         		 	</h2>
+				</div>
+				<div class="result-conter">
+					<h4>
+                <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/title-icon1.png" />
+                结果和说明
+            </h4>
+					<hr class="hr-class" />
+					<div class="result-hightchart">
+						<div id="container-hightchar{{ClassId}}" style="width: 390px; height: 300px; margin: 0 auto; margin-left: -10px; "></div>
+					</div>
+					<div class="result-text">
+						<div>
+							<span>结果分析</span>
+						</div>
+						<p>{{CommentContent}}</p>
+						<div>
+							<span>数据对比</span>
+						</div>
+						<p>{{AnalysisContent}}</p>
+					</div>
+				</div>
+				<div class="week-table">
+					<h4>
+                <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/title-icon2.png" />
+                相关动作<span>根据大数据分析，睿莱体测筛选出与六项身体素质相关联动作，为生活中孩子的素质改善提供强化指导。</span>
+            </h4>
+					<hr class="hr-class" />
+					<div class="test-subjects">
+						<ul class="ul-list">
+							<!-- 网球掷远（上肢力量） -->
+							<li class="li-background">
+								<div class="test-subjects-title">
+									<img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-icon1.png" />
+									<h4>相关联动作</h4>
+									<b>网球掷远（上肢力量）</b><br />
+								</div>
+								<div class="test-subjects-text">
+									<ul>
+										<li>
+											<div class="test-subjects-text-img">
+												<img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon1.png" />
+												<span>原地拍球</span>
+											</div>
+											<p>
+												<em> 相关性：20.65%</em><br />
+												<span>皮球是幼儿童年时的重要“玩伴”，原地、跑动中拍球是幼儿的必备“技能”</span>
+											</p>
+										</li>
+										<li>
+											<div class="test-subjects-text-img">
+												<img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon2.png" />
+												<span>双手接球</span>
+											</div>
+											<p>
+												<em> 相关性：34.61%</em><br />
+												<span>生活中常用到接的动作，比如玩群体性运动，以及把球扔来扔去的游戏等</span>
+											</p>
+										</li>
+										<li>
+											<div class="test-subjects-text-img">
+												<img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon3.png" />
+												<span>地滚球</span>
+											</div>
+											<p>
+												<em> 相关性：20.63%</em><br />
+												<span>在生活中经常滚动物体，使其紧贴地面滚动，给动物喂食等游戏常用到此动作</span>
+											</p>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<!--立定跳远（下肢力量） -->
+							<li>
+								<div class="test-subjects-title">
+									<img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-icon2.png" />
+									<h4>相关联动作</h4>
+									<b>立定跳远（下肢力量）</b><br />
+								</div>
+								<div class="test-subjects-text">
+									<ul>
+										<li>
+											<div class="test-subjects-text-img">
+												<img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon4.png" />
+												<span>单脚跳</span>
+											</div>
+											<p>
+												<em> 相关性：70.63%</em><br />
+												<span>幼儿在游戏中常用到单脚跳的动作，例如像跳房子、斗鸡等</span>
+											</p>
+										</li>
+										<li>
+											<div class="test-subjects-text-img">
+												<img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon5.png" />
+												<span>前跨跳</span>
+											</div>
+											<p>
+												<em> 相关性：36.51%</em><br />
+												<span>日常活动中经常会跨过一些障碍物，当有什么挡路时，跳过去使幼儿避免绊倒</span>
+											</p>
+										</li>
+										<li>
+											<div class="test-subjects-text-img">
+												<img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon6.png" />
+												<span>踢球</span>
+											</div>
+											<p>
+												<em> 相关性：33.18%</em><br />
+												<span>足球是孩子最喜欢的游戏“伙伴”，幼儿常用踢足球玩乐，还可用于移开物体</span>
+											</p>
+										</li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!--脚码-->
+				<div class="footer" style="margin-top: 32px;">
+					<p class="foot-zc">睿莱（RELIABLE）儿童体质检测中心</p>
+					<p class="foot-english">RELIABLE Children Physical Fitness Testing Center</p>
+				</div>
+			</div>
+			<!-- 2page -->
+			<div class="report-box  page-break-before ">
+				<div class="week-table" style="padding-top:80px">
+					<div class="test-subjects ">
+						<ul id="ul-list">
+							<!-- 走平衡木（平衡力） -->
+							<li class="li-background">
+								<div class="test-subjects-title">
+									<img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-icon3.png" />
+									<h4>相关联动作</h4>
+									<b>走平衡木（平衡力)</b><br />
+								</div>
+								<div class="test-subjects-text">
+									<ul>
+										<li>
+											<div class="test-subjects-text-img">
+												<img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon4.png" />
+												<span>单脚跳</span>
+											</div>
+											<p>
+												<em> 相关性：42.66%</em><br />
+												<span>幼儿在游戏中常用到单脚跳的动作，例如像跳房子、斗鸡等</span>
+											</p>
+										</li>
+										<li>
+											<div class="test-subjects-text-img">
+												<img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon7.png" />
+												<span>前滑步</span>
+											</div>
+											<p>
+												<em> 相关性：21.65%</em><br />
+												<span>孩子常常模仿马儿奔跑，用到前滑步动作，同时，跆拳道、武术中也经常用到</span>
+											</p>
+										</li>
+										<li>
+											<div class="test-subjects-text-img">
+												<img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon8.png" />
+												<span>侧滑步</span>
+											</div>
+											<p>
+												<em> 相关性：21.38%</em><br />
+												<span>在躲避、反应类游戏中经常用到侧滑步动作，也是篮球运动最基本的动作之一</span>
+											</p>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<!--十米折返跑（灵敏） -->
+							<li>
+								<div class="test-subjects-title">
+									<img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-icon4.png" />
+									<h4>相关联动作</h4>
+									<b>十米折返跑（灵敏）</b><br />
+								</div>
+								<div class="test-subjects-text">
+									<ul>
+										<li>
+											<div class="test-subjects-text-img">
+												<img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon7.png" />
+												<span>前滑步</span>
+											</div>
+											<p>
+												<em> 相关性：28.96%</em><br />
+												<span>孩子常常模仿马儿奔跑，用到前滑步动作，同时，跆拳道、武术中也经常用到</span>
+											</p>
+										</li>
+										<li>
+											<div class="test-subjects-text-img">
+												<img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon8.png" />
+												<span>侧滑步</span>
+											</div>
+											<p>
+												<em> 相关性：20.38%</em><br />
+												<span>在躲避、反应类游戏中经常用到侧滑步动作，也是篮球运动最基本的动作之一</span>
+											</p>
+										</li>
+										<li>
+											<div class="test-subjects-text-img">
+												<img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon1.png" />
+												<span>原地拍球</span>
+											</div>
+											<p>
+												<em> 相关性：44.96%</em><br />
+												<span>皮球是幼儿童年时的重要“玩伴”，原地、跑动中拍球是幼儿的必备“技能”</span>
+											</p>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<!--坐位体前屈（柔韧） -->
+							<li class="li-background">
+								<div class="test-subjects-title" style="background: url(http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects1.png) no-repeat center right; background-size: 10%;">
+									<img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/title-sit-icon.png" />
+									<h4>相关联动作</h4>
+									<b>坐位体前屈（柔韧）</b><br />
+								</div>
+								<div class="test-subjects-text">
+									<ul>
+										<li style="margin-top: 92px;">
+											<div class="test-subjects-text-img">
+												<img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon8.png" />
+												<span>侧滑步</span>
+											</div>
+											<p>
+												<em> 相关性：34.12%</em><br />
+												<span>在躲避、反应类游戏中经常用到侧滑步动作，也是篮球运动最基本的动作之一</span>
+											</p>
+										</li>
+
+									</ul>
+								</div>
+							</li>
+							<!-- 双脚连续跳（协调） -->
+							<li>
+								<div class="test-subjects-title" style="background: url(http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects2.png) no-repeat center right; background-size: 10%;">
+									<img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/title-double-icon.png" />
+									<h4>相关联动作</h4>
+									<b> 双脚连续跳（协调）</b><br />
+								</div>
+								<div class="test-subjects-text">
+									<ul>
+										<li style="margin-top: 55px;">
+											<div class="test-subjects-text-img">
+												<img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon4.png" />
+												<span>单脚跳</span>
+											</div>
+											<p>
+												<em> 相关性：50.6%</em><br />
+												<span>幼儿在游戏中常用到单脚跳的动作，例如像跳房子、斗鸡等</span>
+											</p>
+										</li>
+										<li>
+											<div class="test-subjects-text-img">
+												<img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon7.png" />
+												<span>前滑步</span>
+											</div>
+											<p>
+												<em> 相关性：22.51%</em><br />
+												<span>孩子常常模仿马儿奔跑，用到前滑步动作，同时，跆拳道、武术中也经常用到</span>
+											</p>
+										</li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!--脚码-->
+				<div class="footer" style="margin-top: 32px;">
+					<p class="foot-zc">睿莱（RELIABLE）儿童体质检测中心</p>
+					<p class="foot-english">RELIABLE Children Physical Fitness Testing Center</p>
+				</div>
+			</div>
+			<div class="report-box  page-break-before ">
+				<div class="head-title">
+					<h2>
+                {{ClassTime}}{{ClassName}}健康课程表
+            </h2>
+				</div>
+				<div class="course-conter result-conter">
+					<h4>
+                <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/title-icon1.png" />
+                课程说明
+            </h4>
+					<hr class="hr-class" />
+					<div class="course-explain ">
+						<p>根据幼儿的体质检测结果、身体素质与动作发展规律、生理与认知情感发展规律等多维度相结合，制定明确的课程目标，再根据课程目标在课程库中选择最适合的课程内容编写成实际应用的改善方案。</p>
+					</div>
+				</div>
+				<div class="dangerous-conter result-conter">
+					<h4>
+                <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/title-icon4.png" />
+                注意事项
+            </h4>
+					<hr class="hr-class" />
+					<div class="course-explain ">
+						<p>
+							（一）根据孩子自身的基本情况进行练习，在安排孩子的体育活动时应遵循运动量与难度由小到大的原则，并及时做出适宜的调整，以达到发展幼儿体质、提高身体素质的目的。 <br />（二）运动中根据孩子的个人情况进行适当地休息，如有不适，立即停止活动。 <br />（三）孩子做出违规和危险的动作需及时制止，以避免受伤。 <br />（四）必要时给予帮助和保护。<br />（五）做好充分的准备活动和结束后的放松活动。<br />（六）在运动前检查场地和器材，确保安全。 <br />（七）均衡膳食，避免过度的糖和油脂的摄入
+						</p>
+					</div>
+				</div>
+				<div class="week-table">
+					<h4>
+                <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/title-icon5.png" />
+                本学期课表
+            </h4>
+					<hr class="hr-class" />
+					<div class="table-box">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th></th>
+									<th colspan="5"> 课程项目</th>
+								</tr>
+							</thead>
+						</table>
+						<div class="tbody-left" style="width: 121px;height: 376px;float: left;">
+							<div class="tbody-left-tr">
+								MONTH<br><b>1</b><br />第一月
+							</div>
+							<div class="tbody-left-tr">
+								MONTH<br><b>2</b><br />第二月
+							</div>
+							<div class="tbody-left-tr">
+								MONTH<br><b>3</b><br />第三月
+							</div>
+							<div class="tbody-left-tr">
+								MONTH<br><b>4</b><br />第四月
+							</div>
+						</div>
+						<div class="tbody-right" style="width: 609px;height: 376px;float: left;" id="table-content{{ClassId}}">
+						</div>
+					</div>
+				</div>
+
+				<div class="footer" style="margin-top:85px;">
+					<p class="foot-zc">睿莱（RELIABLE）儿童体质检测中心</p>
+					<p class="foot-english">RELIABLE Children Physical Fitness Testing Center</p>
+				</div>
+			</div>
+			<!--3page------------------------>
+			<div class="report-box  page-break-before " id="tableList{{ClassId}}">
+			</div>
+			{{/each}}
+		</script>
+
+		<script>
+			var PhysicalProjectToQuality3 = {
+				"1": "身高",
+				"2": "体重",
+				"3": "下肢力量",
+				"4": "协调性",
+				"5": "上肢力量",
+				"6": "平衡力",
+				"7": "柔韧性",
+				"8": "灵敏性",
+				"9": "位移能力",
+				"10": "物体控制"
+			};
+			var projectType = {
+				"12": "身高",
+				"13": "体重",
+				"14": "坐位体前屈",
+				"15": "立定跳远",
+				"16": "双脚连续跳",
+				"17": "折返跑",
+				"18": "网球掷远",
+				"19": "平衡木"
+			};
+			var week = {
+				1: "一",
+				2: "二",
+				3: "三",
+				4: "四",
+				5: "五"
+			};
+			var highchartsFn = function(id, kgdDate, classDate, proArr) {
+				$('#container-hightchar' + id).highcharts({
+					chart: {
+						polar: true,
+						type: 'line'
+					},
+					title: {
+						text: ''
+					},
+					xAxis: {
+						categories: proArr,
+						tickmarkPlacement: 'on',
+						lineWidth: 0
+					},
+					yAxis: {
+						gridLineInterpolation: 'polygon',
+						min: 0,
+						tickInterval: 1,
+						max: 5,
+						gridLineColor: '#000000',
+						lineColor: '#000000',
+						labels: {
+							enabled: false
+						}
+					},
+					tooltip: {
+						shared: true,
+						pointFormat: '<span style="color:{series.color}">得分: <b>{point.y:,.0f}</b><br/>'
+					},
+
+					legend: {
+						enabled: false
+					},
+					credits: {
+						enabled: false
+					},
+					series: [{
+						name: '',
+						color: "#f44a36",
+						data: kgdDate,
+						showInLegend: false
+					}, {
+						name: '',
+						color: "#4879df",
+						data: classDate,
+						showInLegend: false
+					}, ]
+				});
+			};
+			var kdgChartDataDispose = function(data) {
+				var dataArr = [];
+				var objNameArr = [];
+				for(var item in data) {
+					dataArr.push(data[item].AVGScore);
+					objNameArr.push(data[item].ProName);
+				}
+				return {
+					DataArr: dataArr,
+					ObjNameArr: objNameArr
+				};
+			};
+			//学年度相关月份计算
+			var semosterMonth = function() {
+				var nowDate = new Date();
+				var oneSemoster = [2, 3, 4, 5, 6, 7];
+				var twoSemoster = [8, 9, 10, 11, 12, 1];
+				var monthObj = {};
+				if(oneSemoster.some(function(s) {
+						return s == nowDate.getMonth() + 1;
+					})) {
+					monthObj.StartTime = nowDate.getFullYear() + '-02-01';
+					monthObj.FinishTime = nowDate.getFullYear() + '-07-31';
+					monthObj.FinishText = nowDate.getFullYear() + '年3月学期';
+					monthObj.MonthArr = oneSemoster;
+				} else {
+					var endYear = 0;
+					var startYear = 0;
+					if((nowDate.getMonth() + 1) >= 8 && (nowDate.getMonth() + 1) <= 12) {
+						startYear = nowDate.getFullYear();
+						endYear = nowDate.getFullYear() + 1;
+					} else {
+						startYear = nowDate.getFullYear() - 1;
+						endYear = nowDate.getFullYear();
+					}
+					monthObj.StartTime = startYear + '-08-01';
+					monthObj.FinishTime = endYear + '-01-31';
+					monthObj.FinishText = startYear + '年9月学期';
+					monthObj.MonthArr = twoSemoster;
+				}
+				return monthObj;
+			};
+
+			var contentTxt = function(className, kdgData, classData) {
+				var classPhyResultGrade;
+				var contranstGrade;
+				var classTotalScore = eval(kdgData.join("+"));
+				var kindergartenTotalScore = eval(classData.join("+"));
+				if(classTotalScore > 31) {
+					classPhyResultGrade = "优秀";
+				} else if(classTotalScore < 31 && classTotalScore >= 28) {
+					classPhyResultGrade = "良好";
+				} else if(classTotalScore < 28 && classTotalScore >= 21) {
+					classPhyResultGrade = "合格";
+				} else {
+					classPhyResultGrade = "不合格";
+				}
+				var badItemArr = [];
+				var badComment = "";
+				var sortMapArr = [];
+				for(var i = 0, l = kdgData.length; i < l; i++) {
+					var sortMap = {};
+					sortMap['TestObject'] = i;
+					sortMap['Score'] = kdgData[i];
+					if(kdgData[i] < 3) {
+						badItemArr.push(i);
+					}
+					sortMapArr.push(sortMap);
+				}
+
+				if(badItemArr.length > 0) {
+					for(var t = 0; t < badItemArr.length; t++) {
+						if(t == badItemArr.length - 1) {
+							badComment += PhysicalProjectToQuality3[badItemArr[t] + 1];
+						} else {
+							badComment += (PhysicalProjectToQuality3[badItemArr[t] + 1] + "、");
+						}
+					}
+				} else {
+					var sortResult = _.sortBy(sortMapArr, 'Score');
+					badComment = PhysicalProjectToQuality3[sortResult[0].TestObject + 1] + '、' + PhysicalProjectToQuality3[sortResult[1].TestObject + 1];
+				}
+				var generalCommentContent = "体测结果显示," + className + "孩子体质总体发展" + classPhyResultGrade + ",其中" + badComment + "相对较弱，需要重点关注";
+				if(classTotalScore < kindergartenTotalScore) {
+					contranstGrade = "落后于";
+				} else if(classTotalScore == kindergartenTotalScore) {
+					contranstGrade = "相当于";
+				} else if(classTotalScore > kindergartenTotalScore) {
+					contranstGrade = "优秀于";
+				}
+				var contranstBadArr = [];
+				var contranstBadContent = "";
+				for(var c = 0; c < 8; c++) {
+					if(kdgData[c] < classData[c]) {
+						contranstBadArr.push(c);
+					}
+				}
+				if(contranstBadArr.length > 0) {
+					for(var p = 0, d = contranstBadArr.length; p < d; p++) {
+						if(p == d - 1) {
+							contranstBadContent += PhysicalProjectToQuality3[contranstBadArr[p] + 1];
+						} else {
+							contranstBadContent += (PhysicalProjectToQuality3[contranstBadArr[p] + 1] + "、");
+						}
+					}
+				}
+				var generalAnalysisContent = className + '与全园体测数据对比显示，本班孩子体质总体水平' + contranstGrade + "全园水平" + (contranstBadContent.length > 0 ? (",其中" + contranstBadContent + "低于全园对应测试项的平均水平。") : "。");
+				return {
+					AnalysisContent: generalAnalysisContent,
+					CommentContent: generalCommentContent
+				}
+			}
+			var improveInformation = function(id, ImproveInfo) {
+				var improveInformation = _.shuffle(ImproveInfo);
+				var index = 0;
+				var tableInfoArr = [];
+				var itemTypeIcon = {
+					6: "course-lise-run-icon.png",
+					8: "course-list-balance-icon.png",
+					4: "course-list-broad-icon.png",
+					3: "course-list-sit-icon.png",
+					7: "course-list-throw-icon.png",
+					5: "course-lis-double-icon.png"
+				}
+				var indexData = 12901;
+				for(var jsonInfo = 0, jsonLength = improveInformation.length; jsonInfo < jsonLength; jsonInfo++) {
+					indexData++;
+					var itemTable = {
+						Title: improveInformation[jsonInfo].Name,
+						ItemCourseIcon: itemTypeIcon[improveInformation[jsonInfo].ProjectType]
+					};
+					tableInfoArr.push(itemTable);
+					if(index % 5 == 0) {
+						var itemTitle = {
+							NoNumber: week[index / 5 + 1]
+						};
+						var template = Handlebars.compile($("#week-course-title-html").html());
+						var titleTxt = template(itemTitle);
+						$("#tableList" + id).append(titleTxt);
+					}
+					var videoName = improveInformation[jsonInfo].VideoName;
+					var itemInfo = {
+						ClassId: id,
+						WeakDay: week[index % 5 + 1],
+						Title: improveInformation[jsonInfo].Name,
+						ActivityGetRead: improveInformation[jsonInfo].Equipments,
+						ActivityProcess: improveInformation[jsonInfo].Content,
+						VideoName: indexData,
+						ActivityDifficult: (improveInformation[jsonInfo].Difficult == null || improveInformation[jsonInfo].Difficult == "") ? "没有设定增减难度" : improveInformation[jsonInfo].Difficult
+					};
+					var templateInfo = Handlebars.compile($("#item-content-template").html());
+					var titleInfo = templateInfo(itemInfo);
+					$("#tableList" + id).append(titleInfo);
+					var url = "http://testbao.imreliable.net/Pages/Static/VideoCourse.html?name=" + videoName;
+					$('#' + id + itemInfo.VideoName).qrcode({
+						width: 125,
+						height: 125,
+						text: url
+					});
+					if((index + 1) % 5 == 0) {
+						var templateInfo = Handlebars.compile($("#footer-html").html());
+						$("#tableList" + id).append(templateInfo);
+					}
+					index++;
+				}
+				var templateTable = Handlebars.compile($("#table-template-html").html());
+				var titleInfo = templateTable(tableInfoArr);
+				$("#table-content" + id).append(titleInfo);
+				$("#tableList li:even").css("backgroundColor", "#fcf6f3");
+			}
+			$(document).ready(function() {
+				var physicalResult = {
+					"serviceUnitAbstrac": [{
+						"__type": "Admin.ServiceInterface.Services.ExportService+ImproveServiceUnitModel, Admin.ServiceInterface",
+						"Master": {
+							"Id": 6250,
+							"ServiceUnitId": 293,
+							"ClassType": 99,
+							"ProgramId": 518,
+							"TotalChildren": 66,
+							"QualifiedPCT": 0.636,
+							"UnQualifiedPCT": 0.091,
+							"GreatPCT": 0.000,
+							"GoodPCT": 0.273,
+							"WeightNormalPCT": 0.773,
+							"WeightLightPCT": 0.045,
+							"WeightTendPCT": 0.136,
+							"WeightFatPCT": 0.045,
+							"TotalAVGScore": 25.590
+						},
+						"Detail": [{
+							"Id": 42639,
+							"ProjectId": 12,
+							"MasterId": 6250,
+							"AVG": 115.773,
+							"AVGScore": 3.000
+						}, {
+							"Id": 42640,
+							"ProjectId": 13,
+							"MasterId": 6250,
+							"AVG": 20.727,
+							"AVGScore": 4.000
+						}, {
+							"Id": 42641,
+							"ProjectId": 14,
+							"MasterId": 6250,
+							"AVG": 9.077,
+							"AVGScore": 2.000
+						}, {
+							"Id": 42642,
+							"ProjectId": 15,
+							"MasterId": 6250,
+							"AVG": 80.364,
+							"AVGScore": 2.000
+						}, {
+							"Id": 42643,
+							"ProjectId": 16,
+							"MasterId": 6250,
+							"AVG": 4.905,
+							"AVGScore": 4.000
+						}, {
+							"Id": 42644,
+							"ProjectId": 17,
+							"MasterId": 6250,
+							"AVG": 7.082,
+							"AVGScore": 3.000
+						}, {
+							"Id": 42645,
+							"ProjectId": 18,
+							"MasterId": 6250,
+							"AVG": 6.364,
+							"AVGScore": 2.000
+						}, {
+							"Id": 42646,
+							"ProjectId": 19,
+							"MasterId": 6250,
+							"AVG": 7.568,
+							"AVGScore": 2.000
+						}],
+						"ServiceUnitName": "名字你起"
+					}],
+					"serviceUnitClassAbstrac": [{
+							"__type": "Admin.ServiceInterface.Services.ExportService+ImproveClassModel, Admin.ServiceInterface",
+							"Master": {
+								"Id": 96,
+								"ServiceUnitId": 293,
+								"ClassId": 100252,
+								"ClassType": 10,
+								"ProgramId": 518,
+								"TotalChildren": 22,
+								"TotalAVGScore": 25.000,
+								"QualifiedPCT": 0.000,
+								"UnQualifiedPCT": 0.000,
+								"GreatPCT": 0.000,
+								"GoodPCT": 0.000,
+								"WeightNormalPCT": 0.000,
+								"WeightLightPCT": 0.000,
+								"WeightTendPCT": 0.000,
+								"WeightFatPCT": 0.000
+							},
+							"Detail": [{
+								"Id": 996,
+								"ProjectId": 12,
+								"MasterId": 96,
+								"AVG": 115.773,
+								"AVGScore": 5.000
+							}, {
+								"Id": 997,
+								"ProjectId": 13,
+								"MasterId": 96,
+								"AVG": 20.727,
+								"AVGScore": 5.000
+							}, {
+								"Id": 998,
+								"ProjectId": 14,
+								"MasterId": 96,
+								"AVG": 9.077,
+								"AVGScore": 5.000
+							}, {
+								"Id": 999,
+								"ProjectId": 15,
+								"MasterId": 96,
+								"AVG": 80.364,
+								"AVGScore": 5.000
+							}, {
+								"Id": 1000,
+								"ProjectId": 16,
+								"MasterId": 96,
+								"AVG": 4.905,
+								"AVGScore": 4.000
+							}, {
+								"Id": 1001,
+								"ProjectId": 17,
+								"MasterId": 96,
+								"AVG": 7.082,
+								"AVGScore": 3.000
+							}, {
+								"Id": 1002,
+								"ProjectId": 18,
+								"MasterId": 96,
+								"AVG": 6.364,
+								"AVGScore": 2.000
+							}, {
+								"Id": 1003,
+								"ProjectId": 19,
+								"MasterId": 96,
+								"AVG": 7.568,
+								"AVGScore": 2.000
+							}],
+							"improveInfo": [{
+								"Id": 464,
+								"Name": "洗衣篮比赛55",
+								"ProjectType": 7,
+								"Equipments": "洗衣篮、锥形桶\n",
+								"Content": "1.用锥形桶摆放成环形跑道，将小孩分成两组，进行比赛。\n2.让小孩坐在衣篮里，推动小孩向前移动，为了公平，坐在纸箱的小孩重量一定要相近。",
+								"Difficult": "1.增加：使地面较为粗糙或增加距离可增加挑战。\n2.降低：使地面较为光滑或缩短距离可降低挑战。",
+								"VideoName": "5-7-1_3",
+								"AgeGroup": 6,
+								"ClassId": 100252
+							}, {
+								"Id": 573,
+								"Name": " 闭眼坐55",
+								"ProjectType": 8,
+								"Equipments": "篮球",
+								"Content": "1.准备若干篮球，将球放在场地上，并间隔一定的距离。\n2.让幼儿坐在篮球上，双腿伸直，双脚叠在一起，脚尖对脚跟的形式，双手不能有任何辅助。\n3，在游戏过程上，要闭上眼睛。\n",
+								"Difficult": "1.增加:坐在球上互相传球可增加挑战。\n2.降低：闭眼坐在球上可降低难度。\n\n",
+								"VideoName": "6-4-3_2",
+								"AgeGroup": 6,
+								"ClassId": 100252
+							}, {
+								"Id": 562,
+								"Name": " 芭蕾舞者55",
+								"ProjectType": 4,
+								"Equipments": "踏板",
+								"Content": "1.在场地上放置较多的踏板，每个踏板之间有一定的间隔。\n2.幼儿站在踏板上，单脚站立，用另外一条腿和胳膊带动身体，使身体旋转360°，并保持身体平衡。\n3.在旋转过程中要注意安全。\n",
+								"Difficult": "1.增加：加快旋转速度可增加挑战。\n2.降低：降低旋转速度可降低挑战。\n",
+								"VideoName": "6-3-5_4",
+								"AgeGroup": 6,
+								"ClassId": 100252
+							}, {
+								"Id": 534,
+								"Name": " 翻转地球55",
+								"ProjectType": 4,
+								"Equipments": "卡片",
+								"Content": "1.将所有的卡片正面向上摆放成一圆形（地球），卡片中间间隔一定的距离。\n2.让幼儿单脚站于圆内，将所有的杯垫翻转过来。\n3.在翻转过程中，只能单脚站立，另一只脚不能触地。\n",
+								"Difficult": "1.增加：增加地球的大小可增加挑战。\n2.降低：缩小地球的大小可降低挑战。\n",
+								"VideoName": "6-2-3_2",
+								"AgeGroup": 6,
+								"ClassId": 100252
+							}, {
+								"Id": 588,
+								"Name": "绳梯跳跃55",
+								"ProjectType": 4,
+								"Equipments": "绳梯",
+								"Content": "1.将绳梯平铺在场地上，让幼儿站在起点。\n2.让幼儿先单脚跳进绳梯的格子里，然后在两脚分开，两脚站在绳梯的两侧。重复此动作，让幼儿跳完所有的的绳梯。",
+								"Difficult": "1.增加：增加绳梯的长度可增加挑战。\n2.降低：缩短绳梯的长度可降低挑战。",
+								"VideoName": "6-4-6_2",
+								"AgeGroup": 6,
+								"ClassId": 100252
+							}, {
+								"Id": 540,
+								"Name": " 开合跳",
+								"ProjectType": 4,
+								"Equipments": " 踏板",
+								"Content": "1.将踏板放在场地上，让幼儿两站开立，使踏板在幼儿的两腿之间。\n2.当听到开始的口令时，两脚同时跳上踏板，然后再跳成两脚开立，于踏板两侧。\n3.在跳跃过程中，两脚要同步。\n",
+								"Difficult": "1.增加：加快跳跃的节奏可增加挑战。\n2.降低：减慢跳跃的节奏可降低挑战。\n",
+								"VideoName": "6-2-5_5",
+								"AgeGroup": 6,
+								"ClassId": 100252
+							}, {
+								"Id": 556,
+								"Name": " 交换跳",
+								"ProjectType": 4,
+								"Equipments": "胶带",
+								"Content": "1.在场地上设置一条直线，让幼儿两脚并拢面对线站立。\n2.当听到开始口令，幼儿向一脚跳向线前，一脚在线后，然后两脚交换位置连续动作。\n",
+								"Difficult": "1.增加：加快跳跃节奏可增加挑战。\n2.降低：减慢跳跃节奏可降低挑战。\n",
+								"VideoName": "6-3-4_1",
+								"AgeGroup": 6,
+								"ClassId": 100252
+							}, {
+								"Id": 587,
+								"Name": "碎步跑",
+								"ProjectType": 4,
+								"Equipments": "绳梯",
+								"Content": "1.将绳梯平铺在场地上，让幼儿站在起点，迅速碎步跑通过绳梯，看谁用时最短。",
+								"Difficult": "1.增加：增加绳梯的长度可增加挑战。\n2.降低：缩短绳梯的长度可降低挑战。",
+								"VideoName": "6-4-6_1",
+								"AgeGroup": 6,
+								"ClassId": 100252
+							}, {
+								"Id": 560,
+								"Name": "空中旋转",
+								"ProjectType": 4,
+								"Equipments": "踏板",
+								"Content": "1.在场地上放置较多踏板，两两一组中间有较大的的差距。\n2.让幼儿站立在其中一块踏板上，双脚同时起跳在空中旋转180°，然后落在另一块踏板上，重复动作。\n3.在跳跃过程中，注意安全。\n",
+								"Difficult": "1.增加：增加踏板之间的距离可增加挑战。\n2.降低：缩短踏板之间的距离可降低挑战。\n",
+								"VideoName": "6-3-5_2",
+								"AgeGroup": 6,
+								"ClassId": 100252
+							}, {
+								"Id": 539,
+								"Name": "单脚交换跳",
+								"ProjectType": 4,
+								"Equipments": "  踏板",
+								"Content": "1.将踏板放在场地上，让幼儿站在踏板的侧面。\n2.在跳跃中，先将靠近踏板的脚跳上踏板，另一只脚在场地上，然后再将踏板上的脚放到踏板的另一侧，将场地上的脚放到踏板上，然后再反向进行。\n3.动作连续无停顿。\n",
+								"Difficult": "1.增加：加快跳跃的节奏可增加挑战。\n2.降低：减慢跳跃的节奏可降低挑战。\n",
+								"VideoName": "6-2-4_4",
+								"AgeGroup": 6,
+								"ClassId": 100252
+							}, {
+								"Id": 563,
+								"Name": "交叉跳",
+								"ProjectType": 4,
+								"Equipments": "踏板",
+								"Content": "1.将所有的踏板摆成两列放在一起，两列踏板相互错开。\n2.幼儿站在踏板上，斜着跳上另一个踏板，一直斜向跳跃，直到跳完所有的踏板。\n",
+								"Difficult": "1.增加：增加踏板之间的间隔可增加挑战。\n2.降低：降低踏板之间的间隔可增加挑战。\n",
+								"VideoName": "6-3-5_5",
+								"AgeGroup": 6,
+								"ClassId": 100252
+							}, {
+								"Id": 557,
+								"Name": "脚跟跳",
+								"ProjectType": 4,
+								"Equipments": " 胶带",
+								"Content": "1.在场地上设置一条直线，让幼儿两脚并拢站在线上。\n2.当听到开始口令后，在跳跃过程中，将右腿踢向右侧同时脚尖抬起，然后收回右腿，再换左腿重复动作。\n3.注意跳跃节奏。\n",
+								"Difficult": "1.增加：加快跳跃节奏或脚跟不触地可增加挑战。\n2.降低：减慢跳跃节奏或脚跟触地可降低挑战。\n",
+								"VideoName": "6-3-4_2",
+								"AgeGroup": 6,
+								"ClassId": 100252
+							}, {
+								"Id": 535,
+								"Name": "在高处翻转",
+								"ProjectType": 4,
+								"Equipments": "木条、卡片",
+								"Content": "1.让幼儿站在一有高度的木条上，在木条的一侧摆放若干的卡片。\n2.让幼儿单腿站立在木条上将卡片翻转，在翻转过程中，只能单脚触地。\n",
+								"Difficult": "1.增加：增加木条的高度可增加挑战。\n2.降低：减低木条的高度可降低挑战。\n",
+								"VideoName": "6-2-3_3",
+								"AgeGroup": 6,
+								"ClassId": 100252
+							}, {
+								"Id": 536,
+								"Name": "跳跃峡谷",
+								"ProjectType": 4,
+								"Equipments": " 踏板",
+								"Content": "1.将踏板摆放在场地上，中间有一定的间隔，间隔相等。\n2.让幼儿站在起点，开始跳跃，在跳跃过程中必须是双脚连续跳跃。\n",
+								"Difficult": "1.增加：增加踏板之间的间隔可以增加挑战。\n2.降低：缩短踏板之间的间隔可以降低挑战。\n",
+								"VideoName": "6-2-4_1",
+								"AgeGroup": 6,
+								"ClassId": 100252
+							}, {
+								"Id": 591,
+								"Name": " 跳进跳出",
+								"ProjectType": 4,
+								"Equipments": "绳梯",
+								"Content": "1.将绳梯平铺在场地上，让幼儿站在起点。\n2.让幼儿双脚跳进绳格里面，然后在从侧面跳出绳格，重复动作，直到跳完所有的绳梯。",
+								"Difficult": "1.增加：限定完成时间可增加难度。\n2.降低：不限定时间可降低难度。",
+								"VideoName": "6-4-6_5",
+								"AgeGroup": 6,
+								"ClassId": 100252
+							}, {
+								"Id": 561,
+								"Name": " 单脚旋转",
+								"ProjectType": 4,
+								"Equipments": " 踏板",
+								"Content": "1.在场地上放置较多踏板，两两一组中间有较大的的差距。\n2.让幼儿站立在其中一块踏板上，单脚起跳在空中旋转180°，然后落在另一块踏板上，重复动作。\n3.在跳跃过程中，注意安全。\n",
+								"Difficult": "1.增加：增加两块踏板之间的距离可增加挑战。\n2.降低：缩短两块踏板之间的距离可降低挑战。\n",
+								"VideoName": "6-3-5_3",
+								"AgeGroup": 6,
+								"ClassId": 100252
+							}, {
+								"Id": 590,
+								"Name": "前进后退",
+								"ProjectType": 4,
+								"Equipments": "绳梯",
+								"Content": "1.将绳梯平铺在场地上，让幼儿站在起点。\n2.让幼儿先一脚跨进一格，另一脚跟上然后以相同的的方式前进一格，然后在后退一格，后退的形式也是一脚先后退，另一脚在跟上。\n3.中途不允许出现失误。",
+								"Difficult": "1.增加：限定完成时间可增加难度。\n2.降低：不限定时间可降低难度。",
+								"VideoName": "6-4-6_4",
+								"AgeGroup": 6,
+								"ClassId": 100252
+							}, {
+								"Id": 523,
+								"Name": "模拟防守",
+								"ProjectType": 6,
+								"Equipments": "",
+								"Content": "1.设置情境，在一场足球比赛中，孩子当做守门员，老师当做球员进行射门，孩子根据老师的踢球方向进行防守接球。\n2.老师踢出右脚，孩子做出双手上举，身体向右侧弯曲，老师踢出左脚，孩子身体向左侧弯曲的动作，持续进行。",
+								"Difficult": "1.增加：老师加快出脚的速度可增加挑战。\n2.降低：老师减慢出脚的速度可降低挑战。",
+								"VideoName": "6-1-7_1",
+								"AgeGroup": 6,
+								"ClassId": 100252
+							}, {
+								"Id": 549,
+								"Name": " 站上站下",
+								"ProjectType": 5,
+								"Equipments": "凳子、球",
+								"Content": "1.在场地上一塑料筐，筐上放一垫子，也可找一凳子代替，幼儿站在垫子上，手持一大球。\n2.用手将球向上方拍球，将球控制在手的上方。同时双腿站于凳子上或垫子上，然后再下去，球不能脱离手的控制。\n",
+								"Difficult": "1.增加：使用较小的球可增加挑战。\n2.减低：使用较大的球可降低挑战。\n",
+								"VideoName": "6-2-7_6",
+								"AgeGroup": 6,
+								"ClassId": 100252
+							}, {
+								"Id": 573,
+								"Name": " 闭眼坐",
+								"ProjectType": 8,
+								"Equipments": "篮球",
+								"Content": "1.准备若干篮球，将球放在场地上，并间隔一定的距离。\n2.让幼儿坐在篮球上，双腿伸直，双脚叠在一起，脚尖对脚跟的形式，双手不能有任何辅助。\n3，在游戏过程上，要闭上眼睛。\n",
+								"Difficult": "1.增加:坐在球上互相传球可增加挑战。\n2.降低：闭眼坐在球上可降低难度。\n\n",
+								"VideoName": "6-4-3_2",
+								"AgeGroup": 6,
+								"ClassId": 100252
+							}],
+							"ClassName": "大班"
+						},
+						{
+							"Master": {
+								"Id": 97,
+								"ServiceUnitId": 293,
+								"ClassId": 100253,
+								"ClassType": 12,
+								"ProgramId": 518,
+								"TotalChildren": 22,
+								"TotalAVGScore": 25.000,
+								"QualifiedPCT": 0.000,
+								"UnQualifiedPCT": 0.000,
+								"GreatPCT": 0.000,
+								"GoodPCT": 0.000,
+								"WeightNormalPCT": 0.000,
+								"WeightLightPCT": 0.000,
+								"WeightTendPCT": 0.000,
+								"WeightFatPCT": 0.000
+							},
+							"Detail": [{
+								"Id": 1004,
+								"ProjectId": 12,
+								"MasterId": 97,
+								"AVG": 115.773,
+								"AVGScore": 3.000
+							}, {
+								"Id": 1005,
+								"ProjectId": 13,
+								"MasterId": 97,
+								"AVG": 20.727,
+								"AVGScore": 3.000
+							}, {
+								"Id": 1006,
+								"ProjectId": 14,
+								"MasterId": 97,
+								"AVG": 9.077,
+								"AVGScore": 3.000
+							}, {
+								"Id": 1007,
+								"ProjectId": 15,
+								"MasterId": 97,
+								"AVG": 80.364,
+								"AVGScore": 3.000
+							}, {
+								"Id": 1008,
+								"ProjectId": 16,
+								"MasterId": 97,
+								"AVG": 4.905,
+								"AVGScore": 3.000
+							}, {
+								"Id": 1009,
+								"ProjectId": 17,
+								"MasterId": 97,
+								"AVG": 7.082,
+								"AVGScore": 3.000
+							}, {
+								"Id": 1010,
+								"ProjectId": 18,
+								"MasterId": 97,
+								"AVG": 6.364,
+								"AVGScore": 2.000
+							}, {
+								"Id": 1011,
+								"ProjectId": 19,
+								"MasterId": 97,
+								"AVG": 7.568,
+								"AVGScore": 2.000
+							}],
+							"improveInfo": [{
+								"Id": 164,
+								"Name": "旋转木马33",
+								"ProjectType": 7,
+								"Equipments": "长凳",
+								"Content": "1.一个孩子骑旋转木马（长椅），坐或躺在长椅上\n2.在板凳的边缘上，孩子们尽可能快的推动旋转木马，直到自己筋疲力尽为止\n3.如果你认为地板不够滑，你可以在长椅的底部放一些地毯，使其滑动",
+								"Difficult": "1.增加：两端只有一个孩子推板凳，以增加挑战。\n2.降低：两个个孩子推板凳可以降低挑战。",
+								"VideoName": "4-3-4_1",
+								"AgeGroup": 4,
+								"ClassId": 100253
+							}, {
+								"Id": 147,
+								"Name": "平衡33",
+								"ProjectType": 8,
+								"Equipments": "绳圈、平衡盘、垫子",
+								"Content": "1.将所有东西聚在一起，帮助孩子建立一个新的平衡通道，孩子们完成它",
+								"Difficult": "",
+								"VideoName": "4-2-3_6",
+								"AgeGroup": 4,
+								"ClassId": 100253
+							}, {
+								"Id": 305,
+								"Name": "拿起脚33",
+								"ProjectType": 4,
+								"Equipments": " 沙包",
+								"Content": "1.将沙包放在左脚脚背上，保持身体平衡抬起左脚，并用左手将沙包拿到。",
+								"Difficult": "1.增加：将沙包换成网球可增加难度。\n2.降低：不更换沙包可降低难度。\n",
+								"VideoName": "4-9-2_1",
+								"AgeGroup": 4,
+								"ClassId": 100253
+							}, {
+								"Id": 306,
+								"Name": "交叉捡起33",
+								"ProjectType": 4,
+								"Equipments": " 沙包",
+								"Content": "1.将沙包放在脚上，保持身体平衡抬起脚，用异侧手将沙包拿起，两脚都要进行。",
+								"Difficult": "1.增加：将沙包换成网球可增加难度。\n2.降低：不更换沙包可降低难度。\n",
+								"VideoName": "4-9-2_2",
+								"AgeGroup": 4,
+								"ClassId": 100253
+							}, {
+								"Id": 226,
+								"Name": " 单腿跳33",
+								"ProjectType": 4,
+								"Equipments": "",
+								"Content": "1.单脚支撑，从场地的一端跳到另一端，再换只脚支撑跳跃。",
+								"Difficult": "1.增加：距离的增多可增加挑战。\n2.降低：距离的减少可降低挑战。\n",
+								"VideoName": "4-5-4_4",
+								"AgeGroup": 4,
+								"ClassId": 100253
+							}, {
+								"Id": 149,
+								"Name": " 跃过纸箱33",
+								"ProjectType": 4,
+								"Equipments": "纸盒",
+								"Content": "1.跳跃各种大小的纸箱.\n2.条直线是的，没有孩子受伤",
+								"Difficult": "1.增加：将两个盒子叠在一起或使用更大的盒子，以增加挑战。\n2.降低：使用较小的盒子可以降低挑战。",
+								"VideoName": "4-2-4_2",
+								"AgeGroup": 4,
+								"ClassId": 100253
+							}, {
+								"Id": 293,
+								"Name": "跳跃绳子",
+								"ProjectType": 4,
+								"Equipments": "绳子",
+								"Content": "1.两人拉着绳子，一人用手拽着绳子，一人用脚踩着绳子，孩子尽自己的能力进行跳跃。",
+								"Difficult": "1.增加：增高绳子的高度可增加挑战。\n2.降低：降低绳子的高度可降低挑战。\n",
+								"VideoName": "4-8-4_1",
+								"AgeGroup": 4,
+								"ClassId": 100253
+							}, {
+								"Id": 151,
+								"Name": "跳塔",
+								"ProjectType": 4,
+								"Equipments": "纸盒",
+								"Content": "1.将纸盒叠在一起，看看孩子可以跳多少次",
+								"Difficult": "1.增加：堆叠纸箱使垂直距离增高可增加挑战。\n2.降低：使用较低的盒子可以降低挑战。",
+								"VideoName": "4-2-4_4",
+								"AgeGroup": 4,
+								"ClassId": 100253
+							}, {
+								"Id": 212,
+								"Name": " 连续跳",
+								"ProjectType": 4,
+								"Equipments": "瑜伽柱",
+								"Content": "1.不断地推动泡沫滚筒，孩子们试图不断地跳过它。",
+								"Difficult": "1.增加：推动泡沫滚筒的速度加快或站位更接近对方，以增加挑战。\n2.降低：推动泡沫滚筒的速度减慢或站位较远离对方，可降低挑战。\n",
+								"VideoName": "4-5-2_3",
+								"AgeGroup": 4,
+								"ClassId": 100253
+							}, {
+								"Id": 223,
+								"Name": "像黑豹一样跳转",
+								"ProjectType": 4,
+								"Equipments": "",
+								"Content": "1.单脚跳从场地的一端到另一端，可进行左右脚交换。",
+								"Difficult": "1.增加：增加一些障碍物可增加难度。\n2.降低：减少障碍物的数量可减低难度。\n",
+								"VideoName": "4-5-4_1",
+								"AgeGroup": 4,
+								"ClassId": 100253
+							}, {
+								"Id": 307,
+								"Name": "抓沙包",
+								"ProjectType": 4,
+								"Equipments": " 沙包",
+								"Content": "1.将沙包放在脚背上，用脚将沙包提起来，然后用手将沙包抓住。",
+								"Difficult": "1.增加：将沙包踢得更高或用单手接踢起的沙包可增加难度。\n2.降低：将沙包踢得较低一点或用双手接踢起的沙包可降低难度。\n",
+								"VideoName": "4-9-2_3",
+								"AgeGroup": 4,
+								"ClassId": 100253
+							}, {
+								"Id": 228,
+								"Name": " 青蛙跳",
+								"ProjectType": 4,
+								"Equipments": "",
+								"Content": "1.模仿青蛙跳，从一端跳到另一端。",
+								"Difficult": "1.增加：持续的跳跃可增加挑战。\n2.降低：间断的跳跃可降低挑战。\n",
+								"VideoName": "4-5-4_6",
+								"AgeGroup": 4,
+								"ClassId": 100253
+							}, {
+								"Id": 136,
+								"Name": " 踢向教练 ",
+								"ProjectType": 4,
+								"Equipments": " 皮球",
+								"Content": "1.在场地上跑步或散步，将壁球随机散落于场地上\n2.孩子们试图将球踢老师，老师试图躲避球，每成功一次得一分",
+								"Difficult": "1.增加：使用更少的球、小球、更大的空间或躲避速度加快可增加挑战。 \n2.降低：使用较多的球或较大的球可以降低挑战。",
+								"VideoName": "4-2-1_3",
+								"AgeGroup": 4,
+								"ClassId": 100253
+							}, {
+								"Id": 227,
+								"Name": "侧身跳",
+								"ProjectType": 4,
+								"Equipments": "",
+								"Content": "1.侧身站立，双脚同时跳跃，从一端跳到另一端，尽可能减少跳跃的次数。",
+								"Difficult": "1.增加：添加障碍或加大跳跃幅度可增加挑战。\n2.降低：减少障碍或降低跳跃幅度可降低挑战。\n",
+								"VideoName": "4-5-4_5",
+								"AgeGroup": 4,
+								"ClassId": 100253
+							}, {
+								"Id": 135,
+								"Name": "追球 ",
+								"ProjectType": 4,
+								"Equipments": "网球",
+								"Content": "1.球的数量比参与的人数少一个，\n2.每个孩子都试图追赶和抓住网球，每次抓住一个可得到一个点",
+								"Difficult": "1.增大：用弹性像壁球一样的球，增加参加的人数或掷球于墙上可增加挑战。 \n2.降低：使用弹性较低的球可以降低挑战。",
+								"VideoName": "4-2-1_2",
+								"AgeGroup": 4,
+								"ClassId": 100253
+							}, {
+								"Id": 294,
+								"Name": " 90°转折跳",
+								"ProjectType": 4,
+								"Equipments": "砖、石块的教学道具",
+								"Content": "1.用泡沫板设置一个转折的跑道，让孩子从开始双脚跳跃",
+								"Difficult": "1.增加：增加跑道的长度可增加挑战。\n2.降低：缩短跑道的长度可降低挑战。\n",
+								"VideoName": "4-8-4_2",
+								"AgeGroup": 4,
+								"ClassId": 100253
+							}, {
+								"Id": 134,
+								"Name": "运球",
+								"ProjectType": 4,
+								"Equipments": "足球",
+								"Content": "1.运球在一个狭小的空间，孩子试图将球远离你\n2.该游戏是较大的空间里玩的",
+								"Difficult": "1.增加：移动球在一个更大的空间，或使用一个较小的球，以增加挑战。\n2.降低：移动球在一个较小的空间或使用一个较大的球可以降低挑战。",
+								"VideoName": "4-2-1_1",
+								"AgeGroup": 4,
+								"ClassId": 100253
+							}, {
+								"Id": 284,
+								"Name": "抓住反弹球",
+								"ProjectType": 6,
+								"Equipments": " 网球",
+								"Content": "1.两人一组，手持一网球，让网球从地面上弹起对方抓住网球",
+								"Difficult": "1.增加：增加距离或使用弹性更高的球可增加挑战。\n2.降低：缩短距离或使用弹性较低的球可降加挑战。\n",
+								"VideoName": "4-8-1_1",
+								"AgeGroup": 4,
+								"ClassId": 100253
+							}, {
+								"Id": 184,
+								"Name": " 拍气球",
+								"ProjectType": 5,
+								"Equipments": "气球",
+								"Content": "1.用手拍气球，使气球弹起来。",
+								"Difficult": "1.增加：使用较小的气球或进行左、右手交换拍球可增加挑战。\n2.降低：使用较大的气球或使用单手拍球可降低挑战。\n",
+								"VideoName": "4-4-4-_1",
+								"AgeGroup": 4,
+								"ClassId": 100253
+							}, {
+								"Id": 123,
+								"Name": "通过激光标签",
+								"ProjectType": 4,
+								"Equipments": "绳子、支架",
+								"Content": "1.做一个“激光标签”用绳并且距离地面够低，两条绳之间有足够的差距，让孩子们能够运行通过绳索或带子是激光，不能被碰到\n2.尝试从两个方向运行",
+								"Difficult": "1.增加：通过跑速加快或减少绳子之间的差距，以增加挑战。 \n2.降低：降低跑速或增加绳子之间的距离可以降低挑战。",
+								"VideoName": "4-1-6_1",
+								"AgeGroup": 4,
+								"ClassId": 100253
+							}],
+							"ClassName": "小班"
+						}, {
+							"Master": {
+								"Id": 98,
+								"ServiceUnitId": 293,
+								"ClassId": 100254,
+								"ClassType": 11,
+								"ProgramId": 518,
+								"TotalChildren": 22,
+								"TotalAVGScore": 25.000,
+								"QualifiedPCT": 0.000,
+								"UnQualifiedPCT": 0.000,
+								"GreatPCT": 0.000,
+								"GoodPCT": 0.000,
+								"WeightNormalPCT": 0.000,
+								"WeightLightPCT": 0.000,
+								"WeightTendPCT": 0.000,
+								"WeightFatPCT": 0.000
+							},
+							"Detail": [{
+								"Id": 1012,
+								"ProjectId": 12,
+								"MasterId": 98,
+								"AVG": 115.773,
+								"AVGScore": 4.000
+							}, {
+								"Id": 1013,
+								"ProjectId": 13,
+								"MasterId": 98,
+								"AVG": 20.727,
+								"AVGScore": 4.000
+							}, {
+								"Id": 1014,
+								"ProjectId": 14,
+								"MasterId": 98,
+								"AVG": 9.077,
+								"AVGScore": 4.000
+							}, {
+								"Id": 1015,
+								"ProjectId": 15,
+								"MasterId": 98,
+								"AVG": 80.364,
+								"AVGScore": 4.000
+							}, {
+								"Id": 1016,
+								"ProjectId": 16,
+								"MasterId": 98,
+								"AVG": 4.905,
+								"AVGScore": 4.000
+							}, {
+								"Id": 1017,
+								"ProjectId": 17,
+								"MasterId": 98,
+								"AVG": 7.082,
+								"AVGScore": 3.000
+							}, {
+								"Id": 1018,
+								"ProjectId": 18,
+								"MasterId": 98,
+								"AVG": 6.364,
+								"AVGScore": 2.000
+							}, {
+								"Id": 1019,
+								"ProjectId": 19,
+								"MasterId": 98,
+								"AVG": 7.568,
+								"AVGScore": 2.000
+							}],
+							"improveInfo": [{
+								"Id": 486,
+								"Name": " 收集旗子44",
+								"ProjectType": 7,
+								"Equipments": "肋木、旗子、绳子",
+								"Content": "1.将旗子用绳子绑在肋木上，让孩子爬上肋木将旗子拿下来。\n2.在攀爬肋木时注意安全。\n",
+								"Difficult": "1.增加：增加旗子的高度可增加挑战。\n2.降低：降低旗子的高度可降低挑战。",
+								"VideoName": "5-8-1_1",
+								"AgeGroup": 5,
+								"ClassId": 100254
+							}, {
+								"Id": 467,
+								"Name": "斗鸡44",
+								"ProjectType": 8,
+								"Equipments": "",
+								"Content": "1.所有人单脚站立支撑跳跃，互相碰撞，保持平衡。\n2.但要注意安全。",
+								"Difficult": "1.增加：使用非优势脚站立可增加挑战。\n2.降低:使用优势脚站立可增加难度。",
+								"VideoName": "5-7-3_1",
+								"AgeGroup": 5,
+								"ClassId": 100254
+							}, {
+								"Id": 472,
+								"Name": "跳跃更高的障碍4",
+								"ProjectType": 4,
+								"Equipments": "障碍物、皮球",
+								"Content": "1.将所有的较高的障碍物摆成一列，并且间距相等，将球夹在两脚之间，连续跳跃所有的障碍物，保证球不掉落。\n",
+								"Difficult": "1.增加：增加障碍物的高度可增加挑战。\n2.降低：降低障碍物的高度可降低挑战。",
+								"VideoName": "5-7-4_4",
+								"AgeGroup": 5,
+								"ClassId": 100254
+							}, {
+								"Id": 479,
+								"Name": " 单脚跳跃44",
+								"ProjectType": 4,
+								"Equipments": "  踏板",
+								"Content": "1.将所有的踏板摆成列，让孩子单脚跳过踏板，先是向前再是向后跳跃。\n",
+								"Difficult": "1.增加：增加踏板的数量或增加踏板的高度可增加挑战。\n2.降低：减少踏板的数量或降低踏板的高度可降低挑战。",
+								"VideoName": "5-7-5_7",
+								"AgeGroup": 5,
+								"ClassId": 100254
+							}, {
+								"Id": 470,
+								"Name": "带球过河44",
+								"ProjectType": 4,
+								"Equipments": "垫子、皮球",
+								"Content": "1.将垫子铺在地面上并间隔相等的距离，\n2.将球夹在两脚之间，从不第一个垫子开始跳跃，中途不能球掉落，也不能踩在垫子之外。",
+								"Difficult": "1.增加：增加垫子之间的间距可增加挑战。2.降低：缩短垫子之间的间距可降低挑战。",
+								"VideoName": "5-7-4_2",
+								"AgeGroup": 5,
+								"ClassId": 100254
+							}, {
+								"Id": 429,
+								"Name": "  跳跃足球44",
+								"ProjectType": 4,
+								"Equipments": "足球、绳梯",
+								"Content": "1. 在场地上平铺一绳梯，在绳梯的间隔1格放置一足球，让孩子跳跃过所有的足球。",
+								"Difficult": "1.增加：限制时间或增加足球的间距可增加挑战。\n2.降低：不限制时间或缩短足球的间距可降低挑战。",
+								"VideoName": "5-5-4_1",
+								"AgeGroup": 5,
+								"ClassId": 100254
+							}, {
+								"Id": 481,
+								"Name": " 跨过障碍",
+								"ProjectType": 4,
+								"Equipments": "绳子",
+								"Content": "1.将所有粗细不等绳子连接在一起，将其摆放成宽窄不一的跑道，再跑道上随机摆放一些障碍物，在向前跑动过程中跨过障碍物。\n",
+								"Difficult": "1.增加：缩小跑道宽度或增多拐弯可增加挑战。\n2.降低：增加跑道宽度或减少拐弯可降低挑战。",
+								"VideoName": "5-7-6_2",
+								"AgeGroup": 5,
+								"ClassId": 100254
+							}, {
+								"Id": 339,
+								"Name": "加洛普跳",
+								"ProjectType": 4,
+								"Equipments": "砖、石块的教学道具",
+								"Content": "1.将所有的障碍物摆成一列，每个障碍物会比之前的障碍物高一点。\n2.让孩子尝试单腿跳跃所有的障碍物。",
+								"Difficult": "1.增加：增加障碍物的数量或高度可增加挑战。\n2.降低：减少障碍物的数量或高度可降低挑战。",
+								"VideoName": "5-1-6_4",
+								"AgeGroup": 5,
+								"ClassId": 100254
+							}, {
+								"Id": 465,
+								"Name": " 球站",
+								"ProjectType": 4,
+								"Equipments": "皮球",
+								"Content": "1.在场地上铺满皮球，从场地中间划分，一人一半，进行攻击和防守。\n2.将球踢向对方场地，尽量减少自己场地球的数量。",
+								"Difficult": "1.增加：增加场地的大小或减少参与人数可增加挑战。\n2.降低：缩小场地的大小或增加参与人数可降低挑战。",
+								"VideoName": "5-7-2_1",
+								"AgeGroup": 5,
+								"ClassId": 100254
+							}, {
+								"Id": 336,
+								"Name": "双脚跳",
+								"ProjectType": 4,
+								"Equipments": "砖、石块的教学道具",
+								"Content": "1.将所有的障碍物摆成一列，每个障碍物会比之前的障碍物高一点。\n2.让孩子尝试双腿跳跃所有的障碍物。",
+								"Difficult": "1.增加：连续跳或增加障碍物之间的差距，以增加挑战。\n2.降低：间歇性的跳跃或缩短障碍物之间的差距，可降低挑战。",
+								"VideoName": "5-1-6_1",
+								"AgeGroup": 5,
+								"ClassId": 100254
+							}, {
+								"Id": 338,
+								"Name": " 侧身跳",
+								"ProjectType": 4,
+								"Equipments": "砖、石块的教学道具",
+								"Content": "1将所有的障碍物摆成一列，每个障碍物会比之前的障碍物高一点。\n2.让孩子尝试侧身跳跃所有的障碍物。",
+								"Difficult": "",
+								"VideoName": "5-1-6_3",
+								"AgeGroup": 5,
+								"ClassId": 100254
+							}, {
+								"Id": 311,
+								"Name": "单腿跨栏",
+								"ProjectType": 4,
+								"Equipments": "锥形桶",
+								"Content": "1.在场地上将锥形桶摆成一列,孩子在锥形痛的侧面单腿跨过锥形。",
+								"Difficult": "1.增加：增加锥形桶的数量可增加挑战。\n2.降低：减少锥形桶的数量可降低挑战。\n",
+								"VideoName": "5-1-1_2",
+								"AgeGroup": 5,
+								"ClassId": 100254
+							}, {
+								"Id": 387,
+								"Name": "后旋转跳",
+								"ProjectType": 4,
+								"Equipments": "踏板",
+								"Content": "1.将所有的踏板放在地面上，让孩子站在踏板的侧面并背对踏板，是身体向后旋转180度站在踏板上。",
+								"Difficult": "1.增加：增加人与踏板的距离或是缩短踏板的宽度可降低挑战。\n2.降低：缩短人与踏板的距离或是增加踏板的宽度可降低挑战。",
+								"VideoName": "5-3-4_4",
+								"AgeGroup": 5,
+								"ClassId": 100254
+							}, {
+								"Id": 386,
+								"Name": " 旋转跳",
+								"ProjectType": 4,
+								"Equipments": "踏板",
+								"Content": "1.将所有的踏板放在地面上，让孩子站在踏板的侧面并面对踏板，使身体旋转180度调整上踏板。",
+								"Difficult": "1.增加：增加人与踏板的距离或是缩短踏板的宽度可降低挑战。\n2.降低：缩短人与踏板的距离或是增加踏板的宽度可降低挑战。",
+								"VideoName": "5-3-4_3",
+								"AgeGroup": 5,
+								"ClassId": 100254
+							}, {
+								"Id": 440,
+								"Name": "听命令",
+								"ProjectType": 4,
+								"Equipments": "",
+								"Content": "1.孩子在场地上跑动，听老师的命令快速停止，并作出像火烈鸟（单脚站）的动作，看谁保持时间长。\n",
+								"Difficult": "1.增加：命令的节奏变化明显可增加难度。\n2.降低：命令的节奏变化不明显可降低难度。",
+								"VideoName": "5-6-1_1",
+								"AgeGroup": 5,
+								"ClassId": 100254
+							}, {
+								"Id": 360,
+								"Name": "在障碍物中跑动",
+								"ProjectType": 4,
+								"Equipments": "砖、石块的教学道具",
+								"Content": "1.将障碍物摆成一列，障碍物的高度逐渐递增，让孩子在跑动中快速的跨过障碍物。",
+								"Difficult": "1.增加：拉大障碍物之间的间隔可增加挑战。\n2.降低：缩短障碍物之间的间隔可降低挑战。",
+								"VideoName": "5-2-5_2",
+								"AgeGroup": 5,
+								"ClassId": 100254
+							}, {
+								"Id": 340,
+								"Name": " 跳上小岛",
+								"ProjectType": 4,
+								"Equipments": "瑜伽垫",
+								"Content": "1.将瑜伽垫（小岛）横着摆成一排，让孩子进行跨跳，垫子之间的间距较小。\n2.将瑜伽垫（小岛）竖着摆成一排，让孩子进行跨跳，垫子之间的间距较大。\n3.根据孩子的大小和能力自行选择。",
+								"Difficult": "1.增加：保持一只脚模式或增加变垫子间缝隙可增加挑战，\n2.降低：保持两只脚交换模式或缩短垫子间缝隙可降低挑战，",
+								"VideoName": "5-1-6_6",
+								"AgeGroup": 5,
+								"ClassId": 100254
+							}, {
+								"Id": 323,
+								"Name": "用水桶接",
+								"ProjectType": 6,
+								"Equipments": "水桶、杯垫",
+								"Content": "1.每个孩子手持一个水桶，老师将杯垫扔向空中，让孩子尝试用水桶接住杯垫。",
+								"Difficult": "1.增加：老师迅速改变杯垫的方向可增加挑战。\n2.降低：老师较慢的改变杯垫的移动方向可降低挑战。\n",
+								"VideoName": "5-1-2_6",
+								"AgeGroup": 5,
+								"ClassId": 100254
+							}, {
+								"Id": 445,
+								"Name": "  踢不同高度的球",
+								"ProjectType": 5,
+								"Equipments": "呼啦圈、锥形桶、皮球\n",
+								"Content": "1.再墙上放置一标志物（呼啦圈），在间隔一定距离画一条线，在线上放置不通风高度的锥形桶，在锥形桶上方大小一样的皮球，让孩子将锥形桶上的球踢向标志物。\n",
+								"Difficult": "1.增加：增加高度或增加距离可增加难度。\n2.降低：降低高度或缩短距离可降低难度。",
+								"VideoName": "5-6-3_1",
+								"AgeGroup": 5,
+								"ClassId": 100254
+							}, {
+								"Id": 377,
+								"Name": "向上或向下",
+								"ProjectType": 6,
+								"Equipments": "",
+								"Content": "1.老师把她的双手放在身体前面，孩子将一手放在老师的双手之间，老师试图拍打孩子的手孩子快速向上或向下移动他的手，躲避老师的手掌。",
+								"Difficult": "1.增加：老师的手更接近孩子的手可增加挑战。\n2.降低：老师的手较远离孩子的手可降低难度。",
+								"VideoName": "5-3-2_2",
+								"AgeGroup": 5,
+								"ClassId": 100254
+							}],
+							"ClassName": "中班"
+						}
+					]
+				};
+				console.log(physicalResult);
+				var ClassId, objNameArr, itemKdgSVGtScore, itemClassSVGtScore, classAbstrac;
+				var contentArr = [];
+				for(var item in physicalResult.serviceUnitAbstrac) {
+					kgdAbstrac = physicalResult.serviceUnitAbstrac[item];
+					for(var jsons in kgdAbstrac.Detail) {
+						kgdAbstrac.Detail[jsons].ProName = projectType[kgdAbstrac.Detail[jsons].ProjectId]
+					}
+
+					itemKdgSVGtScore = (kdgChartDataDispose(kgdAbstrac.Detail)).DataArr;
+				}
+				for(var item in physicalResult.serviceUnitClassAbstrac) {
+					classAbstrac = physicalResult.serviceUnitClassAbstrac[item];
+					for(var item in classAbstrac.Detail) {
+						classAbstrac.Detail[item].ProName = projectType[classAbstrac.Detail[item].ProjectId]
+					}
+					ClassId = classAbstrac.Master.Id;
+					itemClassSVGtScore = (kdgChartDataDispose(classAbstrac.Detail)).DataArr;
+					objNameArr = (kdgChartDataDispose(classAbstrac.Detail)).ObjNameArr;
+					var contentItem = {
+						ClassId: classAbstrac.Master.Id,
+						ClassName: classAbstrac.ClassName,
+						ClassTime: semosterMonth().FinishText,
+						AnalysisContent: contentTxt(classAbstrac.ClassName, itemKdgSVGtScore, itemClassSVGtScore).AnalysisContent,
+						CommentContent: contentTxt(classAbstrac.ClassName, itemKdgSVGtScore, itemClassSVGtScore).CommentContent,
+						itemClassSVGtScore: itemClassSVGtScore,
+						itemKdgSVGtScore: itemKdgSVGtScore,
+						improveInfo: classAbstrac.improveInfo
+					};
+					contentArr.push(contentItem);
+				}
+				var template = Handlebars.compile($("#content-html").html());
+				var htmlText = template(contentArr);
+				console.log(contentArr);
+				$("#content").append(htmlText);
+				for(var jsons in contentArr) {
+					var itemClassInfo = contentArr[jsons];
+					highchartsFn(itemClassInfo.ClassId, itemClassInfo.itemKdgSVGtScore, itemClassInfo.itemClassSVGtScore, objNameArr);
+					improveInformation(itemClassInfo.ClassId, itemClassInfo.improveInfo);
+				}
+
+			})
+		</script>
+	</head>
+
+	<body>
+		<div id="content">
+		</div>
+	</body>
+
+</html>

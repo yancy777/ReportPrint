@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>幼儿园体测档案</title>
+		<link href="http://cdn.imreliable.net/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="http://cdn.imreliable.net/jquery/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="http://cdn.imreliable.net/bootstrap/js/bootstrap.min.js"></script>
+		<script src="http://cdn.bootcss.com/underscore.js/1.8.3/underscore.js"></script>
+		<script src="http://cdn.bootcss.com/handlebars.js/4.0.6/handlebars.min.js"></script>
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/highcharts-more.js"></script>
+		<style>
+			.table-bordered>thead>tr>th,
+			.table-bordered>tbody>tr>th,
+			.table-bordered>tfoot>tr>th,
+			.table-bordered>thead>tr>td,
+			.table-bordered>tbody>tr>td,
+			.table-bordered>tfoot>tr>td {
+				border: 1px solid #808080;
+			}
+			
+			.table-bordered {
+				border: 1px solid #808080;
+			}
+			
+			.col-md-3,
+			.col-sm-3,
+			.col-xs-3 {
+				padding-left: 5px !important;
+				padding-right: 5px !important;
+			}
+			
+			table {
+				margin-top: 5%;
+			}
+			
+			tr {
+				height: 6rem !important;
+				line-height: 40px;
+			}
+			
+			.table>thead>tr>th,
+			.table>tbody>tr>th,
+			.table>tfoot>tr>th,
+			.table>thead>tr>td,
+			.table>tbody>tr>td,
+			.table>tfoot>tr>td {
+				padding: 0 0;
+				padding-top: 2.1%;
+			}
+			
+			.table-border {
+				border: 1px solid #333;
+			}
+			
+			.container {
+				width: 1170px !important;
+			}
+			
+			.report-titles {
+				padding-top: 5%;
+				font-size: 30px;
+			}
+			
+			label {
+				font-weight: 400;
+			}
+			
+			.report-content {
+				font-size: 20px !important;
+				margin-top: 1% !important;
+			}
+			
+			.base-info {
+				line-height: 3rem !important;
+			}
+			
+			.foot-content {
+				margin-top: 3% !important;
+			}
+		</style>
+		<script type="text/x-handlebars-template" id="content-html">
+			{{#each this}}
+			<div class="container page-break-before">
+				<p class="row text-center report-titles">
+					<label>睿莱园所儿童体质档案</label>
+				</p>
+				<div class="report-content">
+					<div class="base-info">
+						<div class="row">
+							<div class="col-md-3 col-sm-3 col-xs-3 text-right">姓名：</div>
+							<div class="col-md-3 col-sm-3 col-xs-3 text-left">{{ChildName}}</div>
+							<div class="col-md-3 col-sm-3 col-xs-3 text-right">性别：</div>
+							<div class="col-md-3 col-sm-3 col-xs-3 text-left">{{Gender}}</div>
+						</div>
+						<div class="row">
+							<div class="col-md-3 col-sm-3 col-xs-3 text-right">年龄：</div>
+							<div class="col-md-3 col-sm-3 col-xs-3 text-left">{{AgeGroup}}岁</div>
+							<div class="col-md-3 col-sm-3 col-xs-3 text-right">班级：</div>
+							<div class="col-md-3 col-sm-3 col-xs-3 text-left">{{ClassName}}</div>
+						</div>
+						<div class="row">
+							<div class="col-md-3 col-sm-3 col-xs-3 text-right">生日：</div>
+							<div class="col-md-3 col-sm-3 col-xs-3 text-left">{{BirthDate}}</div>
+							<div class="col-md-3 col-sm-3 col-xs-3 text-right">测试日期：</div>
+							<div class="col-md-3 col-sm-3 col-xs-3 text-left">{{TestDate}}</div>
+						</div>
+						<div class="row">
+							<div class="col-md-3 col-sm-3 col-xs-3 text-right">检测编号：</div>
+							<div class="col-md-3 col-sm-3 col-xs-3 text-left">{{TestCode}}</div>
+							<div class="col-md-3 col-sm-3 col-xs-3 text-right">幼儿园：</div>
+							<div class="col-md-3 col-sm-3 col-xs-3 text-left">{{KindergartenName}}</div>
+						</div>
+					</div>
+					<div style="width: 100% !important">
+						<table class="table table-bordered text-center" style="width: 100%;">
+							<thead>
+								<tr>
+									<td style="width: 20%">内容</td>
+									<td style="width: 30%">测试指标</td>
+									<td style="width: 25%">测试值</td>
+									<td style="width: 25%">评分</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td rowspan="2" style="padding-top: 4% !important">形态</td>
+									<td>身高（厘米）</td>
+									<td>{{Height}}</td>
+									<td>{{HeightScore}}</td>
+								</tr>
+								<tr>
+									<td>身高标准体重（千克）</td>
+									<td>{{Weight}}</td>
+									<td>{{WeightScore}}</td>
+								</tr>
+								<tr>
+									<td rowspan="6" style="padding-top: 14%">素质</td>
+									<td>10米折返跑（秒）</td>
+									<td>{{ShuttleRun}}</td>
+									<td>{{ShuttleRunScore}}</td>
+								</tr>
+								<tr>
+									<td>坐位体前屈（厘米）</td>
+									<td>{{SitReach}}</td>
+									<td>{{SitReachScore}}</td>
+								</tr>
+								<tr>
+									<td>立定跳远（厘米）</td>
+									<td>{{BroadJump}}</td>
+									<td>{{BroadJumpScore}}</td>
+								</tr>
+								<tr>
+									<td>双脚连续跳（秒）</td>
+									<td>{{DoubleJump}}</td>
+									<td>{{DoubleJumpScore}}</td>
+								</tr>
+								<tr>
+									<td>网球掷远（米）</td>
+									<td>{{Throw}}</td>
+									<td>{{ThrowScore}}</td>
+								</tr>
+								<tr>
+									<td>走平衡木（秒）</td>
+									<td>{{Balance}}</td>
+									<td>{{BalanceScore}}</td>
+								</tr>
+								<tr>
+									<td>综合评级</td>
+									<td>{{gradeResult GradeResult}}</td>
+									<td>总分</td>
+									<td>{{TotalScore}}</td>
+								</tr>
+								<tr>
+									<td colspan="2" class="text-left">
+										<label style="width:100%;margin-top: 10%;padding-left: 30px;padding-right: 30px;line-height:28px">
+                                        {{{commentContent CommentContent}}}
+                                        <br /><br />
+                                        身体素质测试评分与幼儿的【动作发展】、【运动心理】密切相关，例如网球掷远代表孩子上肢力量与腰腹力量的素质，但与此同时也代表着孩子的投掷动作发展情况。
+                                        <br /><br />
+                                        得分仅供参考，如需了解进一步详细的情况请与中心工作人员联系。
+                                    </label>
+									</td>
+									<td colspan="2">
+										<label id="summary-chart-{{Id}}">
+                                    </label>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="row foot-content">
+							<p style="float: left; position: relative; left: 2%;">*X代表该幼儿因心理或动作发展因素未参与该项测试，故无法记录测试值</p>
+							<p style="float: right; position: relative; right: 2%;">检测站：{{TestingStation}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			{{/each}}
+		</script>
+		<script type="text/javascript">
+			var rTProjectCorrespondence = {
+				'HeightScore': 1,
+				'WeightScore': 2,
+				'BroadJumpScore': 4,
+				'DoubleJumpScore': 5,
+				'ThrowScore': 7,
+				'BalanceScore': 8,
+				'SitReachScore': 3,
+				'ShuttleRunScore': 6
+			};
+			var gradeContent = function(totalScore) {
+				var gradeContent = "";
+				if(totalScore >= 32) {
+					gradeContent = "优秀";
+				} else if(totalScore >= 28 && totalScore <= 31) {
+					gradeContent = "良好";
+				} else if(totalScore >= 20 && totalScore <= 27) {
+					gradeContent = "合格";
+				} else {
+					gradeContent = "不合格";
+				}
+				return gradeContent;
+			}
+			var RTPhysicalProject = {
+				"1": "身高",
+				"2": "体重",
+				"3": "坐位体前屈",
+				"4": "立定跳远",
+				"5": "双脚连续跳",
+				"6": "十米折返跑",
+				"7": "网球掷远",
+				"8": "走平衡木",
+				"9": "位移能力",
+				"10": "物体控制能力"
+			};
+			var recordItemComment = function(dataArr) {
+				var projectContent = "";
+				for(var i = 0, l = dataArr.length; i < l; i++) {
+					if(i == l - 1) {
+						projectContent += RTPhysicalProject[dataArr[i]];
+					} else {
+						projectContent += (RTPhysicalProject[dataArr[i]] + "、");
+					}
+				}
+				return projectContent;
+			};
+			Handlebars.registerHelper("commentContent", function(dataInfo) {
+				var fineArr = [];
+				var favorableArr = [];
+				var badArr = [];
+				var regularArr = [];
+				var underproofArr = [];
+				var notTestArr = [];
+				var commentContent = "祝贺您完成了所有指标的测试，现对您的测试结果进行简评，和同龄人比，您的体质处于" + gradeContent(dataInfo.TotalScore) + "水平,各项发展如下：<br/><br/>";
+				for(var testType in rTProjectCorrespondence) {
+					var single = rTProjectCorrespondence[testType];
+					switch(dataInfo[testType]) {
+						case 0:
+							underproofArr.push(single);
+							break;
+						case 1:
+							underproofArr.push(single);
+							break;
+						case 2:
+							regularArr.push(single);
+							break;
+						case 3:
+							badArr.push(single);
+							break;
+						case 4:
+							favorableArr.push(single);
+							break;
+						case 5:
+							fineArr.push(single);
+							break;
+					}
+				}
+				if(fineArr.length != 0) {
+					commentContent += (recordItemComment(fineArr) + "发展优秀；");
+				}
+				if(favorableArr.length != 0) {
+					commentContent += (recordItemComment(favorableArr) + "发展良好；");
+				}
+				if(badArr.length != 0) {
+					commentContent += (recordItemComment(badArr) + "发展合格；");
+				}
+				if(regularArr.length != 0) {
+					commentContent += (recordItemComment(regularArr) + "发展较差；");
+				}
+				if(underproofArr.length != 0) {
+					commentContent += (recordItemComment(underproofArr) + "不合格，需要特别注意。");
+				}
+
+				return commentContent;
+			});
+			Handlebars.registerHelper("gradeResult", function(totalScore) {
+				return gradeContent(totalScore);
+			});
+			Date.prototype.format = function(fmt) { //author: meizz
+				var o = {
+					"M+": this.getMonth() + 1, //月份
+					"d+": this.getDate(), //日
+					"h+": this.getHours(), //小时
+					"m+": this.getMinutes(), //分
+					"s+": this.getSeconds(), //秒
+					"q+": Math.floor((this.getMonth() + 3) / 3), //季度
+					"S": this.getMilliseconds() //毫秒
+				};
+				if(/(y+)/.test(fmt))
+					fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+				for(var k in o)
+					if(new RegExp("(" + k + ")").test(fmt))
+						fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+				return fmt;
+			}
+			String.prototype.CharpStr2Date = function() {
+				var dateReg = /\/Date\((-?\d+)([\+\-]?\d+)\)\//;
+				var date = new Date(parseInt(this.replace(/\/Date\((-?\d+)([\+\-]?\d+)?\)\//, '$1')));
+				var createTime = date.format("yyyy-MM-dd");
+				return createTime;
+			}
+
+			$(function() {
+				var physicalResult = {
+					"AgencyInfo": "睿莱儿童体质检测中心",
+					"PhyResult": [{
+						"__type": "BabybusSSApi.DatabaseModel.UV_RT_TestResult, BabybusSSApi.DatabaseModel",
+						"Id": 65688,
+						"PlanId": 446,
+						"DataId": 0,
+						"KindergartenId": 116,
+						"ClassId": 194296,
+						"ChildId": 20946,
+						"Gender": 2,
+						"AgeGroup": 6.0,
+						"PlanTime": "\/Date(1490613428986+0800)\/",
+						"CreateTime": "\/Date(1490613469893+0800)\/",
+						"Height": 112.200,
+						"Weight": 18.700,
+						"DoubleJump": 4.860,
+						"BroadJump": 74.800,
+						"ShuttleRun": 10.980,
+						"Throw": 3.300,
+						"Balance": 15.480,
+						"SitReach": 11.700,
+						"HeightScore": 3,
+						"WeightScore": 5,
+						"DoubleJumpScore": 4,
+						"BroadJumpScore": 2,
+						"ShuttleRunScore": 0,
+						"ThrowScore": 1,
+						"BalanceScore": 1,
+						"SitReachScore": 3,
+						"ChildName": "杨雨涵",
+						"ClassName": "大二班",
+						"KindergartenName": "万国金色幼儿园",
+						"Birthday": "\/Date(1310515200000+0800)\/",
+						"ChildCode": "61005001011228      ",
+						"IsMentalFaction": false,
+						"IsMentalBalance": false,
+						"IsMentalBroadJump": false,
+						"IsMentalDoubleJump": false,
+						"IsMentalShuttleRun": false,
+						"IsMentalSitReach": false,
+						"IsMentalThrow": false,
+						"IsMotorBalance": false,
+						"IsMotorBroadJump": false,
+						"IsMotorDoubleJump": false,
+						"IsMotorShuttleRun": false,
+						"IsMotorSitReach": false,
+						"IsMotorThrow": false,
+						"BodyShapTotalScore": 8,
+						"BodyDiathesisTotalScore": 11,
+						"TotalScore": 19,
+						"MissDataType": 0,
+						"ActionDevTotalScore": false,
+						"ClassType": 0,
+						"IsExported": true
+					}, {
+						"Id": 65726,
+						"PlanId": 446,
+						"DataId": 0,
+						"KindergartenId": 116,
+						"ClassId": 194296,
+						"ChildId": 38341,
+						"Gender": 2,
+						"AgeGroup": 6.0,
+						"PlanTime": "\/Date(1490613428986+0800)\/",
+						"CreateTime": "\/Date(1490613475018+0800)\/",
+						"Height": 128.700,
+						"Weight": 23.100,
+						"DoubleJump": 5.760,
+						"BroadJump": 92.400,
+						"ShuttleRun": 6.840,
+						"Throw": 4.950,
+						"Balance": 11.250,
+						"SitReach": 5.400,
+						"HeightScore": 5,
+						"WeightScore": -3,
+						"DoubleJumpScore": 3,
+						"BroadJumpScore": 3,
+						"ShuttleRunScore": 3,
+						"ThrowScore": 2,
+						"BalanceScore": 1,
+						"SitReachScore": 2,
+						"ChildName": "浮雅雯",
+						"ClassName": "大二班",
+						"KindergartenName": "万国金色幼儿园",
+						"Birthday": "\/Date(1305936000000+0800)\/",
+						"ChildCode": "61005001015072      ",
+						"IsMentalFaction": false,
+						"IsMentalBalance": false,
+						"IsMentalBroadJump": false,
+						"IsMentalDoubleJump": false,
+						"IsMentalShuttleRun": false,
+						"IsMentalSitReach": false,
+						"IsMentalThrow": false,
+						"IsMotorBalance": false,
+						"IsMotorBroadJump": false,
+						"IsMotorDoubleJump": false,
+						"IsMotorShuttleRun": false,
+						"IsMotorSitReach": false,
+						"IsMotorThrow": false,
+						"BodyShapTotalScore": 8,
+						"BodyDiathesisTotalScore": 14,
+						"TotalScore": 22,
+						"MissDataType": 0,
+						"ActionDevTotalScore": false,
+						"ClassType": 0,
+						"IsExported": true
+					}]
+				};
+				console.log(physicalResult);
+				var charInfoJson = {};
+				var contentHtml = [];
+				for(var i = 0, l = physicalResult.PhyResult.length; i < l; i++) {
+					var result = physicalResult.PhyResult[i];
+					var itemContent = {
+						ChildName: result.ChildName,
+						Gender: result.Gender == 1 ? "男" : "女",
+						AgeGroup: result.AgeGroup,
+						BirthDate: result.Birthday.CharpStr2Date(),
+						TestDate: result.CreateTime.CharpStr2Date(),
+						ClassName: result.ClassName,
+						TestCode: result.ChildCode.substr(0, 4) + "-" + result.ChildCode.substr(4, 4) + "-" + result.ChildCode.substr(8, 4) + "-" + result.ChildCode.substr(12, 6),
+						KindergartenName: result.KindergartenName,
+						Height: result.Height == 0 || result.Height == -99 || result.Height == null ? "X" : result.Height,
+						HeightScore: result.HeightScore,
+						Weight: result.Weight == 0 || result.Weight == -99 || result.Weight == null ? "X" : result.Weight,
+						WeightScore: Math.abs(result.WeightScore),
+						ShuttleRun: result.ShuttleRun == 0 || result.ShuttleRun == null || result.ShuttleRun == -99 ? "X" : result.ShuttleRun,
+						ShuttleRunScore: result.ShuttleRunScore,
+						SitReach: result.SitReach == 0 || result.SitReach == null || result.SitReach == -99 ? "X" : result.SitReach,
+						SitReachScore: result.SitReachScore,
+						BroadJump: result.BroadJump == 0 || result.BroadJump == -99 || result.BroadJump == null ? "X" : result.BroadJump,
+						BroadJumpScore: result.BroadJumpScore,
+						DoubleJump: result.DoubleJump == 0 || result.DoubleJump == -99 || result.DoubleJump == null ? "X" : result.DoubleJump,
+						DoubleJumpScore: result.DoubleJumpScore,
+						Throw: result.Throw == 0 || result.Throw == null || result.Throw == -99 ? "X" : result.Throw,
+						ThrowScore: result.ThrowScore,
+						Balance: result.Balance == 0 || result.Balance == -99 || result.Balance == null ? "X" : result.Balance,
+						BalanceScore: result.BalanceScore,
+						CommentContent: result,
+						TotalScore: result.TotalScore,
+						GradeResult: result.TotalScore,
+						Id: result.Id,
+						TestingStation: physicalResult.AgencyInfo
+					};
+					var itemChildeveryObjectScore = [];
+					for(var s in rTProjectCorrespondence) {
+						itemChildeveryObjectScore.push(itemContent[s]);
+					}
+					charInfoJson[result.Id] = itemChildeveryObjectScore;
+					contentHtml.push(itemContent);
+				}
+				var template = Handlebars.compile($("#content-html").html());
+				var htmlText = template(contentHtml);
+				$("#record-content").html(htmlText);
+				var testName = [];
+				for(var p in rTProjectCorrespondence) {
+					testName.push(RTPhysicalProject[rTProjectCorrespondence[p]])
+				}
+				for(var charJson in charInfoJson) {
+					$('#summary-chart-' + charJson).highcharts({
+						chart: {
+							polar: true,
+							type: 'area',
+							width: 500,
+							height: 500
+						},
+						credits: {
+							enabled: false,
+						},
+						title: {
+							text: '',
+							floating: true
+						},
+
+						pane: {
+							size: '80%'
+						},
+
+						xAxis: {
+							categories: testName,
+							tickmarkPlacement: 'on',
+							lineWidth: 0,
+							gridLineColor: '#000000',
+							lineColor: '#000000',
+						},
+
+						yAxis: {
+							gridLineInterpolation: 'polygon',
+							tickInterval: 1,
+							lineWidth: 0,
+							max: 5,
+							min: 0,
+							gridLineColor: '#000000',
+							lineColor: '#000000',
+						},
+
+						tooltip: {
+							shared: true,
+							pointFormat: '<span style="color:{series.color}">{point.y:,.1f}</span>',
+						},
+
+						legend: {
+							enabled: false
+						},
+
+						series: [{
+							name: '',
+							data: charInfoJson[charJson],
+						}]
+					});
+
+				}
+			});
+		</script>
+	</head>
+
+	<body>
+		<div id="record-content">
+		</div>
+	</body>
+
+</html>
