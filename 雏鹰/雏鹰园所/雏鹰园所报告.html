@@ -1,0 +1,2039 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>园所报告</title>
+    <link href="http://cdn.imreliable.net/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://cdn.imreliable.net/jquery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="http://cdn.imreliable.net/bootstrap/js/bootstrap.min.js"></script>
+    <script src="http://cdn.bootcss.com/highcharts/5.0.7/highcharts.js"></script>
+    <script src="http://cdn.bootcss.com/highcharts/5.0.7/highcharts-more.js"></script>
+    <script src="http://cdn.bootcss.com/underscore.js/1.8.3/underscore.js"></script>
+    <script src="http://cdn.bootcss.com/handlebars.js/4.0.6/handlebars.min.js"></script>
+    <style type="text/css">
+        ul,
+        ol {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-family: "microsoft yahei";
+            color: #000000;
+        }
+
+        .font-yahei{
+            font-family: "微软雅黑";
+        }
+
+        .font-gray-color{
+            color:#898989;
+        }
+
+        .font-weight-bold{
+            font-weight: bold;
+        }
+
+        .font-weight-normal{
+            font-weight: normal;
+        }
+
+        .sub-title-back{
+            padding:3px 10px;
+            background-color: #ffdd00;
+            color:#000000;
+            border-radius: 20px;
+            margin-left: 19px;
+            line-height: 35px;
+        }
+
+        .report-box {
+            width: 1123px;
+            height: 794px;
+            margin: 0 auto;
+            position: relative;
+            clear: both;
+        }
+        /*part0报告封皮页面*/
+
+        .part0-head-time,
+        .part0-foot-brand {
+            font-size: 15px;
+            font-family: SimSun;
+            text-align: right;
+            margin-right: 10px;
+        }
+
+        .part0-head-time {
+            margin-top: 60px;
+        }
+
+        .part0-foot-brand {
+            margin-bottom: 60px;
+            color:#333;
+        }
+
+            .part0-foot-brand .part0-foot-brand-EN {
+                font-size: 12px;
+            }
+
+        .part0-center {
+            height: 180px;
+            width: 1000px;
+            margin: 118px 0 310px 70.5px;
+            border-left: 27px solid #ffdd00;
+            padding: 8px 0 0 55px;
+            font-family: SimSun;
+        }
+
+            .part0-center h3 {
+                font-size: 33px;
+            }
+
+            .part0-center h1 {
+                font-size: 61px;
+            }
+        /*part0说明*/
+
+        .part0-Instructions-head {
+            height: 88px;
+            font-size: 38px;
+            background: url(http://cdn.imreliable.net/asset/image/familyReportChuying/part0-Instructions-bgcy-icon.png) no-repeat 0 25px;
+            background-size: contain;
+            color: #000000;
+            padding-left: 98px;
+            padding-top: 25px;
+        }
+
+        .part0-Instructions-centent {
+            height: 690px;
+            padding: 40px 72px;
+            color: #000000;
+        }
+
+        .part0-Instructions-centent-left {
+            width: 480px;
+            height: 550px;
+        }
+
+        .part0-Instructions-centent-right {
+            height: 550px;
+            padding-left: 55px;
+        }
+
+        .part0-Instructions-centent-left ul {
+            background: url(http://cdn.imreliable.net/asset/image/part0-Instructions-bg-line.png) no-repeat right 30px;
+            background-size: 1px;
+        }
+
+        .part0-Instructions-centent-left ul,
+        .part0-Instructions-centent-right ol {
+            margin-top: 56px;
+        }
+
+            .part0-Instructions-centent-left ul li {
+                font-size: 16px;
+                color: #da2337;
+
+            }
+
+            .part0-Instructions-centent-left ol li,
+            .part0-Instructions-centent-left p,
+            .part0-Instructions-centent-right ol li {
+                letter-spacing: 1px;
+                margin-left: 19px;
+                font-size: 12px;
+                color: #000000;
+                line-height: 22px;
+                width: 420px;
+                margin-bottom: 20px;
+            }
+
+            .part0-Instructions-centent-right ol li {
+                margin-left: 2px;
+                margin-bottom: 50px;
+            }
+
+        .part0-Instructions-centent-left p {
+            display: block;
+        }
+        /*part0目录页面*/
+
+        .part0-menu-left {
+            width: 520px;
+            height: 794px;
+            background: url(http://cdn.imreliable.net/asset/image/familyReportChuying/part0-menu-bgcy.png) no-repeat center;
+            background-size: contain;
+        }
+
+        .part0-menu-right {
+            height: 794px;
+            width: 600px;
+            padding-top: 200px;
+        }
+
+            .part0-menu-right ul {
+                margin-left: 80px;
+            }
+
+                .part0-menu-right ul li {
+                    line-height: 60px;
+                    font-size: 23px;
+                    font-family: SimSun;
+                    padding-bottom: 140px;
+                }
+
+                    .part0-menu-right ul li span {
+                        width: 72px;
+                        height: 72px;
+                        background: url(http://cdn.imreliable.net/asset/image/familyReportChuying/part0-menu-licy-icon.png) no-repeat center;
+                        background-size: contain;
+                        margin-right: 30px;
+                        padding-left: 20px;
+                        clear: both;
+                    }
+        /*part 目录*/
+
+        .part1-menu-icon {
+            width: 96px;
+            height: 794px;
+            background: url(http://cdn.imreliable.net/asset/image/familyReportChuying/part1-menucy-icon.png) no-repeat center;
+            background-size: contain;
+            line-height: 830px;
+            text-align: center;
+            font-size: 23px;
+            color: #ffffff;
+        }
+
+        .part1-menu-title {
+            width: 443px;
+            height: 397px;
+            text-align: center;
+            line-height: 730px;
+            border-bottom: 1px solid #a0a0a0;
+            font-size: 38px;
+            color: #000;
+        }
+
+        .part1-menu-centen,
+        .part3-menu-centent {
+            width: 556px;
+            height: 440px;
+            border: 2px solid #ffdd00;
+            margin: 0 auto;
+            position: relative;
+            top: 25%;
+        }
+
+            .part3-menu-centent ul {
+                margin-left: 19px;
+                padding-right: 42px;
+                /*margin-top: 80px;*/
+                font-size: 23px;
+                font-family: simsun;
+                color: #DA2337;
+            }
+
+                .part3-menu-centent ul li {
+                    /*margin-bottom: 80px;*/
+                    color: #000000;
+                    position:relative;
+                }
+
+                    .part3-menu-centent ul li span {
+                        display:inline-block;
+                        width:10px;
+                        height:10px;
+                        border-radius: 50%;
+                        background-color: #ffdd00;
+                        position:absolute;
+                        top: 50%;
+                        margin-top:-5px;
+                    }
+
+                        .part3-menu-centent ul li p{
+                            margin-left: 20px;
+                        }
+
+            .part1-menu-centen ul {
+                margin-top: 25px;
+                margin-left: 20px;
+                font-size: 23px;
+                font-family: simsun;
+                color: #DA2337;
+            }
+
+                .part1-menu-centen ul li {
+                    color: #000000;
+                    position:relative;
+                    margin:80px 0;
+                }
+
+                    .part1-menu-centen ul li span {
+                        display:inline-block;
+                        width:10px;
+                        height:10px;
+                        border-radius: 50%;
+                        background-color: #ffdd00;
+                        position:absolute;
+                        top: 50%;
+                        margin-top:-5px;
+                    }
+
+                        .part1-menu-centen ul li p{
+                            margin-left: 20px;
+                        }
+        /*内容*/
+
+        .part-head {
+            color: #333333;
+            background: url(http://cdn.imreliable.net/asset/image/familyReportChuying/part0-Instructions-bgcy-icon.png) no-repeat left;
+            background-size: contain;
+            padding-left: 70px;
+            margin-top: 60px;
+            height: 45px;
+            line-height: 45px;
+            font-size: 23px;
+        }
+
+        .part-centet {
+            width: 1122px;
+            height: 586px;
+            clear: both;
+            padding: 0 73px;
+        }
+
+        .part-centet-left {
+            width: 488px;
+            height: 586px;
+        }
+
+        .part-centet-left-head {
+            height: 48px;
+            display: inline-block;
+            padding: 0 25px;
+            border: 4px solid #2e4f92;
+            background-color: #4879df;
+            border-radius: 30px;
+            line-height: 40px;
+            font-size: 19px;
+            text-align: center;
+            color: #fff;
+            margin-top: 32px;
+            margin-left: 11px;
+        }
+
+            .part-centet-left-head span,
+            .part2-centet-left-head span {
+                color: #fff;
+            }
+
+        .part-centet-left ol li {
+            list-style: disc;
+            margin-top: 97px;
+            margin-left: 20px;
+            width: 383px;
+        }
+
+        .part-centet-right {
+            width: 488px;
+            height: 586px;
+        }
+
+            .part-centet-right h4 {
+                line-height: 70px;
+                text-align: center;
+            }
+
+        .part-centet-right-hightchar {
+            width: 415px;
+            height: 415px;
+            margin: 0 auto;
+        }
+
+        .part-centet-right-hightchar-explain {
+            width: 320px;
+            height: 60px;
+            padding-top: 20px;
+            /*margin: 0 auto;*/
+            margin-left: 130px;
+            margin-bottom: 60px;
+        }
+
+            .part-centet-right-hightchar-explain ul li {
+                float: left;
+                margin-right: 59px;
+                margin-top: 20px;
+                width: 100px;
+            }
+
+            .part-centet-right-hightchar-explain em {
+                width: 17px;
+                height: 17px;
+                margin-right: 35px;
+            }
+
+        .part-foot {
+            width: 1122px;
+            height: 75px;
+            clear: both;
+        }
+
+            .part-foot .part-foot-text {
+                width: 930px;
+                margin-left: 75px;
+                color: #666666;
+                line-height: 30px;
+                position: relative;
+                z-index: 222;
+            }
+
+            .part-foot .part-foot-page-bg {
+                width: 56px;
+                height: 70px;
+                background: url(http://cdn.imreliable.net/asset/image/familyReportChuying/part-pagecy-icon.png) no-repeat center;
+                background-size: contain;
+                line-height: 70px;
+                color: #333;
+                font-size: 29px;
+                text-align: center;
+                margin-top: 15px;
+            }
+
+        .part2-centet-top {
+            width: 977px;
+            height: 180px;
+        }
+
+            .part2-centet-top ol li {
+                list-style: disc;
+                margin: 10px 20px;
+                margin-bottom: 40px;
+            }
+
+            .part2-centet-top .part2-centet-left-head {
+                display: inline-block;
+                width: 888px;
+                height: 48px;
+                padding: 0 25px;
+                border: 4px solid #2e4f92;
+                background-color: #4879df;
+                border-radius: 30px;
+                line-height: 35px;
+                font-size: 19px;
+                text-align: center;
+                color: #fff;
+                margin-top: 12px;
+                margin-left: 30px;
+            }
+
+        .part2-centet-bottom {
+            width: 977px;
+            height: 410px;
+        }
+
+            .part2-centet-bottom h4 {
+                line-height: 20px;
+                text-align: center;
+            }
+
+        .part2-centet-right-hightchar-explain {
+            width: 500px;
+            height: 60px;
+            padding-top: 20px;
+            margin: 0 auto;
+        }
+
+            .part2-centet-right-hightchar-explain ul li {
+                float: left;
+                margin-right: 30px;
+            }
+
+            .part2-centet-right-hightchar-explain em {
+                width: 17px;
+                height: 9px;
+                margin-right: 10px;
+                margin-top: 6px;
+            }
+
+        .part2-centet-bottom .part2-centet-right-hightchar {
+            width: 900px;
+            height: 300px;
+            margin: 0 auto;
+        }
+
+        .kdg-weight-PCT-span {
+            visibility: hidden;
+            width: 550px;
+        }
+
+        .custom{
+                margin-top:30px;
+                height:48px;
+                display:block;
+            }
+
+                .custom span span{
+                    height: 48px;
+                    display: inline-block;
+                    padding: 0 25px;
+                    border-radius: 30px;
+                    line-height: 40px;
+                    font-size: 14px;
+                    text-align: center;
+                    color: #fff;         
+                    margin-right: 10px;       
+                }
+        .separated{
+            width:1px;
+            height:30px;
+            background-color: #666;
+            margin-top: 5px;
+            margin-right: 10px;
+        }
+    </style>
+    <script type="text/x-handlebars-template" id="content-html">
+        <!--报告封皮-->
+        <div class="report-box">
+            <div class="part0-head-time pull-right">
+                {{NowDate}}
+            </div>
+            <div class="part0-center pull-left">
+                <h3><span class="font-weight-bold">{{KindergartenName}}</span>•{{NowYear}}年度（3-6岁）</h3>
+                <h1>儿童体质监测分析报告</h1>
+            </div>
+            <div class="part0-foot-brand pull-left font-weight-bold" style="margin-left:357px">
+                雏鹰宝贝幼儿体质检测服务<br>
+                <span class="part0-foot-brand-EN font-weight-normal font-yahei font-gray-color">服务热线：010-56617272</span>
+            </div>
+            <span class="separated pull-left"></span>
+            <div class="part0-foot-brand pull-left font-weight-bold" style="text-align:left">
+                技术支持：睿莱体测<br>
+                <span class="part0-foot-brand-EN font-weight-normal font-yahei font-gray-color">Cooper Institute</span>
+            </div>
+        </div>
+        <!--说明-->
+        <div class="report-box">
+            <div class="part0-Instructions-head">
+                说明
+            </div>
+            <div class="part0-Instructions-centent">
+                <div class="part0-Instructions-centent-left pull-left">
+                    <h3>■  体质测试说明</h3>
+                    <ul>
+                        <li><span class="sub-title-back">测试体系说明</span></li>
+                        <ol>
+                            <li>
+                                参照教育部2012颁布的《3-6岁儿童学习与发展指南》，雏鹰制定了幼儿基本动作能力测试体系。他反应了幼儿在参与体育活动和日常生活中身体运动的对称性、协调性、姿势等正常与否，动作模式（包括静态和动态）、移动、步态、体姿等是否符合同龄幼儿生长发育和运动特征。
+                            </li>
+                        </ol>
+                        <li><span class="sub-title-back">测试意义</span></li>
+                        <p>
+                            测试的分析结果，可以为幼儿园制定体育活动方案提供科学的数据支持和针对性练习内容。同时可以给家长呈现幼儿阶段性的动作发展水平，简单直观地让家长了解幼儿园体育教学效果，为家庭体育活动中家长指导幼儿动作练习提供有力的参考依据。
+                        </p>
+                        <li><span class="sub-title-back">测试结果</span></li>
+                        <p>
+                            幼儿基本动作能力测试的结果通过动作能力和基础体能两方面反应。动作能力包括：移动性动作、稳定性动作、操作性动作。基础体能包括：灵敏反应性、协调灵活性、平衡稳定性、力量持久性。
+                        </p>
+                    </ul>
+                </div>
+
+                <div class="part0-Instructions-centent-right pull-left">
+                    <h3>■  测试对象、测试数据说明</h3>
+                    <ol>
+                        <li>
+                            <p>• 本报告数据来源于该幼儿园完成所有测试项目的孩子，未参与测试或测试有缺项的孩子的数据均未计入。</p>
+                        </li>
+                        <li>
+                            <p>
+                                • 本次测试涵盖该园所{{ClassTotal}}个班，{{TotalChildren}}名孩子。具体包括：<br><br> {{#each EveryClassName}}
+                                <span style="width: 150px;height:40px;float: left;margin-top: -20px;">
+                                    <br>{{ClassName}}：{{ClassCount}}人;
+                                </span> {{/each }}
+                            </p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <!--part0目录-->
+        <div class="report-box">
+            <div class="part0-menu-left pull-left">
+            </div>
+            <div class="part0-menu-right pull-left">
+                <ul>
+                    <li>
+                        <span class="pull-left">
+                            01
+                        </span>
+                        <p class="pull-left">园所体测情况概述</p>
+                    </li>
+
+                    <li>
+                        <span class="pull-left">
+                            02
+                        </span>
+                        <p class="pull-left">各年级体测情况概述</p>
+                    </li>
+                    <li>
+                        <span class="pull-left">
+                            03
+                        </span>
+                        <p class="pull-left">各班级体测情况概述</p>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <!--part1-目录-->
+        <div class="report-box">
+            <div class="part1-menu-icon pull-left">
+                <p>
+                    Part 1&nbsp;&nbsp;
+                </p>
+            </div>
+            <div class="part1-menu-title pull-left">
+                <p>园所概览</p>
+            </div>
+            <div class="part1-menu-centen pull-left">
+                <ul>
+                    <li><span></span><p>{{KdgTotalTitle}}</p></li>
+                    <li><span></span><p>{{KdgTotalPCTTitle}}</p></li>
+                    <li><span></span><p>{{KdgWeightPCTTitle}}</p></li>
+                </ul>
+            </div>
+        </div>
+        <!--part1我园个体测结果 -->
+        <div class="report-box">
+            <div class="part-head pull-left">
+                <p>{{KdgTotalTitle}}</p>
+            </div>
+            <div class="part-centet pull-left ">
+                <div class="part-centet-left  pull-left">
+                    <div class="custom">
+                        <span>{{{KdgTotalAVGScoreText}}}</span>
+                    </div>
+                    <ol>
+                        <li>
+                            <p>{{{KdgTotalQualityText}}}</p>
+                        </li>
+                    </ol>
+                </div>
+                <div class="part-centet-right pull-left">
+                    <h4>
+                        {{KdgTotalHightchartTitle}}
+                    </h4>
+                    <div class="part-centet-right-hightchar-explain kdg-last-that-ul" style="margin-left: 140px;">
+                        <ul>
+                            <li>
+                                <em class="pull-left" style="background:#4879df ;"></em>
+                                <span class="pull-left">
+                                    本次
+                                </span>
+                            </li>
+                            <li>
+                                <em class="pull-left" style="background:#f44a36 ;"></em>
+                                <span class="pull-left">
+                                    上次
+                                </span>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="part-centet-right-hightchar">
+                        <div id="container-hightcharpart1SVG" style="max-width:450px; height:370px; margin: 0 auto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="part-foot pull-left">
+                <div class="part-foot-text  pull-left">
+                    说明：本测试共有8项，每项占5分，共计40分。综合评级根据分数可分为四级：优秀＞31分，31分≥良好≥28分，27分≥合格≥20分，20分＞不合格。
+                </div>
+                <div class="part-foot-page-bg pull-right">
+                    02
+                </div>
+            </div>
+        </div>
+        <!--part1我园合格水平 -->
+        <div class="report-box">
+            <div class="part-head pull-left">
+                <p>{{KdgTotalPCTTitle}}</p>
+            </div>
+            <div class="part-centet pull-left ">
+                <div class="part-centet-left  pull-left">
+                    <div class="custom">
+                        <span>{{{KdgTotalPCTText}}}</span>
+
+                    </div>
+                    <ol>
+                        {{{KdgTotalPCTQualityText}}}
+                    </ol>
+                </div>
+                <div class="part-centet-right pull-left kdg-weight-PCT-h4">
+                    <h4>
+                        {{KdgTotalPCTHightchartTitle}}
+                    </h4>
+                    <div class="part-centet-right-hightchar-explain kdg-weight-PCT-ul">
+                        <ul>
+                            <li>
+                                <em class="pull-left" style="background:#f44a36 ;"></em>
+                                <span class="pull-left">
+                                    优秀
+                                </span>
+                            </li>
+                            <li>
+                                <em class="pull-left" style="background:#4879df ;"></em>
+                                <span class="pull-left">
+                                    良好
+                                </span>
+                            </li>
+                            <li>
+                                <em class="pull-left" style="background:#21c393 ;"></em>
+                                <span class="pull-left">
+                                    合格
+                                </span>
+                            </li>
+                            <li>
+                                <em class="pull-left" style="background:#fad567 ;"></em>
+                                <span class="pull-left">
+                                    不合格
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="part-centet-right-hightchar">
+                        <div id="container-hightcharpart1Perc" style="max-width:400px; height:300px; margin: 0 auto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="part-foot pull-left">
+                <div class="part-foot-text  pull-left" style="border-bottom: 1px solid #A0A0A0;    line-height: 50px">
+                    &nbsp;
+                </div>
+                <div class="part-foot-page-bg pull-right">
+                    03
+                </div>
+            </div>
+        </div>
+        <!--part1我园体重占比 -->
+        <div class="report-box">
+            <div class="part-head pull-left">
+                <p>{{KdgWeightPCTTitle}}</p>
+            </div>
+            <div class="part-centet pull-left ">
+                <div class="part-centet-left  pull-left">
+                    <div class="part-centet-left-head" style="visibility: hidden;">
+                        <!--	{{KdgTotalPCTText}}-->
+                    </div>
+                    <ol>
+                        {{{KdgWeightPCTQualityText}}}
+                        <!--                        <-->
+                    </ol>
+                </div>
+                <div class="part-centet-right pull-left">
+                    <h4>
+                        {{KdgWeightHightchartTitle}}
+                    </h4>
+                    <div class="part-centet-right-hightchar-explain">
+                        <ul>
+                            <li>
+                                <em class="pull-left" style="background:#fad567 ;"></em>
+                                <span class="pull-left">
+                                    偏轻
+                                </span>
+                            </li>
+                            <li>
+                                <em class="pull-left" style="background:#f44a36 ;"></em>
+                                <span class="pull-left">
+                                    正常
+                                </span>
+                            </li>
+                            <li>
+                                <em class="pull-left" style="background:#4879df ;"></em>
+                                <span class="pull-left">
+                                    偏胖
+                                </span>
+                            </li>
+                            <li>
+                                <em class="pull-left" style="background:#21c393 ;"></em>
+                                <span class="pull-left">
+                                    肥胖
+                                </span>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="part-centet-right-hightchar">
+                        <div id="container-hightcharpart1WeightPerc" style="max-width:450px; height:350px; margin: 0 auto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="part-foot pull-left">
+                <div class="part-foot-text  pull-left">
+                    说明：身高标准体重是国家经过对国民群体的大样本调研，根据不同的年龄、身高计算出该年龄段人正常的体重范围。它能反映孩子在此身高段是否处于正常的体重范围，是判断孩子是否偏重或偏轻的一个指标，同时也能反映孩子的生长发育情况和营养状况。
+                </div>
+                <div class="part-foot-page-bg pull-right">
+                    04
+                </div>
+            </div>
+        </div>
+        <!--part2-目录-->
+        <div class="report-box">
+            <div class="part1-menu-icon pull-left">
+                <p>
+                    Part 2&nbsp;&nbsp;
+                </p>
+            </div>
+            <div class="part1-menu-title pull-left">
+                <p>各年级体测情况概述</p>
+            </div>
+            <div class="part1-menu-centen pull-left">
+                <ul>
+                    <li><span></span><p>各年级中,{{GradeClassScoreMax}}幼儿体质水平最好</p></li>
+                    <li><span></span><p>各年级中,{{GradeClassWeightGreatMax}}幼儿身高标准体重达到正常标准的占比最高 </p></li>
+                </ul>
+            </div>
+        </div>
+        <!--part2柱状图表-->
+        <div class="report-box">
+            <div class="part-head pull-left">
+                <p>各年级中,{{GradeClassScoreMax}}幼儿体质水平最好</p>
+            </div>
+            <div class="part-centet pull-left ">
+                <div class="part2-centet-top  pull-left">
+                    <ol>
+                        <li>
+                            <p>{{GradeClassScoreContent}}</p>
+                        </li>
+                    </ol>
+                    <div class="part2-centet-left-head">
+                        <div style="float: left;">各年级平均分：</div>
+                        <span>
+                            {{#each GradeClassInfo}}
+                            <div style="width: 55px ;float:left; font-size: 12px">
+                                <p style="line-height: 20px;margin-left:5px;margin-top: 2px;">
+                                    <span style="color:#fff"> {{Name}} </span><br> {{TotalAVGScore}}分
+                                </p>
+                            </div>
+                            {{/each }}
+                        </span>
+                    </div>
+
+                </div>
+                <div class="part2-centet-bottom pull-left">
+                    <h4>
+                        各年级各测试项分数
+                    </h4>
+                    <div class="part2-centet-right-hightchar-explain">
+                        <ul>
+                            {{#each GradeInfoData}}
+                            <li>
+                                <em class="pull-left" style="background:{{color}} ;"></em>
+                                <span class="pull-left">
+                                    {{name}}
+                                </span>
+                            </li>
+                            {{/each }}
+                        </ul>
+                    </div>
+                    <div class="part2-centet-right-hightchar ">
+                        <div id="container-hightcharpart2GradeClassScore" style="max-width:800px; height:270px; margin: 0 auto">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="part-foot pull-left">
+                <div class="part-foot-text  pull-left" style="border-bottom: 1px solid #A0A0A0;    line-height: 50px">
+                    &nbsp;
+                </div>
+                <div class="part-foot-page-bg pull-right">
+                    06
+                </div>
+            </div>
+        </div>
+
+        <!--part2年级体重比例最高 -->
+        <div class="report-box">
+            <div class="part-head pull-left">
+                <p>各年级中,{{GradeClassWeightGreatMax}}幼儿身高标准体重达到正常标准的占比最高 </p>
+            </div>
+            <div class="part-centet pull-left ">
+                <div class="part-centet-left  pull-left">
+                    <div class="part-centet-left-head" style="visibility: hidden;">
+                        本次平均总分：<span>{{TotalAVGScore}}分</span>
+                    </div>
+                    <ol>
+                        <li>
+                            <p>{{GradeClassWeightConten}}</p>
+                        </li>
+                    </ol>
+                </div>
+                <div class="part-centet-right pull-left">
+                    <h4>
+                        各年级幼儿身高标准体重评级情况
+                    </h4>
+                    <div class="part-centet-right-hightchar-explain">
+                        <ul>
+                            <li>
+                                <em class="pull-left" style="background:#fad567 ;"></em>
+                                <span class="pull-left">
+                                    偏轻
+                                </span>
+                            </li>
+                            <li>
+                                <em class="pull-left" style="background:#f44a36 ;"></em>
+                                <span class="pull-left">
+                                    正常
+                                </span>
+                            </li>
+
+                            <li>
+                                <em class="pull-left" style="background:#4879df ;"></em>
+                                <span class="pull-left">
+                                    偏胖
+                                </span>
+                            </li>
+                            <li>
+                                <em class="pull-left" style="background:#21c393 ;"></em>
+                                <span class="pull-left">
+                                    肥胖
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="part-centet-right-hightchar">
+                        <div id="container-hightcharpart2WeightPilePerc" style="max-width:400px; height:350px; margin: 0 auto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="part-foot pull-left">
+                <div class="part-foot-text  pull-left" style="border-bottom: 1px solid #A0A0A0;  line-height: 50px">
+                    &nbsp;
+                </div>
+                <div class="part-foot-page-bg pull-right">
+                    07
+                </div>
+            </div>
+        </div>
+        <!--part3-目录-->
+        <div class="report-box">
+            <div class="part1-menu-icon pull-left">
+                <p>
+                    Part 3&nbsp;&nbsp;
+                </p>
+            </div>
+            <div class="part1-menu-title pull-left">
+                <p>各班级体测情况概述</p>
+            </div>
+            <div class="part3-menu-centent pull-left">
+                <ul>
+                    {{#each eachClassContentArr}}
+                    <li style="margin-top:{{ClassMarginTop}}px"><span></span><p>{{eachTypeGreadClassTitle}}</p></li>
+                    {{/each }}
+                </ul>
+            </div>
+        </div>
+        <!--part3柱状图表-->
+        <div id="part3-content">
+            {{{eachClass EachClassContent}}}
+        </div>
+    </script>
+    <script type="text/x-handlebars-template" id="eachClass-content-html">
+        {{#each this}}
+        <div class="report-box">
+            <div class="part-head  pull-left">
+                <p>{{eachTypeGreadClassTitle}}</p>
+            </div>
+            <div class="part-centet pull-left " id="centet{{Id}}">
+                <div class="part2-centet-top  pull-left" id="centet-text{{Id}}">
+                    <ol>
+                        <li>
+                            <p>{{gradeContent}}</p>
+                        </li>
+                    </ol>
+                    <div class="part2-centet-left-head" id="centet-score{{Id}}">
+                        <div style="float: left;">各班级平均分：</div>
+                        <span>
+                            {{#each  eachTypeArry}}
+                            <div style="width: 55px ;float:left; font-size: 12px">
+                                <p style="line-height: 20px;margin-left:5px;margin-top: 2px;">
+                                    <span style="color:#fff"> {{ClassName}} </span><br> {{TotalAVGScore}}分
+                                </p>
+                            </div>
+                            {{/each }}
+                        </span>
+                    </div>
+                </div>
+                <div class="part2-centet-bottom  part3-centet-bottom{{Id}}">
+
+                    <h4>
+                        各班级各测试项分数
+                    </h4>
+                    <div class="part2-centet-right-hightchar-explain">
+                        <div class="part2-centet-right-hightchar-explain">
+                            <ul>
+                                {{#each ClassInfoData}}
+                                <li>
+                                    <em class="pull-left" style="background:{{color}} ;"></em>
+                                    <span class="pull-left">
+                                        {{name}}
+                                    </span>
+                                </li>
+                                {{/each }}
+                            </ul>
+                        </div>
+                        <div id="container-hightcharpart3onlyClassAVGScore{{eachType}}" style="max-width:350px; height:350px; margin: 0 auto">
+                        </div>
+                    </div>
+                    <div class="part2-centet-right-hightchar part2-centet-right-hightchar{{Id}}">
+                        <div id="container-hightcharpart3ClassAVGScore{{eachType}}" style="max-width:800px; height:270px; margin: 0 auto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="part-foot pull-left">
+                <div class="part-foot-text  pull-left" style="border-bottom: 1px solid #A0A0A0;line-height: 50px">
+                    &nbsp;
+                </div>
+                <div class="part-foot-page-bg pull-right">
+                    {{indexPage}}
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </script>
+    <script>
+			//yy-mm-dd
+			var formatDate = function() {
+				var nowDate = new Date();
+				val = {
+					yearMonthDate: nowDate.getFullYear() + "-" + ((nowDate.getMonth() + 1) < 10 ? "0" : "") + (nowDate.getMonth() + 1) + "-" + (nowDate.getDate() < 10 ? "0" : "") + +nowDate.getDate(),
+					year: nowDate.getFullYear()
+				}
+				return val;
+			};
+			var classType = {
+				10: "大班",
+				11: "中班",
+				12: "小班",
+				13: "托班",
+				14: "混龄班",
+				15: "学前班"
+			};
+
+			var totalQuality = function(score) {
+				var result;
+				if(score > 31) {
+					result = "优秀";
+				} else if(score <= 31 && score >= 28) {
+					result = "良好";
+				} else if(score < 28 && score >= 20) {
+					result = "合格";
+				} else {
+					result = "不合格";
+				}
+				return result;
+			};
+			var PCTQuality = function(person) {
+				var result;
+				if(person < 50) {
+					result = "少";
+				} else if(person >= 50) {
+					result = "多";
+				}
+				return result;
+			};
+			var thatlastQuality = function(thatperson, lastperson) {
+				var quality;
+				if(thatperson - lastperson > 0) {
+					quality = "提升";
+				} else if(thatperson - lastperson < 0) {
+					quality = "下降";
+				} else if(thatperson - lastperson == 0) {
+					quality = "不变";
+				}
+				return quality;
+			};
+			var PhysicalProjectToQuality2 = {
+				"1": "身高",
+				"2": "体重",
+				"3": "柔韧性",
+				"4": "下肢力量",
+				"5": "协调性",
+				"6": "灵敏性",
+				"7": "上肢力量",
+				"8": "平衡力",
+				"9": "位移能力",
+				"10": "物体控制"
+			};
+
+			var RTAbstractProjectReation = {
+				'HeightAVGScore': 1,
+				'WeightAVGScore': 2,
+				'BroadJumpAVGScore': 4,
+				'DoubleJumpAVGScore': 5,
+				'ThrowAVGScore': 7,
+				'BalanceAVGScore': 8,
+				'SitReachAVGScore': 3,
+				'ShuttleRunAVGScore': 6
+			};
+
+			var kdgAbstractPCTRealtion = {
+				0: {
+					Grade: "不合格",
+					FieldName: "UnQualifiedPCT",
+					StatusColor: "#fad567",
+				},
+				1: {
+					Grade: "合格",
+					FieldName: "QualifiedPCT",
+					StatusColor: "#21c393",
+				},
+				2: {
+					Grade: "良好",
+					FieldName: "GoodPCT",
+					StatusColor: "#4879df",
+				},
+				3: {
+					Grade: "优秀",
+					FieldName: "GreatPCT",
+					StatusColor: "#f44a36",
+				}
+			};
+			var kdgWeightPCTRelation = {
+				0: {
+					Grade: "肥胖",
+					FieldName: "WeightFatPCT",
+					StatusColor: "#21c393"
+				},
+				1: {
+					Grade: "偏重",
+					FieldName: "WeightTendPCT",
+					StatusColor: "#4879df"
+				},
+				2: {
+					Grade: "偏轻",
+					FieldName: "WeightLightPCT",
+					StatusColor: "#fad567"
+
+				},
+				3: {
+					Grade: "正常",
+					FieldName: "WeightNormalPCT",
+					StatusColor: "#f44a36"
+				}
+			};
+			var kdgConstrastFor = function(kdgObj) {
+				var result = {};
+				var grad;
+				var pct;
+				var status;
+				for(var o in kdgObj) {
+					grad = o;
+					pct = Math.round(Math.abs(kdgObj[o]) * 100);
+					if(kdgObj[o] < 0) {
+						status = "下降";
+					} else if(kdgObj[o] > 0) {
+						status = "上升";
+					} else {
+						status = "不变";
+					}
+				}
+				result["Grad"] = grad;
+				result["Pct"] = pct;
+				result["Status"] = status;
+				return result;
+			};
+
+			//年级体测评语不合格项处理
+			var gradeComment = function(gradeAbstract) {
+				var result = [];
+				for(var itemGrade in gradeAbstract) {
+					var itemGradeComment = {};
+					var itemGradeArr = [];
+					for(var item in gradeAbstract[itemGrade].Detail) {
+						if(gradeAbstract[itemGrade].Detail[item].AVGScore < 2.5) {
+							if(gradeAbstract[itemGrade].Detail[item].ProjectId < 14) {
+								itemGradeArr.push(gradeAbstract[itemGrade].Detail[item].Name);
+							} else {
+								itemGradeArr.push(gradeAbstract[itemGrade].Detail[item].DisplayName);
+							}
+						}
+					}
+					if(itemGradeArr.length > 0) {
+						itemGradeComment[gradeAbstract[itemGrade].Master.ClassType] = itemGradeArr;
+						result.push(itemGradeComment);
+					}
+				}
+				return result;
+			}
+			// 年级评语内容处理
+			var gradeAbstract = function(abstractList, gradeObjData) {
+				var abstractOb = _.sortBy(abstractList, function(num) {
+					return num.TotalAVGScore
+				});
+				var resultArr = [];
+				var contentText = "";
+				if(abstractOb.length > 0) {
+					contentText += (classType[abstractOb[abstractOb.length - 1].ClassType] + "的体测总分高于其他年级，");
+					var badObjContent = gradeComment(gradeObjData);
+
+					var badText = "";
+					if(badObjContent.length > 0) {
+						for(var i = 0, l = badObjContent.length; i < l; i++) {
+							for(var itemGrade in badObjContent[i]) {
+								var itemGradeTest = badObjContent[i][itemGrade];
+								var testObjName = "";
+								for(var j = 0, jl = itemGradeTest.length; j < jl; j++) {
+									var itemTestObj = itemGradeTest[j];
+									testObjName += itemTestObj;
+									if(j != itemGradeTest.length - 1) {
+										testObjName += "、";
+									}
+								}
+								badText += (classType[itemGrade] + "在" + testObjName);
+								if(i != badObjContent.length - 1) {
+									badText += "，";
+								}
+							}
+						}
+						badText += "未达到合格标准，需结合其年龄段发展要求，重点加强。";
+					}
+					contentText += badText;
+				}
+				resultArr.push(contentText);
+				return resultArr;
+			};
+			var gradeWeight = function(abstractList) {
+				var result = [];
+				var contentText = "";
+				var normalPctOb = _.sortBy(abstractList, function(num) {
+					return num.WeightNormalPCT
+				});
+				var fatPctOb = _.sortBy(abstractList, function(num) {
+					return num.WeightFatPCT + num.WeightTendPCT;
+				});
+				var lightPctOb = _.sortBy(abstractList, function(num) {
+					return num.WeightLightPCT;
+				});
+				var normalInfo = normalPctOb[normalPctOb.length - 1];
+				var fatInfo = fatPctOb[fatPctOb.length - 1];
+				var lightInfo = lightPctOb[lightPctOb.length - 1];
+				contentText += ("右图是各年级体重情况对比图，其中" + classType[normalInfo.ClassType] + "正常的占比最高，达到" +
+					Math.round(100 * normalInfo.WeightNormalPCT) + "%；" + classType[fatInfo.ClassType] + "偏重、肥胖的占比最高，达到" + Math.round(100 * (fatInfo.WeightFatPCT + fatInfo.WeightTendPCT)) +
+					"%；" + classType[lightInfo.ClassType] + "偏轻的占比最高，达到了" + Math.round(100 * lightInfo.WeightLightPCT) + "%。");
+				result.push(contentText);
+				return result;
+			};
+
+			var highchartsRadar = function(id, hightchartDate, nameArr) {
+				var thisDate, lastDate;
+				if(hightchartDate.length == 2) {
+					thisDate = hightchartDate[0]
+					lastDate = hightchartDate[1];
+				} else {
+					thisDate = hightchartDate;
+					lastDate = []
+				}
+				$('#container-hightchar' + id).highcharts({
+					chart: {
+						polar: true,
+						type: 'line'
+					},
+					title: {
+						text: ''
+					},
+					xAxis: {
+						categories: nameArr,
+						tickmarkPlacement: 'on',
+						lineWidth: 0
+					},
+					yAxis: {
+						gridLineInterpolation: 'polygon',
+						min: 0,
+						tickInterval: 1,
+						max: 5,
+						gridLineColor: '#000000',
+						lineColor: '#000000',
+						labels: {
+							enabled: false
+						}
+					},
+					tooltip: {
+						shared: true,
+						pointFormat: '<span style="color:{series.color}">得分: <b>{point.y:,.0f}</b><br/>'
+					},
+
+					legend: {
+						enabled: false
+					},
+					credits: {
+						enabled: false
+					},
+					series: [{
+						name: '',
+						color: "#f44a36",
+						data: lastDate,
+						showInLegend: false
+					}, {
+						name: '',
+						color: "#4879df",
+						data: thisDate,
+						showInLegend: false
+					}, ]
+				});
+			};
+			var highchartsPerc = function(id, hightchartDate, colorArr) {
+				var sectorWeight;
+				if(id == "part1Perc") {
+					sectorWeight = 140;
+				} else if(id == "part1WeightPerc") {
+					sectorWeight = 0;
+				}
+				$('#container-hightchar' + id).highcharts({
+					chart: {
+						plotBackgroundColor: null,
+						plotBorderWidth: null,
+						plotShadow: false
+					},
+					title: {
+						text: ''
+					},
+					credits: {
+						enabled: false //不显示LOGO
+					},
+
+					tooltip: {
+						pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+					},
+					legend: {
+						layout: 'vertical',
+						verticalAlign: 'middle',
+						borderWidth: 0
+					},
+					plotOptions: {
+						pie: {
+							innerSize: sectorWeight,
+							allowPointSelect: true,
+							cursor: 'pointer',
+							colors: colorArr,
+							dataLabels: {
+								enabled: true,
+								format: '{point.percentage:.1f} %'
+							}
+						}
+					},
+					series: [{
+						type: 'pie',
+						name: '比例',
+						data: hightchartDate,
+					}]
+				});
+
+			};
+			var kdgAbstractPhysiquefun = function(abstractList) {
+				var constrastText;
+				var resultTextArr = [];
+				var badObjArr = [];
+				var thisTestScoreArr = [];
+				if(abstractList.length >= 2) {
+					constrastText = "右图是我园幼儿两次测试的结果。本次测试中,";
+					for(let itemObj in RTAbstractProjectReation) {
+						var itemTestResult = {};
+						if(abstractList[0][itemObj] > abstractList[1][itemObj]) {
+							badObjArr.push(RTAbstractProjectReation[itemObj]);
+						}
+						itemTestResult['PhysicalObj'] = RTAbstractProjectReation[itemObj];
+						itemTestResult['Score'] = abstractList[0][itemObj];
+						thisTestScoreArr.push(itemTestResult);
+					}
+					if(badObjArr.length >= 2) {
+						for(let i = 0, l = badObjArr.length; i < l; i++) {
+							if(i == 0) {
+								constrastText += ("我园在" + PhysicalProjectToQuality2[badObjArr[i]] + "、");
+							} else if(i == l - 1) {
+								constrastText += (PhysicalProjectToQuality2[badObjArr[i]] + "上有提升;");
+							} else {
+								constrastText += (PhysicalProjectToQualitKdgTotalAVGScoreTexty2[badObjArr[i]] + "、");
+							}
+						}
+					} else if(badObjArr.length == 1) {
+						constrastText += "我园在" + PhysicalProjectToQuality2[badObjArr[0]] + "上有提升；";
+					}
+					var sortScore = _.sortBy(thisTestScoreArr, function(num) {
+						return num.Score
+					});
+					constrastText += ("在" + PhysicalProjectToQuality2[sortScore[0]['PhysicalObj']] + "和" + PhysicalProjectToQuality2[sortScore[1]['PhysicalObj']] + "上表现较弱，须在教学和锻炼中继续加强");
+				} else {
+					constrastText = "右图是我园幼儿各项测试的结果，其中";
+					var onceSortScore = _.sortBy(abstractList[0].Detail, "AVGScore");
+					constrastText += (onceSortScore[0].Name + "、" + onceSortScore[1].Name + "在测试中表现较弱，须在教学和锻炼中重点加强。");
+				}
+				resultTextArr.push(constrastText);
+				return resultTextArr;
+			};
+			var kdgChartDataDispose = function(data) {
+				var dataArr = [];
+				var objNameArr = [];
+				for(var item in data) {
+					if(data[item].ProjectId < 14) {
+						dataArr.push(data[item].AVGScore);
+						objNameArr.push(data[item].Name);
+					} else {
+						dataArr.push(data[item].AVGScore);
+						objNameArr.push(data[item].DisplayName);
+					}
+				}
+				return {
+					DataArr: dataArr,
+					ObjNameArr: objNameArr
+				};
+			};
+			var GradeChartDataDispose = function(data) {
+				var dataArr = [];
+				var objNameArr = [];
+				for(var itemgrade in data) {
+					var itemData = data[itemgrade].Detail;
+					for(var item in itemData) {
+						if(itemData[item].ProjectId < 14) {
+							dataArr.push(itemData[item].AVGScore);
+							objNameArr.push(itemData[item].Name);
+						} else {
+							dataArr.push(itemData[item].AVGScore);
+							objNameArr.push(itemData[item].DisplayName);
+						}
+					}
+				}
+				return {
+					DataArr: dataArr,
+					ObjNameArr: objNameArr
+				};
+			};
+			var kdgAbstractPCTfun = function(abstractList) {
+				var resultContent = [];
+				var thisPCTArr = [];
+				var lastPCTArr = [];
+				var contentTextOne = "";
+				var contentTextTwo = "";
+				var constrastArr = [];
+				if(abstractList.length >= 2) {
+					for(var i = 0; i < 4; i++) {
+						var itemThisPct = {};
+						var itemLastPct = {};
+						switch(i) {
+							case 0:
+								itemThisPct['Grade'] = '优秀';
+								itemThisPct['Pct'] = abstractList[0].Master.GreatPCT;
+								itemLastPct['Grade'] = '优秀';
+								itemLastPct['Pct'] = abstractList[1].Master.GreatPCT;
+								break;
+							case 1:
+								itemThisPct['Grade'] = '良好';
+								itemThisPct['Pct'] = abstractList[0].Master.GoodPCT;
+								itemLastPct['Grade'] = '良好';
+								itemLastPct['Pct'] = abstractList[1].Master.GoodPCT;
+								break;
+							case 2:
+								itemThisPct['Grade'] = '合格';
+								itemThisPct['Pct'] = abstractList[0].Master.QualifiedPCT;
+								itemLastPct['Grade'] = '合格';
+								itemLastPct['Pct'] = abstractList[1].Master.QualifiedPCT;
+								break;
+							case 3:
+								itemThisPct['Grade'] = '不合格';
+								itemThisPct['Pct'] = abstractList[0].Master.UnQualifiedPCT;
+								itemLastPct['Grade'] = '不合格';
+								itemLastPct['Pct'] = abstractList[1].Master.UnQualifiedPCT;
+								break;
+							default:
+						}
+						thisPCTArr.push(itemThisPct);
+						lastPCTArr.push(itemLastPct);
+					}
+					var thisPctArrGb = _.sortBy(thisPCTArr, function(num) {
+						return num.Pct
+					});
+					contentTextOne = "右图是两次测试结果的对比，可以看出" + (100 - Math.round(abstractList[0].Master.UnQualifiedPCT * 100)) + "%的幼儿体质达到合格及以上标准，处于" + thisPctArrGb[thisPctArrGb.length - 1].Grade + "体质水平的幼儿最多，相比上次我园 ";
+					for(var l in thisPCTArr) {
+						var itemConstrast = {};
+						for(var k in lastPCTArr) {
+							if(l == k) {
+								itemConstrast[thisPCTArr[l].Grade] = thisPCTArr[l].Pct - lastPCTArr[k].Pct;
+							}
+						}
+						constrastArr.push(itemConstrast);
+					}
+					for(var c = 0; c < constrastArr.length; c++) {
+						var constrastResult = kdgConstrastFor(constrastArr[c]);
+						contentTextTwo += (constrastResult.Grad + "水平的幼儿占比" + constrastResult.Status + constrastResult.Pct + "%");
+						if(c == constrastArr.length - 1) {
+							contentTextTwo += "。";
+						} else {
+							contentTextTwo += "，";
+						}
+					}
+				} else if(abstractList.length == 1) {
+					contentTextOne += ("我园综合评级达到合格及以上的幼儿共" + Math.round(abstractList[0].TotalChildren * (1 - abstractList[0].UnQualifiedPCT)) + "人，占比" + Math.round(100 - abstractList[0].UnQualifiedPCT * 100) + "%");
+					contentTextTwo += ("综合评级不合格的幼儿占到" + Math.round(abstractList[0].UnQualifiedPCT * 100) + "%，须加强幼儿的日常锻炼。");
+				}
+				resultContent.push(contentTextOne, contentTextTwo);
+				return resultContent;
+			};
+			var kdgChartPerct = function(data) {
+				var dataArr = [];
+				var objColorArr = [];
+				for(var itemObj in kdgAbstractPCTRealtion) {
+					dataArr.push(Math.round(data[kdgAbstractPCTRealtion[itemObj].FieldName] * 100));
+					objColorArr.push(kdgAbstractPCTRealtion[itemObj].StatusColor);
+				};
+				
+				return {
+					DataArr: dataArr,
+					ObjColorArr: objColorArr
+				};
+			};
+			var kdgChartWeightPerct = function(data) {
+				var dataArr = [];
+				var objColorArr = [];
+				for(var itemObj in kdgWeightPCTRelation) {
+					dataArr.push(Math.round(data[kdgWeightPCTRelation[itemObj].FieldName] * 100));
+					objColorArr.push(kdgWeightPCTRelation[itemObj].StatusColor);
+				}
+				return {
+					DataArr: dataArr,
+					ObjColorArr: objColorArr
+				};
+			};
+			var hightBarWeight = function(data) {
+				var infoArry = [];
+				var infoData = [];
+				var weightInfoData = [];
+				var weightInfoDataName = [];
+				for(var item in data) {
+					var gradeInfo = {
+						name: data[item].Master.Name,
+					}
+					infoArry.push(data[item].Master);
+					infoData.push(gradeInfo.name);
+				}
+				for(var itemGrade = 0; itemGrade < data.length; itemGrade++) {
+					if(data.length < 4) {
+						data.length = 4
+					}
+					var legendBarWeight = ['WeightFatPCT', 'WeightTendPCT', 'WeightNormalPCT', 'WeightLightPCT', ];
+					var legendBarWeighttext = ['肥胖', '偏胖', '正常', '偏轻', ];
+					var legendBarWeightColor = ['#21c393', '#4879df', '#f44a36', '#fad567', ];
+					var gradeWeightInfo = {
+						name: legendBarWeighttext[itemGrade],
+						data: _.pluck(infoArry, legendBarWeight[itemGrade]),
+						showInLegend: false,
+						color: legendBarWeightColor[itemGrade]
+					}
+					weightInfoData.push(gradeWeightInfo);
+				}
+				return {
+					WeightInfoData: weightInfoData,
+					WeightInfoDataName: infoData
+
+				}
+			};
+			var hightBarQualified = function(data) {
+				var infoArry = [];
+				var infoData = [];
+				var weightInfoData = [];
+				var weightInfoDataName = [];
+				for(var item in data) {
+					var gradeInfo = {
+						name: data[item].Master.Name,
+					}
+					infoArry.push(data[item].Master);
+					infoData.push(gradeInfo.name);
+				}
+				for(var itemGrade = 0; itemGrade < data.length; itemGrade++) {
+					if(data.length < 4) {
+						data.length = 4
+					}
+					var legendBarWeight = ['UnQualifiedPCT', 'QualifiedPCT', 'GoodPCT', 'GreatPCT', ];
+					var legendBarWeighttext = ['不合格', '合格', '良好', '优秀', ];
+					var legendBarWeightColor = ['#fad567', '#21c393', '#4879df', '#f44a36', ];
+					var gradeWeightInfo = {
+						name: legendBarWeighttext[itemGrade],
+						data: _.pluck(infoArry, legendBarWeight[itemGrade]),
+						showInLegend: false,
+						color: legendBarWeightColor[itemGrade]
+					}
+					weightInfoData.push(gradeWeightInfo);
+				}
+				return {
+					QualifiedInfoData: weightInfoData,
+					QualifiedInfoDataName: infoData
+				}
+			}
+			var hightBarGrade = function(data) {
+				var infoData = [];
+				var legendBarGradeColor;			
+				for(var n in data) {
+					legendBarGradeColor = ['#2ec7c9', '#b6a2de', '#5ab1ef', '#6d86f0', '#a9dfad','#cac819','#42740d','#1377aa'];
+					var gradeInfo = {
+						name: data[n].Master.Name,
+						data: _.pluck(_.sortBy(data[n].Detail, 'ProjectId'), "AVGScore"),
+						color: legendBarGradeColor[n],
+						showInLegend: false,
+					}
+					infoData.push(gradeInfo);
+				}
+				return infoData;
+			}
+			var hightBarClass = function(classType, data) {
+				var infoData = [];
+				var legendBarGradeColor;
+				var num=0;
+				for(var m = 0; m < data.length; m++) {
+					if(data[m].Master.ClassType == classType) {
+						legendBarGradeColor = ['#2ec7c9', '#b6a2de', '#5ab1ef', '#6d86f0', '#a9dfad','#cac819','#42740d','#1377aa'];
+						var gradeInfo = {
+							name: data[m].Master.ClassName,
+							data: _.pluck(_.sortBy(data[m].Detail, 'ProjectId'), "AVGScore"),
+							color: legendBarGradeColor[num++],
+							showInLegend: false,
+						}
+						infoData.push(gradeInfo);
+					}
+				}
+				return infoData;
+			}
+			var groomPhyCompare = function(id, dataArr) {
+				$('#container-hightchar' + id).highcharts({
+					chart: {
+						type: 'column'
+					},
+					title: {
+						text: '',
+						x: -20 //center
+					},
+					xAxis: {
+						categories: ['身 高', '体 重', '柔韧性', '下肢力量', '协调性', '灵敏性', '上肢力量', '平衡力', ],
+					},
+					credits: false,
+					yAxis: {
+						title: {
+							text: '分数'
+						},
+						plotLines: [{
+							value: 0,
+							width: 1,
+							color: '#808080'
+						}]
+					},
+					legend: {
+						layout: 'vertical',
+						align: 'right',
+						verticalAlign: 'middle',
+						borderWidth: 0
+					},
+					series: dataArr
+				});
+			};
+
+			var groomPhyComparePCT = function(id, dataArr, className) {
+				$('#container-hightchar' + id).highcharts({
+					chart: {
+						type: 'bar'
+					},
+					title: {
+						text: '',
+						x: -20
+					},
+					xAxis: {
+						categories: className
+					},
+					credits: false,
+					yAxis: {
+						title: {
+							text: ''
+						},
+						plotLines: [{
+							value: 0,
+							width: 1,
+							color: '#808080'
+						}]
+					},
+					plotOptions: {
+						bar: {
+							stacking: 'percent'
+						},
+					},
+					legend: {
+						layout: 'vertical',
+						align: 'right',
+						verticalAlign: 'middle',
+						borderWidth: 0
+					},
+					series: dataArr
+				});
+			};
+			//班级概况中评语处理；
+			var classAbstract = function(abstractList, type) {
+				var goodClass = "";
+				var badClass = "";
+				var resultArr = [];
+				var badTextContent = "";
+				var goodArrNameArr = [];
+				for(var itemTest in abstractList) {
+					var testObjName = [];
+					var goodClassArr = [];
+					var badObjName = "";
+					for(var itemObj in RTAbstractProjectReation) {
+						if(abstractList[itemTest][itemObj] < 2.5) {
+							testObjName.push(PhysicalProjectToQuality2[RTAbstractProjectReation[itemObj]]);
+							goodClassArr.push(itemObj);
+						}
+					}
+					if(goodClassArr.length == 0) {
+						goodArrNameArr.push(abstractList[itemTest].ClassName);
+					}
+					if(testObjName.length > 0) {
+						for(var i = 0, l = testObjName.length; i < l; i++) {
+							badObjName += testObjName[i];
+							if(i != l - 1) {
+								badObjName += "、";
+							}
+						}
+						badClass += (abstractList[itemTest].ClassName + "的" + badObjName + "未达到合格标准，");
+					}
+				}
+				if(badClass != "") {
+					badTextContent += ("在" + classType[type] + "中，" + badClass + "须重点关注，配合体育课和户外活动来重点提升。");
+					resultArr.push(badTextContent);
+				}
+				if(goodArrNameArr.length > 0) {
+					for(var items = 0, ls = goodArrNameArr.length; items < ls; items++) {
+						goodClass += goodArrNameArr[items];
+						if(items != ls - 1) {
+							goodClass += "、";
+						}
+					}
+					goodClass += "的各项素质全部合格，请参照幼儿动作发展和身体素质要求继续教学强化。";
+					resultArr.push(goodClass);
+				}
+				return resultArr;
+			};
+			var projectScore = {
+				"12": "HeightAVGScore",
+				"13": "WeightAVGScore",
+				"14": "SitReachAVGScore",
+				"15": "BroadJumpAVGScore",
+				"16": "DoubleJumpAVGScore",
+				"17": "ShuttleRunAVGScore",
+				"18": "ThrowAVGScore",
+				"19": "BalanceAVGScore"
+			};
+			var projectType = {
+				"12": "HeightAVG",
+				"13": "WeightAVG",
+				"14": "SitReachAVG",
+				"15": "BroadJumpAVG",
+				"16": "DoubleJumpAVG",
+				"17": "ShuttleRunAVG",
+				"18": "ThrowAVG",
+				"19": "BalanceAVG"
+			};
+			var projectName = {
+				"12": "身高",
+				"13": "体重",
+				"14": "坐位体前屈",
+				"15": "立定跳远",
+				"16": "双脚连续跳",
+				"17": "十米折返跑",
+				"18": "网球掷远",
+				"19": "走平衡木"
+			};
+			var formaDate = function(row) {
+				if(row) {
+					if(row) {
+						var dt = new Date(parseInt(row.slice(6, 19)));
+						var year = dt.getFullYear();
+						var month = dt.getMonth() + 1;
+						var date = dt.getDate();
+						var birthday = (year + "-" + month + "-" + date).replace(/\b(\w)\b/g, '0$1');
+						return birthday;
+					}
+				} else {
+					return '未知';
+				}
+
+			};
+			$(document).ready(function() {
+				var response =  $information$;
+				//console.log(response);
+				var itemKdgInfo = {};
+				var classInfoArry = [];
+				var gradeInfoArry = [];
+				var thisKdgAbstractList, objNameArr, itemKdgSVGtScore;
+
+				itemKdgInfo.KindergartenName = response.ServiceUnitInfo.Name;
+				itemKdgInfo.NowDate = formatDate().yearMonthDate;
+				itemKdgInfo.NowYear = formatDate().year;
+				itemKdgInfo.ClassTotal = response.ClassList.length;
+				itemKdgInfo.TotalChildren = response.ServiceUnitInfo.Count;
+				for(var itemClass in response.ClassList) {
+					var classInfo = {
+						ClassName: response.ClassList[itemClass].Name,
+						ClassCount: response.ClassList[itemClass].Count
+					}
+					classInfoArry.push(classInfo);
+				}
+				for(var itemGrade in response.GradeAbstract) {
+					response.GradeAbstract[itemGrade].Master.Name = classType[response.GradeAbstract[itemGrade].Master.ClassType];
+					gradeInfoArry.push(response.GradeAbstract[itemGrade].Master);
+				}
+				var classAbstracMasterArry = [];
+				var classAbstrac;
+				for(var jsonInfo in response.ClassAbstract) {
+					classAbstrac = response.ClassAbstract[jsonInfo]
+					classAbstrac.Master.ClassName = classAbstrac.ClassInfo.Name;
+					for(var j in classAbstrac.Detail) {
+						classAbstrac.Master[projectType[classAbstrac.Detail[j].ProjectId]] = classAbstrac.Detail[j].AVG;
+						classAbstrac.Master[projectScore[classAbstrac.Detail[j].ProjectId]] = classAbstrac.Detail[j].AVGScore;
+						classAbstrac.Detail[j].Name = projectName[classAbstrac.Detail[j].ProjectId];
+						classAbstrac.Detail[j].ClassType = classAbstrac.Master.ClassType;
+					}
+					classAbstracMasterArry.push(classAbstrac.Master);
+				}
+
+				itemKdgInfo.EveryClassName = classInfoArry;
+				itemKdgInfo.GradeWeightInfo = hightBarWeight(response.GradeAbstract);
+				itemKdgInfo.GradeInfoData = hightBarGrade(response.GradeAbstract);
+
+				var gradeClassAbstract = _.sortBy(gradeInfoArry, function(stooge) {
+					return stooge.TotalAVGScore;
+				});
+				var gradeClassWeightAbstract = _.sortBy(gradeInfoArry, function(stooge) {
+					return stooge.WeightNormalPCT;
+				});
+				itemKdgInfo.GradeClassScoreMax = classType[(gradeClassAbstract[gradeClassAbstract.length - 1]).ClassType];
+				itemKdgInfo.GradeClassWeightGreatMax = classType[(gradeClassWeightAbstract[gradeClassWeightAbstract.length - 1]).ClassType];
+				itemKdgInfo.GradeClassInfo = gradeInfoArry;
+				itemKdgInfo.GradeClassScoreContent = gradeAbstract(gradeInfoArry, response.GradeAbstract);
+				itemKdgInfo.GradeClassWeightConten = gradeWeight(gradeInfoArry);
+
+				if(response.ProgramList.length == 1) {
+					itemKdgInfo.TestTime = "本次体测时间：" + formaDate(response.ProgramList[0].CreateTime);
+				} else if(response.ProgramList.length >= 2) {
+					itemKdgInfo.TestTime = "本次体测时间：" + formaDate(response.ProgramList[0].CreateTime) + "；" + " 上次体测时间：" + formaDate(response.ProgramList[1].CreateTime);
+				}
+				if(response.UnitAbstract.length == 1) {
+					thisKdgAbstractList = response.UnitAbstract[0].Master;
+					itemKdgInfo.KdgTotalTitle = "我园幼儿体测综合评级为" + totalQuality(thisKdgAbstractList.TotalAVGScore);
+					itemKdgInfo.KdgTotalPCTTitle = "我园幼儿体质到合格及以上水平的占比" + Math.round(100 - thisKdgAbstractList.UnQualifiedPCT * 100) + "%";
+					itemKdgInfo.KdgWeightPCTTitle = "我园身高标准体重达到正常标准的幼儿占比" + Math.round(thisKdgAbstractList.WeightNormalPCT * 100) + "%";
+					itemKdgInfo.KdgTotalAVGScoreText = "<span style='color:#fff;border: 4px solid #2e4f92;background-color: #4879df;width:500px;font-size:18px;'> 本次园所平均分："+ thisKdgAbstractList.TotalAVGScore + "分</span>";
+					itemKdgInfo.KdgTotalQualityText = kdgAbstractPhysiquefun(response.UnitAbstract);
+					itemKdgInfo.KdgTotalPCTQualityText = "<li>" +
+						"<p>我园综合评级达到合格及以上的幼儿共" + Math.round((thisKdgAbstractList.TotalChildren) * (1 - thisKdgAbstractList.UnQualifiedPCT)) + "人，各类评级的幼儿占比如下：<br><br>优秀   " +
+						Math.round(thisKdgAbstractList.GreatPCT * 100) + "%；&nbsp;&nbsp; 良好    " +
+						Math.round(thisKdgAbstractList.GoodPCT * 100) + "%； <br>合格   " +
+						Math.round(thisKdgAbstractList.QualifiedPCT * 100) + "%； 不合格  " +
+						Math.round(thisKdgAbstractList.UnQualifiedPCT * 100) + "%</p>" +
+						"</li>" +
+						"<li>" +
+						"<p>综合评级不合格的幼儿占到" + Math.round(thisKdgAbstractList.UnQualifiedPCT * 100) + "%，须加强幼儿的日常锻炼。</p>" +
+						"</li>"
+					itemKdgInfo.KdgWeightPCTQualityText = "<li>" +
+						"<p>我园有" + Math.round((thisKdgAbstractList.TotalChildren) * (1 - thisKdgAbstractList.WeightNormalPCT)) + "名幼儿身高标准体重未达到正常标准，占比 " + Math.round((1 - thisKdgAbstractList.WeightNormalPCT) * 100) + "%。</p>" +
+						"</li>" +
+						"<li>" +
+						"<p>体重偏胖、肥胖的幼儿共" + Math.round((thisKdgAbstractList.TotalChildren) * (thisKdgAbstractList.WeightTendPCT + thisKdgAbstractList.WeightFatPCT)) + "人，占比 " + Math.round((thisKdgAbstractList.WeightTendPCT + thisKdgAbstractList.WeightFatPCT) * 100) + "%。</p>" +
+						"</li>" +
+						"<li>" +
+						"<p>体重偏轻的幼儿共" + Math.round((thisKdgAbstractList.TotalChildren) * thisKdgAbstractList.WeightLightPCT) + "人，占比 " + Math.round((thisKdgAbstractList.WeightLightPCT) * 100) + "%。</p>" +
+						"</li>";
+					itemKdgInfo.KdgTotalHightchartTitle = "我园幼儿各项体测结果";
+					itemKdgInfo.KdgTotalPCTHightchartTitle = "我园体测评级情况";
+					itemKdgInfo.KdgWeightHightchartTitle = "我园幼儿身高标准体重评级情况";
+					itemKdgSVGtScore = (kdgChartDataDispose(response.UnitAbstract[0].Detail)).DataArr;
+					objNameArr = (kdgChartDataDispose(response.UnitAbstract[0].Detail)).ObjNameArr;
+					var itemKdgPerctScore = (kdgChartPerct(response.UnitAbstract[0].Master)).DataArr;
+					var objColorArr = (kdgChartPerct(response.UnitAbstract[0].Master)).ObjColorArr;
+					var itemKdgWeightPerctScore = (kdgChartWeightPerct(response.UnitAbstract[0].Master)).DataArr;
+					var objWeightColorArr = (kdgChartWeightPerct(response.UnitAbstract[0].Master)).ObjColorArr;
+				} else if(response.UnitAbstract.length >= 2) {
+					thisKdgAbstractList = response.UnitAbstract[0].Master;
+					var lastKdgAbstractList = response.UnitAbstract[1].Master;
+					thisKdgAbstractList.Name = "本次";
+					lastKdgAbstractList.Name = "上次";
+
+					itemKdgInfo.TotalChild = thisKdgAbstractList.TotalChildren;
+					itemKdgInfo.TotalAVGScore = thisKdgAbstractList.TotalAVGScore;
+
+					itemKdgInfo.KdgTotalTitle = "我园幼儿体质水平较上次" + thatlastQuality(thisKdgAbstractList.TotalAVGScore, lastKdgAbstractList.TotalAVGScore) + " ——（多次体测）";
+					itemKdgInfo.KdgTotalPCTTitle = "我园幼儿体测综合评级达到合格及以上占比相对于上次" + thatlastQuality(Math.round((thisKdgAbstractList.QualifiedPCT + thisKdgAbstractList.GreatPCT + thisKdgAbstractList.GoodPCT) * 100), Math.round((lastKdgAbstractList.QualifiedPCT + lastKdgAbstractList.GreatPCT + lastKdgAbstractList.GoodPCT) * 100));
+					itemKdgInfo.KdgWeightPCTTitle = "我园身高标准体重达到正常标准的幼儿占比" + thatlastQuality(Math.round((thisKdgAbstractList.WeightNormalPCT) * 100), Math.round((lastKdgAbstractList.WeightNormalPCT) * 100))
+					itemKdgInfo.KdgTotalAVGScoreText = "<span style='color:#fff;border: 4px solid #2e4f92;background-color: #4879df;'> 本次园所平均分："+ thisKdgAbstractList.TotalAVGScore + "分</span><span style='color:#fff;border: 4px solid #aa3222;background-color: #f54a36;'> 上次园所平均分：" + lastKdgAbstractList.TotalAVGScore + "分</span>" ;
+					itemKdgInfo.KdgTotalQualityText = kdgAbstractPhysiquefun(response.UnitAbstract) +
+						"<li>" +
+						"<p>本次：优秀   " +
+						Math.round(thisKdgAbstractList.GreatPCT * 100) + "%；&nbsp;&nbsp; 良好    " +
+						Math.round(thisKdgAbstractList.GoodPCT * 100) + "%； &nbsp;&nbsp;合格   " +
+						Math.round(thisKdgAbstractList.QualifiedPCT * 100) + "%； 不合格  " +
+						Math.round(thisKdgAbstractList.UnQualifiedPCT * 100) + "%</p>" +
+						"<p>上次：优秀   " +
+						Math.round(lastKdgAbstractList.GreatPCT * 100) + "%；&nbsp;&nbsp; 良好    " +
+						Math.round(lastKdgAbstractList.GoodPCT * 100) + "%； &nbsp;&nbsp;合格   " +
+						Math.round(lastKdgAbstractList.QualifiedPCT * 100) + "%； 不合格  " +
+						Math.round(lastKdgAbstractList.UnQualifiedPCT * 100) + "%</p>"
+					"</li>";
+
+					itemKdgInfo.KdgTotalPCTText = "<span style='color:#fff;border: 4px solid #2e4f92;background-color: #4879df;'> 本次合格率："+ Math.round(100 - thisKdgAbstractList.UnQualifiedPCT * 100) +"% </span><span style='color:#fff;border: 4px solid #aa3222;background-color: #f54a36;'> 上次合格率：" + Math.round(100 - lastKdgAbstractList.UnQualifiedPCT * 100) + "%</span>";
+					itemKdgInfo.KdgTotalPCTQualityText = "<li><p>" + kdgAbstractPCTfun(response.UnitAbstract)[0] + "。</p></li><li><p>" + kdgAbstractPCTfun(response.UnitAbstract)[1] + "</p></li>";;
+					itemKdgInfo.KdgWeightPCTQualityText = "<li>" +
+						"<p>本次体重在正常区间内幼儿占比：" + Math.round((thisKdgAbstractList.WeightNormalPCT) * 100) + "%<br>上次体重在正常区间内幼儿占比：" + Math.round((lastKdgAbstractList.WeightNormalPCT) * 100) + "%。</p>" +
+						"</li>" +
+						"<li>" +
+						"<p>本次测试中，体重偏重、肥胖的幼儿" + Math.round((thisKdgAbstractList.TotalChildren) * (thisKdgAbstractList.WeightTendPCT + thisKdgAbstractList.WeightFatPCT)) + "人，占比" +
+						thatlastQuality((thisKdgAbstractList.WeightTendPCT + thisKdgAbstractList.WeightFatPCT), (lastKdgAbstractList.WeightTendPCT + lastKdgAbstractList.WeightFatPCT)) + "" +
+						Math.abs(Math.round(((thisKdgAbstractList.WeightLightPCT) - (lastKdgAbstractList.WeightTendPCT + lastKdgAbstractList.WeightFatPCT)) * 100)) + "%。体重偏轻的幼儿" +
+						Math.round((thisKdgAbstractList.TotalChildren) * thisKdgAbstractList.WeightLightPCT) + "人，占比" + thatlastQuality(thisKdgAbstractList.WeightLightPCT, lastKdgAbstractList.WeightLightPCT) + "" +
+						Math.abs(Math.round(((thisKdgAbstractList.WeightTendPCT + thisKdgAbstractList.WeightFatPCT) - (lastKdgAbstractList.WeightLightPCT)) * 100)) + "%</p>" +
+						"</li>";
+
+					itemKdgInfo.KdgTotalHightchartTitle = "我园两次体测结果对比情况  ";
+					itemKdgInfo.KdgTotalPCTHightchartTitle = "我园体测评级情况";
+					itemKdgInfo.KdgWeightHightchartTitle = "我园幼儿身高标准体重评级情况";
+					itemKdgSVGtScore = [(kdgChartDataDispose(response.UnitAbstract[0].Detail)).DataArr, (kdgChartDataDispose(response.UnitAbstract[1].Detail)).DataArr];
+					objNameArr = (kdgChartDataDispose(response.UnitAbstract[0].Detail)).ObjNameArr;
+
+					itemKdgInfo.KdgWeightInfo = hightBarWeight(response.UnitAbstract);
+					itemKdgInfo.KdgQualifiedInfo = hightBarQualified(response.UnitAbstract);
+				}
+
+				var eachClassInfoArr = _.groupBy(classAbstracMasterArry, 'ClassType');
+				var eachClassContentArr = [];
+				var index = 0;
+				var eachClassInfoArrCount = Count(eachClassInfoArr);
+				var classCount = ClassTitleTextMarginTop(eachClassInfoArrCount);
+				_.each(eachClassInfoArr, function(value, key) {
+					var itemContent = {
+						indexPage: 9 + index,
+						eachType: key,
+						Id: key,
+						gradeContent: classAbstract(eachClassInfoArr[key], key),
+						eachTypeArry: eachClassInfoArr[key],
+						eachTypeGreadClass: _.max(eachClassInfoArr[key], function(stooge) {
+							return stooge.TotalAVGScore;
+						}),
+						eachTypeGreadClassTitle: ClassTitleText(value, key),
+						ClassMarginTop: classCount,
+						ClassInfoData: hightBarClass(key, response.ClassAbstract)
+					};
+					index++;
+					if(itemContent.indexPage == 9) {
+						itemContent.indexPage = '09';
+					}
+					eachClassContentArr.push(itemContent);
+				});
+				itemKdgInfo.eachClassContentArr = eachClassContentArr;
+				var template = Handlebars.compile($("#content-html").html());
+				var htmlText = template(itemKdgInfo);
+				$("#content").append(htmlText);
+				highchartsRadar("part1SVG", itemKdgSVGtScore, objNameArr);
+				groomPhyCompare("part2GradeClassScore", itemKdgInfo.GradeInfoData);
+				groomPhyComparePCT("part2WeightPilePerc", itemKdgInfo.GradeWeightInfo.WeightInfoData, itemKdgInfo.GradeWeightInfo.WeightInfoDataName);
+
+				if(response.UnitAbstract.length == 1) {
+					$(".kdg-weight-PCT-span ").css("visibility", "hidden");
+					highchartsPerc("part1Perc", itemKdgPerctScore, objColorArr);
+					highchartsPerc("part1WeightPerc", itemKdgWeightPerctScore, objWeightColorArr);
+				} else if(response.UnitAbstract.length >= 2) {
+					$(".kdg-weight-PCT-span ").css("visibility", "inherit");
+					groomPhyComparePCT("part1Perc", itemKdgInfo.KdgQualifiedInfo.QualifiedInfoData, itemKdgInfo.KdgQualifiedInfo.QualifiedInfoDataName);
+					groomPhyComparePCT("part1WeightPerc", itemKdgInfo.KdgWeightInfo.WeightInfoData, itemKdgInfo.KdgWeightInfo.WeightInfoDataName);
+				}
+				var arrByClassType = _.groupBy(classAbstracMasterArry, function(info) {
+					return info.ClassType;
+				});
+
+				_.each(arrByClassType, function(value, key) {
+					groomPhyCompare("part3ClassAVGScore" + key, hightBarClass(key, response.ClassAbstract));
+				})
+
+			});
+			Handlebars.registerHelper('eachClass', function(person) {
+				var template = Handlebars.compile($("#eachClass-content-html").html());
+				var htmlText = template(this.eachClassContentArr);
+				return htmlText;
+			});
+
+			function ClassTitleText(classResultList, types) {
+				var text = "";
+				if(classResultList.length > 1) {
+					text = classType[types] + "中，" + (_.max(classResultList, function(stooge) {
+						return stooge.TotalAVGScore;
+					}).ClassName) + "幼儿体质水平最好"
+				} else if(classResultList.length === 1) {
+					text = classType[types] + "中，" + classResultList[0].ClassName + "体测综合评级为" + totalQuality(classResultList[0].TotalAVGScore);
+				}
+				return text;
+			}
+
+			function ClassTitleTextMarginTop(count) {
+				var top = 0;
+				switch(count) {
+					case 1:
+						top = 90;
+						break;
+					case 2:
+						top = 80;
+						break;
+					case 3:
+						top = 70;
+						break;
+					case 4:
+						top = 60;
+						break;
+					case 5:
+						top = 50;
+						break;
+					case 6:
+						top = 40;
+						break;
+					case 7:
+						top = 30;
+						break;
+				}
+				return top;
+			};
+
+			function Count(o) {
+				var t = typeof o;
+				if(t == 'string') {
+					return o.length;
+				} else if(t == 'object') {
+					var n = 0;
+					for(var i in o) {
+						n++;
+					}
+					return n;
+				}
+				return false;
+			}
+    </script>
+</head>
+
+<body>
+    <div id="content">
+    </div>
+
+</body>
+
+</html>

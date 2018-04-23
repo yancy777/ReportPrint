@@ -1,0 +1,1316 @@
+<!--
+**************************************
+*  名称：改善方案（雏鹰）
+*  作用：针对雏鹰的私人订制的改善方案
+*  作者：闫聪洋
+**************************************
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>改善方案</title>
+    <link href="http://cdn.imreliable.net/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://cdn.imreliable.net/jquery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="http://cdn.imreliable.net/bootstrap/js/bootstrap.min.js"></script>
+    <script src="http://cdn.bootcss.com/highcharts/5.0.7/highcharts.js"></script>
+    <script src="http://cdn.bootcss.com/highcharts/5.0.7/highcharts-more.js"></script>
+    <script src="http://cdn.bootcss.com/underscore.js/1.8.3/underscore.js"></script>
+    <script src="http://cdn.bootcss.com/handlebars.js/4.0.6/handlebars.min.js"></script>
+    <script src="http://cdn.bootcss.com/jsbarcode/3.5.7/JsBarcode.all.min.js"></script>
+    <script src="http://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+
+    <style type="text/css">
+        ul,
+        ol {
+            list-style-type: none;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        body {
+            font-family: "microsoft yahei";
+            color: #222222;
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            color: grey;
+        }
+
+            a:link {
+                text-decoration: none;
+            }
+
+            a:hover {
+                cursor: pointer;
+            }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            width: 28%;
+            float: left;
+        }
+
+        body {
+            font-family: "microsoft yahei" !important;
+        }
+
+        h4 {
+            font-size: 18px;
+            font-family: 'Microsoft YaHei';
+        }
+ 		.font-size-min11 {
+            font-size: 12px;
+            transform:scale(0.8,0.8);
+            -ms-transform:scale(0.8,0.8); 	/* IE 9 */
+			-moz-transform:scale(0.8,0.8); 	/* Firefox */
+			-webkit-transform:scale(0.8,0.8); /* Safari 和 Chr*/
+        }
+
+        .font-size-min-min {
+            font-size: 12px;
+            transform:scale(0.7,0.7);
+            -ms-transform:scale(0.7,0.7); 	/* IE 9 */
+			-moz-transform:scale(0.7,0.7); 	/* Firefox */
+			-webkit-transform:scale(0.7,0.7); /* Safari 和 Chr*/
+        }
+        .font-size-min-en{
+        	font-size: 12px;
+            transform:scale(0.75,0.75);
+            -ms-transform:scale(0.75,0.75); 	/* IE 9 */
+			-moz-transform:scale(0.75,0.75); 	/* Firefox */
+			-webkit-transform:scale(0.75,0.75); /* Safari 和 Chr*/
+        }
+
+        .report-box {
+            width: 794px;
+            height: 1123px;
+            margin: 0 auto;
+            position: relative;
+            clear: both;
+        }
+
+        .head-title {
+            text-align: center;
+            display: inline-block;
+            /*height: 88px;*/
+            width: 100%;
+            padding-top: 35px;
+        }
+
+        .hightchar-explain {
+            margin-left: 95px;
+        }
+
+            .hightchar-explain li {
+                float: left;
+            }
+
+                .hightchar-explain li:last-child {
+                    margin-left: 20px;
+                }
+
+            .hightchar-explain img {
+                width: 20px;
+                padding-top: 4px;
+                margin-right: 6px;
+            }
+
+        .hr-class {
+            margin-top: -2px;
+        }
+
+        .result-conter {
+            height: 400px;
+            padding: 0 32px;
+            padding-top: 24px;
+        }
+
+        .result-hightchart {
+            float: left;
+            width: 430px;
+            height: 318px;
+        }
+
+        .result-text {
+            width: 298px;
+            float: right;
+            height: 318px;
+        }
+
+            .result-text span {
+                color: #333333;
+                font-size: 15px;
+                padding: 17px 0;
+                display: block;
+                font-weight: 600;
+            }
+
+            .result-text p {
+                color: #444444;
+                font-size: 13px;
+                line-height: 16px;
+                letter-spacing: 1px;
+            }
+
+            .result-text .result-text-button img {
+                width: 8%;
+                height: 8%;
+                margin-left: 53px;
+                margin-top: -37px;
+            }
+
+        .week-table {
+            padding: 0 32px;
+        }
+
+        .table-box {
+            text-align: center !important;
+            color: #424142;
+        }
+
+        .table-bordered > thead > tr > td {
+            border-right: 1px solid #919191 !important;
+        }
+
+        .week-table h4 img,
+        .result-conter h4 img {
+            width: 3%;
+            margin-right: 9px;
+        }
+
+        thead th {
+            padding: 15px 0px 8px 0px !important;
+            width: 120px !important;
+            text-align: center !important;
+        }
+
+        thead tr {
+            height: 45px;
+        }
+
+        thead {
+            border-bottom: none;
+        }
+
+            thead tr:first-child th {
+                border-right: 2px solid #fff;
+            }
+
+                thead tr:first-child th:last-child {
+                    border-right: 1px solid #919191;
+                }
+
+            thead tr:first-child {
+                background: #ffb900;
+                color: 333333;
+            }
+
+                thead tr:first-child th:nth-child(odd) {
+                    background: #ffdd00;
+                }
+
+            thead tr:nth-child(2) {
+                font-size: 16px;
+            }
+        /*2page*/
+
+        .week-background {
+            background: #fcf6f3 url(http://cdn.imreliable.net/asset/image/A4.1ImproveReport/improvementProgram-bgl.png) no-repeat bottom right;
+            background-size: 32%;
+        }
+
+        .footer {
+            float: left;
+            width: 365px;
+            text-align: center;
+            font-size: 10px;
+            line-height: 6px;
+            padding-top: 19px;
+            margin-left: 211px;
+        }
+
+        .footer:first-of-type {
+            display: none;
+        }
+
+        .foot-zc {
+            color: #7f7f80;
+        }
+
+        .foot-english {
+        	 /*letter-spacing: 1px;*/
+            color: #c6c2c1;
+        }
+
+        .head {
+            clear: both;
+            width: 794px;
+            height: 64px;
+            background: #ffdd00;
+            color: #000000;
+            line-height: 64px;
+            font-size: 25px;
+            text-align: center;
+        }
+        /*内容*/
+
+        .ul-list {
+            margin: 0;
+            padding: 0;
+        }
+
+        .week-box {
+            height: 200px;
+            padding: 0 32px;
+        }
+
+        .center-box {
+            width: 586px;
+            float: left;
+            font-size: 13px;
+            color: #444444;
+            line-height: 19px;
+        }
+
+        .tile {
+            padding: 9px 0;
+            font-size: 19px;
+            color: black;
+        }
+
+        .week-box .tile {
+            background: url(http://cdn.imreliable.net/asset/image/familyReportChuying/xie-line.png) no-repeat 15px 10px;
+            background-size: 5.5%;
+            height: 53px;
+            width: 400px;
+        }
+
+            .week-box .tile span {
+                float: left;
+                padding-right: 20px;
+                color: #ffdd00;
+                font-size: 13px;
+                font-weight: 600;
+            }
+
+            .week-box .tile p {
+                float: left;
+                padding-top: 7px;
+                font-size: 18px;
+            }
+
+        .week-box img {
+            float: right;
+            width: 17%;
+        }
+
+        .remarks {
+            clear: both;
+            margin-top: 15px;
+        }
+
+            .remarks input {
+                width: 507px;
+                margin-left: 10px;
+                border: 1px solid #a0a0a0;
+                background-color: transparent;
+            }
+
+            .remarks span {
+                line-height: 25px;
+                display: block;
+                float: left;
+            }
+
+        .tbody-left-tr {
+            padding-top: 10px;
+            width: 122px;
+            height: 94px;
+            border-right: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            font-size: 15px;
+            font-weight: 600;
+            background: #f9f3e7;
+        }
+
+            .tbody-left-tr b {
+                font-size: 25px;
+            }
+
+        .tbody-right-tr {
+            width: 121.8px;
+            height: 94px;
+            border-right: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+            float: left;
+            background: #fcf9f4;
+        }
+
+            .tbody-right-tr img {
+                float: left;
+                margin: 18px 0 3px 43px;
+            }
+
+            .tbody-right-tr p {
+                float: left;
+                width: 120px;
+                clear: both;
+                font-size: 15px;
+            }
+
+        .week-table .table {
+            margin-bottom: 0 !important;
+        }
+
+        .showKinNameInfo,
+        #showKinNameInfoTitle {
+            margin-left: -6px;
+        }
+
+        .className,
+        #className {
+            margin-left: -6px;
+            margin-right: -6px;
+        }
+        /*体育6项目*/
+
+        .test-subjects {
+            margin: 0 -32px;
+        }
+
+            .test-subjects li {
+                height: 239px;
+            }
+
+        .test-subjects-title {
+            width: 231px;
+            height: 239px;
+            background: url('http://cdn.imreliable.net/asset/image/familyReportChuying/test-subjects-E.png') no-repeat center right;
+            background-size: 10%;
+            float: left;
+            margin-left: 38px;
+        }
+
+            .test-subjects-title img {
+                margin-top: 55px;
+                width: 46%;
+            }
+
+            .test-subjects-title h4 {
+                color: #444444;
+                font-size: 14px;
+                margin: 113px 0 38px 129px;
+                font-weight: 600;
+            }
+
+            .test-subjects-title b {
+                color: #323333;
+                font-size: 15px;
+                line-height: 30px;
+            }
+
+            .test-subjects-title span {
+                color: #666666;
+                font-size: 12px;
+            }
+
+        .test-subjects-text {
+            padding-top: 3px;
+        }
+
+            .test-subjects-text li {
+                width: 500px;
+                height: 60px;
+                float: left;
+                margin-top: 15px;
+                line-height: 28px;
+            }
+
+        .test-subjects-text-img span {
+            float: left;
+            clear: both;
+            width: 80px;
+            text-align: center;
+        }
+
+        .test-subjects-text li img {
+            width: 8%;
+            margin: 0 22px;
+        }
+
+        .test-subjects-text li em {
+            font-size: 15px;
+            color: #333333;
+            font-style: normal;
+            margin-bottom: 14px;
+            background: #ffdd00;
+            border-radius: 25px;
+            padding: 2px 10px;
+            border: 1px solid #ffdd00;
+        }
+
+        .test-subjects-text li span {
+            color: #666666;
+            font-size: 12px;
+            line-height: 22px;
+        }
+
+        .week-table h4 span {
+            font-size: 11px;
+            padding-left: 20px;
+        }
+
+        .test-subjects .li-background {
+            background: #f3f1f2;
+            background-size: 100%;
+        }
+        /*课程+注意*/
+
+        .course-conter {
+            height: 135px !important;
+            font-size: 14px;
+        }
+
+        .dangerous-conter {
+            font-size: 14px;
+            height: 270px !important;
+        }
+
+            .dangerous-conter p,
+            .course-conter p {
+                margin-left: 5px;
+            }
+
+        .qrcode {
+            text-align: center;
+            float: right;
+            width: 17%;
+            height: auto;
+            margin-top: -15px;
+        }
+
+        .btn-style {
+            width: 12rem;
+        }
+
+        .breakpoint-1200 {
+            height: 7861px !important;
+        }
+    </style>
+    <script type="text/x-handlebars-template" id="bigClassHTML">
+        {{#each this}}
+        <div class="col-md-2 searchTypesButton">
+            <input type="radio" name="ClassId" value="{{ClassId}},{{ClassType}},{{ClassName}}" />
+            <label>{{ClassName}}</label>
+        </div>
+        {{/each}}
+    </script>
+    <script type="text/x-handlebars-template" id="middleClassHTML">
+        {{#each this}}
+        <div class="col-md-2 col-sm-2 col-xs-2 searchTypesButton">
+            <input type="radio" name="ClassId" value="{{ClassId}},{{ClassType}},{{ClassName}}" />
+            <label>{{ClassName}}</label>
+        </div>
+        {{/each}}
+    </script>
+    <script type="text/x-handlebars-template" id="smallClassHTML">
+        {{#each this}}
+        <div class="col-md-2 col-sm-2 col-xs-2 searchTypesButton">
+            <input type="radio" name="ClassId" value="{{ClassId}},{{ClassType}},{{ClassName}}" />
+            <label>{{ClassName}}</label>
+        </div>
+        {{/each}}
+    </script>
+    <script type="text/x-handlebars-template" id="bestSmallClassHTML">
+        {{#each this}}
+        <div class="col-md-2 col-sm-2 col-xs-2 searchTypesButton">
+            <input type="radio" name="ClassId" value="{{ClassId}},{{ClassType}},{{ClassName}}" />
+            <label>{{ClassName}}</label>
+        </div>
+        {{/each}}
+    </script>
+
+    <script id="PrincipalAttClsStuDetailInfo3Html" type="text/x-handlebars-template">
+        {{#each this}}
+        <td style="text-align:center;vertical-align:middle">
+            <nobr><span id="{{day}}cqInfo{{childId}}">{{cq}}</span></nobr>
+            <input type="hidden" value="{{cqStatus}}" id="{{day}}cqStatus{{childId}}" />
+        </td>
+        {{/each}}
+    </script>
+    <!-- 2page课程表 -->
+    <script id="item-content-template" type="text/x-handlebars-template">
+        <ul class="ul-list">
+            <li class="week-box ">
+                <div class="tile">
+                    <span>{{WeakDay}}</span>
+                    <p>{{Title}}</p>
+                </div>
+                <div class="center-box">
+                    <p>活动准备：{{ActivityGetRead}}</p>
+                    活动过程：{{ActivityProcess}}
+                    <p class="remarks">调整难度：{{ActivityDifficult}}</p>
+                </div>
+                <div class="qrcode">
+                    <div id="{{ClassId}}{{VideoName}}"></div>
+                    <div>扫一扫，观看课程</div>
+                </div>
+            </li>
+        </ul>
+    </script>
+    <script type="text/x-handlebars-template" id="table-template-html">
+        {{#each this}}
+        <div class="tbody-right-tr">
+            <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/{{ItemCourseIcon}}" alt="" />
+            <p>{{Title}}</p>
+        </div>
+        {{/each}}
+    </script>
+    <script type="text/x-handlebars-template" id="footer-html">
+        <div class="footer">
+             <div style="width: 51%;height:22px;float: left;text-align: right;border-right: 1px #999999 solid;;">
+                    <p class="foot-zc font-size-min11" style="margin-right: -13px">雏鹰宝贝幼儿体质检测服务</p>
+                    <p class="foot-english font-size-min-en" style="margin-right: -16px">服务热线：010-56617272</p>
+                </div>
+                <div style="width: 49%;float: left;text-align: left;">
+                    <p class="foot-zc font-size-min11" style="margin-left: -13px">技术支持：睿莱体测</p>
+                    <p class="foot-english font-size-min-en" style="margin-left: -18px">RELIABLE</p>
+                </div>
+        </div>
+    </script>
+    <script type="text/x-handlebars-template" id="week-course-title-html">
+        <div class="head  page-break-before">
+            第{{NoNumber}}月课程
+        </div>
+    </script>
+    <script type="text/x-handlebars-template" id="content-html">
+        {{#each this}}
+        <div class="report-box  page-break-before ">
+            <div class="head-title">
+                <h2>
+                    {{ClassTime}}{{ServiceUnitName}}{{ClassName}}体测结果分析
+                </h2>
+            </div>
+            <div class="result-conter">
+                <h4>
+                    <img src="http://cdn.imreliable.net/asset/image/familyReportChuying/title-icon1.png" />
+                    结果和说明
+                </h4>
+                <hr class="hr-class" />
+                <div class="result-hightchart">
+                    <div class="hightchar-explain">
+                        <ul>
+                            <li>
+                                <img src="http://cdn.imreliable.net/asset/image/familyReportChuying/score-children-icon.png" />
+                                <span>
+                                    班级平均分
+                                </span>
+                            </li>
+                            <li>
+                                <img src="http://cdn.imreliable.net/asset/image/familyReportChuying/score-class-icon.png" />
+                                <span>
+                                    全园平均分
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="container-hightchar{{ClassId}}" style="width: 350px; height: 260px; margin: 0 auto; margin-left: 10px; "></div>
+                </div>
+                <div class="result-text">
+                    <div>
+                        <span>结果分析</span>
+                    </div>
+                    <p>{{CommentContent}}</p>
+                    <div>
+                        <span>数据对比</span>
+                    </div>
+                    <p>{{AnalysisContent}}</p>
+                </div>
+            </div>
+            <div class="week-table">
+                <h4>
+                    <img src="http://cdn.imreliable.net/asset/image/familyReportChuying/title-icon2.png" />
+                    相关动作<span>根据大数据分析，雏鹰体测筛选出与六项身体素质相关联动作，为生活中孩子的素质改善提供强化指导。</span>
+                </h4>
+                <hr class="hr-class" />
+                <div class="test-subjects">
+                    <ul class="ul-list">
+                        <!-- 网球掷远（上肢力量） -->
+                        <li class="li-background">
+                            <div class="test-subjects-title">
+                                <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-icon1.png" />
+                                <h4>相关联动作</h4>
+                                <b>网球掷远（上肢力量）</b><br />
+                            </div>
+                            <div class="test-subjects-text">
+                                <ul>
+                                    <li>
+                                        <div class="test-subjects-text-img">
+                                            <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon1.png" />
+                                            <span>原地拍球</span>
+                                        </div>
+                                        <p>
+                                            <em> 相关性：20.65%</em><br />
+                                            <span>皮球是幼儿童年时的重要“玩伴”，原地、跑动中拍球是幼儿的必备“技能”</span>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <div class="test-subjects-text-img">
+                                            <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon2.png" />
+                                            <span>双手接球</span>
+                                        </div>
+                                        <p>
+                                            <em> 相关性：34.61%</em><br />
+                                            <span>生活中常用到接的动作，比如玩群体性运动，以及把球扔来扔去的游戏等</span>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <div class="test-subjects-text-img">
+                                            <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon3.png" />
+                                            <span>地滚球</span>
+                                        </div>
+                                        <p>
+                                            <em> 相关性：20.63%</em><br />
+                                            <span>在生活中经常滚动物体，使其紧贴地面滚动，给动物喂食等游戏常用到此动作</span>
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!--立定跳远（下肢力量） -->
+                        <li>
+                            <div class="test-subjects-title">
+                                <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-icon2.png" />
+                                <h4>相关联动作</h4>
+                                <b>立定跳远（下肢力量）</b><br />
+                            </div>
+                            <div class="test-subjects-text">
+                                <ul>
+                                    <li>
+                                        <div class="test-subjects-text-img">
+                                            <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon4.png" />
+                                            <span>单脚跳</span>
+                                        </div>
+                                        <p>
+                                            <em> 相关性：70.63%</em><br />
+                                            <span>幼儿在游戏中常用到单脚跳的动作，例如像跳房子、斗鸡等</span>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <div class="test-subjects-text-img">
+                                            <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon5.png" />
+                                            <span>前跨跳</span>
+                                        </div>
+                                        <p>
+                                            <em> 相关性：36.51%</em><br />
+                                            <span>日常活动中经常会跨过一些障碍物，当有什么挡路时，跳过去使幼儿避免绊倒</span>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <div class="test-subjects-text-img">
+                                            <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon6.png" />
+                                            <span>踢球</span>
+                                        </div>
+                                        <p>
+                                            <em> 相关性：33.18%</em><br />
+                                            <span>足球是孩子最喜欢的游戏“伙伴”，幼儿常用踢足球玩乐，还可用于移开物体</span>
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--脚码-->
+            <div class="footer" style="margin-top: 32px;">
+              <div style="width: 51%;height:22px;float: left;text-align: right;border-right: 1px #999999 solid;;">
+                    <p class="foot-zc font-size-min11" style="margin-right: -13px">雏鹰宝贝幼儿体质检测服务</p>
+                    <p class="foot-english font-size-min-en" style="margin-right: -16px">服务热线：010-56617272</p>
+                </div>
+                <div style="width: 49%;float: left;text-align: left;">
+                    <p class="foot-zc font-size-min11" style="margin-left: -13px">技术支持：睿莱体测</p>
+                    <p class="foot-english font-size-min-en" style="margin-left: -18px">RELIABLE</p>
+                </div>
+            </div>
+        </div>
+        <!-- 2page -->
+        <div class="report-box  page-break-before ">
+            <div class="week-table" style="padding-top:80px">
+                <div class="test-subjects ">
+                    <ul id="ul-list">
+                        <!-- 走平衡木（平衡力） -->
+                        <li class="li-background">
+                            <div class="test-subjects-title">
+                                <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-icon3.png" />
+                                <h4>相关联动作</h4>
+                                <b>走平衡木（平衡力)</b><br />
+                            </div>
+                            <div class="test-subjects-text">
+                                <ul>
+                                    <li>
+                                        <div class="test-subjects-text-img">
+                                            <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon4.png" />
+                                            <span>单脚跳</span>
+                                        </div>
+                                        <p>
+                                            <em> 相关性：42.66%</em><br />
+                                            <span>幼儿在游戏中常用到单脚跳的动作，例如像跳房子、斗鸡等</span>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <div class="test-subjects-text-img">
+                                            <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon7.png" />
+                                            <span>前滑步</span>
+                                        </div>
+                                        <p>
+                                            <em> 相关性：21.65%</em><br />
+                                            <span>孩子常常模仿马儿奔跑，用到前滑步动作，同时，跆拳道、武术中也经常用到</span>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <div class="test-subjects-text-img">
+                                            <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon8.png" />
+                                            <span>侧滑步</span>
+                                        </div>
+                                        <p>
+                                            <em> 相关性：21.38%</em><br />
+                                            <span>在躲避、反应类游戏中经常用到侧滑步动作，也是篮球运动最基本的动作之一</span>
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!--十米折返跑（灵敏） -->
+                        <li>
+                            <div class="test-subjects-title">
+                                <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-icon4.png" />
+                                <h4>相关联动作</h4>
+                                <b>十米折返跑（灵敏）</b><br />
+                            </div>
+                            <div class="test-subjects-text">
+                                <ul>
+                                    <li>
+                                        <div class="test-subjects-text-img">
+                                            <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon7.png" />
+                                            <span>前滑步</span>
+                                        </div>
+                                        <p>
+                                            <em> 相关性：28.96%</em><br />
+                                            <span>孩子常常模仿马儿奔跑，用到前滑步动作，同时，跆拳道、武术中也经常用到</span>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <div class="test-subjects-text-img">
+                                            <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon8.png" />
+                                            <span>侧滑步</span>
+                                        </div>
+                                        <p>
+                                            <em> 相关性：20.38%</em><br />
+                                            <span>在躲避、反应类游戏中经常用到侧滑步动作，也是篮球运动最基本的动作之一</span>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <div class="test-subjects-text-img">
+                                            <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon1.png" />
+                                            <span>原地拍球</span>
+                                        </div>
+                                        <p>
+                                            <em> 相关性：44.96%</em><br />
+                                            <span>皮球是幼儿童年时的重要“玩伴”，原地、跑动中拍球是幼儿的必备“技能”</span>
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!--坐位体前屈（柔韧） -->
+                        <li class="li-background">
+                            <div class="test-subjects-title" style="background:url(http://cdn.imreliable.net/asset/image/familyReportChuying/test-subjects1.png) no-repeat center right; background-size: 10%;">
+                                <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/title-sit-icon.png" />
+                                <h4>相关联动作</h4>
+                                <b>坐位体前屈（柔韧）</b><br />
+                            </div>
+                            <div class="test-subjects-text">
+                                <ul>
+                                    <li style="margin-top: 92px;">
+                                        <div class="test-subjects-text-img">
+                                            <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon8.png" />
+                                            <span>侧滑步</span>
+                                        </div>
+                                        <p>
+                                            <em> 相关性：34.12%</em><br />
+                                            <span>在躲避、反应类游戏中经常用到侧滑步动作，也是篮球运动最基本的动作之一</span>
+                                        </p>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+                        <!-- 双脚连续跳（协调） -->
+                        <li>
+                            <div class="test-subjects-title" style="background:url(http://cdn.imreliable.net/asset/image/familyReportChuying/test-subjects2.png) no-repeat center right; background-size: 10%;">
+                                <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/title-double-icon.png" />
+                                <h4>相关联动作</h4>
+                                <b> 双脚连续跳（协调）</b><br />
+                            </div>
+                            <div class="test-subjects-text">
+                                <ul>
+                                    <li style="margin-top: 55px;">
+                                        <div class="test-subjects-text-img">
+                                            <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon4.png" />
+                                            <span>单脚跳</span>
+                                        </div>
+                                        <p>
+                                            <em> 相关性：50.6%</em><br />
+                                            <span>幼儿在游戏中常用到单脚跳的动作，例如像跳房子、斗鸡等</span>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <div class="test-subjects-text-img">
+                                            <img src="http://cdn.imreliable.net/asset/image/A4.1ImproveReport/test-subjects-text-icon7.png" />
+                                            <span>前滑步</span>
+                                        </div>
+                                        <p>
+                                            <em> 相关性：22.51%</em><br />
+                                            <span>孩子常常模仿马儿奔跑，用到前滑步动作，同时，跆拳道、武术中也经常用到</span>
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--脚码-->
+            <div class="footer" style="margin-top: 32px;">
+                <div style="width: 51%;height:22px;float: left;text-align: right;border-right: 1px #999999 solid;;">
+                    <p class="foot-zc font-size-min11" style="margin-right: -13px">雏鹰宝贝幼儿体质检测服务</p>
+                    <p class="foot-english font-size-min-en" style="margin-right: -16px">服务热线：010-56617272</p>
+                </div>
+                <div style="width: 49%;float: left;text-align: left;">
+                    <p class="foot-zc font-size-min11" style="margin-left: -13px">技术支持：睿莱体测</p>
+                    <p class="foot-english font-size-min-en" style="margin-left: -18px">RELIABLE</p>
+                </div>
+            </div>
+        </div>
+        <div class="report-box  page-break-before ">
+            <div class="head-title">
+                <h2>
+                    {{ClassTime}}{{ClassName}}健康课程表
+                </h2>
+            </div>
+            <div class="course-conter result-conter">
+                <h4>
+                    <img src="http://cdn.imreliable.net/asset/image/familyReportChuying/title-icon1.png" />
+                    课程说明
+                </h4>
+                <hr class="hr-class" />
+                <div class="course-explain ">
+                    <p>根据幼儿的体质检测结果、身体素质与动作发展规律、生理与认知情感发展规律等多维度相结合，制定明确的课程目标，再根据课程目标在课程库中选择最适合的课程内容编写成实际应用的改善方案。</p>
+                </div>
+            </div>
+            <div class="dangerous-conter result-conter">
+                <h4>
+                    <img src="http://cdn.imreliable.net/asset/image/familyReportChuying/title-icon4.png" />
+                    注意事项
+                </h4>
+                <hr class="hr-class" />
+                <div class="course-explain ">
+                    <p>
+                        （一）根据孩子自身的基本情况进行练习，在安排孩子的体育活动时应遵循运动量与难度由小到大的原则，并及时做出适宜的调整，以达到发展幼儿体质、提高身体素质的目的。 <br />（二）运动中根据孩子的个人情况进行适当地休息，如有不适，立即停止活动。 <br />（三）孩子做出违规和危险的动作需及时制止，以避免受伤。 <br />（四）必要时给予帮助和保护。<br />（五）做好充分的准备活动和结束后的放松活动。<br />（六）在运动前检查场地和器材，确保安全。 <br />（七）均衡膳食，避免过度的糖和油脂的摄入
+                    </p>
+                </div>
+            </div>
+            <div class="week-table">
+                <h4>
+                    <img src="http://cdn.imreliable.net/asset/image/familyReportChuying/title-icon5.png" />
+                    本学期课表
+                </h4>
+                <hr class="hr-class" />
+                <div class="table-box">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th colspan="5"> 课程项目</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div class="tbody-left" style="width: 121px;height: 376px;float: left;">
+                        <div class="tbody-left-tr">
+                            MONTH<br><b>1</b><br />第一月
+                        </div>
+                        <div class="tbody-left-tr">
+                            MONTH<br><b>2</b><br />第二月
+                        </div>
+                        <div class="tbody-left-tr">
+                            MONTH<br><b>3</b><br />第三月
+                        </div>
+                        <div class="tbody-left-tr">
+                            MONTH<br><b>4</b><br />第四月
+                        </div>
+                    </div>
+                    <div class="tbody-right" style="width: 609px;height: 376px;float: left;" id="table-content{{ClassId}}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer" style="margin-top:85px;">
+                <div style="width: 51%;height:22px;float: left;text-align: right;border-right: 1px #999999 solid;;">
+                    <p class="foot-zc font-size-min11" style="margin-right: -13px">雏鹰宝贝幼儿体质检测服务</p>
+                    <p class="foot-english font-size-min-en" style="margin-right: -16px">服务热线：010-56617272</p>
+                </div>
+                <div style="width: 49%;float: left;text-align: left;">
+                    <p class="foot-zc font-size-min11" style="margin-left: -13px">技术支持：睿莱体测</p>
+                    <p class="foot-english font-size-min-en" style="margin-left: -18px">RELIABLE</p>
+                </div>
+            </div>
+        </div>
+        <!--3page------------------------>
+        <div class="report-box  page-break-before " id="tableList{{ClassId}}">
+        </div>
+        {{/each}}
+    </script>
+
+    <script>
+        var PhysicalProjectToQuality3 = {
+            "1": "身高",
+            "2": "体重",
+            "3": "下肢力量",
+            "4": "协调性",
+            "5": "上肢力量",
+            "6": "平衡力",
+            "7": "柔韧性",
+            "8": "灵敏性",
+            "9": "位移能力",
+            "10": "物体控制"
+        };
+        var projectType = {
+            "12": "身高",
+            "13": "体重",
+            "14": "坐位体前屈",
+            "15": "立定跳远",
+            "16": "双脚连续跳",
+            "17": "折返跑",
+            "18": "网球掷远",
+            "19": "平衡木"
+        };
+        var projectQuality = {
+            "12": "身高",
+            "13": "体重",
+            "14": "柔韧性",
+            "15": "下肢力量",
+            "16": "协调性",
+            "17": "灵敏性",
+            "18": "上肢力量",
+            "19": "平衡力"
+        };
+        var week = {
+            1: "一",
+            2: "二",
+            3: "三",
+            4: "四",
+            5: "五"
+        };
+        var highchartsFn = function (id, kgdDate, classDate, proArr) {
+            $('#container-hightchar' + id).highcharts({
+                chart: {
+                    polar: true,
+                    type: 'line'
+                },
+                credits: {
+                    enabled: false,
+                },
+                title: {
+                    text: '',
+                    floating: true
+                },
+                pane: {
+                    size: '80%'
+                },
+                xAxis: {
+                    categories: proArr,
+                    tickmarkPlacement: 'on',
+                    lineWidth: 0,
+                    color: '#999999'
+                },
+                yAxis: {
+                    gridLineInterpolation: 'polygon',
+                    tickInterval: 1,
+                    lineWidth: 0,
+                    max: 5,
+                    min: 0,
+                    gridLineColor: '#e9e8e8',
+                    lineColor: '#e9e8e8',
+                },
+
+                tooltip: {
+                    shared: true,
+                    pointFormat: '<span style="color:{series.color}">{point.y:,.1f}</span>',
+                },
+
+                legend: {
+                    enabled: false
+                },
+
+                plotOptions: {
+                    series: {
+                        fillOpacity: 0.3
+                    }
+                },
+                series: [{
+                    type: 'area',
+                    name: '班级平均分',
+                    color: "#ffdf00",
+                    data: classDate,
+                    pointPlacement: 'on'
+                }, {
+                    type: 'area',
+                    name: '园所平均分',
+                    color: "#00a6ec",
+                    data: kgdDate,
+                    pointPlacement: 'on'
+                }],
+            });
+        };
+        var kdgChartDataDispose = function (data) {
+            var dataArr = [];
+            var objNameArr = [];
+            for (var item in data) {
+                dataArr.push(data[item].AVGScore);
+                objNameArr.push(projectQuality[data[item].ProjectId]);
+            }
+            return {
+                DataArr: dataArr,
+                ObjNameArr: objNameArr
+            };
+        };
+        //学年度相关月份计算
+        var semosterMonth = function () {
+            var nowDate = new Date();
+            var oneSemoster = [2, 3, 4, 5, 6, 7];
+            var twoSemoster = [8, 9, 10, 11, 12, 1];
+            var monthObj = {};
+            if (oneSemoster.some(function (s) {
+                return s == nowDate.getMonth() + 1;
+            })) {
+                monthObj.StartTime = nowDate.getFullYear() + '-02-01';
+                monthObj.FinishTime = nowDate.getFullYear() + '-07-31';
+                monthObj.FinishText = nowDate.getFullYear() + '年3月学期';
+                monthObj.MonthArr = oneSemoster;
+            } else {
+                var endYear = 0;
+                var startYear = 0;
+                if ((nowDate.getMonth() + 1) >= 8 && (nowDate.getMonth() + 1) <= 12) {
+                    startYear = nowDate.getFullYear();
+                    endYear = nowDate.getFullYear() + 1;
+                } else {
+                    startYear = nowDate.getFullYear() - 1;
+                    endYear = nowDate.getFullYear();
+                }
+                monthObj.StartTime = startYear + '-08-01';
+                monthObj.FinishTime = endYear + '-01-31';
+                monthObj.FinishText = startYear + '年9月学期';
+                monthObj.MonthArr = twoSemoster;
+            }
+            return monthObj;
+        };
+        var formatTotalScore = function (totalscore) {
+            let rank = "";
+            if (totalscore > 31) {
+                rank = "优秀";
+            } else if (totalscore >= 28 && totalscore <= 31) {
+                rank = "良好";
+            } else if (totalscore >= 20 && totalscore <= 27) {
+                rank = "合格";
+            } else if (totalscore < 20) {
+                rank = "不合格";
+            }
+            return rank;
+        };
+        var contentTxt = function (className, kdgData, classData, kdgDetail, classDetail) {
+            var classPhyResultGrade;
+            var contranstGrade;
+            var classTotalScore = eval(classData.join("+"));
+            var kindergartenTotalScore = eval(kdgData.join("+"));
+            classPhyResultGrade = formatTotalScore(classTotalScore);
+
+            var badItemArr = [];
+            var badComment = '';
+            var sortMapArr = [];
+            var generalCommentContent = '';
+            for (var i = 0, l = classDetail.length; i < l; i++) {
+                var sortMap = {};
+                sortMap['TestObject'] = classDetail[i].ProjectId;
+                sortMap['Score'] = classDetail[i].AVGScore;
+                if (classDetail[i].AVGScore < 3) {
+                    badItemArr.push(classDetail[i].ProjectId);
+                }
+                sortMapArr.push(sortMap);
+            }
+            if (badItemArr.length > 0) {
+                for (var t = 0; t < badItemArr.length; t++) {
+                    if (t == badItemArr.length - 1) {
+                        badComment += projectQuality[badItemArr[t]];
+                    } else {
+                        badComment += (projectQuality[badItemArr[t]] + "、");
+                    };
+                };
+            } else {
+                var sortResult = _.sortBy(sortMapArr, 'Score');
+                badComment = projectQuality[sortResult[0].TestObject] + '、' + projectQuality[sortResult[1].TestObject];
+            };
+            generalCommentContent = "体测结果显示," + className + "孩子体质总体发展" + classPhyResultGrade + ",其中" + badComment + "相对较弱，需要重点关注。";
+
+            var generalAnalysisContent = '';
+            if (classTotalScore < kindergartenTotalScore) {
+                contranstGrade = "落后于";
+            } else if (classTotalScore == kindergartenTotalScore) {
+                contranstGrade = "相当于";
+            } else if (classTotalScore > kindergartenTotalScore) {
+                contranstGrade = "优秀于";
+            }
+            var contranstBadArr = [];
+            var contranstBadContent = "";
+            for (var c = 0; c < 8; c++) {
+                if (kdgDetail[c].AVGScore > classDetail[c].AVGScore) {
+                    contranstBadArr.push(projectQuality[classDetail[c].ProjectId]);
+                }
+            }
+            if (contranstBadArr.length > 0) {
+                for (var p = 0, d = contranstBadArr.length; p < d; p++) {
+                    if (p == d - 1) {
+                        contranstBadContent += contranstBadArr[p];
+                    } else {
+                        contranstBadContent += (contranstBadArr[p] + "、");
+                    }
+                }
+            }
+            generalAnalysisContent = className + '与全园体测数据对比显示，本班孩子体质总体水平' + contranstGrade + "全园水平" + (contranstBadContent.length > 0 ? (",其中" + contranstBadContent + "低于全园对应测试项的平均水平。") : "。");
+            return {
+                AnalysisContent: generalAnalysisContent,
+                CommentContent: generalCommentContent
+            }
+        }
+        var improveInformation = function (id, ImproveInfo) {
+            var improveInformation = _.shuffle(ImproveInfo);
+            var index = 0;
+            var tableInfoArr = [];
+            var itemTypeIcon = {
+                6: "course-lise-run-icon.png",
+                8: "course-list-balance-icon.png",
+                4: "course-list-broad-icon.png",
+                3: "course-list-sit-icon.png",
+                7: "course-list-throw-icon.png",
+                5: "course-lis-double-icon.png"
+            }
+            var indexData = 12901;
+            for (var jsonInfo = 0, jsonLength = improveInformation.length; jsonInfo < jsonLength; jsonInfo++) {
+                indexData++;
+                var itemTable = {
+                    Title: improveInformation[jsonInfo].Name,
+                    ItemCourseIcon: itemTypeIcon[improveInformation[jsonInfo].ProjectType]
+                };
+                tableInfoArr.push(itemTable);
+                if (index % 5 == 0) {
+                    var itemTitle = {
+                        NoNumber: week[index / 5 + 1]
+                    };
+                    var template = Handlebars.compile($("#week-course-title-html").html());
+                    var titleTxt = template(itemTitle);
+                    $("#tableList" + id).append(titleTxt);
+                }
+                var videoName = improveInformation[jsonInfo].VideoName;
+                var itemInfo = {
+                    ClassId: id,
+                    WeakDay: week[index % 5 + 1],
+                    Title: improveInformation[jsonInfo].Name,
+                    ActivityGetRead: improveInformation[jsonInfo].Equipments,
+                    ActivityProcess: improveInformation[jsonInfo].Content,
+                    VideoName: indexData,
+                    ActivityDifficult: (improveInformation[jsonInfo].Difficult == null || improveInformation[jsonInfo].Difficult == "") ? "没有设定增减难度" : improveInformation[jsonInfo].Difficult
+                };
+                var templateInfo = Handlebars.compile($("#item-content-template").html());
+                var titleInfo = templateInfo(itemInfo);
+                $("#tableList" + id).append(titleInfo);
+                var url = "http://testbao.imreliable.net/Pages/Static/VideoCourse.html?name=" + videoName;
+                $('#' + id + itemInfo.VideoName).qrcode({
+                    width: 125,
+                    height: 125,
+                    text: url
+                });
+                if ((index + 1) % 5 == 0) {
+                    var templateInfo = Handlebars.compile($("#footer-html").html());
+                    $("#tableList" + id).append(templateInfo);
+                }
+                index++;
+            }
+            var templateTable = Handlebars.compile($("#table-template-html").html());
+            var titleInfo = templateTable(tableInfoArr);
+            $("#table-content" + id).append(titleInfo);
+            $("#tableList li:even").css("backgroundColor", "#fcf6f3");
+        }
+        $(document).ready(function () {   
+        var physicalResult = $information$;
+//        console.log(physicalResult);
+            var ClassId, objNameArr, itemKdgSVGtScore, itemClassSVGtScore, classAbstrac;
+            var contentArr = [];
+            var serviceUnitName;
+            for (var item in physicalResult.serviceUnitAbstrac) {
+            	serviceUnitName=physicalResult.serviceUnitAbstrac[item].ServiceUnitName;
+                kgdAbstrac = physicalResult.serviceUnitAbstrac[item];
+                for (var jsons in kgdAbstrac.Detail) {
+                    kgdAbstrac.Detail[jsons].ProName = projectType[kgdAbstrac.Detail[jsons].ProjectId]
+                }
+                itemKdgSVGtScore = (kdgChartDataDispose(kgdAbstrac.Detail)).DataArr;
+            }
+            for (var item in physicalResult.serviceUnitClassAbstrac) {
+                classAbstrac = physicalResult.serviceUnitClassAbstrac[item];
+                for (var item in classAbstrac.Detail) {
+                    classAbstrac.Detail[item].ProName = projectType[classAbstrac.Detail[item].ProjectId]
+                }
+                ClassId = classAbstrac.Master.Id;
+                itemClassSVGtScore = (kdgChartDataDispose(classAbstrac.Detail)).DataArr;
+                objNameArr = (kdgChartDataDispose(classAbstrac.Detail)).ObjNameArr;
+                var contentItem = {
+                    ClassId: classAbstrac.Master.Id,
+                    ClassName: classAbstrac.ClassName,
+                 	ServiceUnitName:serviceUnitName,
+                    ClassTime: semosterMonth().FinishText,
+                    AnalysisContent: contentTxt(classAbstrac.ClassName, itemKdgSVGtScore, itemClassSVGtScore, kgdAbstrac.Detail, classAbstrac.Detail).AnalysisContent,
+                    CommentContent: contentTxt(classAbstrac.ClassName, itemKdgSVGtScore, itemClassSVGtScore, kgdAbstrac.Detail, classAbstrac.Detail).CommentContent,
+                    itemClassSVGtScore: itemClassSVGtScore,
+                    itemKdgSVGtScore: itemKdgSVGtScore,
+                    improveInfo: classAbstrac.improveInfo
+                };
+                contentArr.push(contentItem);
+            }
+
+            var template = Handlebars.compile($("#content-html").html());
+            var htmlText = template(contentArr);
+            $("#content").append(htmlText);
+            for (var jsons in contentArr) {
+                var itemClassInfo = contentArr[jsons];
+                highchartsFn(itemClassInfo.ClassId, itemClassInfo.itemKdgSVGtScore, itemClassInfo.itemClassSVGtScore, objNameArr);
+                improveInformation(itemClassInfo.ClassId, itemClassInfo.improveInfo);
+            }
+
+        })
+    </script>
+</head>
+
+<body>
+    <div id="content">
+    </div>
+</body>
+
+</html>

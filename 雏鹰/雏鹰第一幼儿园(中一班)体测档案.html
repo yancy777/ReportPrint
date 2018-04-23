@@ -1,0 +1,492 @@
+<!--
+**************************************
+*  名称：园体测档案（雏鹰）
+*  作用：针对雏鹰的私人订制的园体测档案
+*  作者：闫聪洋
+**************************************
+-->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>幼儿园体测档案</title>
+    <link href="http://cdn.imreliable.net/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="http://cdn.imreliable.net/asset/css/physical-exam-report.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://cdn.imreliable.net/jquery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="http://cdn.imreliable.net/bootstrap/js/bootstrap.min.js"></script>
+    <script src="http://cdn.bootcss.com/underscore.js/1.8.3/underscore.js"></script>
+    <script src="http://cdn.bootcss.com/handlebars.js/4.0.6/handlebars.min.js"></script>
+    <!--High Chart-->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <!--<script src="https://code.highcharts.com/modules/exporting.js"></script>-->
+    <style>
+        .col-md-3,
+        .col-sm-3,
+        .col-xs-3 {
+            padding-left: 5px !important;
+            padding-right: 5px !important;
+        }
+
+        table {
+            margin-top: 5%;
+        }
+
+        tr {
+            height: 6rem !important;
+            line-height: 40px;
+        }
+
+        .table > thead > tr > th,
+        .table > tbody > tr > th,
+        .table > tfoot > tr > th,
+        .table > thead > tr > td,
+        .table > tbody > tr > td,
+        .table > tfoot > tr > td {
+            padding: 0 0;
+            padding-top: 2.1%;
+        }
+
+        .table-border {
+            border: 1px solid #333;
+            /*height: 50px;
+            line-height: 50px;*/
+        }
+
+        .container {
+            width: 1170px !important;
+        }
+
+        .report-titles {
+            padding-top: 5%;
+            font-size: 30px;
+        }
+
+        label {
+            font-weight: 400;
+        }
+
+        .report-content {
+            font-size: 20px !important;
+            margin-top: 1% !important;
+        }
+
+        .base-info {
+            line-height: 3rem !important;
+        }
+
+        .foot-content {
+            margin-top: 3% !important;
+        }
+    </style>
+    <script type="text/x-handlebars-template" id="content-html">
+        {{#each this}}
+        <div class="container page-break-before">
+            <p class="row text-center report-titles">
+                <label>雏鹰园所儿童体质档案</label>
+            </p>
+            <div class="report-content">
+                <div class="base-info">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-right">姓名：</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-left">{{ChildName}}</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-right">性别：</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-left">{{Gender}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-right">年龄：</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-left">{{AgeGroup}}岁</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-right">班级：</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-left">{{ClassName}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-right">生日：</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-left">{{BirthDate}}</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-right">测试日期：</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-left">{{TestDate}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-right">检测编号：</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-left">{{TestCode}}</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-right">幼儿园：</div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 text-left">{{KindergartenName}}</div>
+                    </div>
+                </div>
+                <div style="width: 100% !important">
+                    <table class="table table-bordered text-center" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <td style="width: 20%">内容</td>
+                                <td style="width: 30%">测试指标</td>
+                                <td style="width: 25%">测试值</td>
+                                <td style="width: 25%">评分</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="2" style="padding-top: 4% !important">形态</td>
+                                <td>身高（厘米）</td>
+                                <td>{{Height}}</td>
+                                <td>{{HeightScore}}</td>
+                            </tr>
+                            <tr>
+                                <td>身高标准体重（千克）</td>
+                                <td>{{Weight}}</td>
+                                <td>{{WeightScore}}</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="6" style="padding-top: 14%">素质</td>
+                                <td>10米折返跑（秒）</td>
+                                <td>{{ShuttleRun}}</td>
+                                <td>{{ShuttleRunScore}}</td>
+                            </tr>
+                            <tr>
+                                <td>坐位体前屈（厘米）</td>
+                                <td>{{SitReach}}</td>
+                                <td>{{SitReachScore}}</td>
+                            </tr>
+                            <tr>
+                                <td>立定跳远（厘米）</td>
+                                <td>{{BroadJump}}</td>
+                                <td>{{BroadJumpScore}}</td>
+                            </tr>
+                            <tr>
+                                <td>双脚连续跳（秒）</td>
+                                <td>{{DoubleJump}}</td>
+                                <td>{{DoubleJumpScore}}</td>
+                            </tr>
+                            <tr>
+                                <td>网球掷远（米）</td>
+                                <td>{{Throw}}</td>
+                                <td>{{ThrowScore}}</td>
+                            </tr>
+                            <tr>
+                                <td>走平衡木（秒）</td>
+                                <td>{{Balance}}</td>
+                                <td>{{BalanceScore}}</td>
+                            </tr>
+                            <tr>
+                                <td>综合评级</td>
+                                <td>{{gradeResult GradeResult}}</td>
+                                <td>总分</td>
+                                <td>{{TotalScore}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-left">
+                                    <label style="width:100%;margin-top: 10%;padding-left: 30px;padding-right: 30px;line-height:28px">
+                                        {{{commentContent CommentContent}}}
+                                        <br /><br />
+                                        身体素质测试评分与幼儿的【动作发展】、【运动心理】密切相关，例如网球掷远代表孩子上肢力量与腰腹力量的素质，但与此同时也代表着孩子的投掷动作发展情况。
+                                        <br /><br />
+                                        得分仅供参考，如需了解进一步详细的情况请与中心工作人员联系。
+                                    </label>
+                                </td>
+                                <td colspan="2">
+                                    <label id="summary-chart-{{Id}}">
+                                    </label>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row foot-content">
+                        <p style="float: left; position: relative; left: 2%;">*X代表该幼儿因心理或动作发展因素未参与该项测试，故无法记录测试值</p>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </script>
+    <script type="text/javascript">
+        var rTProjectCorrespondence = {
+            'HeightScore': 1,
+            'WeightScore': 2,
+            'BroadJumpScore': 4,
+            'DoubleJumpScore': 5,
+            'ThrowScore': 7,
+            'BalanceScore': 8,
+            'SitReachScore': 3,
+            'ShuttleRunScore': 6
+        };
+        var gradeContent = function (totalScore) {
+            var gradeContent = "";
+            if (totalScore >= 32) {
+                gradeContent = "优秀";
+            } else if (totalScore >= 28 && totalScore <= 31) {
+                gradeContent = "良好";
+            } else if (totalScore >= 20 && totalScore <= 27) {
+                gradeContent = "合格";
+            } else {
+                gradeContent = "不合格";
+            }
+            return gradeContent;
+        }
+        var RTPhysicalProject = {
+            "1": "身高",
+            "2": "体重",
+            "3": "坐位体前屈",
+            "4": "立定跳远",
+            "5": "双脚连续跳",
+            "6": "十米折返跑",
+            "7": "网球掷远",
+            "8": "走平衡木",
+            "9": "位移能力",
+            "10": "物体控制能力"
+        };
+        var recordItemComment = function (dataArr) {
+            var projectContent = "";
+
+            for (var i = 0, l = dataArr.length; i < l; i++) {
+                if (i == l - 1) {
+                    projectContent += dataArr[i];
+                } else {
+                    projectContent += dataArr[i] + "、";
+                }
+            }
+            return projectContent;
+        };
+        Handlebars.registerHelper("commentContent", function (dataInfo) {
+            var fineProject = [];
+            var favorableProject = [];
+            var badProject = [];
+            var regularProject = [];
+            var underproofProject = [];
+            var notTestProject = [];
+            var commentContent = "祝贺您完成了所有指标的测试，现对您的测试结果进行简评，和同龄人比，您的体质处于" + gradeContent(dataInfo.resultMaster.TotalScore) + "水平,各项发展如下：<br/><br/>";
+            // for(var testType in rTProjectCorrespondence) {
+
+            //					if(dataInfo[testType] != 0) {
+
+            //0-2不合格；3合格；4良好；5优秀
+            for (let i = 0, length = dataInfo.resultDetail.length; i < length; i++) {
+                switch (dataInfo.resultDetail[i].Rank) {
+                    case 0:
+                        underproofProject.push(dataInfo.resultDetail[i].Name);
+                        break;
+                    case 1:
+                        underproofProject.push(dataInfo.resultDetail[i].Name);
+                        break;
+                    case 2:
+                        underproofProject.push(dataInfo.resultDetail[i].Name);
+                        break;
+                    case 3:
+                        regularProject.push(dataInfo.resultDetail[i].Name);
+                        break;
+                    case 4:
+                        favorableProject.push(dataInfo.resultDetail[i].Name);
+                        break;
+                    case 5:
+                        fineProject.push(dataInfo.resultDetail[i].Name);
+                        break;
+                }
+            }
+            //					} else {
+            //						notTestArr.push(single);
+            //					}
+            if (fineProject.length > 0) {
+                commentContent += (recordItemComment(fineProject) + "发展优秀；");
+            }
+            if (favorableProject.length > 0) {
+                commentContent += (recordItemComment(favorableProject) + "发展良好；");
+            }
+            if (regularProject.length > 0) {
+                commentContent += (recordItemComment(regularProject) + "发展合格；");
+            }
+            //				if(badProject.length > 0) {
+            //					commentContent += (recordItemComment(badProject) + "发展较差；");
+            //				}
+            if (underproofProject.length > 0) {
+                commentContent += (recordItemComment(underproofProject) + "不合格，需要特别注意。");
+            }
+            //				if(notTestArr.length != 0) {
+            //					commentContent += (recordItemComment(notTestArr) + "分数为0，可能没有测试；");
+            //				}
+            return commentContent;
+        });
+        Handlebars.registerHelper("gradeResult", function (totalScore) {
+            return gradeContent(totalScore);
+        });
+        Date.prototype.format = function (fmt) { //author: meizz
+            var o = {
+                "M+": this.getMonth() + 1, //月份
+                "d+": this.getDate(), //日
+                "h+": this.getHours(), //小时
+                "m+": this.getMinutes(), //分
+                "s+": this.getSeconds(), //秒
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                "S": this.getMilliseconds() //毫秒
+            };
+            if (/(y+)/.test(fmt))
+                fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt))
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+        String.prototype.CharpStr2Date = function () {
+            //[\+\-]:+ is for datetime offset, - is for datetime
+            var dateReg = /\/Date\((-?\d+)([\+\-]?\d+)\)\//;
+            var date = new Date(parseInt(this.replace(/\/Date\((-?\d+)([\+\-]?\d+)?\)\//, '$1')));
+            var createTime = date.format("yyyy-MM-dd");
+            return createTime;
+        }
+
+        $(function () {
+            var physicalResult = {"AgencyInfo":{"__type":"BabybusSSApi.DatabaseModel.UV_KgReliation, BabybusSSApi.DatabaseModel","KindergartenId":856,"KindergartenName":"雏鹰第一幼儿园","KindergartenAdress":"陕西省西安市新城区","KindergartenCancel":false,"KindergartenCode":"su6101002485","KindergartenRegionCode":"610102","AllianceName":"雏鹰","AllianceId":854,"AgencyAndProxyId":855,"AgencyAndProxyName":"雏鹰代理","AgencyAndProxyUnitType":5},"PhyResult":[{"__type":"Admin.ServiceInterface.Services.ExportService+PhyResultModel, Admin.ServiceInterface","resultMaster":{"Id":41529,"CreateTime":"\/Date(1523754999263-0000)\/","ProgramId":2002,"ServiceUnitId":856,"ServiceUnitName":"雏鹰第一幼儿园","ClassId":101894,"ClassName":"中一班","ChildId":44031,"ChildName":"汪琦航","Gender":1,"Age":4.5,"Birthday":"\/Date(1377446400000-0000)\/","TestStatus":true,"Cancel":false,"GUID":"e1c2a9406be64aa894b4f19d5a87b3a2","TotalScore":32,"ClassType":11,"MissDataType":0,"IsExported":true},"resultDetail":[{"Id":315549,"ProjectId":12,"MasterId":41529,"Result":108.00,"IsTest":false,"Rank":3,"GUID":"4f5c4179db294182b9c38ca4c60ac567","Name":"身高","DisplayName":"身高","IsMental":false,"IsMotor":false},{"Id":315550,"ProjectId":13,"MasterId":41529,"Result":17.00,"IsTest":false,"Rank":5,"GUID":"655478374e6c4c30aced99c0dfd7b173","Name":"体重","DisplayName":"体重","IsMental":false,"IsMotor":false},{"Id":315551,"ProjectId":14,"MasterId":41529,"Result":17.00,"IsTest":false,"Rank":5,"GUID":"204c41d9de1947909c67049f883fa547","Name":"坐位体前屈","DisplayName":"柔韧性","IsMental":false,"IsMotor":false},{"Id":315552,"ProjectId":15,"MasterId":41529,"Result":110.00,"IsTest":false,"Rank":5,"GUID":"1439616e0d6e42c3860f07a7ef798ab3","Name":"立定跳远","DisplayName":"下肢力量","IsMental":false,"IsMotor":false},{"Id":315553,"ProjectId":16,"MasterId":41529,"Result":6.50,"IsTest":false,"Rank":3,"GUID":"85e0ca9140744d8293aab87215cc317e","Name":"双脚连续跳","DisplayName":"协调性","IsMental":false,"IsMotor":false},{"Id":315554,"ProjectId":17,"MasterId":41529,"Result":6.80,"IsTest":false,"Rank":4,"GUID":"d5df333791fe41aaae1292f0c56070d0","Name":"十米折返跑","DisplayName":"灵敏性","IsMental":false,"IsMotor":false},{"Id":315555,"ProjectId":18,"MasterId":41529,"Result":5.00,"IsTest":false,"Rank":3,"GUID":"970bf8df7a9245aaab7a2146ce603d94","Name":"网球掷远","DisplayName":"上肢力量","IsMental":false,"IsMotor":false},{"Id":315556,"ProjectId":19,"MasterId":41529,"Result":4.40,"IsTest":false,"Rank":4,"GUID":"b3478d05245f4f4e9e29bc759171efcd","Name":"走平衡木","DisplayName":"平衡力","IsMental":false,"IsMotor":false}],"childCode":"610100240000134"},{"resultMaster":{"Id":41530,"CreateTime":"\/Date(1523754999263-0000)\/","ProgramId":2002,"ServiceUnitId":856,"ServiceUnitName":"雏鹰第一幼儿园","ClassId":101894,"ClassName":"中一班","ChildId":44032,"ChildName":"柯旭武","Gender":1,"Age":4.5,"Birthday":"\/Date(1368979200000-0000)\/","TestStatus":true,"Cancel":false,"GUID":"f3c2a48c06ee461fb30afdd79d0f3052","TotalScore":29,"ClassType":11,"MissDataType":0,"IsExported":true},"resultDetail":[{"Id":315557,"ProjectId":12,"MasterId":41530,"Result":103.00,"IsTest":false,"Rank":2,"GUID":"7bf143cc849f4f5daffe54d497bb80a6","Name":"身高","DisplayName":"身高","IsMental":false,"IsMotor":false},{"Id":315558,"ProjectId":13,"MasterId":41530,"Result":16.00,"IsTest":false,"Rank":5,"GUID":"eba4ba1d022949adbce4944c5a470e85","Name":"体重","DisplayName":"体重","IsMental":false,"IsMotor":false},{"Id":315559,"ProjectId":14,"MasterId":41530,"Result":8.00,"IsTest":false,"Rank":3,"GUID":"1c02e565ec874c568fb439e10c1d233e","Name":"坐位体前屈","DisplayName":"柔韧性","IsMental":false,"IsMotor":false},{"Id":315560,"ProjectId":15,"MasterId":41530,"Result":80.00,"IsTest":false,"Rank":3,"GUID":"124204c78b104bbc83ce12e74f5bef59","Name":"立定跳远","DisplayName":"下肢力量","IsMental":false,"IsMotor":false},{"Id":315561,"ProjectId":16,"MasterId":41530,"Result":6.00,"IsTest":false,"Rank":4,"GUID":"308f84b98f6448b4b48fa5ea530ac294","Name":"双脚连续跳","DisplayName":"协调性","IsMental":false,"IsMotor":false},{"Id":315562,"ProjectId":17,"MasterId":41530,"Result":7.20,"IsTest":false,"Rank":4,"GUID":"19eb273a1aee47be8a60364b95d2c834","Name":"十米折返跑","DisplayName":"灵敏性","IsMental":false,"IsMotor":false},{"Id":315563,"ProjectId":18,"MasterId":41530,"Result":5.00,"IsTest":false,"Rank":3,"GUID":"f8106eb2a53544de8eecee53de29351f","Name":"网球掷远","DisplayName":"上肢力量","IsMental":false,"IsMotor":false},{"Id":315564,"ProjectId":19,"MasterId":41530,"Result":2.80,"IsTest":false,"Rank":5,"GUID":"2a777525de184161b148a127350a4d4d","Name":"走平衡木","DisplayName":"平衡力","IsMental":false,"IsMotor":false}],"childCode":"610100240000249"},{"resultMaster":{"Id":41531,"CreateTime":"\/Date(1523754999263-0000)\/","ProgramId":2002,"ServiceUnitId":856,"ServiceUnitName":"雏鹰第一幼儿园","ClassId":101894,"ClassName":"中一班","ChildId":44033,"ChildName":"冯琬真","Gender":2,"Age":5.0,"Birthday":"\/Date(1359734400000-0000)\/","TestStatus":true,"Cancel":false,"GUID":"1093ff95428e42d199027ad1701b3540","TotalScore":19,"ClassType":11,"MissDataType":0,"IsExported":true},"resultDetail":[{"Id":315565,"ProjectId":12,"MasterId":41531,"Result":103.00,"IsTest":false,"Rank":2,"GUID":"1a46dc7ef5f54c8e85265eab1aaf1cf2","Name":"身高","DisplayName":"身高","IsMental":false,"IsMotor":false},{"Id":315566,"ProjectId":13,"MasterId":41531,"Result":15.00,"IsTest":false,"Rank":5,"GUID":"ccbcbf111d324e0cbbdb2f805797022f","Name":"体重","DisplayName":"体重","IsMental":false,"IsMotor":false},{"Id":315567,"ProjectId":14,"MasterId":41531,"Result":11.30,"IsTest":false,"Rank":3,"GUID":"370648e5ccd44b21b1d94fa97d2f182a","Name":"坐位体前屈","DisplayName":"柔韧性","IsMental":false,"IsMotor":false},{"Id":315568,"ProjectId":15,"MasterId":41531,"Result":82.00,"IsTest":false,"Rank":3,"GUID":"80185e9698154613af6298173a8878e0","Name":"立定跳远","DisplayName":"下肢力量","IsMental":false,"IsMotor":false},{"Id":315569,"ProjectId":16,"MasterId":41531,"Result":8.30,"IsTest":false,"Rank":2,"GUID":"f6e192c5c21447dbbdc3614935aac608","Name":"双脚连续跳","DisplayName":"协调性","IsMental":false,"IsMotor":false},{"Id":315570,"ProjectId":17,"MasterId":41531,"Result":12.80,"IsTest":false,"Rank":0,"GUID":"bd43975f8e2b4c70bbd020c9db431739","Name":"十米折返跑","DisplayName":"灵敏性","IsMental":false,"IsMotor":false},{"Id":315571,"ProjectId":18,"MasterId":41531,"Result":4.00,"IsTest":false,"Rank":2,"GUID":"e37b7f6c6c6d4b0096607e774ffa97c2","Name":"网球掷远","DisplayName":"上肢力量","IsMental":false,"IsMotor":false},{"Id":315572,"ProjectId":19,"MasterId":41531,"Result":11.50,"IsTest":false,"Rank":2,"GUID":"a752e29be0b145119171194434df3542","Name":"走平衡木","DisplayName":"平衡力","IsMental":false,"IsMotor":false}],"childCode":"610100240000315"},{"resultMaster":{"Id":41532,"CreateTime":"\/Date(1523754999263-0000)\/","ProgramId":2002,"ServiceUnitId":856,"ServiceUnitName":"雏鹰第一幼儿园","ClassId":101894,"ClassName":"中一班","ChildId":44034,"ChildName":"张桂娴","Gender":2,"Age":5.5,"Birthday":"\/Date(1348588800000-0000)\/","TestStatus":true,"Cancel":false,"GUID":"5ff9326f9ece49f38bd4d20b734db5e1","TotalScore":22,"ClassType":11,"MissDataType":0,"IsExported":true},"resultDetail":[{"Id":315573,"ProjectId":12,"MasterId":41532,"Result":111.00,"IsTest":false,"Rank":3,"GUID":"a885122888eb4c328d98888e2a269f67","Name":"身高","DisplayName":"身高","IsMental":false,"IsMotor":false},{"Id":315574,"ProjectId":13,"MasterId":41532,"Result":19.00,"IsTest":false,"Rank":5,"GUID":"de6d01aa2e0349d6a9e12dfbb2d1f2de","Name":"体重","DisplayName":"体重","IsMental":false,"IsMotor":false},{"Id":315575,"ProjectId":14,"MasterId":41532,"Result":12.90,"IsTest":false,"Rank":3,"GUID":"9e30c487ac8245a3bbe92e7769695855","Name":"坐位体前屈","DisplayName":"柔韧性","IsMental":false,"IsMotor":false},{"Id":315576,"ProjectId":15,"MasterId":41532,"Result":80.00,"IsTest":false,"Rank":2,"GUID":"90cfc3d83399484ab313a56318663ee3","Name":"立定跳远","DisplayName":"下肢力量","IsMental":false,"IsMotor":false},{"Id":315577,"ProjectId":16,"MasterId":41532,"Result":6.10,"IsTest":false,"Rank":3,"GUID":"bdb517b71edb4e74a73128c02e65aaee","Name":"双脚连续跳","DisplayName":"协调性","IsMental":false,"IsMotor":false},{"Id":315578,"ProjectId":17,"MasterId":41532,"Result":7.80,"IsTest":false,"Rank":2,"GUID":"1fffe22e4884424db81d1101c652a303","Name":"十米折返跑","DisplayName":"灵敏性","IsMental":false,"IsMotor":false},{"Id":315579,"ProjectId":18,"MasterId":41532,"Result":4.00,"IsTest":false,"Rank":2,"GUID":"734aa36bef6441a190543b622eae472d","Name":"网球掷远","DisplayName":"上肢力量","IsMental":false,"IsMotor":false},{"Id":315580,"ProjectId":19,"MasterId":41532,"Result":9.00,"IsTest":false,"Rank":2,"GUID":"50fe250ca28143d1890fe236bdf860a0","Name":"走平衡木","DisplayName":"平衡力","IsMental":false,"IsMotor":false}],"childCode":"610100240000453"},{"resultMaster":{"Id":41533,"CreateTime":"\/Date(1523754999263-0000)\/","ProgramId":2002,"ServiceUnitId":856,"ServiceUnitName":"雏鹰第一幼儿园","ClassId":101894,"ClassName":"中一班","ChildId":44035,"ChildName":"代志远","Gender":2,"Age":4.5,"Birthday":"\/Date(1371744000000-0000)\/","TestStatus":true,"Cancel":false,"GUID":"a859f349a2894a6c9845e77a65c5338e","TotalScore":21,"ClassType":11,"MissDataType":0,"IsExported":true},"resultDetail":[{"Id":315581,"ProjectId":12,"MasterId":41533,"Result":110.00,"IsTest":false,"Rank":4,"GUID":"475e8ecc7ae54f409984b61c922e29e3","Name":"身高","DisplayName":"身高","IsMental":false,"IsMotor":false},{"Id":315582,"ProjectId":13,"MasterId":41533,"Result":20.00,"IsTest":false,"Rank":5,"GUID":"c372a5642af64099a19d47c72932ddfc","Name":"体重","DisplayName":"体重","IsMental":false,"IsMotor":false},{"Id":315583,"ProjectId":14,"MasterId":41533,"Result":5.70,"IsTest":false,"Rank":1,"GUID":"a4ff9a034d1744d198e4bb5ac89a7b31","Name":"坐位体前屈","DisplayName":"柔韧性","IsMental":false,"IsMotor":false},{"Id":315584,"ProjectId":15,"MasterId":41533,"Result":62.00,"IsTest":false,"Rank":2,"GUID":"22d5c9585b67425082a9b66f9900b38b","Name":"立定跳远","DisplayName":"下肢力量","IsMental":false,"IsMotor":false},{"Id":315585,"ProjectId":16,"MasterId":41533,"Result":7.80,"IsTest":false,"Rank":3,"GUID":"90b3ea256705452c8aca0de16725d6e7","Name":"双脚连续跳","DisplayName":"协调性","IsMental":false,"IsMotor":false},{"Id":315586,"ProjectId":17,"MasterId":41533,"Result":9.90,"IsTest":false,"Rank":2,"GUID":"56f2f6b3546f4a07957a8cd1476f8000","Name":"十米折返跑","DisplayName":"灵敏性","IsMental":false,"IsMotor":false},{"Id":315587,"ProjectId":18,"MasterId":41533,"Result":2.50,"IsTest":false,"Rank":2,"GUID":"a63d52c097de4426b2fbe78fc8eb4779","Name":"网球掷远","DisplayName":"上肢力量","IsMental":false,"IsMotor":false},{"Id":315588,"ProjectId":19,"MasterId":41533,"Result":11.50,"IsTest":false,"Rank":2,"GUID":"924befd7e53b40f19f0d5a9acfc85cc7","Name":"走平衡木","DisplayName":"平衡力","IsMental":false,"IsMotor":false}],"childCode":"610100240000554"},{"resultMaster":{"Id":41534,"CreateTime":"\/Date(1523754999263-0000)\/","ProgramId":2002,"ServiceUnitId":856,"ServiceUnitName":"雏鹰第一幼儿园","ClassId":101894,"ClassName":"中一班","ChildId":44036,"ChildName":"梅语彤","Gender":2,"Age":5.0,"Birthday":"\/Date(1357747200000-0000)\/","TestStatus":true,"Cancel":false,"GUID":"8027b5f113fe421a94f42801f55d7c91","TotalScore":17,"ClassType":11,"MissDataType":0,"IsExported":true},"resultDetail":[{"Id":315589,"ProjectId":12,"MasterId":41534,"Result":111.00,"IsTest":false,"Rank":4,"GUID":"c1817b799a484699b3278cd11b2fcf00","Name":"身高","DisplayName":"身高","IsMental":false,"IsMotor":false},{"Id":315590,"ProjectId":13,"MasterId":41534,"Result":17.00,"IsTest":false,"Rank":-3,"GUID":"a5e04816aa1d4d66a4d63b3a07875d80","Name":"体重","DisplayName":"体重","IsMental":false,"IsMotor":false},{"Id":315591,"ProjectId":14,"MasterId":41534,"Result":10.10,"IsTest":false,"Rank":3,"GUID":"83dd0d5dbcfa4aafaf583950d8dddca0","Name":"坐位体前屈","DisplayName":"柔韧性","IsMental":false,"IsMotor":false},{"Id":315592,"ProjectId":15,"MasterId":41534,"Result":90.00,"IsTest":false,"Rank":4,"GUID":"a7c629bea79340ec831cdf55703dd9f8","Name":"立定跳远","DisplayName":"下肢力量","IsMental":false,"IsMotor":false},{"Id":315593,"ProjectId":16,"MasterId":41534,"Result":8.10,"IsTest":false,"Rank":2,"GUID":"f6a092b5a2004640bce24b529990b859","Name":"双脚连续跳","DisplayName":"协调性","IsMental":false,"IsMotor":false},{"Id":315594,"ProjectId":17,"MasterId":41534,"Result":8.40,"IsTest":false,"Rank":2,"GUID":"067d40d8f1ba4e409d7b3175cf84e5da","Name":"十米折返跑","DisplayName":"灵敏性","IsMental":false,"IsMotor":false},{"Id":315595,"ProjectId":18,"MasterId":41534,"Result":4.00,"IsTest":false,"Rank":2,"GUID":"ce5d903f5fc24023b6b2262bfb8bcf2b","Name":"网球掷远","DisplayName":"上肢力量","IsMental":false,"IsMotor":false},{"Id":315596,"ProjectId":19,"MasterId":41534,"Result":6.50,"IsTest":false,"Rank":3,"GUID":"be4100b27aa240038a4331c886d1f5ca","Name":"走平衡木","DisplayName":"平衡力","IsMental":false,"IsMotor":false}],"childCode":"610100240000604"},{"resultMaster":{"Id":41535,"CreateTime":"\/Date(1523754999263-0000)\/","ProgramId":2002,"ServiceUnitId":856,"ServiceUnitName":"雏鹰第一幼儿园","ClassId":101894,"ClassName":"中一班","ChildId":44037,"ChildName":"邓甜馨","Gender":2,"Age":4.5,"Birthday":"\/Date(1381593600000-0000)\/","TestStatus":true,"Cancel":false,"GUID":"e525fc4963b74f1c9aa2cae02b3265e0","TotalScore":32,"ClassType":11,"MissDataType":0,"IsExported":true},"resultDetail":[{"Id":315597,"ProjectId":12,"MasterId":41535,"Result":104.00,"IsTest":false,"Rank":3,"GUID":"7a34eb0bddf844659163cb00168f2d93","Name":"身高","DisplayName":"身高","IsMental":false,"IsMotor":false},{"Id":315598,"ProjectId":13,"MasterId":41535,"Result":18.00,"IsTest":false,"Rank":5,"GUID":"0c9c0a86208342f7b6a3ecd97c7cc220","Name":"体重","DisplayName":"体重","IsMental":false,"IsMotor":false},{"Id":315599,"ProjectId":14,"MasterId":41535,"Result":15.80,"IsTest":false,"Rank":4,"GUID":"42920f2042dc4696840c356426c9ff47","Name":"坐位体前屈","DisplayName":"柔韧性","IsMental":false,"IsMotor":false},{"Id":315600,"ProjectId":15,"MasterId":41535,"Result":55.00,"IsTest":false,"Rank":2,"GUID":"9a34a937387045ef9184b426cb5075c7","Name":"立定跳远","DisplayName":"下肢力量","IsMental":false,"IsMotor":false},{"Id":315601,"ProjectId":16,"MasterId":41535,"Result":5.30,"IsTest":false,"Rank":5,"GUID":"461ac72977634b038f3355654799881d","Name":"双脚连续跳","DisplayName":"协调性","IsMental":false,"IsMotor":false},{"Id":315602,"ProjectId":17,"MasterId":41535,"Result":7.20,"IsTest":false,"Rank":4,"GUID":"534da453015643fcbc3bbda44630c2d7","Name":"十米折返跑","DisplayName":"灵敏性","IsMental":false,"IsMotor":false},{"Id":315603,"ProjectId":18,"MasterId":41535,"Result":5.00,"IsTest":false,"Rank":4,"GUID":"f4242fedd130423da20fcd119c2f22ea","Name":"网球掷远","DisplayName":"上肢力量","IsMental":false,"IsMotor":false},{"Id":315604,"ProjectId":19,"MasterId":41535,"Result":4.50,"IsTest":false,"Rank":5,"GUID":"4cb8c59278c84f65a82652e07bbf6faf","Name":"走平衡木","DisplayName":"平衡力","IsMental":false,"IsMotor":false}],"childCode":"610100240000706"},{"resultMaster":{"Id":41536,"CreateTime":"\/Date(1523754999263-0000)\/","ProgramId":2002,"ServiceUnitId":856,"ServiceUnitName":"雏鹰第一幼儿园","ClassId":101894,"ClassName":"中一班","ChildId":44038,"ChildName":"陶昕","Gender":2,"Age":4.5,"Birthday":"\/Date(1382025600000-0000)\/","TestStatus":true,"Cancel":false,"GUID":"1ee3ef92fbda4695815683ab8398a425","TotalScore":20,"ClassType":11,"MissDataType":0,"IsExported":true},"resultDetail":[{"Id":315605,"ProjectId":12,"MasterId":41536,"Result":104.00,"IsTest":false,"Rank":3,"GUID":"4e85280303e146ab95c641da022b3c8c","Name":"身高","DisplayName":"身高","IsMental":false,"IsMotor":false},{"Id":315606,"ProjectId":13,"MasterId":41536,"Result":16.00,"IsTest":false,"Rank":5,"GUID":"27c6acd8c2914c928490097521b7fc9b","Name":"体重","DisplayName":"体重","IsMental":false,"IsMotor":false},{"Id":315607,"ProjectId":14,"MasterId":41536,"Result":10.30,"IsTest":false,"Rank":3,"GUID":"792476235ee447f6a2967552cabe37e3","Name":"坐位体前屈","DisplayName":"柔韧性","IsMental":false,"IsMotor":false},{"Id":315608,"ProjectId":15,"MasterId":41536,"Result":58.00,"IsTest":false,"Rank":2,"GUID":"c3568c60499c438387620477259df91c","Name":"立定跳远","DisplayName":"下肢力量","IsMental":false,"IsMotor":false},{"Id":315609,"ProjectId":16,"MasterId":41536,"Result":25.00,"IsTest":false,"Rank":0,"GUID":"9e57f28942af43eca6a48a47daf5f749","Name":"双脚连续跳","DisplayName":"协调性","IsMental":false,"IsMotor":false},{"Id":315610,"ProjectId":17,"MasterId":41536,"Result":9.50,"IsTest":false,"Rank":2,"GUID":"d79bf75bb2294a13b75dffe76ca5ee17","Name":"十米折返跑","DisplayName":"灵敏性","IsMental":false,"IsMotor":false},{"Id":315611,"ProjectId":18,"MasterId":41536,"Result":4.00,"IsTest":false,"Rank":3,"GUID":"2cc17ece1c0f49df88c87ba93fb8ec2d","Name":"网球掷远","DisplayName":"上肢力量","IsMental":false,"IsMotor":false},{"Id":315612,"ProjectId":19,"MasterId":41536,"Result":11.80,"IsTest":false,"Rank":2,"GUID":"dcd0bf59ec50477aa2d2a8700579228a","Name":"走平衡木","DisplayName":"平衡力","IsMental":false,"IsMotor":false}],"childCode":"610100240000891"},{"resultMaster":{"Id":41537,"CreateTime":"\/Date(1523754999263-0000)\/","ProgramId":2002,"ServiceUnitId":856,"ServiceUnitName":"雏鹰第一幼儿园","ClassId":101894,"ClassName":"中一班","ChildId":44039,"ChildName":"徐晨晞","Gender":2,"Age":4.0,"Birthday":"\/Date(1386777600000-0000)\/","TestStatus":true,"Cancel":false,"GUID":"32399714ae8845e38f0bb4af0beaae63","TotalScore":24,"ClassType":11,"MissDataType":0,"IsExported":true},"resultDetail":[{"Id":315613,"ProjectId":12,"MasterId":41537,"Result":103.00,"IsTest":false,"Rank":3,"GUID":"077ea8634cea443bb3f5c182cfaad8c1","Name":"身高","DisplayName":"身高","IsMental":false,"IsMotor":false},{"Id":315614,"ProjectId":13,"MasterId":41537,"Result":16.00,"IsTest":false,"Rank":5,"GUID":"fb8e0ee152ae4625b8e4478687feab06","Name":"体重","DisplayName":"体重","IsMental":false,"IsMotor":false},{"Id":315615,"ProjectId":14,"MasterId":41537,"Result":6.30,"IsTest":false,"Rank":2,"GUID":"153795c198124b80a2e7bba5b618cd91","Name":"坐位体前屈","DisplayName":"柔韧性","IsMental":false,"IsMotor":false},{"Id":315616,"ProjectId":15,"MasterId":41537,"Result":75.00,"IsTest":false,"Rank":4,"GUID":"e0d7a1b34793490e9726c6244e7df897","Name":"立定跳远","DisplayName":"下肢力量","IsMental":false,"IsMotor":false},{"Id":315617,"ProjectId":16,"MasterId":41537,"Result":20.30,"IsTest":false,"Rank":0,"GUID":"00270e8db9664dd383b44a57dd022901","Name":"双脚连续跳","DisplayName":"协调性","IsMental":false,"IsMotor":false},{"Id":315618,"ProjectId":17,"MasterId":41537,"Result":8.10,"IsTest":false,"Rank":3,"GUID":"755b213db16a4677a5b11d5f2a9dc458","Name":"十米折返跑","DisplayName":"灵敏性","IsMental":false,"IsMotor":false},{"Id":315619,"ProjectId":18,"MasterId":41537,"Result":4.00,"IsTest":false,"Rank":3,"GUID":"4a250552cf3a4a42be219d4e2d21a290","Name":"网球掷远","DisplayName":"上肢力量","IsMental":false,"IsMotor":false},{"Id":315620,"ProjectId":19,"MasterId":41537,"Result":5.60,"IsTest":false,"Rank":4,"GUID":"4881083357de42d69280589088f29604","Name":"走平衡木","DisplayName":"平衡力","IsMental":false,"IsMotor":false}],"childCode":"610100240000948"},{"resultMaster":{"Id":41538,"CreateTime":"\/Date(1523754999263-0000)\/","ProgramId":2002,"ServiceUnitId":856,"ServiceUnitName":"雏鹰第一幼儿园","ClassId":101894,"ClassName":"中一班","ChildId":44040,"ChildName":"徐晨楠","Gender":2,"Age":4.0,"Birthday":"\/Date(1386777600000-0000)\/","TestStatus":true,"Cancel":false,"GUID":"7b7bfc85a3f6494391324df7114626ea","TotalScore":27,"ClassType":11,"MissDataType":0,"IsExported":true},"resultDetail":[{"Id":315621,"ProjectId":12,"MasterId":41538,"Result":102.00,"IsTest":false,"Rank":3,"GUID":"5eb77e92430c4e3593619c73045eedac","Name":"身高","DisplayName":"身高","IsMental":false,"IsMotor":false},{"Id":315622,"ProjectId":13,"MasterId":41538,"Result":16.00,"IsTest":false,"Rank":5,"GUID":"a00a409f7ffb4de4bbd2b3f1607ddf7b","Name":"体重","DisplayName":"体重","IsMental":false,"IsMotor":false},{"Id":315623,"ProjectId":14,"MasterId":41538,"Result":3.80,"IsTest":false,"Rank":1,"GUID":"cdbf822826ee4df693aa4419a05b92c6","Name":"坐位体前屈","DisplayName":"柔韧性","IsMental":false,"IsMotor":false},{"Id":315624,"ProjectId":15,"MasterId":41538,"Result":70.00,"IsTest":false,"Rank":3,"GUID":"f418cfdca88642f98bcf8ba774b8b065","Name":"立定跳远","DisplayName":"下肢力量","IsMental":false,"IsMotor":false},{"Id":315625,"ProjectId":16,"MasterId":41538,"Result":7.30,"IsTest":false,"Rank":4,"GUID":"eb3a09e60c0d4f4da6bc5bd875d2f9f1","Name":"双脚连续跳","DisplayName":"协调性","IsMental":false,"IsMotor":false},{"Id":315626,"ProjectId":17,"MasterId":41538,"Result":7.80,"IsTest":false,"Rank":4,"GUID":"f41d2f5b11a446688300220a6e2717ef","Name":"十米折返跑","DisplayName":"灵敏性","IsMental":false,"IsMotor":false},{"Id":315627,"ProjectId":18,"MasterId":41538,"Result":4.00,"IsTest":false,"Rank":3,"GUID":"ca25bb3bb5cb4d3990bf3e4d3890799d","Name":"网球掷远","DisplayName":"上肢力量","IsMental":false,"IsMotor":false},{"Id":315628,"ProjectId":19,"MasterId":41538,"Result":5.40,"IsTest":false,"Rank":4,"GUID":"9b0f1b272aa6490d91b02e4a50b96cf8","Name":"走平衡木","DisplayName":"平衡力","IsMental":false,"IsMotor":false}],"childCode":"610100240001069"},{"resultMaster":{"Id":41539,"CreateTime":"\/Date(1523754999263-0000)\/","ProgramId":2002,"ServiceUnitId":856,"ServiceUnitName":"雏鹰第一幼儿园","ClassId":101894,"ClassName":"中一班","ChildId":44041,"ChildName":"邓紫萱","Gender":2,"Age":5.0,"Birthday":"\/Date(1352649600000-0000)\/","TestStatus":true,"Cancel":false,"GUID":"33c0d6054eba4feda0e6b7e1cfe999c8","TotalScore":24,"ClassType":11,"MissDataType":0,"IsExported":true},"resultDetail":[{"Id":315629,"ProjectId":12,"MasterId":41539,"Result":111.00,"IsTest":false,"Rank":4,"GUID":"d97ed49910114611a457e91577db7878","Name":"身高","DisplayName":"身高","IsMental":false,"IsMotor":false},{"Id":315630,"ProjectId":13,"MasterId":41539,"Result":18.00,"IsTest":false,"Rank":5,"GUID":"e3b794dbafb14c6e98f92646f8c59f12","Name":"体重","DisplayName":"体重","IsMental":false,"IsMotor":false},{"Id":315631,"ProjectId":14,"MasterId":41539,"Result":11.40,"IsTest":false,"Rank":3,"GUID":"db1b8cb6b96240319adba0f93ad29080","Name":"坐位体前屈","DisplayName":"柔韧性","IsMental":false,"IsMotor":false},{"Id":315632,"ProjectId":15,"MasterId":41539,"Result":80.00,"IsTest":false,"Rank":3,"GUID":"d5c40ab3785c44dd8ee98eb4f35058b4","Name":"立定跳远","DisplayName":"下肢力量","IsMental":false,"IsMotor":false},{"Id":315633,"ProjectId":16,"MasterId":41539,"Result":6.20,"IsTest":false,"Rank":3,"GUID":"f8af07874ca248abaa0d60c2949abf0a","Name":"双脚连续跳","DisplayName":"协调性","IsMental":false,"IsMotor":false},{"Id":315634,"ProjectId":17,"MasterId":41539,"Result":9.10,"IsTest":false,"Rank":2,"GUID":"99f0015914d041a498d578447fccddc1","Name":"十米折返跑","DisplayName":"灵敏性","IsMental":false,"IsMotor":false},{"Id":315635,"ProjectId":18,"MasterId":41539,"Result":5.00,"IsTest":false,"Rank":3,"GUID":"d09814e561e14b9e9c072ba6a336f8e7","Name":"网球掷远","DisplayName":"上肢力量","IsMental":false,"IsMotor":false},{"Id":315636,"ProjectId":19,"MasterId":41539,"Result":14.20,"IsTest":false,"Rank":1,"GUID":"4adcd8e76d2d4079bdbbbfebadb781e0","Name":"走平衡木","DisplayName":"平衡力","IsMental":false,"IsMotor":false}],"childCode":"610100240001171"},{"resultMaster":{"Id":41540,"CreateTime":"\/Date(1523754999263-0000)\/","ProgramId":2002,"ServiceUnitId":856,"ServiceUnitName":"雏鹰第一幼儿园","ClassId":101894,"ClassName":"中一班","ChildId":44042,"ChildName":"王雅琪","Gender":2,"Age":4.5,"Birthday":"\/Date(1374595200000-0000)\/","TestStatus":true,"Cancel":false,"GUID":"1b53ac07703140ac95f63d2bf6ca311d","TotalScore":28,"ClassType":11,"MissDataType":0,"IsExported":true},"resultDetail":[{"Id":315637,"ProjectId":12,"MasterId":41540,"Result":103.00,"IsTest":false,"Rank":2,"GUID":"bec92c3e0f8741469eaca9b1c7a87ae6","Name":"身高","DisplayName":"身高","IsMental":false,"IsMotor":false},{"Id":315638,"ProjectId":13,"MasterId":41540,"Result":17.00,"IsTest":false,"Rank":5,"GUID":"8b5204badf794767a7e7d2550b2fe279","Name":"体重","DisplayName":"体重","IsMental":false,"IsMotor":false},{"Id":315639,"ProjectId":14,"MasterId":41540,"Result":16.70,"IsTest":false,"Rank":5,"GUID":"a53799ef512348788008f32cae48d103","Name":"坐位体前屈","DisplayName":"柔韧性","IsMental":false,"IsMotor":false},{"Id":315640,"ProjectId":15,"MasterId":41540,"Result":80.00,"IsTest":false,"Rank":3,"GUID":"0481dcd4dee04ef69a137787fa596160","Name":"立定跳远","DisplayName":"下肢力量","IsMental":false,"IsMotor":false},{"Id":315641,"ProjectId":16,"MasterId":41540,"Result":7.40,"IsTest":false,"Rank":3,"GUID":"6b1b467cb928443a992d10aff846c4dd","Name":"双脚连续跳","DisplayName":"协调性","IsMental":false,"IsMotor":false},{"Id":315642,"ProjectId":17,"MasterId":41540,"Result":8.40,"IsTest":false,"Rank":3,"GUID":"8a69e4ca4a2540238767d7cb5c50cd94","Name":"十米折返跑","DisplayName":"灵敏性","IsMental":false,"IsMotor":false},{"Id":315643,"ProjectId":18,"MasterId":41540,"Result":5.50,"IsTest":false,"Rank":4,"GUID":"0b7599db05f54fc5ba91b5f7922cc635","Name":"网球掷远","DisplayName":"上肢力量","IsMental":false,"IsMotor":false},{"Id":315644,"ProjectId":19,"MasterId":41540,"Result":9.00,"IsTest":false,"Rank":3,"GUID":"7dcf3e2be24e45b1b46be7bb1be71193","Name":"走平衡木","DisplayName":"平衡力","IsMental":false,"IsMotor":false}],"childCode":"610100240001257"},{"resultMaster":{"Id":41541,"CreateTime":"\/Date(1523754999263-0000)\/","ProgramId":2002,"ServiceUnitId":856,"ServiceUnitName":"雏鹰第一幼儿园","ClassId":101894,"ClassName":"中一班","ChildId":44043,"ChildName":"温自然","Gender":2,"Age":4.5,"Birthday":"\/Date(1369238400000-0000)\/","TestStatus":true,"Cancel":false,"GUID":"78bb50c4d895466398da61ef9d5c696c","TotalScore":24,"ClassType":11,"MissDataType":0,"IsExported":true},"resultDetail":[{"Id":315645,"ProjectId":12,"MasterId":41541,"Result":104.00,"IsTest":false,"Rank":3,"GUID":"d16f1b21e9f54caeb124bdbede1142b7","Name":"身高","DisplayName":"身高","IsMental":false,"IsMotor":false},{"Id":315646,"ProjectId":13,"MasterId":41541,"Result":16.00,"IsTest":false,"Rank":5,"GUID":"9ac02f90ea1d432280d13ae40d694606","Name":"体重","DisplayName":"体重","IsMental":false,"IsMotor":false},{"Id":315647,"ProjectId":14,"MasterId":41541,"Result":12.50,"IsTest":false,"Rank":3,"GUID":"81aae826605b4284ae6b43df5d0e883d","Name":"坐位体前屈","DisplayName":"柔韧性","IsMental":false,"IsMotor":false},{"Id":315648,"ProjectId":15,"MasterId":41541,"Result":65.00,"IsTest":false,"Rank":2,"GUID":"238ecdc6ffd04d90a918b3d8f80ad714","Name":"立定跳远","DisplayName":"下肢力量","IsMental":false,"IsMotor":false},{"Id":315649,"ProjectId":16,"MasterId":41541,"Result":6.00,"IsTest":false,"Rank":4,"GUID":"26f5ae4f4c9c4119b7438317aaa75d0f","Name":"双脚连续跳","DisplayName":"协调性","IsMental":false,"IsMotor":false},{"Id":315650,"ProjectId":17,"MasterId":41541,"Result":10.80,"IsTest":false,"Rank":1,"GUID":"99cf16728947440c9b71ed694f94df6d","Name":"十米折返跑","DisplayName":"灵敏性","IsMental":false,"IsMotor":false},{"Id":315651,"ProjectId":18,"MasterId":41541,"Result":4.00,"IsTest":false,"Rank":3,"GUID":"e48ad79aefd44b4091c94085dda90821","Name":"网球掷远","DisplayName":"上肢力量","IsMental":false,"IsMotor":false},{"Id":315652,"ProjectId":19,"MasterId":41541,"Result":10.00,"IsTest":false,"Rank":3,"GUID":"cc3c337cc7254797a897bc95551a78c4","Name":"走平衡木","DisplayName":"平衡力","IsMental":false,"IsMotor":false}],"childCode":"610100240001378"},{"resultMaster":{"Id":41542,"CreateTime":"\/Date(1523754999263-0000)\/","ProgramId":2002,"ServiceUnitId":856,"ServiceUnitName":"雏鹰第一幼儿园","ClassId":101894,"ClassName":"中一班","ChildId":44044,"ChildName":"郑诗琪","Gender":2,"Age":4.5,"Birthday":"\/Date(1368115200000-0000)\/","TestStatus":true,"Cancel":false,"GUID":"85c1015edc27407782959830e6e44a1d","TotalScore":23,"ClassType":11,"MissDataType":0,"IsExported":true},"resultDetail":[{"Id":315653,"ProjectId":12,"MasterId":41542,"Result":112.00,"IsTest":false,"Rank":5,"GUID":"964529fe04d6460baaba93acc4328c79","Name":"身高","DisplayName":"身高","IsMental":false,"IsMotor":false},{"Id":315654,"ProjectId":13,"MasterId":41542,"Result":17.00,"IsTest":false,"Rank":-3,"GUID":"6678f277a964435c9ef583389b73d2b9","Name":"体重","DisplayName":"体重","IsMental":false,"IsMotor":false},{"Id":315655,"ProjectId":14,"MasterId":41542,"Result":10.00,"IsTest":false,"Rank":3,"GUID":"27dc91336a7749308d5cb03afca69992","Name":"坐位体前屈","DisplayName":"柔韧性","IsMental":false,"IsMotor":false},{"Id":315656,"ProjectId":15,"MasterId":41542,"Result":70.00,"IsTest":false,"Rank":3,"GUID":"5480eaf2b04340278a69925f34784bc0","Name":"立定跳远","DisplayName":"下肢力量","IsMental":false,"IsMotor":false},{"Id":315657,"ProjectId":16,"MasterId":41542,"Result":5.60,"IsTest":false,"Rank":4,"GUID":"64e9d2fbea0048a5a1dd96d1493ad6c9","Name":"双脚连续跳","DisplayName":"协调性","IsMental":false,"IsMotor":false},{"Id":315658,"ProjectId":17,"MasterId":41542,"Result":8.90,"IsTest":false,"Rank":2,"GUID":"76a16fd44de44cd381bbe4d3f59003c4","Name":"十米折返跑","DisplayName":"灵敏性","IsMental":false,"IsMotor":false},{"Id":315659,"ProjectId":18,"MasterId":41542,"Result":6.50,"IsTest":false,"Rank":5,"GUID":"919c11f3913d4788a1932e0ec18fabc4","Name":"网球掷远","DisplayName":"上肢力量","IsMental":false,"IsMotor":false},{"Id":315660,"ProjectId":19,"MasterId":41542,"Result":6.90,"IsTest":false,"Rank":4,"GUID":"ecd3a770264f4f178a4819c15888b831","Name":"走平衡木","DisplayName":"平衡力","IsMental":false,"IsMotor":false}],"childCode":"610100240001479"},{"resultMaster":{"Id":41543,"CreateTime":"\/Date(1523754999263-0000)\/","ProgramId":2002,"ServiceUnitId":856,"ServiceUnitName":"雏鹰第一幼儿园","ClassId":101894,"ClassName":"中一班","ChildId":44045,"ChildName":"袁新惠","Gender":2,"Age":5.0,"Birthday":"\/Date(1353168000000-0000)\/","TestStatus":true,"Cancel":false,"GUID":"0c232b29752547dfadab0c9dbff98aa3","TotalScore":28,"ClassType":11,"MissDataType":0,"IsExported":true},"resultDetail":[{"Id":315661,"ProjectId":12,"MasterId":41543,"Result":111.00,"IsTest":false,"Rank":4,"GUID":"1ca957d3647d401c9855164a34a13b9a","Name":"身高","DisplayName":"身高","IsMental":false,"IsMotor":false},{"Id":315662,"ProjectId":13,"MasterId":41543,"Result":19.00,"IsTest":false,"Rank":5,"GUID":"d530f9c94e144987a9b0180c1a45b2a3","Name":"体重","DisplayName":"体重","IsMental":false,"IsMotor":false},{"Id":315663,"ProjectId":14,"MasterId":41543,"Result":14.00,"IsTest":false,"Rank":4,"GUID":"d242c53994244331adda3551512d3d3f","Name":"坐位体前屈","DisplayName":"柔韧性","IsMental":false,"IsMotor":false},{"Id":315664,"ProjectId":15,"MasterId":41543,"Result":85.00,"IsTest":false,"Rank":3,"GUID":"3ce255a63cd945bb856198bacbf91a27","Name":"立定跳远","DisplayName":"下肢力量","IsMental":false,"IsMotor":false},{"Id":315665,"ProjectId":16,"MasterId":41543,"Result":6.30,"IsTest":false,"Rank":3,"GUID":"781f4310cf984aa29a7bedc2c3f63945","Name":"双脚连续跳","DisplayName":"协调性","IsMental":false,"IsMotor":false},{"Id":315666,"ProjectId":17,"MasterId":41543,"Result":7.60,"IsTest":false,"Rank":3,"GUID":"63d8dd83f0904b43815a6fca447c7f02","Name":"十米折返跑","DisplayName":"灵敏性","IsMental":false,"IsMotor":false},{"Id":315667,"ProjectId":18,"MasterId":41543,"Result":4.50,"IsTest":false,"Rank":3,"GUID":"7e1c67066b0d41a9a46d3542d0c898d7","Name":"网球掷远","DisplayName":"上肢力量","IsMental":false,"IsMotor":false},{"Id":315668,"ProjectId":19,"MasterId":41543,"Result":7.50,"IsTest":false,"Rank":3,"GUID":"1cd03bc7e8954e6ca4b2258800390630","Name":"走平衡木","DisplayName":"平衡力","IsMental":false,"IsMotor":false}],"childCode":"610100240001546"},{"resultMaster":{"Id":41544,"CreateTime":"\/Date(1523754999263-0000)\/","ProgramId":2002,"ServiceUnitId":856,"ServiceUnitName":"雏鹰第一幼儿园","ClassId":101894,"ClassName":"中一班","ChildId":44046,"ChildName":"周叶果儿","Gender":2,"Age":4.5,"Birthday":"\/Date(1370880000000-0000)\/","TestStatus":true,"Cancel":false,"GUID":"d1c361a1125a40d0ab20ac7f29879377","TotalScore":27,"ClassType":11,"MissDataType":0,"IsExported":true},"resultDetail":[{"Id":315669,"ProjectId":12,"MasterId":41544,"Result":106.00,"IsTest":false,"Rank":3,"GUID":"2d9e0981f9ef444bb9a24460b999d625","Name":"身高","DisplayName":"身高","IsMental":false,"IsMotor":false},{"Id":315670,"ProjectId":13,"MasterId":41544,"Result":18.00,"IsTest":false,"Rank":5,"GUID":"6d1638d9959541d19be08508583445ff","Name":"体重","DisplayName":"体重","IsMental":false,"IsMotor":false},{"Id":315671,"ProjectId":14,"MasterId":41544,"Result":12.50,"IsTest":false,"Rank":3,"GUID":"8de63f0ad09e42929c9e31bc1909850b","Name":"坐位体前屈","DisplayName":"柔韧性","IsMental":false,"IsMotor":false},{"Id":315672,"ProjectId":15,"MasterId":41544,"Result":78.00,"IsTest":false,"Rank":3,"GUID":"d843819521d84f4a9bac3c9f1cd063c8","Name":"立定跳远","DisplayName":"下肢力量","IsMental":false,"IsMotor":false},{"Id":315673,"ProjectId":16,"MasterId":41544,"Result":5.90,"IsTest":false,"Rank":4,"GUID":"4ad7b85598644e90b354ddc4c425d0ce","Name":"双脚连续跳","DisplayName":"协调性","IsMental":false,"IsMotor":false},{"Id":315674,"ProjectId":17,"MasterId":41544,"Result":8.60,"IsTest":false,"Rank":2,"GUID":"1d35e2732dff468da73f310250b932fb","Name":"十米折返跑","DisplayName":"灵敏性","IsMental":false,"IsMotor":false},{"Id":315675,"ProjectId":18,"MasterId":41544,"Result":4.00,"IsTest":false,"Rank":3,"GUID":"7d4cc5ea95124090a0207508172f07ec","Name":"网球掷远","DisplayName":"上肢力量","IsMental":false,"IsMotor":false},{"Id":315676,"ProjectId":19,"MasterId":41544,"Result":5.50,"IsTest":false,"Rank":4,"GUID":"77351053e0e641d7b9250346667ce1fe","Name":"走平衡木","DisplayName":"平衡力","IsMental":false,"IsMotor":false}],"childCode":"610100240001647"},{"resultMaster":{"Id":41545,"CreateTime":"\/Date(1523754999263-0000)\/","ProgramId":2002,"ServiceUnitId":856,"ServiceUnitName":"雏鹰第一幼儿园","ClassId":101894,"ClassName":"中一班","ChildId":44047,"ChildName":"赵小楠","Gender":2,"Age":5.0,"Birthday":"\/Date(1359043200000-0000)\/","TestStatus":true,"Cancel":false,"GUID":"5f5846256d3842699613e0fd7f46e483","TotalScore":22,"ClassType":11,"MissDataType":0,"IsExported":true},"resultDetail":[{"Id":315677,"ProjectId":12,"MasterId":41545,"Result":110.00,"IsTest":false,"Rank":3,"GUID":"2ef717bf9dfd4a82a1b29ee3e7511a5d","Name":"身高","DisplayName":"身高","IsMental":false,"IsMotor":false},{"Id":315678,"ProjectId":13,"MasterId":41545,"Result":20.00,"IsTest":false,"Rank":5,"GUID":"a00fa9b98880418daa3978f08ee97c63","Name":"体重","DisplayName":"体重","IsMental":false,"IsMotor":false},{"Id":315679,"ProjectId":14,"MasterId":41545,"Result":8.80,"IsTest":false,"Rank":2,"GUID":"57cc12d41e7a44aba71f4798a18c2abe","Name":"坐位体前屈","DisplayName":"柔韧性","IsMental":false,"IsMotor":false},{"Id":315680,"ProjectId":15,"MasterId":41545,"Result":65.00,"IsTest":false,"Rank":2,"GUID":"72c3ceb1166b4b1fa773fdee51fe9c5e","Name":"立定跳远","DisplayName":"下肢力量","IsMental":false,"IsMotor":false},{"Id":315681,"ProjectId":16,"MasterId":41545,"Result":7.10,"IsTest":false,"Rank":3,"GUID":"bf15a5b0bca4444baaba13c106501a1a","Name":"双脚连续跳","DisplayName":"协调性","IsMental":false,"IsMotor":false},{"Id":315682,"ProjectId":17,"MasterId":41545,"Result":8.80,"IsTest":false,"Rank":2,"GUID":"bdabf04f051b4499870629fda474e499","Name":"十米折返跑","DisplayName":"灵敏性","IsMental":false,"IsMotor":false},{"Id":315683,"ProjectId":18,"MasterId":41545,"Result":4.00,"IsTest":false,"Rank":2,"GUID":"02d1267705494fdaa4a920d06b6f9975","Name":"网球掷远","DisplayName":"上肢力量","IsMental":false,"IsMotor":false},{"Id":315684,"ProjectId":19,"MasterId":41545,"Result":5.80,"IsTest":false,"Rank":3,"GUID":"55734e7019de446bbbf22d73dd4c4c97","Name":"走平衡木","DisplayName":"平衡力","IsMental":false,"IsMotor":false}],"childCode":"610100240001733"},{"resultMaster":{"Id":41546,"CreateTime":"\/Date(1523754999263-0000)\/","ProgramId":2002,"ServiceUnitId":856,"ServiceUnitName":"雏鹰第一幼儿园","ClassId":101894,"ClassName":"中一班","ChildId":44048,"ChildName":"张梦影","Gender":2,"Age":4.5,"Birthday":"\/Date(1370188800000-0000)\/","TestStatus":true,"Cancel":false,"GUID":"0a093733d70d43bba7bf78a99c99e633","TotalScore":23,"ClassType":11,"MissDataType":0,"IsExported":true},"resultDetail":[{"Id":315685,"ProjectId":12,"MasterId":41546,"Result":106.00,"IsTest":false,"Rank":3,"GUID":"57bf43d0516240f3a15019efc354abe9","Name":"身高","DisplayName":"身高","IsMental":false,"IsMotor":false},{"Id":315686,"ProjectId":13,"MasterId":41546,"Result":17.00,"IsTest":false,"Rank":5,"GUID":"c79829d104fe4bb58da807868f909522","Name":"体重","DisplayName":"体重","IsMental":false,"IsMotor":false},{"Id":315687,"ProjectId":14,"MasterId":41546,"Result":9.80,"IsTest":false,"Rank":2,"GUID":"0be275b8a05c4553830bdd1708fcfc4d","Name":"坐位体前屈","DisplayName":"柔韧性","IsMental":false,"IsMotor":false},{"Id":315688,"ProjectId":15,"MasterId":41546,"Result":80.00,"IsTest":false,"Rank":3,"GUID":"a3be79bb124d43478bbfe4770f58fd7c","Name":"立定跳远","DisplayName":"下肢力量","IsMental":false,"IsMotor":false},{"Id":315689,"ProjectId":16,"MasterId":41546,"Result":6.60,"IsTest":false,"Rank":4,"GUID":"759d92f16c8046b88126f5978a7f4265","Name":"双脚连续跳","DisplayName":"协调性","IsMental":false,"IsMotor":false},{"Id":315690,"ProjectId":17,"MasterId":41546,"Result":8.80,"IsTest":false,"Rank":2,"GUID":"af1dfbc2831f44acbcb39d200c49491b","Name":"十米折返跑","DisplayName":"灵敏性","IsMental":false,"IsMotor":false},{"Id":315691,"ProjectId":18,"MasterId":41546,"Result":2.50,"IsTest":false,"Rank":2,"GUID":"7598a3192da1483683b888af636e83ae","Name":"网球掷远","DisplayName":"上肢力量","IsMental":false,"IsMotor":false},{"Id":315692,"ProjectId":19,"MasterId":41546,"Result":16.00,"IsTest":false,"Rank":2,"GUID":"d68170c15c424dd8993a0fb487710cd3","Name":"走平衡木","DisplayName":"平衡力","IsMental":false,"IsMotor":false}],"childCode":"610100240001835"},{"resultMaster":{"Id":41547,"CreateTime":"\/Date(1523754999263-0000)\/","ProgramId":2002,"ServiceUnitId":856,"ServiceUnitName":"雏鹰第一幼儿园","ClassId":101894,"ClassName":"中一班","ChildId":44049,"ChildName":"张紫涵","Gender":2,"Age":5.0,"Birthday":"\/Date(1356019200000-0000)\/","TestStatus":true,"Cancel":false,"GUID":"8727ced01d164f7487410dda5e654482","TotalScore":23,"ClassType":11,"MissDataType":0,"IsExported":true},"resultDetail":[{"Id":315693,"ProjectId":12,"MasterId":41547,"Result":105.00,"IsTest":false,"Rank":2,"GUID":"54af38e712f34c7f867bc9e4bde5f272","Name":"身高","DisplayName":"身高","IsMental":false,"IsMotor":false},{"Id":315694,"ProjectId":13,"MasterId":41547,"Result":18.00,"IsTest":false,"Rank":5,"GUID":"92aaa44e4e3545fea9618bd9912da909","Name":"体重","DisplayName":"体重","IsMental":false,"IsMotor":false},{"Id":315695,"ProjectId":14,"MasterId":41547,"Result":9.10,"IsTest":false,"Rank":2,"GUID":"cb7650611c714aef8ad2a19b7bb19f13","Name":"坐位体前屈","DisplayName":"柔韧性","IsMental":false,"IsMotor":false},{"Id":315696,"ProjectId":15,"MasterId":41547,"Result":78.00,"IsTest":false,"Rank":3,"GUID":"707274a0e01447ac9ddfa2be29e10f9d","Name":"立定跳远","DisplayName":"下肢力量","IsMental":false,"IsMotor":false},{"Id":315697,"ProjectId":16,"MasterId":41547,"Result":8.50,"IsTest":false,"Rank":2,"GUID":"530eeea9c570438984abf86359da4823","Name":"双脚连续跳","DisplayName":"协调性","IsMental":false,"IsMotor":false},{"Id":315698,"ProjectId":17,"MasterId":41547,"Result":8.40,"IsTest":false,"Rank":2,"GUID":"b1ae97a9efb3413cb03b1f9a75bd4e8e","Name":"十米折返跑","DisplayName":"灵敏性","IsMental":false,"IsMotor":false},{"Id":315699,"ProjectId":18,"MasterId":41547,"Result":4.50,"IsTest":false,"Rank":3,"GUID":"3959288ccc8d4545903b55c78bc4ec8a","Name":"网球掷远","DisplayName":"上肢力量","IsMental":false,"IsMotor":false},{"Id":315700,"ProjectId":19,"MasterId":41547,"Result":5.50,"IsTest":false,"Rank":4,"GUID":"d1d6d07372394fd5a3d386a141f5eb84","Name":"走平衡木","DisplayName":"平衡力","IsMental":false,"IsMotor":false}],"childCode":"610100240001936"},{"resultMaster":{"Id":41548,"CreateTime":"\/Date(1523754999263-0000)\/","ProgramId":2002,"ServiceUnitId":856,"ServiceUnitName":"雏鹰第一幼儿园","ClassId":101894,"ClassName":"中一班","ChildId":44050,"ChildName":"鲍楚惠","Gender":2,"Age":4.5,"Birthday":"\/Date(1372694400000-0000)\/","TestStatus":true,"Cancel":false,"GUID":"7e5b12d029c549b78032faeb323e61e5","TotalScore":29,"ClassType":11,"MissDataType":0,"IsExported":true},"resultDetail":[{"Id":315701,"ProjectId":12,"MasterId":41548,"Result":115.00,"IsTest":false,"Rank":5,"GUID":"a3b292073f1540fdaec1416ec573b2e1","Name":"身高","DisplayName":"身高","IsMental":false,"IsMotor":false},{"Id":315702,"ProjectId":13,"MasterId":41548,"Result":21.00,"IsTest":false,"Rank":5,"GUID":"2860ec09f0fe465f8adae4302c4d6612","Name":"体重","DisplayName":"体重","IsMental":false,"IsMotor":false},{"Id":315703,"ProjectId":14,"MasterId":41548,"Result":13.80,"IsTest":false,"Rank":4,"GUID":"0b74f62f20144033b6438ef49f64f635","Name":"坐位体前屈","DisplayName":"柔韧性","IsMental":false,"IsMotor":false},{"Id":315704,"ProjectId":15,"MasterId":41548,"Result":65.00,"IsTest":false,"Rank":2,"GUID":"6543f0aa7c10420b919737792d353481","Name":"立定跳远","DisplayName":"下肢力量","IsMental":false,"IsMotor":false},{"Id":315705,"ProjectId":16,"MasterId":41548,"Result":6.90,"IsTest":false,"Rank":3,"GUID":"54a44722446a41309614a704cf8de544","Name":"双脚连续跳","DisplayName":"协调性","IsMental":false,"IsMotor":false},{"Id":315706,"ProjectId":17,"MasterId":41548,"Result":8.30,"IsTest":false,"Rank":3,"GUID":"e6c76d31d43d45d5b20e681da493eb59","Name":"十米折返跑","DisplayName":"灵敏性","IsMental":false,"IsMotor":false},{"Id":315707,"ProjectId":18,"MasterId":41548,"Result":5.00,"IsTest":false,"Rank":4,"GUID":"5adbe4d88f8646089d489d0f7eab7bf7","Name":"网球掷远","DisplayName":"上肢力量","IsMental":false,"IsMotor":false},{"Id":315708,"ProjectId":19,"MasterId":41548,"Result":8.20,"IsTest":false,"Rank":3,"GUID":"f71d4bd33b004b159e4f2ca5bbf6fac2","Name":"走平衡木","DisplayName":"平衡力","IsMental":false,"IsMotor":false}],"childCode":"610100240002085"}]};
+            //console.log(physicalResult);
+            var charInfoJson = {};
+            var contentHtml = [];
+            for (var i = 0, l = physicalResult.PhyResult.length; i < l; i++) {
+                var result = physicalResult.PhyResult[i];
+                var resultHeight, resultHeightScore, resultWeight, resultWeightScore, resultShuttleRun, resultShuttleRunScore, resultSitReach, resultSitReachScore, resultBroadJump, resultBroadJumpScore, resultDoubleJump, resultDoubleJumpScore, resultThrow, resultThrowScore, resultBalance, resultBalanceScore;
+                for (var j = 0, len = result.resultDetail.length; j < len; j++) {
+                    let ProjectId = result.resultDetail[j].ProjectId;
+                    let detailInfo = result.resultDetail[j];
+                    switch (ProjectId) {
+                        case 12:
+                            resultHeight = detailInfo.Result;
+                            resultHeightScore = detailInfo.Rank;
+                            break;
+                        case 13:
+                            resultWeight = detailInfo.Result;
+                            resultWeightScore = detailInfo.Rank;
+                            break;
+                        case 14:
+                            resultSitReach = detailInfo.Result;
+                            resultSitReachScore = detailInfo.Rank;
+                            break;
+                        case 15:
+                            resultBroadJump = detailInfo.Result;
+                            resultBroadJumpScore = detailInfo.Rank;
+                            break;
+                        case 16:
+                            resultDoubleJump = detailInfo.Result;
+                            resultDoubleJumpScore = detailInfo.Rank;
+                            break;
+                        case 17:
+                            resultShuttleRun = detailInfo.Result;
+                            resultShuttleRunScore = detailInfo.Rank;
+                            break;
+                        case 18:
+                            resultThrow = detailInfo.Result;
+                            resultThrowScore = detailInfo.Rank;
+                            break;
+                        case 19:
+                            resultBalance = detailInfo.Result;
+                            resultBalanceScore = detailInfo.Rank;
+                            break;
+
+                    }
+                }
+                var agencyResult = physicalResult.AgencyInfo;
+                var itemContent = {
+                    ChildName: result.resultMaster.ChildName,
+                    Gender: result.resultMaster.Gender == 1 ? "男" : "女",
+                    AgeGroup: result.resultMaster.Age,
+                    BirthDate: result.resultMaster.Birthday.CharpStr2Date(),
+                    TestDate: result.resultMaster.CreateTime.CharpStr2Date(),
+                    ClassName: result.resultMaster.ClassName,
+                    TestCode: result.childCode.substr(0, 4) + "-" + result.childCode.substr(4, 4) + "-" + result.childCode.substr(8, 4) + "-" + result.childCode.substr(12, 6),
+                    KindergartenName: agencyResult.KindergartenName,
+
+                    Height: resultHeight == 0 || resultHeight == -99 || resultHeight == null ? "X" : resultHeight,
+                    HeightScore: resultHeightScore,
+                    Weight: resultWeight == 0 || resultWeight == -99 || resultWeight == null ? "X" : resultWeight,
+                    WeightScore: Math.abs(resultWeightScore),
+                    ShuttleRun: resultShuttleRun == 0 || resultShuttleRun == null || resultShuttleRun == -99 ? "X" : resultShuttleRun,
+                    ShuttleRunScore: resultShuttleRunScore,
+                    SitReach: resultSitReach == 0 || resultSitReach == null || resultSitReach == -99 ? "X" : resultSitReach,
+                    SitReachScore: resultSitReachScore,
+                    BroadJump: resultBroadJump == 0 || resultBroadJump == -99 || resultBroadJump == null ? "X" : resultBroadJump,
+                    BroadJumpScore: resultBroadJumpScore,
+                    DoubleJump: resultDoubleJump == 0 || resultDoubleJump == -99 || resultDoubleJump == null ? "X" : resultDoubleJump,
+                    DoubleJumpScore: resultDoubleJumpScore,
+                    Throw: resultThrow == 0 || resultThrow == null || resultThrow == -99 ? "X" : resultThrow,
+                    ThrowScore: resultThrowScore,
+                    Balance: resultBalance == 0 || resultBalance == -99 || resultBalance == null ? "X" : resultBalance,
+                    BalanceScore: resultBalanceScore,
+                    CommentContent: result,
+                    TotalScore: result.resultMaster.TotalScore,
+                    GradeResult: result.resultMaster.TotalScore,
+                    Id: result.resultMaster.Id,
+                    TestingStation: physicalResult.AgencyInfo.AgencyAndProxyName
+                };
+                var itemChildeveryObjectScore = [];
+                for (var s in rTProjectCorrespondence) {
+                    itemChildeveryObjectScore.push(itemContent[s]);
+                }
+                charInfoJson[result.resultMaster.Id] = itemChildeveryObjectScore;
+                contentHtml.push(itemContent);
+            }
+            var template = Handlebars.compile($("#content-html").html());
+            var htmlText = template(contentHtml);
+            $("#record-content").html(htmlText);
+            var testName = [];
+            for (var p in rTProjectCorrespondence) {
+                testName.push(RTPhysicalProject[rTProjectCorrespondence[p]])
+            }
+            for (var charJson in charInfoJson) {
+                $('#summary-chart-' + charJson).highcharts({
+                    chart: {
+                        polar: true,
+                        type: 'area',
+                        width: 500,
+                        height: 500
+                    },
+                    credits: {
+                        enabled: false,
+                    },
+                    title: {
+                        text: '',
+                        floating: true
+                    },
+
+                    pane: {
+                        size: '80%'
+                    },
+
+                    xAxis: {
+                        categories: testName,
+                        tickmarkPlacement: 'on',
+                        lineWidth: 0,
+                        gridLineColor: '#000000',
+                        lineColor: '#000000',
+                    },
+
+                    yAxis: {
+                        gridLineInterpolation: 'polygon',
+                        tickInterval: 1,
+                        lineWidth: 0,
+                        max: 5,
+                        min: 0,
+                        gridLineColor: '#000000',
+                        lineColor: '#000000',
+                    },
+
+                    tooltip: {
+                        shared: true,
+                        pointFormat: '<span style="color:{series.color}">{point.y:,.1f}</span>',
+                    },
+
+                    legend: {
+                        enabled: false
+                    },
+
+                    series: [{
+                        name: '',
+                        data: charInfoJson[charJson],
+                        //backgroundColor:'#CE2C46'
+                    }]
+                });
+
+            }
+        });
+    </script>
+</head>
+<body>
+    <div id="record-content">
+    </div>
+</body>
+</html>
